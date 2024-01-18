@@ -1,0 +1,11 @@
+<h1>My Spaces</h1>
+
+<%= link_to 'New Top-Level Space', new_space_path %>
+
+<ul>
+  <% @spaces.each do |space| %>
+    <li>
+      <%= link_to space.name, space_path(space) %>
+    </li>
+  <% end %>
+</ul>

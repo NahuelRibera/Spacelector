@@ -1,0 +1,23 @@
+<h1><%= @space.name %></h1>
+<p><%= @space.description %></p>
+
+<%= link_to 'New Space', new_space_path(parent_space_id: @space.id) %>
+
+<ul>
+  <% @child_spaces.each do |child_space| %>
+    <li>
+      <%= link_to child_space.name, space_path(child_space) %>
+      <%= form_with url: space_path(child_space), method: :delete do %>
+        <%= submit_tag 'Delete', data: { confirm: 'Are you sure you want to delete this space?' } %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<% if @space.parent_space %>
+  <%= link_to 'Back to ' + @space.parent_space.name, space_path(@space.parent_space) %>
+<% else %>
+  <%= link_to 'Back to My Spaces', spaces_path %>
+<% end %>
+
+<%= link_to 'Upload New Image', new_space_image_path(@space) %>

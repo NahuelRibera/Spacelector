@@ -1,0 +1,5 @@
+<% @space.images.each do |image| %>
+  <% if image.file.attached? %>
+    <%= image_tag image.file %>
+  <% end %>
+<% end %>

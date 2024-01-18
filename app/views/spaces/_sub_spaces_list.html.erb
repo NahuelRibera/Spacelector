@@ -1,0 +1,8 @@
+<ul>
+  <% child_spaces.each do |child_space| %>
+    <li>
+      <%= link_to child_space.name, space_path(child_space) %>
+      <%= link_to 'Delete', space_path(child_space), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </li>
+  <% end %>
+</ul>
