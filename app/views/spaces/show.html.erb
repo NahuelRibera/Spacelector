@@ -21,3 +21,10 @@
 <% end %>
 
 <%= link_to 'Upload New Image', new_space_image_path(@space) %>
+
+<!-- Display Images -->
+<% @space.images.each do |image| %>
+  <% if image.file.attached? %>
+    <%= image_tag image.file %>
+  <% end %>
+<% end %>
