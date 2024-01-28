@@ -6,6 +6,9 @@
   <% @spaces.each do |space| %>
     <li>
       <%= link_to space.name, space_path(space) %>
+      <%= form_with url: space_path(space), method: :delete do %>
+        <%= submit_tag 'Delete', data: { confirm: 'Are you sure you want to delete this space?' } %>
+      <% end %>
     </li>
   <% end %>
 </ul>
