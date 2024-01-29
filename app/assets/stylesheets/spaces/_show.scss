@@ -1,0 +1,148 @@
+div.set {
+  margin: 40px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -3px;
+}
+
+h1 {
+  margin: 0;
+  color: #333;
+  font-size: 40px;
+}
+
+.new {
+  color: #fff;
+  background-color: #4285f4; /* Google Drive blue */
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.back {
+  color:#333;
+  background-color: #e6e6e6; /* Google Drive blue */
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 10px;
+  display: inline-block;
+  margin-bottom: 20px;
+  transition: background-color 0.2s ease-in-out;
+
+
+  &:hover{
+    background-color: #dadada;
+  }
+}
+
+.back_to {
+  color: #333;
+  background-color: #e6e6e6; /* Google Drive blue */
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 10px;
+  display: inline-block;
+  margin-top: 20px;
+  transition: background-color 0.2s ease-in-out;
+
+
+  &:hover{
+    background-color: #dadada;
+  }
+}
+
+.upload {
+  color: #333;
+  background-color: #e6e6e6; /* Google Drive blue */
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 10px;
+  display: inline-block;
+  margin-left: 15px;
+  transition: background-color 0.2s ease-in-out;
+
+
+  &:hover{
+    background-color: #dadada;
+  }
+}
+
+.space-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.space-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.space-list li {
+  flex: 0 0 calc(20% - 20px); /* Adjust the width and space between spaces */
+  box-sizing: border-box; /* Include padding and border in the width */
+  border: 1px solid #ddd; /* Light gray border around each space */
+  border-radius: 10px; /* Rounded corners */
+  padding: 16px;
+  text-align: left;
+  transition: box-shadow 0.2s ease-in-out;
+  background-color: white;
+
+  &:hover {
+    box-shadow: 0 3px 7px rgba(0,0,0,0.07);
+
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+  font-size: 20px;
+}
+
+.delete {
+  color: #333;
+  padding: 4px 10px;
+  text-decoration: none;
+  border-radius: 10px;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  margin-left: 10px;
+
+
+  &:hover{
+    background-color: #dadada;
+  }
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.grid-image {
+  max-width: 100%;
+  height: 450px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .image-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

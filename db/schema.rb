@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_02_155932) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_29_160258) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,11 +43,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_02_155932) do
   end
 
   create_table "boxes", force: :cascade do |t|
-    t.integer "x"
-    t.integer "y"
+    t.integer "top"
+    t.integer "left"
     t.integer "width"
     t.integer "height"
-    t.bigint "image_id", null: false
+    t.bigint "image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["image_id"], name: "index_boxes_on_image_id"
@@ -60,14 +60,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_02_155932) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.index ["space_id"], name: "index_images_on_space_id"
-  end
-
-  create_table "infos", force: :cascade do |t|
-    t.text "content"
-    t.bigint "box_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["box_id"], name: "index_infos_on_box_id"
   end
 
   create_table "spaces", force: :cascade do |t|
@@ -97,6 +89,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_02_155932) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "boxes", "images"
   add_foreign_key "images", "spaces"
-  add_foreign_key "infos", "boxes"
   add_foreign_key "spaces", "users"
 end

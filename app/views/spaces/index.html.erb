@@ -1,14 +1,19 @@
-<h1>My Spaces</h1>
+<div class="set">
+  <div class="header">
+    <h1>Spaces</h1>
+    <%= link_to '+ New', new_space_path, class: 'new' %>
+  </div>
 
-<%= link_to 'New Top-Level Space', new_space_path %>
-
-<ul>
-  <% @spaces.each do |space| %>
-    <li>
-      <%= link_to space.name, space_path(space) %>
-      <%= form_with url: space_path(space), method: :delete do %>
-        <%= submit_tag 'Delete', data: { confirm: 'Are you sure you want to delete this space?' } %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+  <ul class="space-list">
+    <% @spaces.each do |space| %>
+      <li>
+        <%= link_to space_path(space) do %>
+          <div class="space-box">
+            <%= space.name %>
+            <!-- Add other content inside the space box as needed -->
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

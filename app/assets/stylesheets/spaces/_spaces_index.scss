@@ -1,0 +1,77 @@
+div.set {
+  margin: 40px;
+}
+
+h1 {
+  margin: 0;
+  color: #333; /* Google Drive text color */
+  font-size: 40px; /* Adjust as needed */
+}
+
+nav {
+  background-color: rgb(240, 240, 240); /* Dark background for the navbar */
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+.new {
+  color: #fff;
+  background-color: #4285f4; /* Google Drive blue */
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.button:hover {
+  background-color: #357ae8; /* Darker blue on hover */
+}
+
+.space-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap; /* Enable wrapping */
+  gap: 20px; /* Adjust the space between spaces */
+}
+
+.space-list li {
+  flex: 0 0 calc(20% - 20px); /* Adjust the width and space between spaces */
+  box-sizing: border-box; /* Include padding and border in the width */
+  border: 1px solid #ddd; /* Light gray border around each space */
+  border-radius: 10px; /* Rounded corners */
+  padding: 16px;
+  text-align: left;
+  transition: box-shadow 0.2s ease-in-out;
+  background-color: white;
+
+  &:hover {
+    box-shadow: 0 3px 7px rgba(0,0,0,0.07);
+
+  }
+}
+
+/* Adjust for medium screens (2 items per row) */
+@media screen and (max-width: 768px) {
+  .space-list li {
+    flex: 0 0 calc(20% - 20px);
+  }
+}
+
+/* Adjust for smaller screens (1 item per row) */
+@media screen and (max-width: 480px) {
+  .space-list li {
+    flex: 0 0 calc(33.33% - 20px);
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #333; /* Google Drive text color */
+  font-size: 20px;
+}
+
+a:hover {
+  text-decoration: none;
+}

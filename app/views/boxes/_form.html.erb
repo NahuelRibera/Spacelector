@@ -1,0 +1,41 @@
+<!-- app/views/boxes/_form.html.erb -->
+<% if @image && @box %>
+  <%= form_with(model: [@image, @box], local: true) do |form| %>
+    <% if @box.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@box.errors.count, "error") %> prohibited this box from being saved:</h2>
+        <ul>
+          <% @box.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :top %>
+      <%= form.number_field :top %>
+    </div>
+
+    <div class="field">
+      <%= form.label :left %>
+      <%= form.number_field :left %>
+    </div>
+
+    <div class="field">
+      <%= form.label :width %>
+      <%= form.number_field :width %>
+    </div>
+
+    <div class="field">
+      <%= form.label :height %>
+      <%= form.number_field :height %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+<% else %>
+  <p>Error: @image or @box is nil</p>
+<% end %>
