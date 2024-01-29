@@ -1,0 +1,70 @@
+/* Styles for the upload image.html.erb */
+
+/* Common styles for set and header */
+.set {
+  margin: 40px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+/* Header styles */
+h1 {
+  margin: 0;
+  color: #333;
+  font-size: 40px;
+}
+
+h4 {
+  margin: 0;
+  color: #333; /* Change the color to #333 */
+}
+
+label {
+  display: block;
+  font-size: 20px; /* Adjust as needed */
+  margin-bottom: 5px; /* Adjust as needed */
+}
+
+/* Styles for the link back */
+a {
+  text-decoration: none;
+  color: #333;
+  font-size: 20px;
+}
+
+a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Styles for the form */
+form {
+  margin-top: 20px; /* Adjust as needed */
+  display: flex;
+  flex-direction: column; /* Change to column layout */
+}
+
+.field {
+  margin-bottom: 20px; /* Adjust as needed */
+}
+
+input[type="file"] {
+  width: calc(100% - 16px); /* Adjust as needed */
+  padding: 8px;
+  font-size: 16px; /* Adjust as needed */
+  border-radius: 8px; /* Add border-radius to the file input */
+}
+
+.upload-button {
+  width: max-content; /* Change to max-content to allow inline display */
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 8px; /* Add border-radius to the button */
+  background-color: #4285f4; /* Google Drive blue */
+  color: #fff;
+  margin-top: 20px; /* Add margin to the top of the button */
+}

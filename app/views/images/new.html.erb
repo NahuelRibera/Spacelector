@@ -1,21 +1,18 @@
-<%= form_with model: [@space, @image], local: true do |form| %>
-  <% if @image.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@image.errors.count, "error") %> prohibited this image from being saved:</h2>
-      <ul>
-      <% @image.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="set">
+  <div class="header">
+    <h1>New Image</h1>
+  </div>
+
+  <%= form_with model: @image, url: space_images_path(@space), local: true, class: 'image-form' do |form| %>
+    <div class="field">
+      <%= form.file_field :file, required: true %>
     </div>
+    <%= form.submit "Upload", class: 'upload-button' %>
   <% end %>
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-  <div class="field">
-    <%= form.label :file %>
-    <%= form.file_field :file, required: true %>
-  </div>
-  <%= form.submit "Upload Image" %>
-<% end %>
+
+  <% if @space.parent_space %>
+    <%= link_to "Back to '#{j @space.parent_space.name}'", space_path(@space.parent_space), class: "back_to" %>
+  <% else %>
+    <%= link_to 'Back', spaces_path, class: "back" %>
+  <% end %>
+</div>

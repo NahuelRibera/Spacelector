@@ -1,14 +1,23 @@
-<h1>New Space</h1>
-
-<%= form_with model: @space, url: spaces_path, local: true do |form| %>
-  <% if @space.parent_space_id %>
-    <%= form.hidden_field :parent_space_id %>
-  <% end %>
-  <div class="field">
-    <%= form.label :name, "Space Name" %>
-    <%= form.text_field :name, required: true %>
+<div class="set">
+  <div class="header">
+    <h1>New Space</h1>
   </div>
-  <%= form.submit "Create Space" %>
-<% end %>
 
-<%= link_to 'Back', spaces_path %>
+  <%= form_with model: @space, url: spaces_path, local: true, class: 'space-form' do |form| %>
+    <% if @space.parent_space_id %>
+      <%= form.hidden_field :parent_space_id %>
+    <% end %>
+    <div class="field">
+      <h4>Name</h4>
+      <%= form.text_field :name, required: true %>
+
+    <%= form.submit "Create" %>
+    </div>
+  <% end %>
+
+   <% if @space.parent_space %>
+    <%= link_to "Back to '#{j @space.parent_space.name}'", space_path(@space.parent_space), class: "back_to" %>
+  <% else %>
+    <%= link_to 'Back', spaces_path, class: "back" %>
+  <% end %>
+</div>

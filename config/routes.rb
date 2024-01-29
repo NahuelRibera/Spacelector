@@ -3,14 +3,12 @@ Rails.application.routes.draw do
   root to: 'spaces#index'
 
   resources :spaces do
-    resources :images, only: [:new, :create, :show, :destroy]
+    resources :images, only: [:new, :create, :show, :destroy] do
+      resources :boxes, only: [:new, :create]
+    end
   end
 
-  resources :images, only: [] do
-    resources :boxes, only: [:new, :create, :edit, :update, :destroy]
-  end
-
-  resources :boxes, only: [] do
+  resources :boxes do
     resource :info, only: [:new, :create, :show, :edit, :update, :destroy]
   end
 
