@@ -4,8 +4,4 @@ import "controllers"
 import "@popperjs/core"
 import "bootstrap"
 import Rails from "@rails/ujs";
-import "@rails/activestorage";
-import "channels";
-
 Rails.start();
-ActiveStorage.start();

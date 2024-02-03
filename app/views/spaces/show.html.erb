@@ -13,58 +13,41 @@
 
   <%= link_to 'Upload image', new_space_image_path(@space), class: "upload" %>
 
-  <!-- Display Images -->
-  <div class="image-grid">
-    <% @space.images.each do |image| %>
-      <% if image.file.attached? %>
-        <%= image_tag image.file, class: "grid-image" %>
-
-        <!-- Display Boxes -->
-        <div class="boxes-container" data-image-id="<%= image.id %>">
-          <%= render partial: 'boxes/form', locals: { image: image, box: Box.new } %>
-
-          <% if image.boxes.present? %>
-            <% image.boxes.each do |box| %>
-              <p>
-                Top: <%= box.top %>, Left: <%= box.left %>, Width: <%= box.width %>, Height: <%= box.height %>
-                <%= link_to 'Edit', edit_image_box_path(image, box) %>
-                <%= link_to 'Destroy', image_box_path(image, box), method: :delete, data: { confirm: 'Are you sure?' } %>
-              </p>
-            <% end %>
-          <% else %>
-            <p>No boxes to render.</p>
+  <ul class="space-list">
+    <% @child_spaces.each do |child_space| %>
+      <li>
+        <div class="space-info">
+          <%= link_to child_space.name, space_path(child_space) %>
+          <%= form_with url: space_path(child_space), method: :delete do %>
+            <%= submit_tag 'X', data: { confirm: 'Are you sure you want to delete this space?' }, class: "delete" %>
           <% end %>
         </div>
-      <% end %>
+      </li>
     <% end %>
-  </div>
+  </ul>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const deleteButtons = document.querySelectorAll(".delete");
+  <!-- Display Images -->
+<div class="image-grid">
+  <% @space.images.each do |image| %>
+    <% if image.file.attached? %>
+      <%= image_tag image.file, class: "grid-image" %>
+    <% end %>
+  <% end %>
+</div>
 
-      deleteButtons.forEach(button => {
-        button.addEventListener("click", function(event) {
-          const confirmationMessage = button.getAttribute("data-confirm");
 
-          if (confirmationMessage && !confirm(confirmationMessage)) {
-            event.preventDefault();
-          }
-        });
-      });
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const deleteButtons = document.querySelectorAll(".delete");
 
-      const newBoxForms = document.querySelectorAll('.new-box-form');
+    deleteButtons.forEach(button => {
+      button.addEventListener("click", function(event) {
+        const confirmationMessage = button.getAttribute("data-confirm");
 
-      newBoxForms.forEach(form => {
-        form.addEventListener('ajax:success', function(event) {
-          const [data, status, xhr] = event.detail;
-          const boxesContainer = form.closest('.boxes-container');
-          boxesContainer.insertAdjacentHTML('beforeend', data);
-
-          // Clear the form
-          form.reset();
-        });
+        if (confirmationMessage && !confirm(confirmationMessage)) {
+          event.preventDefault();
+        }
       });
     });
-  </script>
-</div>
+  });
+</script>

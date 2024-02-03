@@ -28,17 +28,12 @@ class SpacesController < ApplicationController
     @space = Space.find(params[:id])
     if @space.destroy
       flash[:notice] = 'Space was successfully deleted.'
+      redirect_to spaces_path
     else
       flash[:alert] = 'Error deleting space.'
-    end
-
-    if @space.parent_space
-      redirect_to space_path(@space.parent_space)
-    else
-      redirect_to spaces_path
+      redirect_to space_path(@space)
     end
   end
-
 
   private
 

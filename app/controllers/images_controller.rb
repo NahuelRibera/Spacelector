@@ -19,7 +19,6 @@ class ImagesController < ApplicationController
 
   def show
     @image = Image.find(params[:id])
-    @boxes = @image.boxes
   end
 
   private
