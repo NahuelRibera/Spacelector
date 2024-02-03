@@ -21,6 +21,13 @@ class ImagesController < ApplicationController
     @image = Image.find(params[:id])
   end
 
+  def destroy
+    @space = Space.find(params[:space_id])
+    @image = @space.images.find(params[:id])
+    @image.destroy
+    redirect_to @space, notice: 'Image was successfully deleted.'
+  end
+
   private
 
   def image_params

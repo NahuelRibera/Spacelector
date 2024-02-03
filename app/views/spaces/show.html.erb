@@ -27,14 +27,19 @@
   </ul>
 
   <!-- Display Images -->
-<div class="image-grid">
-  <% @space.images.each do |image| %>
-    <% if image.file.attached? %>
-      <%= image_tag image.file, class: "grid-image" %>
+  <div class="image-grid">
+    <% @space.images.each do |image| %>
+      <% if image.file.attached? %>
+        <div class="image-container">
+          <%= image_tag image.file, class: "grid-image" %>
+          <%= form_with url: space_image_path(@space, image), method: :delete, data: { confirm: 'Are you sure you want to delete this image?' }, class: "delete-image-form" do %>
+            <%= submit_tag 'X', class: "delete-image" %>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
-
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
@@ -43,6 +48,18 @@
     deleteButtons.forEach(button => {
       button.addEventListener("click", function(event) {
         const confirmationMessage = button.getAttribute("data-confirm");
+
+        if (confirmationMessage && !confirm(confirmationMessage)) {
+          event.preventDefault();
+        }
+      });
+    });
+
+    const deleteImageButtons = document.querySelectorAll(".delete-image");
+
+    deleteImageButtons.forEach(button => {
+      button.addEventListener("click", function(event) {
+        const confirmationMessage = button.parentElement.getAttribute("data-confirm");
 
         if (confirmationMessage && !confirm(confirmationMessage)) {
           event.preventDefault();
