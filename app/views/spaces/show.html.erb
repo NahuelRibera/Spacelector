@@ -1,18 +1,19 @@
 <div class="set">
   <div class="header">
     <h1><%= @space.name %></h1>
-    <p><%= @space.description %></p>
+    <%# <p><%= @space.description %>
     <%= link_to '+ New', new_space_path(parent_space_id: @space.id), class: "new" %>
+    <%# <%= link_to raw('<i class="fa-solid fa-plus"></i> New'), new_space_path(parent_space_id: @space.id), class: "new" %> 
   </div>
 
   <% if @space.parent_space %>
-    <%= link_to "Back to '#{j @space.parent_space.name}'", space_path(@space.parent_space), class: "back_to" %>
+    <%= link_to raw('<i class="fa-solid fa-arrow-left"></i> Back to \''.html_safe + j(@space.parent_space.name) + '\''), space_path(@space.parent_space), class: "back_to" %>
   <% else %>
-    <%= link_to 'Back', spaces_path, class: "back" %>
+    <%= link_to raw('<i class="fa-solid fa-arrow-left"></i> Back'), spaces_path, class: "back" %>
   <% end %>
 
-  <%= link_to 'Upload image', new_space_image_path(@space), class: "upload" %>
 
+<%= link_to raw('<i class="fa-solid fa-arrow-up-from-bracket"></i> Upload image'), new_space_image_path(@space), class: "upload" %>
   <ul class="space-list">
     <% @child_spaces.each do |child_space| %>
       <li>
@@ -34,7 +35,7 @@
             <%= form.submit 'X', data: { confirm: 'Are you sure you want to delete this image?' }, class: "delete" %>
           <% end %>
           <div class="image-card">
-            <a class="demo" href="<%= url_for(image.file) %>" data-lightbox="example-<%= index + 1 %>">
+            <a class="demo" href="<%= url_for(image.file) %>" data-lightbox="example" data-title="<%= image.title %>">
               <%= image_tag(image.file, class: "grid-image example-image", alt: "image-#{index + 1}") %>
             </a>
             <div class="title">
@@ -58,6 +59,16 @@
             event.preventDefault();
           }
         });
+      });
+
+      // Lightbox2 initialization
+      lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true,
+        'showImageNumberLabel': false,
+        'disableKeyboardNav': false,
+        'showImageNumberLabel': true,
+        'alwaysShowNavOnTouchDevices': true
       });
     });
   </script>
