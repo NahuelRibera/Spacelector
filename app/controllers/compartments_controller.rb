@@ -1,21 +1,46 @@
-class CompartmentsController < ApplicationController
-  before_action :set_image
+# app/controllers/compartments_controller.rb
 
+class CompartmentsController < ApplicationController
+  before_action :set_image, only: [:create, :update, :destroy]
+  before_action :set_compartment, only: [:update, :destroy]
+
+  # POST /images/:image_id/compartments
   def create
     @compartment = @image.compartments.new(compartment_params)
     if @compartment.save
-      render json: @compartment, status: :created
+      redirect_to @image, notice: 'Compartment was successfully created.'
     else
-      render json: @compartment.errors, status: :unprocessable_entity
+      render :new
     end
+  end
+
+  # PATCH/PUT /images/:image_id/compartments/:id
+  def update
+    if @compartment.update(compartment_params)
+      redirect_to @image, notice: 'Compartment was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  # DELETE /images/:image_id/compartments/:id
+  def destroy
+    @compartment.destroy
+    redirect_to @image, notice: 'Compartment was successfully destroyed.'
   end
 
   private
 
+  # Use callbacks to share common setup or constraints between actions.
   def set_image
     @image = Image.find(params[:image_id])
   end
 
+  def set_compartment
+    @compartment = @image.compartments.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
   def compartment_params
     params.require(:compartment).permit(:name, :x, :y, :width, :height)
   end

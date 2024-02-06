@@ -3,8 +3,8 @@ class ImagesController < ApplicationController
 
   def create
     @image = @space.images.new(image_params)
-    @image.file.attach(params[:image][:file]) # Attach the file
-    @image.file_path = @image.file.key # Set the file_path to the attachment key
+    @image.file.attach(params[:image][:file])
+    @image.file_path = @image.file.key
 
     if @image.save
       redirect_to space_path(@space), notice: 'Image successfully uploaded.'
@@ -14,7 +14,8 @@ class ImagesController < ApplicationController
   end
 
   def new
-    @image = Image.new # Create a new image instance without associating it to any space yet
+    @image = Image.new
+    @compartment = @image.compartments.build  # Initialize a new compartment associated with the image
   end
 
   def show

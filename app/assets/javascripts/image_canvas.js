@@ -1,3 +1,5 @@
+// image_canvas.js
+
 document.addEventListener("DOMContentLoaded", function() {
   const canvas = document.getElementById("imageCanvas");
   const context = canvas.getContext("2d");
@@ -5,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const compartments = [];
 
   let isDrawing = false;
-  let startX, startY;
+  let startX, startY, endX, endY;
 
   // Function to draw compartments on the canvas
   function drawCompartments() {

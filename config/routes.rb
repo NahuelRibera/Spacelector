@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :spaces do
     resources :images, only: [:new, :create, :show, :destroy] do
-      resources :compartments, only: [:create]
+      resources :compartments, only: [:new, :create]
     end
   end
 
