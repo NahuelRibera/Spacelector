@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   end
 
   get '/search', to: 'search#index'
+  get '/profile', to: 'profiles#show', as: :profile
 end

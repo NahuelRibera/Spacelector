@@ -1,3 +1,90 @@
 .navbar-lewagon {
   background: white;
 }
+
+.navbar {
+  background: white;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 67px;
+  border-bottom: 1px solid #e6e6e6;
+  display: flex;
+  justify-content: space-between; // This will space out the logo and the nav items
+  padding: 0 20px; // Added padding for a bit of space on the sides
+  overflow: visible;
+}
+
+.navbar-brand img {
+  max-height: 30px;
+  width: auto;
+  margin-right: 0.5rem;
+}
+
+.navbar-nav {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end; // This keeps the nav items to the right
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem; // Ensure consistent spacing between nav items
+}
+
+.nav-link, .btn-login {
+  color: #333;
+  text-transform: capitalize;
+  font-weight: bold;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  display: flex; // Align horizontally
+  align-items: center; // Center vertically
+}
+
+.btn-login {
+  border: 1px solid #01C1AD;
+  border-radius: 20px;
+  color: white;
+  background-color: #4285f4; // Adjusted for consistency with your blue button
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  font-weight: bold;
+  margin-left: 1rem; // Adjust the margin as needed
+
+  &:hover {
+    background-color: #357ae8; // Darker blue on hover
+  }
+}
+
+/* Responsive styles for smaller screens */
+@media screen and (max-width: 768px) {
+  .navbar {
+    height: auto; // Adjust height for mobile
+    flex-direction: row; // Keep items in a row
+    padding: 10px; // Reduce padding for mobile
+  }
+
+  .navbar-brand img {
+    max-height: 28px; // Slightly smaller logo for mobile
+  }
+
+  .navbar-nav {
+    justify-content: flex-end; // Keep items to the right
+  }
+
+  .nav-item, .nav-link, .btn-login {
+    padding: 0.25rem 0.5rem; // Reduce padding for mobile
+    font-size: 0.8rem; // Slightly smaller font size for mobile
+  }
+
+  .btn-login {
+    margin-left: 0.5rem; // Reduce margin for mobile
+    font-size: 0.7rem; // Even smaller font size for mobile
+  }
+}
