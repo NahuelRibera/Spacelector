@@ -20,7 +20,7 @@
     <button id="selectCompartmentsButton" type="button" style="display: none;">Select Compartments</button>
 
     <!-- Canvas for drawing compartments -->
-    <canvas id="imageCanvas" width="800" height="600" style="display: none;"></canvas>
+    <canvas id="imageCanvas" style="display: none;"></canvas>
 
     <!-- Input field for compartment name -->
     <div class="field" style="display: none;">
@@ -39,7 +39,7 @@
   <% end %>
 </div>
 
-<script>
+<<script>
   // Script to handle image file selection
   document.getElementById('imageFileInput').addEventListener('change', function() {
     const fileInput = this;
@@ -70,12 +70,27 @@
     // Function to draw compartments on the canvas
     function drawCompartments() {
       context.clearRect(0, 0, canvas.width, canvas.height);
-      compartments.forEach(compartment => {
-        context.beginPath();
-        context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
-        context.stroke();
-        context.fillText(compartment.name, compartment.x, compartment.y - 5);
-      });
+      const fileInput = document.getElementById('imageFileInput');
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const img = new Image();
+          img.onload = function() {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            context.drawImage(img, 0, 0);
+            compartments.forEach(compartment => {
+              context.beginPath();
+              context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
+              context.stroke();
+              context.fillText(compartment.name, compartment.x, compartment.y - 5);
+            });
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
     }
 
     // Function to save compartment data
@@ -112,7 +127,14 @@
     // Show canvas and input field when "Select Compartments" button is clicked
     const selectCompartmentsButton = document.getElementById('selectCompartmentsButton');
     selectCompartmentsButton.addEventListener('click', function() {
-      imageCanvas.style.display = 'block';
+      const fileInput = document.getElementById('imageFileInput');
+      if (fileInput.files.length === 0) {
+        alert('Please choose a file first.');
+        return;
+      }
+
+      drawCompartments();
+      canvas.style.display = 'block';
       compartmentNameInput.parentElement.style.display = 'block';
     });
   });
