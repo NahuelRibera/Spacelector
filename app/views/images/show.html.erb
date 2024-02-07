@@ -1,12 +1,16 @@
-<!-- app/views/images/show.html.erb -->
-<% @space.images.each do |image| %>
-  <% if image.file.attached? %>
-    <div class="image-container">
-      <%= image_tag image.file, class: "grid-image" %>
-      <p><%= image.title %></p>
-      <%= form_with url: space_image_path(@space, image), method: :delete, data: { confirm: 'Are you sure you want to delete this image?' }, class: "delete-image-form" do |form| %>
-        <%= submit_tag 'X', class: "delete-image" %>
-      <% end %>
-    </div>
-  <% end %>
-<% end %>
+<div class="set">
+  <div class="header">
+    <h1><%= @space.name %></h1>
+  </div>
+
+  <canvas id="imageCanvas"></canvas>
+
+  <div class="compartment-form">
+    <input type="text" id="compartmentName" placeholder="Enter compartment name">
+    <button onclick="saveCompartment()">Save Compartment</button>
+  </div>
+</div>
+
+<script>
+  // JavaScript code to handle drawing compartments on the canvas
+</script>
