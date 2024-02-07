@@ -1,0 +1,34 @@
+<!-- app/views/compartments/edit.html.erb -->
+
+<h1>Edit Compartment</h1>
+
+<%= form_with(model: [@image, @compartment], local: true, method: :patch) do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :x %>
+    <%= form.number_field :x %>
+  </div>
+
+  <div class="field">
+    <%= form.label :y %>
+    <%= form.number_field :y %>
+  </div>
+
+  <div class="field">
+    <%= form.label :width %>
+    <%= form.number_field :width %>
+  </div>
+
+  <div class="field">
+    <%= form.label :height %>
+    <%= form.number_field :height %>
+  </div>
+
+  <%= form.submit %>
+<% end %>
+
+<%= link_to 'Back', image_path(@image) %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_26_085059) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_06_133130) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,6 +51,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_26_085059) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["image_id"], name: "index_boxes_on_image_id"
+  end
+
+  create_table "compartments", force: :cascade do |t|
+    t.string "name"
+    t.integer "x"
+    t.integer "y"
+    t.integer "width"
+    t.integer "height"
+    t.bigint "image_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["image_id"], name: "index_compartments_on_image_id"
   end
 
   create_table "images", force: :cascade do |t|
@@ -95,6 +107,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_26_085059) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "boxes", "images"
+  add_foreign_key "compartments", "images"
   add_foreign_key "images", "spaces"
   add_foreign_key "infos", "boxes"
   add_foreign_key "spaces", "users"
