@@ -1,5 +1,4 @@
 <!-- app/views/images/new.html.erb -->
-
 <div class="set">
   <div class="header">
     <h1>New Image</h1>
@@ -22,8 +21,8 @@
     <!-- Canvas for drawing compartments -->
     <canvas id="imageCanvas" style="display: none;"></canvas>
 
-    <!-- Input field for compartment name -->
-    <div id="compartmentInputs" style="display: none;"></div>
+    <!-- Container for compartment name input fields -->
+    <div id="compartmentNamesContainer" style="display: none;"></div>
 
     <%= form.submit "Upload", class: 'upload-button', id: 'uploadButton' %>
   <% end %>
@@ -42,7 +41,6 @@
     const fileInput = this;
     const selectCompartmentsButton = document.getElementById('selectCompartmentsButton');
     const imageCanvas = document.getElementById('imageCanvas');
-    const compartmentNameInput = document.getElementById('compartmentName');
 
     // Show the select compartments button if a file is selected
     if (fileInput.files.length > 0) {
@@ -51,7 +49,7 @@
       alert('Please choose a file first.');
       selectCompartmentsButton.style.display = 'none';
       imageCanvas.style.display = 'none';
-      document.getElementById('compartmentInputs').style.display = 'none';
+      compartmentNamesContainer.style.display = 'none';
     }
   });
 
@@ -59,10 +57,10 @@
   document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('imageCanvas');
     const context = canvas.getContext('2d');
+    const compartmentNamesContainer = document.getElementById('compartmentNamesContainer');
     const compartments = [];
     let isDrawing = false;
     let startX, startY, endX, endY;
-    let currentCompartmentInput = 0;
 
     // Function to draw compartments on the canvas
     function drawCompartments() {
@@ -92,18 +90,11 @@
 
     // Function to save compartment data
     function saveCompartment() {
-      const compartmentNameInput = document.createElement('input');
-      compartmentNameInput.type = 'text';
-      compartmentNameInput.name = `compartment[${currentCompartmentInput}][name]`;
-      compartmentNameInput.placeholder = 'Compartment Name';
-      document.getElementById('compartmentInputs').appendChild(compartmentNameInput);
-
-      const name = compartmentNameInput.value;
+      const name = compartmentNamesContainer.lastElementChild.value;
       const width = Math.abs(startX - endX);
       const height = Math.abs(startY - endY);
       compartments.push({ name: name, x: startX, y: startY, width: width, height: height });
       drawCompartments();
-      currentCompartmentInput++;
     }
 
     // Mouse event listeners
@@ -111,6 +102,12 @@
       isDrawing = true;
       startX = event.offsetX;
       startY = event.offsetY;
+
+      // Create a new input field for the compartment name with placeholder text
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Compartment ' + (compartmentNamesContainer.children.length + 1);
+      compartmentNamesContainer.appendChild(input);
     });
 
     canvas.addEventListener('mousemove', function(event) {
@@ -139,7 +136,7 @@
 
       drawCompartments();
       canvas.style.display = 'block';
-      document.getElementById('compartmentInputs').style.display = 'block';
+      compartmentNamesContainer.style.display = 'block';
     });
   });
 </script>
