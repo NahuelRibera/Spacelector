@@ -1,9 +1,9 @@
-<div class="set">
+<section id="content" class="set">
   <div class="header">
     <h1><%= @space.name %></h1>
     <%# <p><%= @space.description %>
     <%= link_to '+ New', new_space_path(parent_space_id: @space.id), class: "new" %>
-    <%# <%= link_to raw('<i class="fa-solid fa-plus"></i> New'), new_space_path(parent_space_id: @space.id), class: "new" %> 
+    <%# <%= link_to raw('<i class="fa-solid fa-plus"></i> New'), new_space_path(parent_space_id: @space.id), class: "new" %>
   </div>
 
   <% if @space.parent_space %>
@@ -72,4 +72,4 @@
       });
     });
   </script>
-</div>
+</section>
