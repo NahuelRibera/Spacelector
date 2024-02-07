@@ -9,11 +9,16 @@
         <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        <%= form_with(url: destroy_user_session_path, method: :delete, local: false, class: "form-inline") do %>
+          <%= submit_tag 'Sign Out', class: 'btn nav-link' %>
+        <% end %>
       </li>
     <% else %>
       <li class="nav-item">
         <%= link_to "Login", new_user_session_path, class: "nav-link btn-login" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Sign up", new_user_registration_path, class: "nav-link btn-login" %>
       </li>
     <% end %>
   </ul>
