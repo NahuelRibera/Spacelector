@@ -79,3 +79,9 @@ end
 gem "cloudinary"
 
 gem 'lightbox2'
+
+gem 'omniauth'
+
+gem 'omniauth-google-oauth2'
+
+gem "omniauth-rails_csrf_protection","~> 1.0"
