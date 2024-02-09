@@ -21,6 +21,8 @@ class SpacesController < ApplicationController
 
   def show
     @space = Space.find(params[:id])
+    @image = @space.images.first # Or fetch the desired image using your logic
+    @compartments = @image.compartments if @image.present?
     @child_spaces = @space.child_spaces
   end
 
