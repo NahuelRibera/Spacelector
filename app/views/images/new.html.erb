@@ -1,4 +1,3 @@
-<!-- app/views/images/new.html.erb -->
 <div class="set">
   <div class="header">
     <h1>New Image</h1>
@@ -36,7 +35,7 @@
 </div>
 
 <script>
-  // Script to handle image file selection
+  // Existing script to handle image file selection
   document.getElementById('imageFileInput').addEventListener('change', function() {
     const fileInput = this;
     const selectCompartmentsButton = document.getElementById('selectCompartmentsButton');
@@ -53,7 +52,7 @@
     }
   });
 
-  // Script to initialize the canvas and handle compartment selection
+  // Existing script to initialize the canvas and handle compartment selection
   document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('imageCanvas');
     const context = canvas.getContext('2d');
@@ -137,6 +136,25 @@
       drawCompartments();
       canvas.style.display = 'block';
       compartmentNamesContainer.style.display = 'block';
+    });
+
+    // New event listener to prevent upload if compartments are not named
+    const uploadButton = document.getElementById('uploadButton');
+    uploadButton.addEventListener('click', function(event) {
+      const compartmentInputs = compartmentNamesContainer.querySelectorAll('input');
+      let compartmentsNamed = true;
+
+      compartmentInputs.forEach(input => {
+        if (input.value.trim() === '') {
+          compartmentsNamed = false;
+          return;
+        }
+      });
+
+      if (!compartmentsNamed) {
+        event.preventDefault();
+        alert('Please name all compartments before uploading.');
+      }
     });
   });
 </script>
