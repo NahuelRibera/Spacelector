@@ -20,7 +20,10 @@ class ImagesController < ApplicationController
 
   def show
     @image = Image.find(params[:id])
+    @compartments = @image.compartments || [] # Initialize @compartments to an empty array if it's nil
   end
+
+
 
   def destroy
     @space = Space.find(params[:space_id])

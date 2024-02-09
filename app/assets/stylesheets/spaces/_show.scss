@@ -24,7 +24,7 @@ h1 {
 
 .new {
   color: #fff;
-  background-color: #4285f4; /* Google Drive blue */
+  background-color: #44A0D8;
   padding: 8px 16px;
   text-decoration: none;
   border-radius: 10px;
@@ -208,4 +208,29 @@ a {
   text-align: center;
   margin-top: 12px;
   margin-bottom: 12px;
+}
+
+/* CSS for modal overlay */
+.modal-overlay {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9999; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+}
+
+/* CSS for modal content */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 800px;
+  background-color: #fefefe;
+  position: relative;
+  padding: 20px;
+  border: 1px
 }
