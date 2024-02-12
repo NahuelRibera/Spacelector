@@ -3,7 +3,6 @@ div.set {
 }
 
 body {
-  // font-family: 'Poppins';
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -210,7 +209,6 @@ a {
   margin-bottom: 12px;
 }
 
-/* CSS for modal overlay */
 .modal-overlay {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -223,7 +221,6 @@ a {
   background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
 }
 
-/* CSS for modal content */
 .modal-content {
   margin: auto;
   display: block;

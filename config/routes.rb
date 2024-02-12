@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'members/dashboard'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
@@ -21,5 +22,10 @@ Rails.application.routes.draw do
   end
 
   get '/search', to: 'search#index'
+
   get '/profile', to: 'profiles#show', as: :profile
+
+  get 'checkout', to: 'checkouts#show'
+  get 'checkout/success', to: 'checkouts#success'
+  get 'billing', to: 'billings#show'
 end
