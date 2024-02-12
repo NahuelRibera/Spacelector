@@ -6,7 +6,14 @@
   <ul class="navbar-nav me-auto">
     <% if user_signed_in? %>
       <li class="nav-item">
-        <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
+        <%= link_to "Subscribe!", checkout_path(
+          line_items: ['price_1OifPODT88Wq6H33t1AHmxom'],
+          payment_mode: 'subscription'
+        ),
+        class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Manage billing", @portal_sessions.url unless @portal_session.nil? %>
       </li>
       <li class="nav-item">
         <%= form_with(url: destroy_user_session_path, method: :delete, local: false, class: "form-inline") do %>
