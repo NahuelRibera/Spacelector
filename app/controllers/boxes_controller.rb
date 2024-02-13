@@ -1,2 +1,0 @@
-class BoxesController < ApplicationController
-end
