@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get '/profile', to: 'profiles#show', as: :profile
 
   get 'checkout', to: 'checkouts#show'
+  get 'checkout/:plan', to: 'checkouts#checkout', as: :checkout_plan
   get 'checkout/success', to: 'checkouts#success'
   get 'billing', to: 'billings#show'
 end
