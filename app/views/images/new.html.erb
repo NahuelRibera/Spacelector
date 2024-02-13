@@ -92,8 +92,29 @@
       const name = compartmentNamesContainer.lastElementChild.value;
       const width = Math.abs(startX - endX);
       const height = Math.abs(startY - endY);
-      compartments.push({ name: name, x: startX, y: startY, width: width, height: height });
+      const x = Math.min(startX, endX);
+      const y = Math.min(startY, endY);
+      const compartment = { name, x, y, width, height };
+
+      // Update or create new hidden inputs
+      updateOrCreateHiddenInputs(compartment, compartments.length);
+
+      compartments.push(compartment);
       drawCompartments();
+    }
+
+    function updateOrCreateHiddenInputs(compartment, index) {
+      const form = document.querySelector('.image-form');
+      ['name', 'x', 'y', 'width', 'height'].forEach(attr => {
+        let input = form.querySelector(`input[name="image[compartments_attributes][${index}][${attr}]"]`);
+        if (!input) {
+          input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = `image[compartments_attributes][${index}][${attr}]`;
+          form.appendChild(input);
+        }
+        input.value = compartment[attr];
+      });
     }
 
     // Mouse event listeners

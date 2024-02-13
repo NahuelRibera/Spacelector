@@ -35,7 +35,7 @@ class ImagesController < ApplicationController
   private
 
   def image_params
-    params.require(:image).permit(:file, :title)
+    params.require(:image).permit(:file, :title, compartments_attributes: [:name, :x, :y, :width, :height])
   end
 
   def set_space
