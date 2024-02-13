@@ -78,6 +78,8 @@
               context.beginPath();
               context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
               context.stroke();
+              context.strokeStyle = '#44A0D8'; // Customize stroke color if needed
+              context.lineWidth = 4; // Customize line width if needed
               context.fillText(compartment.name, compartment.x, compartment.y - 5);
             });
           };
