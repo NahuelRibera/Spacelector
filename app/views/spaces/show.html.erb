@@ -44,11 +44,15 @@
 
 <div id="image-modal" class="modal-overlay">
   <div class="modal-content">
-    <span class="close-modal">&times;</span>
-    <img id="modal-image" class="modal-image" src="" alt="">
-    <canvas id="modal-canvas" class="modal-canvas"></canvas>
+    <span class="close-modal"></span>
+    <%# <div class="image-container"> %>
+      <img id="modal-image" class="modal-image" src="" alt="">
+      <canvas id="modal-canvas" class="modal-canvas"></canvas>
+    <%# </div> %>
   </div>
 </div>
+
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -82,8 +86,8 @@
           compartmentsData.forEach(compartment => {
             context.beginPath();
             context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
-            context.strokeStyle = 'red'; // Customize stroke color if needed
-            context.lineWidth = 2; // Customize line width if needed
+            context.strokeStyle = '#44A0D8'; // Customize stroke color if needed
+            context.lineWidth = 5; // Customize line width if needed
             context.stroke();
             context.fillStyle = 'red'; // Customize fill color if needed
             context.fillText(compartment.name, compartment.x, compartment.y - 5);
