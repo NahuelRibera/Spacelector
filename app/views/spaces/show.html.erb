@@ -18,8 +18,9 @@
         <div class="space-info">
           <%= link_to child_space.name, space_path(child_space) %>
           <%= form_with url: space_path(child_space), method: :delete do |form| %>
-            <%= form.submit 'X', data: { confirm: 'Are you sure you want to delete this space?' }, class: "delete" %>
-          <% end %>
+  <%= form.submit 'X', onclick: "return confirm('Are you sure you want to delete this space?')", class: "delete" %>
+<% end %>
+
         </div>
       </li>
     <% end %>
@@ -27,17 +28,22 @@
 
   <div class="image-grid">
     <% @space.images.each_with_index do |image, index| %>
-      <% if image.file.attached? %>
-        <div class="image-container">
-          <div class="image-card">
-            <%= image_tag(image.file, class: "grid-image example-image", alt: "image-#{index + 1}", data: { compartments: compartments_for_image(image) }) %>
-            <div class="title">
-              <h5><%= image.title %></h5>
-            </div>
-          </div>
+  <% if image.file.attached? %>
+    <div class="image-container">
+      <div class="image-card">
+        <%= image_tag(image.file, class: "grid-image example-image", alt: "image-#{index + 1}", data: { compartments: compartments_for_image(image) }) %>
+        <div class="title">
+          <h5><%= image.title %></h5>
         </div>
-      <% end %>
-    <% end %>
+        <%= form_with url: space_image_path(@space, image), method: :delete, data: { confirm: 'Are you sure you want to delete this image?' }, class: "delete-image-form" do |form| %>
+            <%= form.submit 'X', onclick: "return confirm('Are you sure you want to delete this image?')", class: "delete" %>
+
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
   </div>
 
 </section>

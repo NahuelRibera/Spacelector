@@ -6,6 +6,10 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+h5 {
+  font-family: 'Open Sans', sans-serif;
+}
+
 .header {
   display: flex;
   flex-wrap: wrap; /* Added to handle small screen sizes */
@@ -92,7 +96,7 @@ h1 {
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -107,7 +111,7 @@ h1 {
   background-color: white;
   flex: 1;
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     flex: 0 0 calc(50% - 20px);
   }
 
@@ -124,20 +128,29 @@ a {
 }
 
 .delete {
-  color: #333;
-  padding: 2.5px 10px;
+  color: #7b7b7b;
+  // padding: 2.5px 8px;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 50%;
   display: inline-block;
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   margin-left: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #e9e9e9;
+
 
 
   &:hover{
-    background-color: #dadada;
+    background-color: #d7d7d7;
   }
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+
 }
 
 .image-grid {
@@ -160,7 +173,7 @@ a {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .image-grid {
     grid-template-columns: repeat(2, 1fr);
   }
