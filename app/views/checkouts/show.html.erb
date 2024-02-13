@@ -1,6 +1,4 @@
-<h1>Checkout!</h1>
-
-<%= render partial: 'pay/stripe/checkout_button', locals: {
-    session: @checkout_session,
-    title: "Checkout"
-} %>
+<div class="pricing-cards">
+  <%= render 'pricing_card', title: 'Standard', price: '$25/mo', subtitle: 'paid monthly', plan: 'monthly' %>
+  <%= render 'pricing_card', title: 'Advanced', price: '$199/mo', subtitle: 'paid annually', plan: 'annual' %>
+</div>

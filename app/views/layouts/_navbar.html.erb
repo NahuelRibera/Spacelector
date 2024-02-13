@@ -6,11 +6,7 @@
   <ul class="navbar-nav me-auto">
     <% if user_signed_in? %>
       <li class="nav-item">
-        <%= link_to "Subscribe!", checkout_path(
-          line_items: ['price_1OifPODT88Wq6H33t1AHmxom'],
-          payment_mode: 'subscription'
-        ),
-        class: "nav-link" %>
+        <%= link_to "Subscribe!", checkout_path, class: "nav-link" %>
       </li>
       <li class="nav-item">
         <%= link_to "Manage billing", @portal_sessions.url unless @portal_session.nil? %>
