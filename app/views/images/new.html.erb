@@ -62,8 +62,9 @@
     let startX, startY, endX, endY;
 
     // Function to draw compartments on the canvas
+    // Function to draw compartments on the canvas
+    // Function to draw image and compartments on the canvas
     function drawCompartments() {
-      context.clearRect(0, 0, canvas.width, canvas.height);
       const fileInput = document.getElementById('imageFileInput');
       if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
@@ -73,7 +74,7 @@
           img.onload = function() {
             canvas.width = img.width;
             canvas.height = img.height;
-            context.drawImage(img, 0, 0);
+            context.drawImage(img, 0, 0); // Draw the image first
             compartments.forEach(compartment => {
               context.beginPath();
               context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
@@ -88,6 +89,7 @@
         reader.readAsDataURL(file);
       }
     }
+
 
     // Function to save compartment data
     function saveCompartment() {
