@@ -62,8 +62,10 @@
     let startX, startY, endX, endY;
 
     // Function to draw compartments on the canvas
+    // Function to draw compartments on the canvas
+    // Function to draw image and compartments on the canvas
+    // Function to draw image and compartments on the canvas
     function drawCompartments() {
-      context.clearRect(0, 0, canvas.width, canvas.height);
       const fileInput = document.getElementById('imageFileInput');
       if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
@@ -73,13 +75,16 @@
           img.onload = function() {
             canvas.width = img.width;
             canvas.height = img.height;
-            context.drawImage(img, 0, 0);
+            context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas first
+            context.drawImage(img, 0, 0); // Draw the image
+
+            context.strokeStyle = '#44A0D8'; // Set the stroke color
+            context.lineWidth = 4; // Set the line width
+
             compartments.forEach(compartment => {
               context.beginPath();
               context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
               context.stroke();
-              context.strokeStyle = '#44A0D8'; // Customize stroke color if needed
-              context.lineWidth = 4; // Customize line width if needed
               context.fillText(compartment.name, compartment.x, compartment.y - 5);
             });
           };
