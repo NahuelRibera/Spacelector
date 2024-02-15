@@ -63,6 +63,26 @@
   align-items: center; // Center vertically
 }
 
+.nav-item .nav-link.premium-trial {
+  background: white;
+  color: black;
+  border: none;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  box-shadow: 0 0 0.25px #44A0D8, 0 0 0.5px #44A0D8, 0 0 0.75px #44A0D8, 0 0 1.25px #44A0D8, 0 0 1.75px #44A0D8, 0 0 2px #44A0D8, 0 0 2.5px #44A0D8, 0 0 3.75px #44A0D8;
+  transition: all 0.3s ease-in-out;
+  padding: 5px 10px;
+  margin: 0 10px;
+}
+
+.nav-item .nav-link:hover {
+  background: #f4fbff;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  box-shadow: 0 0 0.5px #44A0D8, 0 0 1px #44A0D8, 0 0 1.5px #44A0D8, 0 0 2.5px #44A0D8, 0 0 3.5px #44A0D8, 0 0 4px #44A0D8, 0 0 5px #44A0D8, 0 0 7.5px #44A0D8;
+}
+
 .btn-login {
   border: 1px solid #01C1AD;
   border-radius: 20px;
