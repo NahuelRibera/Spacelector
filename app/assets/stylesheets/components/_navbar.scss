@@ -18,8 +18,25 @@
   overflow: visible;
 }
 
+.sign-out-button {
+  background: none; // Removes any background
+  border: none; // Removes the border
+  padding: 0; // Removes padding
+  margin: 0; // Adjust as needed
+
+  &:hover {
+    background: none; // Keeps the background transparent on hover
+    opacity: 0.8; // Optional: slight transparency effect on hover
+  }
+
+  img {
+    height: 30px; // Adjust the size as needed
+    width: auto;
+  }
+}
+
 .navbar-brand img {
-  max-height: 30px;
+  max-height: 24px;
   width: auto;
   margin-right: 0.5rem;
 }
