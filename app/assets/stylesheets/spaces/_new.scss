@@ -1,10 +1,18 @@
-/* Styles for the new.html.erb */
-
-/* Common styles for set and header */
-.set {
-  margin: 40px;
+/* Increase space between label and text field */
+#content {
+  margin-top: 115px;
 }
 
+.label {
+  margin-bottom: 15px; /* Adjust as needed */
+}
+
+/* Increase space between text field and back button */
+.space-form {
+  margin-top: 40px; /* Adjust as needed */
+}
+
+/* Common styles for set and header */
 .header {
   display: flex;
   justify-content: space-between;
@@ -17,17 +25,22 @@ h1 {
   margin: 0;
   color: #333;
   font-size: 40px;
+  text-align: center;
 }
 
 h4 {
+  font-family: 'Open Sans', sans-serif;
   margin: 0;
   color: #333; /* Change the color to #333 */
+  margin-bottom: 20px;
+  font-size: 25px;
 }
 
 label {
   display: block;
   font-size: 20px; /* Adjust as needed */
-  margin-bottom: 5px; /* Adjust as needed */
+
+  margin-top: 15px;
 }
 
 /* Styles for the link back */
@@ -54,3 +67,69 @@ a:hover {
   }
 }
 
+.back_form {
+  color:#333;
+  background-color: #e6e6e6; /* Google Drive blue */
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 10px;
+  display: inline-block;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover{
+    background-color: #dadada;
+  }
+}
+
+.card-general {
+  background-color: #ffffff; /* White background */
+  border-radius: 10px; /* Rounded borders */
+  padding: 25px; /* Add padding for content inside the card */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  max-width: 500px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.card-field {
+  background-color: #f4f4f4; /* White background */
+  border-radius: 10px; /* Rounded borders */
+  padding: 15px; /* Add padding for content inside the card */
+  margin-bottom: 20px; /* Add margin to separate card fields */
+  margin-top: -10px;
+}
+
+.text-field {
+  background-color: #ffffff; /* White background */
+  border: 5px solid #f4f4f4; /* Rounded borders */
+  border-radius: 10px;
+  padding: 5px 10px; /* Add padding */
+  font-size: 12px; /* Adjust font size */
+  width: 100%; /* Set width to fill the container */
+  box-sizing: border-box; /* Include padding and border in width */
+}
+
+.new-create {
+  color: #fff;
+  background-color: #44A0D8;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 16px;
+  // margin-left: auto;
+  // margin-right: auto;
+  width: fit-content;
+  // margin-top: 25px;
+  // margin-bottom: 12px;
+  text-decoration: none;
+}
+
+.btn-row {
+  display: flex;
+  justify-content: space-between; /* Distribute space between items */
+  align-items: center; /* Align items vertically */
+  margin-top: 35px; /* Adjust margin as needed */
+  margin-bottom: 5px;
+  border: none;
+  outline: none;
+}
