@@ -18,9 +18,8 @@
         <div class="space-info">
           <%= link_to child_space.name, space_path(child_space) %>
           <%= form_with url: space_path(child_space), method: :delete do |form| %>
-  <%= form.submit 'X', onclick: "return confirm('Are you sure you want to delete this space?')", class: "delete-space" %>
-<% end %>
-
+            <%= form.submit 'X', onclick: "return confirm('Are you sure you want to delete this space?')", class: "delete-space" %>
+          <% end %>
         </div>
       </li>
     <% end %>
@@ -28,36 +27,45 @@
 
   <div class="image-grid">
     <% @space.images.each_with_index do |image, index| %>
-  <% if image.file.attached? %>
-    <div class="image-container">
-      <div class="image-card">
-        <%= image_tag(image.file, class: "grid-image example-image", alt: "image-#{index + 1}", data: { compartments: compartments_for_image(image) }) %>
-        <div class="title">
-          <h5><%= image.title %></h5>
+      <% if image.file.attached? %>
+        <div class="image-container">
+          <div class="image-card">
+            <%= image_tag(image.file, class: "grid-image example-image", alt: "image-#{index + 1}", data: { compartments: compartments_for_image(image) }) %>
+            <div class="title">
+              <h5><%= image.title %></h5>
+            </div>
+            <%= form_with url: space_image_path(@space, image), method: :delete, data: { confirm: 'Are you sure you want to delete this image?' }, class: "delete-image-form" do |form| %>
+              <%= form.submit 'X', class: "delete" %>
+            <% end %>
+          </div>
         </div>
-        <%= form_with url: space_image_path(@space, image), method: :delete, data: { confirm: 'Are you sure you want to delete this image?' }, class: "delete-image-form" do |form| %>
-            <%= form.submit 'X', onclick: "return confirm('Are you sure you want to delete this image?')", class: "delete" %>
+        <% image.compartments.each do |compartment| %>
+          <!-- Trigger element for showing compartment info -->
+          <div data-compartment-id="<%= compartment.id %>" class="compartment-info-trigger">
+            <%= compartment.name %>
+          </div>
 
+          <!-- The compartment info to be displayed -->
+          <!-- The compartment info to be displayed -->
+          <div id="compartment-info-<%= compartment.id %>" class="compartment-info" style="display: none;">
+            Description: <textarea id="description-<%= compartment.id %>" placeholder="Enter object description"></textarea><br>
+            <button onclick="saveObjectInfo(<%= compartment.id %>)">Save</button>
+          </div>
         <% end %>
-      </div>
-    </div>
-  <% end %>
-<% end %>
-
+      <% end %>
+    <% end %>
   </div>
 
-</section>
-
-<div id="image-modal" class="modal-overlay">
-  <div class="modal-content">
-    <span class="close-modal"></span>
-    <%# <div class="image-container"> %>
-      <img id="modal-image" class="modal-image" src="" alt="">
+  <!-- Modal to display the image and compartments -->
+  <div id="image-modal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <img id="modal-image" class="modal-image" src="" alt="Modal Image">
       <canvas id="modal-canvas" class="modal-canvas"></canvas>
-    <%# </div> %>
+      <!-- Container for compartment information boxes -->
+      <div id="compartment-info-boxes"></div>
+    </div>
   </div>
-</div>
-
 
 
 <script>
@@ -97,33 +105,84 @@
             context.stroke();
             context.fillStyle = 'red'; // Customize fill color if needed
             context.fillText(compartment.name, compartment.x, compartment.y - 5);
+
+            // Dynamically create trigger elements for showing compartment info
+            const trigger = document.createElement('div');
+            trigger.setAttribute('data-compartment-id', compartment.id);
+            trigger.classList.add('compartment-info-trigger');
+            trigger.textContent = compartment.name;
+            trigger.style.position = 'absolute';
+            trigger.style.top = `${compartment.y}px`;
+            trigger.style.left = `${compartment.x}px`;
+            modal.appendChild(trigger);
           });
         };
 
         img.src = clickedImage.src;
       });
     });
-
-    // Close modal when close button is clicked
-    closeModal.addEventListener('click', function() {
+    
+      closeModal.addEventListener('click', function() {
       modal.style.display = 'none';
-      // Show the clicked image
+      // Reset clicked image
       if (clickedImage) {
         clickedImage.style.display = 'block';
-        clickedImage = null; // Reset clicked image
+        clickedImage = null;
       }
+    });
+
+    document.querySelectorAll('.compartment-info-trigger').forEach(trigger => {
+      trigger.addEventListener('click', function() {
+        const compartmentId = this.getAttribute('data-compartment-id');
+        const infoDiv = document.getElementById(`compartment-info-${compartmentId}`);
+        if (infoDiv.style.display === 'none') {
+          infoDiv.style.display = 'block';
+        } else {
+          infoDiv.style.display = 'none';
+        }
+      });
     });
 
     // Close modal when clicking outside the modal content
     window.addEventListener('click', function(event) {
       if (event.target === modal) {
         modal.style.display = 'none';
-        // Show the clicked image
+        // Reset clicked image
         if (clickedImage) {
           clickedImage.style.display = 'block';
-          clickedImage = null; // Reset clicked image
+          clickedImage = null;
         }
       }
     });
+
+    function saveObjectInfo(compartmentId) {
+      // Get the value from the textarea
+      var description = document.getElementById('description-' + compartmentId).value;
+
+      // Create the data object to be sent
+      var objectInfoData = {
+        object_info: {
+          description: description
+        }
+      };
+
+      fetch('/compartments/' + compartmentId + '/object_infos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify(objectInfoData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Handle success - maybe update the UI to reflect the saved info
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error('Error:', error);
+      });
+    }
   });
 </script>

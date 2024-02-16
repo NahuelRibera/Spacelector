@@ -21,6 +21,10 @@ Rails.application.routes.draw do
     resource :info, only: [:new, :create, :show, :edit, :update, :destroy]
   end
 
+  resources :compartments do
+    resources :object_infos, as: 'compartment_object_infos'
+  end
+
   get '/search', to: 'search#index'
 
   get '/profile', to: 'profiles#show', as: :profile
