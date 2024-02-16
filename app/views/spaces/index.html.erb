@@ -14,7 +14,7 @@
           <% end %>
 
           <%= form_with url: space_path(space), method: :delete, class: "delete-form" do |form| %>
-            <%= form.submit 'X', data: { confirm: 'Are you sure you want to delete this space?' }, class: 'delete' %>
+            <%= form.submit 'X', data: { confirm: 'Are you sure you want to delete this space?' }, class: 'delete-space' %>
           <% end %>
         </div>
       </li>

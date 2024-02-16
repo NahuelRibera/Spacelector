@@ -1,21 +1,20 @@
-<section id="content" class="set">
-  <div class="header">
-    <h1>New Image</h1>
-  </div>
+<section id="content-card" class="set-card">
+  <div class='card-general'>
+    <h1>Upload Image</h1>
 
   <%= form_with model: @image, url: space_images_path(@space), local: true, class: 'image-form' do |form| %>
     <div class="field">
       <%= form.label :title, 'Title' %>
-      <%= form.text_field :title, required: true %>
+      <%= form.text_field :title, required: true, class: 'text-field' %>
     </div>
 
     <div class="field">
-      <%= form.label :file, 'Image' %>
+      <%# <%= form.label :file, 'Image' %>
       <%= form.file_field :file, required: true, id: 'imageFileInput' %>
     </div>
 
     <!-- Select Compartments button -->
-    <button id="selectCompartmentsButton" type="button" style="display: none;">Select Compartments</button>
+    <button id="selectCompartmentsButton" type="button" class="btn back_form">Select Compartments</button>
 
     <!-- Canvas for drawing compartments -->
     <canvas id="imageCanvas" style="display: none;"></canvas>
@@ -23,15 +22,19 @@
     <!-- Container for compartment name input fields -->
     <div id="compartmentNamesContainer" style="display: none;"></div>
 
-    <%= form.submit "Upload", class: 'upload-button', id: 'uploadButton' %>
-  <% end %>
+    <div class='btn-row'>
 
   <% if @space.parent_space %>
-    <%= link_to "Back to '#{j @space.parent_space.name}'",
-                space_path(@space.parent_space), class: "back_to" %>
-  <% else %>
-    <%= link_to 'Back', spaces_path, class: "back" %>
+      <%= link_to "Back to '#{j @space.child_space.name}'", space_path(@space.child_space), class: "back_to" %>
+    <% else %>
+    <%= link_to 'Back', spaces_path, class: "back_form" %>
+      <% end %>
+  <%= form.submit "Upload", class: 'btn upload', style: "justify-content: center;", id: 'uploadButton' %>
+  </div>
   <% end %>
+
+
+</div>
 </section>
 
 <script>

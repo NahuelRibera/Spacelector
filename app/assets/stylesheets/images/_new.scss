@@ -57,12 +57,21 @@ input[type="file"] {
   border-radius: 8px; /* Add border-radius to the file input */
 }
 
-.upload-button {
-  width: max-content; /* Change to max-content to allow inline display */
+.upload{
+ color: #fff;
+  background-color: #44A0D8;
   padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 10px;
   font-size: 16px;
-  border-radius: 8px; /* Add border-radius to the button */
-  background-color: #4285f4; /* Google Drive blue */
-  color: #fff;
-  margin-top: 20px; /* Add margin to the top of the button */
+  // margin-left: auto;
+  // margin-right: auto;
+  width: fit-content;
+  // margin-top: 25px;
+  // margin-bottom: 12px;
+  text-decoration: none;
+  justify-content: center;
+  text-align: center;
+  align-self: center; /* Center align the back button */
+  margin-top: 20px;
 }

@@ -85,3 +85,7 @@ a:hover {
   justify-content: space-between;
   align-items: center;
 }
+
+.space-box a:hover {
+  text-decoration: none; /* Remove underline on hover */
+}
