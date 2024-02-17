@@ -60,34 +60,29 @@
   <div id="image-modal" class="modal-overlay">
     <div class="modal-content">
       <span class="close-modal">&times;</span>
-      <img id="modal-image" class="modal-image" src="" alt="Modal Image">
-      <canvas id="modal-canvas" class="modal-canvas"></canvas>
-      <!-- Container for compartment information boxes -->
-      <div id="compartment-info-boxes"></div>
+      <div class="modal-body">
+        <img id="modal-image" class="modal-image" src="" alt="Modal Image">
+        <canvas id="modal-canvas" class="modal-canvas"></canvas>
+        <div id="compartment-info-boxes" class="compartment-info-container"></div>
+      </div>
     </div>
   </div>
-
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const images = document.querySelectorAll('.grid-image');
     const modal = document.getElementById('image-modal');
-    const modalImage = document.getElementById('modal-image');
+    const modalBody = document.querySelector('.modal-body');
     const modalCanvas = document.getElementById('modal-canvas');
     const closeModal = document.querySelector('.close-modal');
+    const infoContainer = document.getElementById('compartment-info-boxes');
     let clickedImage = null;
 
     images.forEach(image => {
       image.addEventListener('click', function() {
         clickedImage = this; // Store the clicked image
-
-        // Retrieve compartments data for the clicked image
         const compartmentsData = JSON.parse(image.dataset.compartments);
-
-        // Show modal overlay
         modal.style.display = 'block';
-
-        // Draw compartments on the canvas
         const context = modalCanvas.getContext('2d');
         const img = new Image();
 
@@ -95,77 +90,54 @@
           modalCanvas.width = img.width;
           modalCanvas.height = img.height;
           context.drawImage(img, 0, 0);
-
-          // Draw compartments
           compartmentsData.forEach(compartment => {
-            context.beginPath();
-            context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
-            context.strokeStyle = '#44A0D8'; // Customize stroke color if needed
-            context.lineWidth = 5; // Customize line width if needed
-            context.stroke();
-            context.fillStyle = 'red'; // Customize fill color if needed
-            context.fillText(compartment.name, compartment.x, compartment.y - 5);
-
-            // Dynamically create trigger elements for showing compartment info
-            const trigger = document.createElement('div');
-            trigger.setAttribute('data-compartment-id', compartment.id);
-            trigger.classList.add('compartment-info-trigger');
-            trigger.textContent = compartment.name;
-            trigger.style.position = 'absolute';
-            trigger.style.top = `${compartment.y}px`;
-            trigger.style.left = `${compartment.x}px`;
-            modal.appendChild(trigger);
+            drawCompartment(context, compartment);
           });
         };
-
         img.src = clickedImage.src;
+
+        // Clear existing compartment info boxes
+        infoContainer.innerHTML = '';
+
+        // Create compartment info boxes
+        compartmentsData.forEach(compartment => {
+          const compartmentInfoBox = createCompartmentInfoBox(compartment);
+          infoContainer.appendChild(compartmentInfoBox);
+        });
       });
     });
-    
-      closeModal.addEventListener('click', function() {
+
+    closeModal.addEventListener('click', function() {
       modal.style.display = 'none';
-      // Reset clicked image
-      if (clickedImage) {
-        clickedImage.style.display = 'block';
-        clickedImage = null;
+      clickedImage = null;
+      infoContainer.innerHTML = ''; // Clear compartment info boxes
+    });
+
+    // Improved event listener attachment for compartment triggers
+    // Now listens on the modal for clicks and checks if the target is a compartment trigger
+    modal.addEventListener('click', function(event) {
+      if (event.target.classList.contains('compartment-info-trigger')) {
+        const compartmentId = event.target.getAttribute('data-compartment-id');
+        toggleCompartmentInfo(compartmentId);
       }
     });
 
-    document.querySelectorAll('.compartment-info-trigger').forEach(trigger => {
-      trigger.addEventListener('click', function() {
-        const compartmentId = this.getAttribute('data-compartment-id');
-        const infoDiv = document.getElementById(`compartment-info-${compartmentId}`);
-        if (infoDiv.style.display === 'none') {
-          infoDiv.style.display = 'block';
-        } else {
-          infoDiv.style.display = 'none';
-        }
-      });
-    });
-
-    // Close modal when clicking outside the modal content
     window.addEventListener('click', function(event) {
       if (event.target === modal) {
         modal.style.display = 'none';
-        // Reset clicked image
         if (clickedImage) {
-          clickedImage.style.display = 'block';
           clickedImage = null;
         }
+        // Remove dynamically created compartment triggers to avoid duplication
+        removeCompartmentTriggers();
       }
     });
 
     function saveObjectInfo(compartmentId) {
-      // Get the value from the textarea
       var description = document.getElementById('description-' + compartmentId).value;
-
-      // Create the data object to be sent
       var objectInfoData = {
-        object_info: {
-          description: description
-        }
+        object_info: { description: description }
       };
-
       fetch('/compartments/' + compartmentId + '/object_infos', {
         method: 'POST',
         headers: {
@@ -176,13 +148,65 @@
       })
       .then(response => response.json())
       .then(data => {
-        // Handle success - maybe update the UI to reflect the saved info
         console.log('Success:', data);
       })
       .catch((error) => {
-        // Handle errors
         console.error('Error:', error);
       });
+    }
+
+    function drawCompartment(context, compartment) {
+      context.beginPath();
+      context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
+      context.strokeStyle = '#44A0D8';
+      context.lineWidth = 5;
+      context.stroke();
+      context.fillStyle = 'red';
+      context.fillText(compartment.name, compartment.x, compartment.y - 5);
+    }
+
+    function createCompartmentInfoBox(compartment) {
+      const box = document.createElement('div');
+      box.classList.add('compartment-info');
+      box.id = `compartment-info-${compartment.id}`;
+
+      const label = document.createElement('label');
+      label.textContent = compartment.name + ': ';
+
+      const textarea = document.createElement('textarea');
+      textarea.id = 'description-' + compartment.id;
+
+      const saveButton = document.createElement('button');
+      saveButton.textContent = 'Save';
+      saveButton.onclick = function() {
+        saveObjectInfo(compartment.id);
+      };
+
+      box.appendChild(label);
+      box.appendChild(textarea);
+      box.appendChild(saveButton);
+
+      return box;
+    }
+
+    function createCompartmentTrigger(container, compartment) {
+      const trigger = document.createElement('div');
+      trigger.setAttribute('data-compartment-id', compartment.id);
+      trigger.classList.add('compartment-info-trigger');
+      trigger.textContent = compartment.name;
+      trigger.style.position = 'absolute';
+      trigger.style.top = `${compartment.y}px`;
+      trigger.style.left = `${compartment.x}px`;
+      container.appendChild(trigger);
+    }
+
+    function toggleCompartmentInfo(compartmentId) {
+      const infoDiv = document.getElementById(`compartment-info-${compartmentId}`);
+      infoDiv.style.display = infoDiv.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function removeCompartmentTriggers() {
+      document.querySelectorAll('.compartment-info-trigger').forEach(trigger => trigger.remove());
     }
   });
 </script>
