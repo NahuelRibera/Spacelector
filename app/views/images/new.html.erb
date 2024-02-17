@@ -1,23 +1,29 @@
 <section id="content-card" class="set-card">
   <div class='card-general'>
     <h1>Upload Image</h1>
-
+<%# <br> %>
   <%= form_with model: @image, url: space_images_path(@space), local: true, class: 'image-form' do |form| %>
     <div class="field">
       <%= form.label :title, 'Title' %>
       <%= form.text_field :title, required: true, class: 'text-field' %>
     </div>
 
+    <br>
+
     <div class="field">
       <%# <%= form.label :file, 'Image' %>
       <%= form.file_field :file, required: true, id: 'imageFileInput' %>
     </div>
 
+    <br>
+
     <!-- Select Compartments button -->
     <button id="selectCompartmentsButton" type="button" class="btn back_form">Select Compartments</button>
 
+    <br>
+
     <!-- Canvas for drawing compartments -->
-    <canvas id="imageCanvas" style="display: none;"></canvas>
+    <canvas id="imageCanvas" class="image-canvas" style="display: none;"></canvas>
 
     <!-- Container for compartment name input fields -->
     <div id="compartmentNamesContainer" style="display: none;"></div>
@@ -29,7 +35,7 @@
     <% else %>
     <%= link_to 'Back', spaces_path, class: "back_form" %>
       <% end %>
-  <%= form.submit "Upload", class: 'btn upload', style: "justify-content: center;", id: 'uploadButton' %>
+  <%= form.submit "Upload", class:"custom-btn", style: "justify-content: center;", id: 'uploadButton' %>
   </div>
   <% end %>
 
