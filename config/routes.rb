@@ -33,4 +33,6 @@ Rails.application.routes.draw do
   get 'checkout/:plan', to: 'checkouts#checkout', as: :checkout_plan
   get 'checkout/success', to: 'checkouts#success'
   get 'billing', to: 'billings#show'
+  post 'compartments/:compartment_id/object_infos', to: 'compartments#save_description'
+
 end
