@@ -9,12 +9,12 @@ Rails.application.routes.draw do
 
   resources :spaces do
     resources :images, only: [:new, :create, :show, :destroy] do
-      resources :compartments, only: [:new, :create]
+      resources :compartments, only: [:index] # Add index to fetch compartments for an image
     end
   end
 
   resources :images, only: [] do
-    resources :boxes, only: [:new, :create, :edit, :update, :destroy]
+    resources :compartments, only: [:index] # This line sets up the route
   end
 
   resources :boxes, only: [] do
