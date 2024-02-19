@@ -74,26 +74,13 @@ input[type="file"] {
   border: none !important;
 }
 
-#imageCanvas {
-  width: 600px; /* Default width */
-  height: auto; /* Maintain aspect ratio */
-  max-width: 100%; /* Ensures it doesn't overflow its parent */
-  margin: auto;
-  display: block;
-
-  @media (max-width: 768px) {
-      width: 400px; /* Adjusted width for smaller screens */
-  }
+#imageCanvas.image-canvas {
+    width: 550px; /* Default width */
+    max-width: 100%; /* Ensures the canvas does not exceed the container width */
 }
 
-.image-canvas {
-  width: 600px; /* Default width */
-  height: auto; /* Maintain aspect ratio */
-  max-width: 100%; /* Ensures it doesn't overflow its parent */
-  margin: auto;
-  display: block;
-
-  @media (max-width: 768px) {
-      width: 400px; /* Adjusted width for smaller screens */
-  }
+@media only screen and (max-width: 768px) {
+    #imageCanvas.image-canvas {
+        width: 300px; /* Width for screens with a max width of 768px */
+    }
 }

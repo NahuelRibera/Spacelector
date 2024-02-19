@@ -23,7 +23,7 @@
     <br>
 
     <!-- Canvas for drawing compartments -->
-    <canvas id="imageCanvas" class="image-canvas" style="display: none;"></canvas>
+    <canvas id="imageCanvas" class="image-canvas" style="display: none; max-width: 100%; width: 550px; height: auto;"></canvas>
 
     <!-- Container for compartment name input fields -->
     <div id="compartmentNamesContainer" style="display: none;"></div>
@@ -71,10 +71,6 @@
     let startX, startY, endX, endY;
 
     // Function to draw compartments on the canvas
-    // Function to draw compartments on the canvas
-    // Function to draw image and compartments on the canvas
-    // Function to draw image and compartments on the canvas
-    // Function to draw image and compartments on the canvas
     function drawCompartments() {
       const fileInput = document.getElementById('imageFileInput');
       if (fileInput.files.length > 0) {
@@ -137,8 +133,11 @@
     // Mouse event listeners
     canvas.addEventListener('mousedown', function(event) {
       isDrawing = true;
-      startX = event.offsetX;
-      startY = event.offsetY;
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      startX = (event.clientX - rect.left) * scaleX;
+      startY = (event.clientY - rect.top) * scaleY;
 
       // Create a new input field for the compartment name with placeholder text
       const input = document.createElement('input');
@@ -149,8 +148,11 @@
 
     canvas.addEventListener('mousemove', function(event) {
       if (!isDrawing) return;
-      endX = event.offsetX;
-      endY = event.offsetY;
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      endX = (event.clientX - rect.left) * scaleX;
+      endY = (event.clientY - rect.top) * scaleY;
       drawCompartments();
       context.beginPath();
       context.rect(startX, startY, endX - startX, endY - startY);
