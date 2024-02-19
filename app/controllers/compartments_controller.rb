@@ -1,5 +1,3 @@
-# app/controllers/compartments_controller.rb
-
 class CompartmentsController < ApplicationController
   before_action :set_image, only: [:create, :update, :destroy]
   before_action :set_compartment, only: [:update, :destroy]

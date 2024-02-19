@@ -84,19 +84,25 @@
 
   // Function to save compartment info with debounce
   function saveCompartmentInfoDebounced(compartmentId) {
-    var description = document.getElementById('description-' + compartmentId).value;
-    // Replace with your actual save logic
-    fetch('/compartments/' + compartmentId + '/object_infos', {
+    const description = document.getElementById('description-' + compartmentId).value;
+    fetch(`/compartments/${compartmentId}/object_infos`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
       },
-      body: JSON.stringify({ description: description })
+      body: JSON.stringify({ object_info: { description: description } })
     })
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      return response.json();
+    })
     .then(data => {
       console.log('Saved successfully', data);
+      // Update the textarea to reflect the saved data (for persistence)
+      document.getElementById('description-' + data.compartment_id).value = data.description;
     })
     .catch((error) => {
       console.error('Error saving:', error);
@@ -106,15 +112,12 @@
   document.addEventListener('DOMContentLoaded', function() {
     const images = document.querySelectorAll('.grid-image');
     const modal = document.getElementById('image-modal');
-    const modalBody = document.querySelector('.modal-body');
     const modalCanvas = document.getElementById('modal-canvas');
     const closeModal = document.querySelector('.close-modal');
     const infoContainer = document.getElementById('compartment-info-boxes');
-    let clickedImage = null;
 
     images.forEach(image => {
       image.addEventListener('click', function() {
-        clickedImage = this;
         const compartmentsData = JSON.parse(image.dataset.compartments);
         modal.style.display = 'block';
         const context = modalCanvas.getContext('2d');
@@ -128,8 +131,7 @@
             drawCompartment(context, compartment);
           });
         };
-        img.src = clickedImage.src;
-
+        img.src = this.src;
         infoContainer.innerHTML = ''; // Clear existing compartment info boxes
 
         compartmentsData.forEach(compartment => {
@@ -139,27 +141,17 @@
       });
     });
 
-    closeModal.addEventListener('click', function() {
-      modal.style.display = 'none';
-      clickedImage = null;
-      infoContainer.innerHTML = ''; // Clear compartment info boxes
-    });
-
-    modal.addEventListener('click', function(event) {
-      if (event.target.classList.contains('compartment-info-trigger')) {
-        const compartmentId = event.target.getAttribute('data-compartment-id');
-        toggleCompartmentInfo(compartmentId);
-      }
-    });
-
+    // Updated to close modal when clicking outside the image
     window.addEventListener('click', function(event) {
       if (event.target === modal) {
         modal.style.display = 'none';
-        if (clickedImage) {
-          clickedImage = null;
-        }
-        removeCompartmentTriggers();
+        infoContainer.innerHTML = ''; // Clear compartment info boxes
       }
+    });
+
+    closeModal.addEventListener('click', function() {
+      modal.style.display = 'none';
+      infoContainer.innerHTML = ''; // Additional handler for close button
     });
 
     function drawCompartment(context, compartment) {
@@ -173,6 +165,8 @@
     }
 
     function createCompartmentInfoBox(compartment) {
+      console.log('Creating box for Compartment ID:', compartment.id);
+
       const box = document.createElement('div');
       box.classList.add('compartment-info');
       box.id = `compartment-info-${compartment.id}`;
@@ -182,56 +176,17 @@
 
       const textarea = document.createElement('textarea');
       textarea.id = 'description-' + compartment.id;
-      // Store compartment ID in the dataset for easy access
       textarea.dataset.compartmentId = compartment.id;
-
-      // Wrap the debounce call in a closure that captures the current compartment ID
-      textarea.addEventListener('input', debounce(function() {
-        // Retrieve the compartment ID from the dataset
-        saveCompartmentInfoDebounced(this.dataset.compartmentId);
-      }, 500)); // Autosave with debounce
+      textarea.value = compartment.description || ""; // Set initial value if available
+      textarea.addEventListener('input', debounce((event) => {
+        const debouncedCompartmentId = event.target.dataset.compartmentId;
+        saveCompartmentInfoDebounced(debouncedCompartmentId);
+      }, 500));
 
       box.appendChild(label);
       box.appendChild(textarea);
 
       return box;
-    }
-
-    function saveCompartmentInfoDebounced(compartmentId) {
-      const description = document.getElementById('description-' + compartmentId).value;
-      const objectInfoData = {
-        object_info: { description: description }
-      };
-
-      fetch('/compartments/' + compartmentId + '/object_infos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
-        body: JSON.stringify(objectInfoData)
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error saving:', error);
-      });
-    }
-
-    function toggleCompartmentInfo(compartmentId) {
-      const infoDiv = document.getElementById(`compartment-info-${compartmentId}`);
-      infoDiv.style.display = infoDiv.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function removeCompartmentTriggers() {
-      document.querySelectorAll('.compartment-info-trigger').forEach(trigger => trigger.remove());
     }
   });
 </script>

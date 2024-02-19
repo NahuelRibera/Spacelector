@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
 
   resources :compartments do
-    resources :object_infos, as: 'compartment_object_infos'
+    resources :object_infos, only: [:create], as: 'compartment_object_infos'
   end
 
   get '/search', to: 'search#index'
@@ -33,6 +33,5 @@ Rails.application.routes.draw do
   get 'checkout/:plan', to: 'checkouts#checkout', as: :checkout_plan
   get 'checkout/success', to: 'checkouts#success'
   get 'billing', to: 'billings#show'
-  post 'compartments/:compartment_id/object_infos', to: 'compartments#save_description'
-
+  post 'compartments/:compartment_id/object_infos', to: 'object_infos#create'
 end
