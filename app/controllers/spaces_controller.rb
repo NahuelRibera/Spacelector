@@ -37,6 +37,15 @@ class SpacesController < ApplicationController
     end
   end
 
+  def update_name
+    @space = Space.find(params[:id])
+    if @space.update(name: params[:name])
+      render json: { success: true, message: 'Space name successfully updated' }
+    else
+      render json: { success: false, errors: @space.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def space_params

@@ -15,6 +15,7 @@ div.set {
 h1 {
   color: #333;
   font-size: 40px;
+  margin-bottom: 10px;
 }
 
 h4 {
@@ -26,6 +27,7 @@ label {
   display: block;
   font-size: 20px; /* Adjust as needed */
   margin-bottom: 5px; /* Adjust as needed */
+  margin-top: 30px;
 }
 
 /* Styles for the link back */
@@ -46,6 +48,10 @@ form {
   flex-direction: column; /* Change to column layout */
 }
 
+.text-field {
+  margin-bottom: 20px;
+}
+
 .field {
   margin-bottom: 20px; /* Adjust as needed */
 }
@@ -57,21 +63,24 @@ input[type="file"] {
   border-radius: 8px; /* Add border-radius to the file input */
 }
 
-.upload{
- color: #fff;
-  background-color: #44A0D8;
-  padding: 8px 16px;
+#uploadButton {
+  color: #9e4444 !important;
+  background-color: #44A0D8 !important;
+  padding: 6px 12px;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 10px !important;
   font-size: 16px;
-  // margin-left: auto;
-  // margin-right: auto;
-  width: fit-content;
-  // margin-top: 25px;
-  // margin-bottom: 12px;
-  text-decoration: none;
-  justify-content: center;
-  text-align: center;
-  align-self: center; /* Center align the back button */
   margin-top: 20px;
+  border: none !important;
+}
+
+#imageCanvas.image-canvas {
+    width: 550px; /* Default width */
+    max-width: 100%; /* Ensures the canvas does not exceed the container width */
+}
+
+@media only screen and (max-width: 768px) {
+    #imageCanvas.image-canvas {
+        width: 300px; /* Width for screens with a max width of 768px */
+    }
 }

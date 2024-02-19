@@ -1,23 +1,29 @@
 <section id="content-card" class="set-card">
   <div class='card-general'>
     <h1>Upload Image</h1>
-
+<%# <br> %>
   <%= form_with model: @image, url: space_images_path(@space), local: true, class: 'image-form' do |form| %>
     <div class="field">
       <%= form.label :title, 'Title' %>
       <%= form.text_field :title, required: true, class: 'text-field' %>
     </div>
 
+    <br>
+
     <div class="field">
       <%# <%= form.label :file, 'Image' %>
-      <%= form.file_field :file, required: true, id: 'imageFileInput' %>
+      <%= form.file_field :file, required: true, id: 'imageFileInput', capture: 'camera' %>
     </div>
+
+    <br>
 
     <!-- Select Compartments button -->
     <button id="selectCompartmentsButton" type="button" class="btn back_form">Select Compartments</button>
 
+    <br>
+
     <!-- Canvas for drawing compartments -->
-    <canvas id="imageCanvas" style="display: none;"></canvas>
+    <canvas id="imageCanvas" class="image-canvas" style="display: none; max-width: 100%; width: 550px; height: auto;"></canvas>
 
     <!-- Container for compartment name input fields -->
     <div id="compartmentNamesContainer" style="display: none;"></div>
@@ -29,7 +35,7 @@
     <% else %>
     <%= link_to 'Back', spaces_path, class: "back_form" %>
       <% end %>
-  <%= form.submit "Upload", class: 'btn upload', style: "justify-content: center;", id: 'uploadButton' %>
+  <%= form.submit "Upload", class:"custom-btn", style: "justify-content: center;", id: 'uploadButton' %>
   </div>
   <% end %>
 
@@ -65,10 +71,6 @@
     let startX, startY, endX, endY;
 
     // Function to draw compartments on the canvas
-    // Function to draw compartments on the canvas
-    // Function to draw image and compartments on the canvas
-    // Function to draw image and compartments on the canvas
-    // Function to draw image and compartments on the canvas
     function drawCompartments() {
       const fileInput = document.getElementById('imageFileInput');
       if (fileInput.files.length > 0) {
@@ -128,33 +130,55 @@
       });
     }
 
-    // Mouse event listeners
-    canvas.addEventListener('mousedown', function(event) {
+    // Mouse and touch event listeners
+    function handleStart(event) {
       isDrawing = true;
-      startX = event.offsetX;
-      startY = event.offsetY;
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      startX = (event.clientX - rect.left) * scaleX;
+      startY = (event.clientY - rect.top) * scaleY;
 
       // Create a new input field for the compartment name with placeholder text
       const input = document.createElement('input');
       input.type = 'text';
       input.placeholder = 'Compartment ' + (compartmentNamesContainer.children.length + 1);
       compartmentNamesContainer.appendChild(input);
-    });
+    }
 
-    canvas.addEventListener('mousemove', function(event) {
+    function handleMove(event) {
       if (!isDrawing) return;
-      endX = event.offsetX;
-      endY = event.offsetY;
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      endX = (event.clientX - rect.left) * scaleX;
+      endY = (event.clientY - rect.top) * scaleY;
       drawCompartments();
       context.beginPath();
       context.rect(startX, startY, endX - startX, endY - startY);
       context.stroke();
-    });
+    }
 
-    canvas.addEventListener('mouseup', function(event) {
+    function handleEnd(event) {
       isDrawing = false;
       saveCompartment();
+    }
+
+    canvas.addEventListener('mousedown', handleStart);
+    canvas.addEventListener('mousemove', handleMove);
+    canvas.addEventListener('mouseup', handleEnd);
+
+    canvas.addEventListener('touchstart', function(event) {
+      event.preventDefault();
+      handleStart(event.touches[0]);
     });
+
+    canvas.addEventListener('touchmove', function(event) {
+      event.preventDefault();
+      handleMove(event.touches[0]);
+    });
+
+    canvas.addEventListener('touchend', handleEnd);
 
     // Show canvas and input field when "Select Compartments" button is clicked
     const selectCompartmentsButton = document.getElementById('selectCompartmentsButton');
