@@ -1,7 +1,11 @@
 <section id="content" class="set">
   <div class="header">
-    <h1><%= @space.name %></h1>
-    <%= link_to '+ New', new_space_path(parent_space_id: @space.id), class: "new" %>
+    <div class="space-name">
+      <h1><%= @space.name %></h1>
+<a href="#" id="rename-button">
+      <i id="rename-icon" class="fas fa-pen-to-square"></i>
+    </a>    </div>
+      <%= link_to '+ New', new_space_path(parent_space_id: @space.id), class: "new" %>
   </div>
 
   <% if @space.parent_space %>
@@ -67,7 +71,42 @@
     const modalImage = document.getElementById('modal-image');
     const modalCanvas = document.getElementById('modal-canvas');
     const closeModal = document.querySelector('.close-modal');
+    const spaceName = document.getElementById('space-name');
+    const renameButton = document.getElementById('rename-button');
     let clickedImage = null;
+
+    // Function to update the space name via AJAX
+        function updateSpaceName(newName) {
+      fetch('<%= update_space_name_path(@space) %>', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': '<%= form_authenticity_token %>'
+        },
+        body: JSON.stringify({ name: newName })
+      })
+      .then(response => {
+        if (response.ok) {
+          // Update the space name in the DOM
+          spaceName.textContent = newName;
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    }
+
+    // Event listener for renaming the space name
+    renameButton.addEventListener('click', function() {
+      const newName = prompt('Enter the new name for the space:');
+      if (newName !== null && newName.trim() !== '') {
+        updateSpaceName(newName);
+        // Refresh the page after 1 second
+        setTimeout(function() {
+          window.location.reload();
+        }, 100);
+      }
+    });
 
     images.forEach(image => {
       image.addEventListener('click', function() {

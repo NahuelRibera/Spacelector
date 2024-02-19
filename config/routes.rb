@@ -8,10 +8,13 @@ Rails.application.routes.draw do
   root to: 'spaces#index'
 
   resources :spaces do
-    resources :images, only: [:new, :create, :show, :destroy] do
+    resources :images, only: [:new, :create, :show, :destroy, :update] do
       resources :compartments, only: [:new, :create]
     end
   end
+
+  patch '/spaces/:id/update_name', to: 'spaces#update_name', as: 'update_space_name'
+
 
   resources :images, only: [] do
     resources :boxes, only: [:new, :create, :edit, :update, :destroy]
