@@ -130,8 +130,8 @@
       });
     }
 
-    // Mouse event listeners
-    canvas.addEventListener('mousedown', function(event) {
+    // Mouse and touch event listeners
+    function handleStart(event) {
       isDrawing = true;
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvas.width / rect.width;
@@ -144,9 +144,9 @@
       input.type = 'text';
       input.placeholder = 'Compartment ' + (compartmentNamesContainer.children.length + 1);
       compartmentNamesContainer.appendChild(input);
-    });
+    }
 
-    canvas.addEventListener('mousemove', function(event) {
+    function handleMove(event) {
       if (!isDrawing) return;
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvas.width / rect.width;
@@ -157,12 +157,28 @@
       context.beginPath();
       context.rect(startX, startY, endX - startX, endY - startY);
       context.stroke();
-    });
+    }
 
-    canvas.addEventListener('mouseup', function(event) {
+    function handleEnd(event) {
       isDrawing = false;
       saveCompartment();
+    }
+
+    canvas.addEventListener('mousedown', handleStart);
+    canvas.addEventListener('mousemove', handleMove);
+    canvas.addEventListener('mouseup', handleEnd);
+
+    canvas.addEventListener('touchstart', function(event) {
+      event.preventDefault();
+      handleStart(event.touches[0]);
     });
+
+    canvas.addEventListener('touchmove', function(event) {
+      event.preventDefault();
+      handleMove(event.touches[0]);
+    });
+
+    canvas.addEventListener('touchend', handleEnd);
 
     // Show canvas and input field when "Select Compartments" button is clicked
     const selectCompartmentsButton = document.getElementById('selectCompartmentsButton');
