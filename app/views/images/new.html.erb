@@ -23,7 +23,7 @@
     <br>
 
     <!-- Canvas for drawing compartments -->
-    <canvas id="imageCanvas" class="image-canvas" style="display: none; max-width: 100%; width: 550px; height: auto;"></canvas>
+    <canvas id="imageCanvas" class="image-canvas" style="display: none; max-width: 100%; width: 550px; height: auto; margin-bottom: 20px"></canvas>
 
     <!-- Container for compartment name input fields -->
     <div id="compartmentNamesContainer" style="display: none;"></div>
@@ -72,33 +72,36 @@
 
     // Function to draw compartments on the canvas
     function drawCompartments() {
-      const fileInput = document.getElementById('imageFileInput');
-      if (fileInput.files.length > 0) {
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          const img = new Image();
-          img.onload = function() {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas first
-            context.drawImage(img, 0, 0); // Draw the image
+  const fileInput = document.getElementById('imageFileInput');
+  if (fileInput.files.length > 0) {
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      const img = new Image();
+      img.onload = function() {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas first
+        context.drawImage(img, 0, 0); // Draw the image
 
-            context.strokeStyle = '#44A0D8'; // Set the stroke color
-            context.lineWidth = 4; // Set the line width
+        context.strokeStyle = '#44A0D8'; // Set the stroke color
+        context.lineWidth = 4.5; // Set the line width
 
-            compartments.forEach(compartment => {
-              context.beginPath();
-              context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
-              context.stroke();
-              context.fillText(compartment.name, compartment.x, compartment.y - 5);
-            });
-          };
-          img.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    }
+        compartments.forEach((compartment, index) => {
+          context.beginPath();
+          context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
+          context.stroke();
+          context.fillStyle = '#44A0D8'; // Set color to red
+          context.font = 'bold 20px Open Sans'; // Set font size and style
+          context.fillText((index + 1).toString(), compartment.x + 10, compartment.y + 25); // Draw number
+          context.fillText(compartment.name, compartment.x, compartment.y - 5);
+        });
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
 
     // Function to save compartment data
     function saveCompartment() {
