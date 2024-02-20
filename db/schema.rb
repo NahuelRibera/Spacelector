@@ -42,17 +42,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_15_135046) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "boxes", force: :cascade do |t|
-    t.integer "x"
-    t.integer "y"
-    t.integer "width"
-    t.integer "height"
-    t.bigint "image_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["image_id"], name: "index_boxes_on_image_id"
-  end
-
   create_table "compartments", force: :cascade do |t|
     t.string "name"
     t.integer "x"
@@ -72,14 +61,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_15_135046) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.index ["space_id"], name: "index_images_on_space_id"
-  end
-
-  create_table "infos", force: :cascade do |t|
-    t.text "content"
-    t.bigint "box_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["box_id"], name: "index_infos_on_box_id"
   end
 
   create_table "object_infos", force: :cascade do |t|
@@ -216,10 +197,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_15_135046) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "boxes", "images"
   add_foreign_key "compartments", "images"
   add_foreign_key "images", "spaces"
-  add_foreign_key "infos", "boxes"
   add_foreign_key "object_infos", "compartments"
   add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
   add_foreign_key "pay_charges", "pay_subscriptions", column: "subscription_id"
