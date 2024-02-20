@@ -68,12 +68,13 @@
   color: black;
   border: none;
   border-radius: 30px;
-  font-size: 0.8rem;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 500;
   box-shadow: 0 0 0.25px #44A0D8, 0 0 0.5px #44A0D8, 0 0 0.75px #44A0D8, 0 0 1.25px #44A0D8, 0 0 1.75px #44A0D8, 0 0 2px #44A0D8, 0 0 2.5px #44A0D8, 0 0 3.75px #44A0D8;
   transition: all 0.3s ease-in-out;
-  padding: 5px 10px;
+  padding: 2.5px 10px;
   margin: 0 10px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .nav-item .nav-link:hover {
@@ -93,6 +94,10 @@
   text-transform: capitalize;
   font-weight: bold;
   margin-left: 1rem; // Adjust the margin as needed
+
+  @media (max-width: 768px) {
+    margin-left: 0px;
+  }
 
   &:hover {
     background-color: #357ae8; // Darker blue on hover
@@ -116,12 +121,11 @@
   }
 
   .nav-item, .nav-link, .btn-login {
-    padding: 0.25rem 0.5rem; // Reduce padding for mobile
+    // padding: 0.25rem 0.5rem;
     font-size: 0.8rem; // Slightly smaller font size for mobile
   }
 
   .btn-login {
-    margin-left: 0.5rem; // Reduce margin for mobile
-    font-size: 0.7rem; // Even smaller font size for mobile
+    margin-left: 0px; // Reduce margin for mobile
   }
 }
