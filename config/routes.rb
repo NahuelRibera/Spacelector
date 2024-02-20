@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :spaces do
     resources :images, only: [:new, :create, :show, :destroy, :update] do
-      resources :compartments, only: [:new, :create]
+      resources :compartments, only: [:index] # Add index to fetch compartments for an image
     end
   end
 
@@ -17,11 +17,15 @@ Rails.application.routes.draw do
 
 
   resources :images, only: [] do
-    resources :boxes, only: [:new, :create, :edit, :update, :destroy]
+    resources :compartments, only: [:index] # This line sets up the route
   end
 
   resources :boxes, only: [] do
     resource :info, only: [:new, :create, :show, :edit, :update, :destroy]
+  end
+
+  resources :compartments do
+    resources :object_infos, only: [:create], as: 'compartment_object_infos'
   end
 
   get '/search', to: 'search#index'
@@ -32,4 +36,5 @@ Rails.application.routes.draw do
   get 'checkout/:plan', to: 'checkouts#checkout', as: :checkout_plan
   get 'checkout/success', to: 'checkouts#success'
   get 'billing', to: 'billings#show'
+  post 'compartments/:compartment_id/object_infos', to: 'object_infos#create'
 end

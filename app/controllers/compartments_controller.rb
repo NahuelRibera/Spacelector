@@ -1,7 +1,5 @@
-# app/controllers/compartments_controller.rb
-
 class CompartmentsController < ApplicationController
-  before_action :set_image, only: [:create, :update, :destroy]
+  before_action :set_image, only: [:index, :create, :update, :destroy]
   before_action :set_compartment, only: [:update, :destroy]
 
   # POST /images/:image_id/compartments
@@ -12,6 +10,12 @@ class CompartmentsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def index
+    image = Image.find(params[:image_id])
+    compartments = image.compartments
+    render json: compartments
   end
 
   # PATCH/PUT /images/:image_id/compartments/:id
@@ -40,8 +44,7 @@ class CompartmentsController < ApplicationController
     @compartment = @image.compartments.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def compartment_params
-    params.require(:compartment).permit(:name, :x, :y, :width, :height)
+    params.require(:compartment).permit(:name, :x, :y, :width, :height, :description) # Ensure :description is permitted if it's part of your model
   end
 end

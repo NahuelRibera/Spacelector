@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_12_120824) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_15_135046) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -80,6 +80,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_120824) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["box_id"], name: "index_infos_on_box_id"
+  end
+
+  create_table "object_infos", force: :cascade do |t|
+    t.bigint "compartment_id", null: false
+    t.string "name"
+    t.text "description"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["compartment_id"], name: "index_object_infos_on_compartment_id"
   end
 
   create_table "pay_charges", force: :cascade do |t|
@@ -210,6 +220,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_120824) do
   add_foreign_key "compartments", "images"
   add_foreign_key "images", "spaces"
   add_foreign_key "infos", "boxes"
+  add_foreign_key "object_infos", "compartments"
   add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
   add_foreign_key "pay_charges", "pay_subscriptions", column: "subscription_id"
   add_foreign_key "pay_payment_methods", "pay_customers", column: "customer_id"
