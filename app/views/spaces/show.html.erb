@@ -215,10 +215,11 @@
   context.beginPath();
   context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
   context.strokeStyle = '#44A0D8';
-  context.lineWidth = 5;
+  context.lineWidth = 4.5;
   context.stroke();
-  context.fillStyle = 'red';
-  context.fillText(compartment.number.toString(), compartment.x, compartment.y - 5); // Display number instead of name
+  context.fillStyle = '#44A0D8';
+  context.font = 'bold 20px Open Sans';
+  context.fillText(compartment.number.toString(), compartment.x + 10, compartment.y + 25); // Display number instead of name
 }
 
     function createCompartmentInfoBox(compartment) {

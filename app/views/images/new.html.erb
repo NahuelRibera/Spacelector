@@ -72,35 +72,34 @@
 
     // Function to draw compartments on the canvas
     function drawCompartments() {
-  const fileInput = document.getElementById('imageFileInput');
-  if (fileInput.files.length > 0) {
-    const file = fileInput.files[0];
-    const reader = new FileReader();
-    reader.onload = function(event) {
-      const img = new Image();
-      img.onload = function() {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas first
-        context.drawImage(img, 0, 0); // Draw the image
+    const fileInput = document.getElementById('imageFileInput');
+    if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = new Image();
+            img.onload = function() {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas first
+                context.drawImage(img, 0, 0); // Draw the image
 
-        context.strokeStyle = '#44A0D8'; // Set the stroke color
-        context.lineWidth = 4.5; // Set the line width
+                context.strokeStyle = '#44A0D8'; // Set the stroke color
+                context.lineWidth = 4.5; // Set the line width
 
-        compartments.forEach((compartment, index) => {
-          context.beginPath();
-          context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
-          context.stroke();
-          context.fillStyle = '#44A0D8'; // Set color to red
-          context.font = 'bold 20px Open Sans'; // Set font size and style
-          context.fillText((index + 1).toString(), compartment.x + 10, compartment.y + 25); // Draw number
-          context.fillText(compartment.name, compartment.x, compartment.y - 5);
-        });
-      };
-      img.src = event.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
+                compartments.forEach((compartment, index) => {
+                    context.beginPath();
+                    context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
+                    context.stroke();
+                    context.fillStyle = '#44A0D8'; // Set color to red
+                    context.font = 'bold 20px Open Sans'; // Set font size and style
+                    context.fillText((index + 1).toString(), compartment.x + 10, compartment.y + 25); // Draw number
+                });
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
 }
 
     // Function to save compartment data
@@ -134,19 +133,13 @@
 
     // Mouse and touch event listeners
     function handleStart(event) {
-      isDrawing = true;
-      const rect = canvas.getBoundingClientRect();
-      const scaleX = canvas.width / rect.width;
-      const scaleY = canvas.height / rect.height;
-      startX = (event.clientX - rect.left) * scaleX;
-      startY = (event.clientY - rect.top) * scaleY;
-
-      // Create a new input field for the compartment name with placeholder text
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.placeholder = 'Compartment ' + (compartmentNamesContainer.children.length + 1);
-      compartmentNamesContainer.appendChild(input);
-    }
+    isDrawing = true;
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    startX = (event.clientX - rect.left) * scaleX;
+    startY = (event.clientY - rect.top) * scaleY;
+}
 
     function handleMove(event) {
       if (!isDrawing) return;
