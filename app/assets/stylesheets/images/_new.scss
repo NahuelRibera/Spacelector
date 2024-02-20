@@ -84,3 +84,17 @@ input[type="file"] {
         width: 300px; /* Width for screens with a max width of 768px */
     }
 }
+
+.compartment-input {
+  width: 100%; /* Make input fields take full width */
+  margin-bottom: 10px; /* Add some bottom margin for spacing */
+  padding: 8px 12px; /* Add padding for better appearance */
+  border-radius: 10px; /* Apply border radius */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  text-align: center; /* Center align text */
+}
+
+input[type="text"] {
+  justify-content: center;
+  border-radius: 10px;
+}
