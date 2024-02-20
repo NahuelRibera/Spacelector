@@ -370,7 +370,14 @@ a {
   // margin-bottom: 50px;
   width: fit-content;
   height: fit-content;
+  overflow: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the element precisely */
+
   // margin-left: 150px;
+
 
   @media (min-width: 1200px) {
     margin: auto;
@@ -387,6 +394,10 @@ a {
     align-items: center;
     margin-top: 10vh;
   }
+}
+
+#image-modal{
+  justify-content: center;
 }
 
 .modal-canvas {
