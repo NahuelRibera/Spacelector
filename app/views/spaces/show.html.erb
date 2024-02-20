@@ -2,7 +2,7 @@
   <div class="header">
     <div class="space-name">
       <h1><%= @space.name %></h1>
-<a href="#" id="rename-button"> 
+<a href="#" id="rename-button">
       <i id="rename-icon" class="fas fa-pen-to-square"></i>
     </a>    </div>
       <%= link_to '+ New', new_space_path(parent_space_id: @space.id), class: "new" %>
@@ -53,7 +53,7 @@
 
           <!-- The compartment info to be displayed -->
           <div id="compartment-info-<%= compartment.id %>" class="compartment-info" style="display: none;">
-            Description: <textarea id="description-<%= compartment.id %>" placeholder="Enter object description"></textarea><br>
+            <textarea id="description-<%= compartment.id %>" placeholder="Enter object description"></textarea><br>
             <button onclick="saveObjectInfo(<%= compartment.id %>)">Save</button>
           </div>
         <% end %>
