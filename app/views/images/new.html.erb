@@ -105,19 +105,18 @@
 
     // Function to save compartment data
     function saveCompartment() {
-      const name = compartmentNamesContainer.lastElementChild.value;
-      const width = Math.abs(startX - endX);
-      const height = Math.abs(startY - endY);
-      const x = Math.min(startX, endX);
-      const y = Math.min(startY, endY);
-      const compartment = { name, x, y, width, height };
+  const width = Math.abs(startX - endX);
+  const height = Math.abs(startY - endY);
+  const x = Math.min(startX, endX);
+  const y = Math.min(startY, endY);
+  const compartment = { x, y, width, height };
 
-      // Update or create new hidden inputs
-      updateOrCreateHiddenInputs(compartment, compartments.length);
+  // Update or create new hidden inputs
+  updateOrCreateHiddenInputs(compartment, compartments.length);
 
-      compartments.push(compartment);
-      drawCompartments();
-    }
+  compartments.push(compartment);
+  drawCompartments();
+}
 
     function updateOrCreateHiddenInputs(compartment, index) {
       const form = document.querySelector('.image-form');

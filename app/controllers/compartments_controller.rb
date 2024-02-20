@@ -45,6 +45,6 @@ class CompartmentsController < ApplicationController
   end
 
   def compartment_params
-    params.require(:compartment).permit(:name, :x, :y, :width, :height, :description) # Ensure :description is permitted if it's part of your model
+    params.require(:compartment).permit(:x, :y, :width, :height, :description) # Ensure :description is permitted if it's part of your model
   end
 end

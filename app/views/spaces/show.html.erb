@@ -184,11 +184,13 @@
                         modalCanvas.height = img.height;
                         context.drawImage(img, 0, 0);
                         infoContainer.innerHTML = ''; // Clear existing boxes before appending new ones
-                        compartmentsData.forEach(compartment => {
-                            drawCompartment(context, compartment);
-                            const compartmentInfoBox = createCompartmentInfoBox(compartment);
-                            infoContainer.appendChild(compartmentInfoBox);
-                        });
+                        compartmentsData.forEach((compartment, index) => {
+    compartment.number = index + 1; // Assigning number to each compartment
+    drawCompartment(context, compartment);
+    const compartmentInfoBox = createCompartmentInfoBox(compartment);
+    infoContainer.appendChild(compartmentInfoBox);
+});
+
                     };
                     img.src = this.src;
                 })
@@ -210,38 +212,38 @@
     });
 
     function drawCompartment(context, compartment) {
-      context.beginPath();
-      context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
-      context.strokeStyle = '#44A0D8';
-      context.lineWidth = 5;
-      context.stroke();
-      context.fillStyle = 'red';
-      context.fillText(compartment.name, compartment.x, compartment.y - 5);
-    }
+  context.beginPath();
+  context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
+  context.strokeStyle = '#44A0D8';
+  context.lineWidth = 5;
+  context.stroke();
+  context.fillStyle = 'red';
+  context.fillText(compartment.number.toString(), compartment.x, compartment.y - 5); // Display number instead of name
+}
 
     function createCompartmentInfoBox(compartment) {
-      console.log('Creating box for Compartment ID:', compartment.id);
+  console.log('Creating box for Compartment ID:', compartment.id);
 
-      const box = document.createElement('div');
-      box.classList.add('compartment-info');
-      box.id = `compartment-info-${compartment.id}`;
+  const box = document.createElement('div');
+  box.classList.add('compartment-info');
+  box.id = `compartment-info-${compartment.id}`;
 
-      const label = document.createElement('label');
-      label.textContent = compartment.name + ': ';
+  const label = document.createElement('label');
+  label.textContent = compartment.number.toString(); // Display number instead of name
 
-      const textarea = document.createElement('textarea');
-      textarea.id = 'description-' + compartment.id;
-      textarea.dataset.compartmentId = compartment.id;
-      textarea.value = compartment.description || ""; // Set initial value if available
-      textarea.addEventListener('input', debounce((event) => {
-        const debouncedCompartmentId = event.target.dataset.compartmentId;
-        saveCompartmentInfoDebounced(debouncedCompartmentId);
-      }, 500));
+  const textarea = document.createElement('textarea');
+  textarea.id = 'description-' + compartment.id;
+  textarea.dataset.compartmentId = compartment.id;
+  textarea.value = compartment.description || ""; // Set initial value if available
+  textarea.addEventListener('input', debounce((event) => {
+    const debouncedCompartmentId = event.target.dataset.compartmentId;
+    saveCompartmentInfoDebounced(debouncedCompartmentId);
+  }, 500));
 
-      box.appendChild(label);
-      box.appendChild(textarea);
+  box.appendChild(label);
+  box.appendChild(textarea);
 
-      return box;
-    }
+  return box;
+}
   });
 </script>
