@@ -12,6 +12,11 @@ class CompartmentsController < ApplicationController
     end
   end
 
+  def create_or_update_object_info
+    puts "Description received: #{params[:object_info][:description]}"
+    # Rest of your logic to handle the creation or update
+  end
+
   def index
     image = Image.find(params[:image_id])
     compartments = image.compartments
