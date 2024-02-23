@@ -147,6 +147,8 @@
     const renameButton = document.getElementById('rename-button');
     let clickedImage = null;
 
+    const compartmentsInfoBoxes = {};
+
     function updateSpaceName(newName) {
       fetch('<%= update_space_name_path(@space) %>', {
         method: 'PATCH',
@@ -177,15 +179,24 @@
     });
 
     images.forEach(image => {
-      image.addEventListener('click', function() {
-        const imageId = this.getAttribute('data-image-id');
-        if (!imageId) {
-          console.error('Image ID is undefined. Check data-image-id attribute of the image element.');
-          return;
-        }
+    image.addEventListener('click', function() {
+      const imageId = this.getAttribute('data-image-id');
+      if (!imageId) {
+        console.error('Image ID is undefined. Check data-image-id attribute of the image element.');
+        return;
+      }
 
-        const infoContainer = document.getElementById('compartment-info-boxes'); // Moved inside click event listener
+      const infoContainer = document.getElementById('compartment-info-boxes');
+      infoContainer.innerHTML = ''; // Clear existing info boxes
 
+      if (compartmentsInfoBoxes[imageId]) {
+        // If compartments info boxes already exist for this image, use them
+        compartmentsInfoBoxes[imageId].forEach(box => {
+          infoContainer.appendChild(box);
+        });
+        modal.style.display = 'block'; // Show the modal
+      } else {
+        // Otherwise, fetch compartment data from the server
         fetch(`/images/${imageId}/compartments`)
           .then(response => {
             if (!response.ok) {
@@ -194,7 +205,7 @@
             return response.json();
           })
           .then(compartmentsData => {
-            modal.style.display = 'block';
+            modal.style.display = 'block'; // Show the modal
             const context = modalCanvas.getContext('2d');
             const img = new Image();
 
@@ -202,19 +213,27 @@
               modalCanvas.width = img.width;
               modalCanvas.height = img.height;
               context.drawImage(img, 0, 0);
-              infoContainer.innerHTML = '';
+
+              const infoBoxes = [];
               compartmentsData.forEach((compartment, index) => {
                 compartment.number = index + 1;
                 drawCompartment(context, compartment);
+
+                // Create info box for each compartment
                 const compartmentInfoBox = createCompartmentInfoBox(compartment);
                 infoContainer.appendChild(compartmentInfoBox);
+                infoBoxes.push(compartmentInfoBox);
               });
+
+              // Store the info boxes for future use
+              compartmentsInfoBoxes[imageId] = infoBoxes;
             };
             img.src = this.src;
           })
           .catch(error => console.error('Error fetching compartment data:', error));
-      });
+      }
     });
+  });
 
     closeModal.addEventListener('click', function() {
       modal.style.display = 'none';
