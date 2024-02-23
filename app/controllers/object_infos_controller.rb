@@ -1,4 +1,3 @@
-# app/controllers/object_infos_controller.rb
 class ObjectInfosController < ApplicationController
   before_action :set_compartment, only: [:create]
 
