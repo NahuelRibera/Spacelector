@@ -49,6 +49,7 @@
     const fileInput = this;
     const selectCompartmentsButton = document.getElementById('selectCompartmentsButton');
     const imageCanvas = document.getElementById('imageCanvas');
+    const compartmentNamesContainer = document.getElementById('compartmentNamesContainer');
 
     // Show the select compartments button if a file is selected
     if (fileInput.files.length > 0) {
@@ -72,54 +73,55 @@
 
     // Function to draw compartments on the canvas
     function drawCompartments() {
-    const fileInput = document.getElementById('imageFileInput');
-    if (fileInput.files.length > 0) {
+      const fileInput = document.getElementById('imageFileInput');
+      if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
         const reader = new FileReader();
         reader.onload = function(event) {
-            const img = new Image();
-            img.onload = function() {
-                canvas.width = img.width;
-                canvas.height = img.height;
-                context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas first
-                context.drawImage(img, 0, 0); // Draw the image
+          const img = new Image();
+          img.onload = function() {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas first
+            context.drawImage(img, 0, 0); // Draw the image
+            loadedImage = img; // Store the loaded image globally
 
-                context.strokeStyle = '#44A0D8'; // Set the stroke color
-                context.lineWidth = 4.5; // Set the line width
+            context.strokeStyle = '#44A0D8'; // Set the stroke color
+            context.lineWidth = 4.5; // Set the line width
 
-                compartments.forEach((compartment, index) => {
-                    context.beginPath();
-                    context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
-                    context.stroke();
-                    context.fillStyle = '#44A0D8'; // Set color to red
-                    context.font = 'bold 20px Open Sans'; // Set font size and style
-                    context.fillText((index + 1).toString(), compartment.x + 10, compartment.y + 25); // Draw number
-                });
-            };
-            img.src = event.target.result;
+            compartments.forEach((compartment, index) => {
+              context.beginPath();
+              context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
+              context.stroke();
+              context.fillStyle = '#44A0D8'; // Set color
+              context.font = 'bold 20px Open Sans'; // Set font size and style
+              context.fillText((index + 1).toString(), compartment.x + 10, compartment.y + 25); // Draw number
+            });
+          };
+          img.src = event.target.result;
         };
         reader.readAsDataURL(file);
+      }
     }
-}
 
     // Function to save compartment data
     function saveCompartment() {
-  const width = Math.abs(startX - endX);
-  const height = Math.abs(startY - endY);
-  const x = Math.min(startX, endX);
-  const y = Math.min(startY, endY);
-  const compartment = { x, y, width, height };
+      const width = Math.abs(startX - endX);
+      const height = Math.abs(startY - endY);
+      const x = Math.min(startX, endX);
+      const y = Math.min(startY, endY);
+      const compartment = { x, y, width, height };
 
-  // Update or create new hidden inputs
-  updateOrCreateHiddenInputs(compartment, compartments.length);
+      // Update or create new hidden inputs
+      updateOrCreateHiddenInputs(compartment, compartments.length);
 
-  compartments.push(compartment);
-  drawCompartments();
-}
+      compartments.push(compartment);
+      drawCompartments();
+    }
 
     function updateOrCreateHiddenInputs(compartment, index) {
       const form = document.querySelector('.image-form');
-      ['name', 'x', 'y', 'width', 'height'].forEach(attr => {
+      ['x', 'y', 'width', 'height'].forEach(attr => {
         let input = form.querySelector(`input[name="image[compartments_attributes][${index}][${attr}]"]`);
         if (!input) {
           input = document.createElement('input');
@@ -133,26 +135,40 @@
 
     // Mouse and touch event listeners
     function handleStart(event) {
-    isDrawing = true;
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    startX = (event.clientX - rect.left) * scaleX;
-    startY = (event.clientY - rect.top) * scaleY;
-}
-
-    function handleMove(event) {
-      if (!isDrawing) return;
+      isDrawing = true;
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvas.width / rect.width;
       const scaleY = canvas.height / rect.height;
-      endX = (event.clientX - rect.left) * scaleX;
-      endY = (event.clientY - rect.top) * scaleY;
-      drawCompartments();
-      context.beginPath();
-      context.rect(startX, startY, endX - startX, endY - startY);
-      context.stroke();
+      startX = (event.clientX - rect.left) * scaleX;
+      startY = (event.clientY - rect.top) * scaleY;
     }
+
+   function handleMove(event) {
+    if (!isDrawing) return;
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    endX = (event.clientX - rect.left) * scaleX;
+    endY = (event.clientY - rect.top) * scaleY;
+
+    if (loadedImage) {
+        context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+        context.drawImage(loadedImage, 0, 0, canvas.width, canvas.height); // Redraw the stored image
+
+        // Redraw existing compartments
+        compartments.forEach(compartment => {
+            context.beginPath();
+            context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
+            context.stroke();
+        });
+
+        // Draw the current rectangle
+        context.beginPath();
+        context.rect(startX, startY, endX - startX, endY - startY);
+        context.stroke();
+    }
+  }
+
 
     function handleEnd(event) {
       isDrawing = false;
