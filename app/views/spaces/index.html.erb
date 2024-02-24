@@ -1,39 +1,46 @@
 <section id="content" class="set">
-  <div class="header">
-    <h1>Spaces</h1>
-    <%= link_to '+ New', new_space_path, class: 'new' %>
+  <% if user_signed_in? %>
+    <div class="header">
+      <h1>Spaces</h1>
+      <%= link_to '+ New', new_space_path, class: 'new' %>
+    </div>
 
-  </div>
+    <ul class="space-list">
+      <% @spaces.each do |space| %>
+        <li>
+          <div class="space-box">
+            <%= link_to space_path(space) do %>
+              <%= space.name %>
+            <% end %>
 
-  <ul class="space-list">
-    <% @spaces.each do |space| %>
-      <li>
-        <div class="space-box">
-          <%= link_to space_path(space) do %>
-            <%= space.name %>
-          <% end %>
+            <%= form_with url: space_path(space), method: :delete, class: "delete-form" do |form| %>
+              <%= form.submit 'X', onclick: "return confirm('Are you sure you want to delete this space?')", class: 'delete-space' %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
 
-          <%= form_with url: space_path(space), method: :delete, class: "delete-form" do |form| %>
-            <%= form.submit 'X', onclick: "return confirm('Are you sure you want to delete this space?')", class: 'delete-space' %>
-          <% end %>
-        </div>
-      </li>
-    <% end %>
-  </ul>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const deleteButtons = document.querySelectorAll(".delete-space");
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const deleteButtons = document.querySelectorAll(".delete");
+        deleteButtons.forEach(button => {
+          button.addEventListener("click", function(event) {
+            const confirmationMessage = 'Are you sure you want to delete this space?';
 
-      deleteButtons.forEach(button => {
-        button.addEventListener("click", function(event) {
-          const confirmationMessage = button.getAttribute("data-confirm");
-
-          if (confirmationMessage && !confirm(confirmationMessage)) {
-            event.preventDefault();
-          }
+            if (!confirm(confirmationMessage)) {
+              event.preventDefault();
+            }
+          });
         });
       });
-    });
-  </script>
+    </script>
+  <% else %>
+    <!-- Display a link to sign in with Google -->
+    <div class="welcome-message">
+      <h1>Welcome to Our Service</h1>
+      <p>Please <%= link_to 'sign in with Google', user_google_oauth2_omniauth_authorize_path %> to manage your spaces.</p>
+    </div>
+  <% end %>
 </section>

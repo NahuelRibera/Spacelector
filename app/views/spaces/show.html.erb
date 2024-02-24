@@ -45,14 +45,7 @@
             <% end %>
           </div>
         </div>
-        <% image.compartments.each do |compartment| %>
-          <div data-compartment-id="<%= compartment.id %>" class="compartment-info-trigger">
-            <%= compartment.name %>
-          </div>
-          <div id="compartment-info-<%= compartment.id %>" class="compartment-info" style="display: none;">
-            <textarea id="description-<%= compartment.id %>" placeholder="Enter object description"></textarea><br>
-          </div>
-        <% end %>
+        <!-- Rest of your code -->
       <% end %>
     <% end %>
   </div>

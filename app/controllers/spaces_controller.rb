@@ -1,8 +1,14 @@
 class SpacesController < ApplicationController
-  before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    @spaces = params[:parent_space_id].present? ? Space.find(params[:parent_space_id]).child_spaces : current_user.spaces.where(parent_space_id: nil)
+    if user_signed_in?
+      # Display the user's spaces or child spaces if they are logged in
+      @spaces = params[:parent_space_id].present? ? Space.find(params[:parent_space_id]).child_spaces : current_user.spaces.where(parent_space_id: nil)
+    else
+      # Set @spaces to all spaces
+      @spaces = Space.all
+    end
   end
 
   def new
