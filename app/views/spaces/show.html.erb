@@ -139,6 +139,40 @@
   }
 
   document.addEventListener('DOMContentLoaded', function() {
+    const userId = '<%= current_user.id %>'; // Assuming you're using Devise or similar for authentication
+
+    // Function to fetch compartment info box data associated with the user
+    function fetchCompartmentInfo(userId) {
+        fetch(`/users/${userId}/compartment_info_boxes`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(compartmentInfoData => {
+                // Populate info boxes with the retrieved data
+                populateInfoBoxes(compartmentInfoData);
+            })
+            .catch(error => console.error('Error fetching compartment info box data:', error));
+    }
+
+    // Function to populate info boxes with data
+    function populateInfoBoxes(compartmentInfoData) {
+        // Iterate over the retrieved data and populate the corresponding info boxes
+        compartmentInfoData.forEach(info => {
+            const compartmentId = info.compartment_id;
+            const description = info.description;
+            const textarea = document.getElementById(`description-${compartmentId}`);
+            if (textarea) {
+                textarea.value = description;
+            }
+        });
+    }
+
+    // Fetch compartment info box data when the page loads
+    fetchCompartmentInfo(userId);
+
     const images = document.querySelectorAll('.grid-image');
     const modal = document.getElementById('image-modal');
     const modalCanvas = document.getElementById('modal-canvas');
