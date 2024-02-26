@@ -19,11 +19,12 @@
         <% end %>
       </li>
     <% else %>
+      <!-- Remove the old Devise login and sign up links -->
+      <!-- Display the Google login button -->
       <li class="nav-item">
-        <%= link_to "Login", new_user_session_path, class: "nav-link btn-login" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Sign up", new_user_registration_path, class: "nav-link btn-login" %>
+        <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" } do |f| %>
+          <%= f.submit "Login with Google", type: "image", src: url_for("/assets/google_signin_buttons/web_light_sq_SI@4x.png") %>
+        <% end %>
       </li>
     <% end %>
   </ul>
