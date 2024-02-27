@@ -361,7 +361,7 @@ a {
 
 .modal-content {
   background-color: #fefefe;
-  padding: 7px;
+  padding: 10px;
   border: 1px solid; /* Add a border style */
   border-radius: 10px;
   // display: flex;
@@ -392,6 +392,7 @@ a {
     justify-content: center;
     align-items: center;
     margin-top: 10vh;
+    overflow: auto; /* Enable vertical scrolling */
   }
 }
 
@@ -418,4 +419,48 @@ a {
 
 .image-card:hover {
   cursor: pointer;
+}
+
+.modal-body {
+  display: flex;
+  align-items: flex-start;
+
+  @media (max-width: 768px) {
+    /* Override existing styles for smaller screens */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    overflow-y: auto; /* Enable vertical scrolling */
+
+  }
+}
+
+.compartment-info-container {
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-left: 18px; /* Add padding for better readability */
+  padding-right: 5px;
+  padding-top: 0px;
+
+  @media (min-width: 1200px) {
+    max-width: 40%;
+    max-height: 85vh;
+  }
+
+  @media (max-width: 768px) {
+    /* Override existing styles for smaller screens */
+    max-width: 90%; /* Adjust as needed */
+    width: 90%; /* Adjust as needed */
+    margin-top: 10px; /* Add margin for separation */
+  }
+}
+
+textarea {
+  width: 100%; /* Set the width to 100% to fill the container */
+  height: 100px; /* Set a fixed or percentage height */
+  padding: 10px; /* Add padding for better readability */
+  border: 1px solid #ddd;
+  border-radius: 5px; /* Add border radius for rounded corners */
+  font-family: 'open sans', sans-serif; /* Specify a font family */
+  font-size: 15px; /* Specify a font size */
+  line-height: 1.5; /* Specify line height for readability */
+  /* Add any additional styles as needed */
 }
