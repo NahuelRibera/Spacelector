@@ -14,8 +14,9 @@ class ObjectInfosController < ApplicationController
   private
 
   def set_compartment
-    @compartment = current_user.compartments.find(params[:compartment_id])
+    @compartment = Compartment.find(params[:compartment_id])
   end
+
 
   def object_info_params
     params.require(:object_info).permit(:description) # Ensure these params match what's sent by your JS fetch request
