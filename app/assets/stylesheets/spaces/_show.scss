@@ -420,3 +420,23 @@ a {
 .image-card:hover {
   cursor: pointer;
 }
+
+.modal-body {
+  display: flex;
+  align-items: flex-start;
+}
+
+.compartment-info-container {
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 10px; /* Add padding for better readability */
+
+  @media (min-width: 1200px) {
+    max-width: 40%;
+    max-height: 85vh;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 40%;
+    max-height: 85vh;
+  }
+}
