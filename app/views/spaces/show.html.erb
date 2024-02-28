@@ -70,6 +70,16 @@
   </div>
 
 <script>
+  function handlePageLoad() {
+  const textareas = document.querySelectorAll('textarea');
+  textareas.forEach(textarea => {
+    textarea.style.height = 'auto'; // Reset height to auto to properly calculate new height
+    textarea.style.height = textarea.scrollHeight + 'px'; // Set the height to the scrollHeight, ensuring all content is visible
+  });
+}
+
+document.addEventListener('DOMContentLoaded', handlePageLoad);
+  // Define the debounce function
   function debounce(func, wait) {
     let timeout;
     return function(...args) {
@@ -82,45 +92,52 @@
     };
   }
 
-  // Function to save text area content to localStorage
+  // Function to save textarea content to localStorage
   function saveTextAreaContent(compartmentId, content) {
     localStorage.setItem(`compartment_${compartmentId}_text`, content);
   }
 
-  // Function to load text area content from localStorage
+  // Function to load textarea content from localStorage
   function loadTextAreaContent(compartmentId) {
     return localStorage.getItem(`compartment_${compartmentId}_text`) || '';
   }
 
-  function createCompartmentInfoBox(compartment) {
-    console.log('Creating box for Compartment ID:', compartment.id);
-
-    const box = document.createElement('div');
-    box.classList.add('compartment-info');
-    box.id = `compartment-info-${compartment.id}`;
-
-    const label = document.createElement('label');
-    label.textContent = compartment.number.toString();
-
-    const textarea = document.createElement('textarea');
-    textarea.id = 'description-' + compartment.id;
-    textarea.dataset.compartmentId = compartment.id;
-    textarea.value = loadTextAreaContent(compartment.id); // Load content from localStorage
-
-    textarea.addEventListener('input', debounce((event) => {
-      const debouncedCompartmentId = event.target.dataset.compartmentId;
-      const descriptionValue = event.target.value;
-      console.log(`Textarea value for compartment ${debouncedCompartmentId}: '${descriptionValue}'`);
-      console.log(`Event listener triggered for compartment ${debouncedCompartmentId}`);
-      saveCompartmentInfoDebounced(debouncedCompartmentId, descriptionValue);
-      saveTextAreaContent(debouncedCompartmentId, descriptionValue); // Save content to localStorage
-    }, 500));
-
-    box.appendChild(label);
-    box.appendChild(textarea);
-
-    return box;
+  // Function to dynamically adjust textarea height based on content
+  function autoResizeTextarea(event) {
+    const textarea = event.target;
+    textarea.style.height = 'auto'; // Reset height to auto to properly calculate new height
+    textarea.style.height = textarea.scrollHeight + 'px'; // Set the height to the scrollHeight, ensuring all content is visible
+    saveTextAreaContent(textarea.dataset.compartmentId, textarea.value); // Save content to localStorage
   }
+
+  // Create compartment info box
+  function createCompartmentInfoBox(compartment) {
+  console.log('Creating box for Compartment ID:', compartment.id);
+
+  const box = document.createElement('div');
+  box.classList.add('compartment-info');
+  box.id = `compartment-info-${compartment.id}`;
+
+  const label = document.createElement('label');
+  label.textContent = compartment.number.toString();
+
+  const textarea = document.createElement('textarea');
+  textarea.id = 'description-' + compartment.id;
+  textarea.dataset.compartmentId = compartment.id;
+  textarea.value = loadTextAreaContent(compartment.id); // Load content from localStorage
+
+  // Bind input event to auto resize textarea
+  textarea.addEventListener('input', debounce(autoResizeTextarea, 300)); // Debounce the input event to avoid rapid resizing
+
+  box.appendChild(label);
+  box.appendChild(textarea);
+
+  // Initial auto-resize
+  autoResizeTextarea({ target: textarea });
+
+  return box;
+}
+
 
   function saveCompartmentInfoDebounced(compartmentId, description) {
     console.log(`Saving description for compartment ${compartmentId}: '${description}'`);
@@ -183,6 +200,7 @@
     let clickedImage = null;
 
     const compartmentsInfoBoxes = {};
+
 
     function updateSpaceName(newName) {
       fetch('<%= update_space_name_path(@space) %>', {
