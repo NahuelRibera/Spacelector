@@ -45,14 +45,7 @@
             <% end %>
           </div>
         </div>
-        <% image.compartments.each do |compartment| %>
-          <div data-compartment-id="<%= compartment.id %>" class="compartment-info-trigger">
-            <%= compartment.name %>
-          </div>
-          <div id="compartment-info-<%= compartment.id %>" class="compartment-info" style="display: none;">
-            <textarea id="description-<%= compartment.id %>" placeholder="Enter object description"></textarea><br>
-          </div>
-        <% end %>
+        <!-- Rest of your code -->
       <% end %>
     <% end %>
   </div>
@@ -92,7 +85,65 @@ document.addEventListener('DOMContentLoaded', handlePageLoad);
     };
   }
 
-  // Function to save textarea content to localStorage
+  document.addEventListener('DOMContentLoaded', function() {
+    const queryParams = new URLSearchParams(window.location.search);
+    const imageId = queryParams.get('image_id');
+    const compartmentId = queryParams.get('highlight_compartment_id');
+
+    if (imageId && compartmentId) {
+      // Directly invoke the logic to display the image and highlight the compartment.
+      displayImageAndHighlightCompartment(imageId, compartmentId);
+    }
+  });
+
+  function displayImageAndHighlightCompartment(imageId, compartmentId) {
+    // Logic to display the image directly, bypassing the need for click simulation.
+    // This might involve showing a modal, setting the image source, etc.
+
+    // After ensuring the image is displayed, highlight the compartment.
+    waitForCompartmentInfoToBeReady(compartmentId, () => {
+      const compartmentElement = document.getElementById(`compartment-info-${compartmentId}`);
+      if (compartmentElement) {
+        compartmentElement.style.border = '2px solid red';
+        compartmentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  }
+
+  function showModalForImage(imageId) {
+    // This function simulates clicking on an image to open its modal.
+    // It finds the image by its data-image-id attribute and triggers the click event programmatically.
+    const imageElement = document.querySelector(`[data-image-id="${imageId}"]`);
+    if (imageElement) {
+      imageElement.click();
+    } else {
+      console.error('Image element not found for imageId:', imageId);
+    }
+  }
+
+  function waitForCompartmentInfoToBeReady(compartmentId, callback) {
+    // Check if the compartment info box for the given compartmentId is already present.
+    // If not, set a timeout to check again shortly.
+    const checkInterval = 100; // milliseconds
+    const maxAttempts = 50;
+    let attempts = 0;
+
+    const checkForCompartmentInfo = () => {
+      attempts++;
+      const compartmentElement = document.getElementById(`compartment-info-${compartmentId}`);
+      if (compartmentElement) {
+        callback(); // Compartment info is ready, call the callback function.
+      } else if (attempts < maxAttempts) {
+        setTimeout(checkForCompartmentInfo, checkInterval); // Try again after a short delay.
+      } else {
+        console.error('Compartment info box not found for compartmentId:', compartmentId);
+      }
+    };
+
+    checkForCompartmentInfo();
+  }
+
+  // Function to save text area content to localStorage
   function saveTextAreaContent(compartmentId, content) {
     localStorage.setItem(`compartment_${compartmentId}_text`, content);
   }

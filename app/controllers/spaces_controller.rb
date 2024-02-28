@@ -1,8 +1,14 @@
 class SpacesController < ApplicationController
-  before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    @spaces = params[:parent_space_id].present? ? Space.find(params[:parent_space_id]).child_spaces : current_user.spaces.where(parent_space_id: nil)
+    if user_signed_in?
+      # Display the user's spaces or child spaces if they are logged in
+      @spaces = params[:parent_space_id].present? ? Space.find(params[:parent_space_id]).child_spaces : current_user.spaces.where(parent_space_id: nil)
+    else
+      # Set @spaces to all spaces
+      @spaces = Space.all
+    end
   end
 
   def new
@@ -16,6 +22,24 @@ class SpacesController < ApplicationController
       redirect_to space_path(@space), notice: 'Space was successfully created.'
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def search
+    query = params[:query]
+    # Adjust the query based on where the searchable information is actually stored.
+    # This example assumes a direct relationship for simplicity.
+    compartments = Compartment.joins(:object_infos).where("object_infos.description ILIKE ?", "%#{query}%").distinct
+
+    if compartments.any?
+      # Assuming each compartment is related to one image, and each image to one space.
+      # This will need adjustment based on your actual data model.
+      compartment = compartments.first
+      image = compartment.image
+      space = image.space
+      redirect_to space_path(space, image_id: image.id, highlight_compartment_id: compartment.id)
+    else
+      redirect_to root_path, alert: 'No results found.'
     end
   end
 

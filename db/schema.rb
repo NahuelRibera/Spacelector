@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_15_135046) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_28_130619) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,6 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_15_135046) do
     t.bigint "image_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "info"
     t.index ["image_id"], name: "index_compartments_on_image_id"
   end
 
@@ -70,6 +71,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_15_135046) do
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "info"
     t.index ["compartment_id"], name: "index_object_infos_on_compartment_id"
   end
 

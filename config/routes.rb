@@ -11,10 +11,12 @@ Rails.application.routes.draw do
     resources :images, only: [:new, :create, :show, :destroy, :update] do
       resources :compartments, only: [:index] # Add index to fetch compartments for an image
     end
+    collection do
+      get 'search'
+    end
   end
 
   patch '/spaces/:id/update_name', to: 'spaces#update_name', as: 'update_space_name'
-
 
   resources :images, only: [] do
     resources :compartments, only: [:index] # This line sets up the route
@@ -27,8 +29,6 @@ Rails.application.routes.draw do
   resources :compartments do
     resources :object_infos, only: [:create], as: 'compartment_object_infos'
   end
-
-  get '/search', to: 'search#index'
 
   get '/profile', to: 'profiles#show', as: :profile
 
