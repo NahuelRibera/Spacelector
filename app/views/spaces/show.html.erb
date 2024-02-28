@@ -73,6 +73,27 @@
     };
   }
 
+  document.addEventListener('DOMContentLoaded', function() {
+    const queryParams = new URLSearchParams(window.location.search);
+    const imageId = queryParams.get('image_id');
+    const compartmentId = queryParams.get('highlight_compartment_id');
+
+    if (imageId && compartmentId) {
+      const imageElement = document.querySelector(`[data-image-id="${imageId}"]`);
+      if (imageElement) {
+        imageElement.click(); // Triggering display of the image.
+      }
+
+      setTimeout(() => {
+        const compartmentElement = document.getElementById(`compartment-info-${compartmentId}`);
+        if (compartmentElement) {
+          compartmentElement.style.border = '2px solid red'; // Highlighting the compartment.
+          compartmentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 500); // Adjust as needed based on your application's behavior.
+    }
+  });
+
   // Function to save text area content to localStorage
   function saveTextAreaContent(compartmentId, content) {
     localStorage.setItem(`compartment_${compartmentId}_text`, content);
@@ -286,4 +307,3 @@
     }
   });
 </script>
-
