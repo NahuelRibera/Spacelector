@@ -357,7 +357,14 @@ a {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+
+  @media (max-width: 768px) {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+  }
 }
+
 
 .modal-content {
   background-color: #fefefe;
@@ -455,12 +462,14 @@ a {
 
 textarea {
   width: 100%; /* Set the width to 100% to fill the container */
-  height: 100px; /* Set a fixed or percentage height */
+  min-height: 44px; /* Set a fixed or percentage height */
   padding: 10px; /* Add padding for better readability */
   border: 1px solid #ddd;
   border-radius: 5px; /* Add border radius for rounded corners */
   font-family: 'open sans', sans-serif; /* Specify a font family */
   font-size: 15px; /* Specify a font size */
   line-height: 1.5; /* Specify line height for readability */
+  resize: none; /* Disable manual resizing */
+  overflow: hidden;
   /* Add any additional styles as needed */
 }
