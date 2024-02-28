@@ -31,10 +31,11 @@
     <div class='btn-row'>
 
   <% if @space.parent_space %>
-      <%= link_to "Back to '#{j @space.child_space.name}'", space_path(@space.child_space), class: "back_to" %>
-    <% else %>
-    <%= link_to 'Back', spaces_path, class: "back_form" %>
-      <% end %>
+  <%= link_to "Back to '#{j @space}'s Parent Space", space_path(@space.parent_space), class: "back_to" %>
+<% else %>
+  <%= link_to 'Back', spaces_path, class: "back_form" %>
+<% end %>
+
   <%= form.submit "Upload", class:"custom-btn", style: "justify-content: center;", id: 'uploadButton' %>
   </div>
   <% end %>

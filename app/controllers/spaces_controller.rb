@@ -25,6 +25,24 @@ class SpacesController < ApplicationController
     end
   end
 
+  def search
+    query = params[:query]
+    # Adjust the query based on where the searchable information is actually stored.
+    # This example assumes a direct relationship for simplicity.
+    compartments = Compartment.joins(:object_infos).where("object_infos.description ILIKE ?", "%#{query}%").distinct
+
+    if compartments.any?
+      # Assuming each compartment is related to one image, and each image to one space.
+      # This will need adjustment based on your actual data model.
+      compartment = compartments.first
+      image = compartment.image
+      space = image.space
+      redirect_to space_path(space, image_id: image.id, highlight_compartment_id: compartment.id)
+    else
+      redirect_to root_path, alert: 'No results found.'
+    end
+  end
+
   def show
     @space = Space.find(params[:id])
     @image = @space.images.first # Or fetch the desired image using your logic
