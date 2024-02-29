@@ -40,9 +40,8 @@
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.15);
   text-align: center;
   width: 320px; // Slightly increased width
-  margin: 20px; // Added margin to give space around the cards
+  margin: -40px 20px 20px;
   transition: all 0.3s ease-in-out;
-
 
   &:hover {
     transform: translateY(-5px);
