@@ -240,14 +240,6 @@ a {
   }
 }
 
-//SPACE IMAGE DISPLAY
-
-.grid-image {
-  width: 100%;
-  height: 330px; // Set height to auto to maintain aspect ratio
-  display: block; // Ensure the image is treated as a block element
-  object-fit: cover;
-}
 
 .image-grid {
   display: grid;
@@ -256,19 +248,18 @@ a {
   margin-top: 40px;
 }
 
-.image-container {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  background-color: white;
+.grid-image {
+  width: 100%;
+  height: 330px; // Set height to auto to maintain aspect ratio
   border-radius: 10px;
-  box-shadow: 0 0 0.25px #44A0D8, 0 0 0.5px #44A0D8, 0 0 0.75px #44A0D8, 0 0 1.25px #44A0D8, 0 0 1.75px #44A0D8, 0 0 2px #44A0D8, 0 0 2.5px #44A0D8, 0 0 3.75px #44A0D8;
-  transition: box-shadow 0.3s ease-in-out;
+  display: block; // Ensure the image is treated as a block element
+  object-fit: cover;
+
   &:hover {
-    box-shadow: 0 0 0.5px #44A0D8, 0 0 1px #44A0D8, 0 0 1.5px #44A0D8, 0 0 2.5px #44A0D8, 0 0 3.5px #44A0D8, 0 0 4px #44A0D8, 0 0 5px #44A0D8, 0 0 7.5px #44A0D8;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.07);
+
   }
 }
-
 
 .back,
   .back_to,
@@ -315,6 +306,16 @@ a {
   }
 }
 
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
 .delete-image-form {
   position: absolute;
   top: 0;
@@ -357,11 +358,17 @@ a {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+
+  @media (max-width: 768px) {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+  }
 }
 
 .modal-content {
   background-color: #fefefe;
-  padding: 7px;
+  padding: 10px;
   border: 1px solid; /* Add a border style */
   border-radius: 10px;
   // display: flex;
@@ -377,7 +384,6 @@ a {
 
   // margin-left: 150px;
 
-
   @media (min-width: 1200px) {
     margin: auto;
     display: absolute;
@@ -392,6 +398,7 @@ a {
     justify-content: center;
     align-items: center;
     margin-top: 10vh;
+    overflow: auto; /* Enable vertical scrolling */
   }
 }
 
@@ -418,4 +425,51 @@ a {
 
 .image-card:hover {
   cursor: pointer;
+}
+
+.modal-body {
+  display: flex;
+  align-items: flex-start;
+
+  @media (max-width: 768px) {
+    /* Override existing styles for smaller screens */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    overflow-y: auto; /* Enable vertical scrolling */
+
+  }
+}
+
+.compartment-info-container {
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-left: 18px; /* Add padding for better readability */
+  padding-right: 5px;
+  padding-top: 0px;
+
+  @media (min-width: 1200px) {
+    max-width: 80%;
+    max-height: 85vh;
+  }
+
+  @media (max-width: 768px) {
+    /* Override existing styles for smaller screens */
+    max-width: 90%; /* Adjust as needed */
+    width: 90%; /* Adjust as needed */
+    margin-top: 10px; /* Add margin for separation */
+  }
+}
+
+textarea {
+  width: 100%; /* Set the width to 100% to fill the container */
+  min-width: 150px;
+  min-height: 44px; /* Set a fixed or percentage height */
+  padding: 10px; /* Add padding for better readability */
+  border: 1px solid #ddd;
+  border-radius: 5px; /* Add border radius for rounded corners */
+  font-family: 'open sans', sans-serif; /* Specify a font family */
+  font-size: 15px; /* Specify a font size */
+  line-height: 1.5; /* Specify line height for readability */
+  resize: none; /* Disable manual resizing */
+  overflow: hidden;
+  /* Add any additional styles as needed */
 }
