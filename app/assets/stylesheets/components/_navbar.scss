@@ -18,6 +18,34 @@
   overflow: visible;
 }
 
+.navbar-search-container {
+  flex-grow: 1; // Allow the search container to fill the space
+  display: flex;
+  justify-content: center; // Center the search form
+  padding: 0 20px; // Give some space on both sides
+ }
+
+ .search-form {
+  display: flex;
+  width: 100%; // Full width to align with the design
+  .search-input {
+    width: 100%;
+    border-radius: 30px; // Rounded corners
+    border: 1px solid #e6e6e6; // Light grey border
+    padding: 5px 15px; // Padding inside the search bar
+    &:focus {
+      outline: none;
+      border-color: #44A0D8; // Focus color
+      box-shadow: 0 0 0.5px #44A0D8, 0 0 1px #44A0D8, 0 0 1.5px #44A0D8;
+    }
+  }
+  // Hiding the submit button, Enter key will submit the form
+  input[type="submit"] {
+    display: none;
+  }
+ }
+
+
 .sign-out-button {
   background: none; // Removes any background
   border: none; // Removes the border
@@ -43,8 +71,8 @@
 
 .navbar-nav {
   display: flex;
-  flex: 1;
-  justify-content: flex-end; // This keeps the nav items to the right
+  align-items: center;
+  margin-right: 10px; // Reduce the space on the right side
 }
 
 .nav-item {
