@@ -127,7 +127,7 @@ function highlightCompartment(compartmentId) {
   waitForCompartmentInfoToBeReady(compartmentId, () => {
     const compartmentTextArea = document.querySelector(`#description-${compartmentId}`);
     if (compartmentTextArea) {
-      compartmentTextArea.style.border = '2px solid red';
+      compartmentTextArea.style.border = '2px solid #44A0D8';
       compartmentTextArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
       compartmentTextArea.focus(); // Optionally set focus to the textarea
     } else {
