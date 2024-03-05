@@ -125,12 +125,13 @@ function highlightCompartment(compartmentId) {
   // This function gets called after the delay set in showModalForImage to ensure
   // that the modal has had time to load and display
   waitForCompartmentInfoToBeReady(compartmentId, () => {
-    const compartmentElement = document.getElementById(`compartment-info-${compartmentId}`);
-    if (compartmentElement) {
-      compartmentElement.style.border = '2px solid red';
-      compartmentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const compartmentTextArea = document.querySelector(`#description-${compartmentId}`);
+    if (compartmentTextArea) {
+      compartmentTextArea.style.border = '2px solid red';
+      compartmentTextArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      compartmentTextArea.focus(); // Optionally set focus to the textarea
     } else {
-      console.error('Compartment element not found for compartmentId:', compartmentId);
+      console.error('Textarea element not found for compartmentId:', compartmentId);
     }
   });
 }
