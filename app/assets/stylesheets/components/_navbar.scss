@@ -2,6 +2,13 @@
   background: white;
 }
 
+.logo {
+  @media (max-width: 768px) {
+    max-width: 115px; /* Adjust the maximum width as needed */
+    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+  }
+}
+
 .navbar {
   background: white;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -92,6 +99,8 @@
 }
 
 .nav-item .nav-link.premium-trial {
+  @media (min-width: 768px) {
+
   background: white;
   color: black;
   border: none;
@@ -103,6 +112,9 @@
   padding: 2.5px 10px;
   margin: 0 10px;
   font-family: 'Open Sans', sans-serif;
+  }
+
+
 }
 
 .nav-item .nav-link:hover {
@@ -155,5 +167,20 @@
 
   .btn-login {
     margin-left: 0px; // Reduce margin for mobile
+  }
+}
+
+@media (max-width: 768px) {
+  .premium-trial .text {
+    display: none; /* Hide the text */
+  }
+
+  .premium-trial .image-logo {
+    display: inline-block; /* Display the image */
+    background-image: url('crown.png');
+    width: 10px; /* Adjust width as needed */
+    height: 10px; /* Adjust height as needed */
+    background-size: cover; /* Ensure the image covers the span */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
   }
 }

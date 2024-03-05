@@ -1,6 +1,6 @@
 <div class="navbar navbar-expand navbar-light navbar-lewagon">
   <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "spacelector.png" %>
+    <%= image_tag "spacelector.png", class: "logo" %>
   <% end %>
 
   <div class="navbar-search-container">
@@ -13,7 +13,10 @@
   <ul class="navbar-nav me-auto">
     <% if user_signed_in? %>
       <li class="nav-item">
-        <%= link_to "Premium Trial", checkout_path, class: "nav-link premium-trial" %>
+        <a href="<%= checkout_path %>" class="nav-link premium-trial">
+          <span class="text">Premium Trial</span>
+          <span class="image-logo"></span> <!-- Add an empty span for the image logo -->
+        </a>
       </li>
       <li class="nav-item">
         <%= link_to "Manage billing", @portal_sessions.url unless @portal_session.nil? %>
