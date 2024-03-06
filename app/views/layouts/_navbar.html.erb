@@ -12,12 +12,12 @@
 
   <ul class="navbar-nav me-auto">
     <% if user_signed_in? %>
-      <li class="nav-item">
-        <a href="<%= checkout_path %>" class="nav-link premium-trial">
+        <a href="<%= checkout_path %>" class="premium-trial">
           <span class="text">Premium Trial</span>
-          <span class="image-logo"></span> <!-- Add an empty span for the image logo -->
         </a>
-      </li>
+          <%= link_to checkout_path, class: "navbar-crown" do %>
+            <%= image_tag "crown.png", class: "image-logo" %>
+          <% end %>
       <li class="nav-item">
         <%= link_to "Manage billing", @portal_sessions.url unless @portal_session.nil? %>
       </li>
