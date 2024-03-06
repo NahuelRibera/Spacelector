@@ -1,20 +1,23 @@
 <div class="navbar navbar-expand navbar-light navbar-lewagon">
-  <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "spacelector.png" %>
+  <%= link_to root_path do %>
+    <%= image_tag "spacelector.png", class: "logo" %>
   <% end %>
 
   <div class="navbar-search-container">
     <%= form_with url: search_spaces_path, method: :get, local: true, class: "search-form" do |form| %>
-      <%= form.text_field :query, placeholder: "What are you looking for? Search here...", class: "search-input" %>
+      <%= form.text_field :query, placeholder: "What are you looking for?", class: "search-input" %>
       <!-- Removed the search button, Enter key will submit the form -->
     <% end %>
   </div>
 
   <ul class="navbar-nav me-auto">
     <% if user_signed_in? %>
-      <li class="nav-item">
-        <%= link_to "Premium Trial", checkout_path, class: "nav-link premium-trial" %>
-      </li>
+        <a href="<%= checkout_path %>" class="premium-trial">
+          <span class="text">Premium Trial</span>
+        </a>
+          <%= link_to checkout_path, class: "navbar-crown" do %>
+            <%= image_tag "crown.png", class: "image-logo" %>
+          <% end %>
       <li class="nav-item">
         <%= link_to "Manage billing", @portal_sessions.url unless @portal_session.nil? %>
       </li>

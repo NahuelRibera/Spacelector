@@ -356,13 +356,13 @@ a {
   top: 50%; /* Center vertically */
   transform: translate(-50%, -50%); /* Center the element precisely */
   width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  height: 300%; /* Full height */
   background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
 
   @media (max-width: 768px) {
-    position: absolute;
-    width: 200%;
-    height: 200%;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 }
 
@@ -377,29 +377,29 @@ a {
   // margin-bottom: 50px;
   width: fit-content;
   height: fit-content;
-  overflow: auto;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Center the element precisely */
+
 
   // margin-left: 150px;
 
   @media (min-width: 1200px) {
     margin: auto;
     display: absolute;
-    top: 50%; /* Center vertically */
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%); /* Center the element precisely */
-
   }
 
   @media (max-width: 768px) {
-    margin: auto;
     display: absolute;
     justify-content: center;
     align-items: center;
-    margin-top: 10vh;
+    margin-top: 30px;
     overflow: auto; /* Enable vertical scrolling */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the element precisely */
+    top: 50%;
+    max-height: calc(90vh - 100px); /* Set maximum height to fill viewport height minus 100px */
   }
 }
 
@@ -456,7 +456,8 @@ a {
     /* Override existing styles for smaller screens */
     max-width: 90%; /* Adjust as needed */
     width: 90%; /* Adjust as needed */
-    margin-top: 10px; /* Add margin for separation */
+    margin-top: 5px; /* Add margin for separation */
+    padding: 0px;
   }
 }
 
@@ -473,4 +474,7 @@ textarea {
   resize: none; /* Disable manual resizing */
   overflow: hidden;
   /* Add any additional styles as needed */
+
+  @media (max-width: 768px) {
+  }
 }
