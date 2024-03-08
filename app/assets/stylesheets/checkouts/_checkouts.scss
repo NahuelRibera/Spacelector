@@ -16,6 +16,10 @@ h2, h3, h4, h5, h6 {
 
 h3 {
   font-size: 30px;
+
+  @media(min-width: 768px) {
+    font-size: 40px;
+  }
 }
 
 .title-container {
@@ -44,6 +48,10 @@ h3 {
     @media(max-width: 768px) {
       font-size: 16px;
       margin-top: 20px;
+    }
+
+    @media(min-width: 768px) {
+      margin-top: 15px;
     }
   }
 }
@@ -77,6 +85,10 @@ h3 {
     box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.15);
   }
 
+  @media(min-width: 768px) {
+    width: 400px;
+  }
+
   .card-header {
     background-color: #44A0D8; // Adjust to match your desired header color
     color: #ffffff; // Text color for the header
@@ -89,6 +101,10 @@ h3 {
     align-items: center; // Align items vertically
     justify-content: center; // Center content horizontally
     font-family: 'Open Sans', sans-serif;
+
+    @media(min-width: 768px) {
+
+    }
 
     h3 {
       margin: 0; // Reset default margin
@@ -104,7 +120,11 @@ h3 {
       font-size: 2.5em; // Adjust the font size as necessary
       font-weight: bold;
       color: #333333; // Price color
-      margin: 15px 0;
+
+
+      @media(min-width: 768px) {
+        font-size: 50px;
+      }
     }
 
 
@@ -112,6 +132,10 @@ h3 {
       font-size: 1em;
       color: #808080; // Billing cycle text color
       margin-bottom: 30px;
+
+      @media(min-width: 768px) {
+        font-size: 20px;
+      }
     }
 
 
