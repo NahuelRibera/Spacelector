@@ -34,9 +34,14 @@
       <% if image.file.attached? %>
         <div class="image-container">
           <div class="image-card">
-            <%# Display a variant of the image. For example, a resized thumbnail: %>
-            <%= image_tag(image.file.variant(resize_to_limit: [1920, 1080]), class: "grid-image example-image", alt: "image-#{index + 1}",
-                          data: { image_id: image.id, compartments: compartments_for_image(image).to_json }) %>
+            <%# Check if the image is a HEIC file and conditionally apply resizing %>
+            <% if image.file.content_type == 'image/heic' %>
+              <%= image_tag(image.file.variant(resize_to_limit: [1920, 1080]), class: "grid-image example-image", alt: "image-#{index + 1}",
+                            data: { image_id: image.id, compartments: compartments_for_image(image).to_json }) %>
+            <% else %>
+              <%= image_tag(image.file, class: "grid-image example-image", alt: "image-#{index + 1}",
+                            data: { image_id: image.id, compartments: compartments_for_image(image).to_json }) %>
+            <% end %>
             <div class="title">
               <h5><%= image.title %></h5>
             </div>
