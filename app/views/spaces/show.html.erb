@@ -392,9 +392,12 @@ function waitForCompartmentInfoToBeReady(compartmentId, callback) {
       context.strokeStyle = '#44A0D8';
       context.lineWidth = 4.5;
       context.stroke();
-      context.fillStyle = '#44A0D8';
-      context.font = 'bold 40px Open Sans';
-      context.fillText(compartment.number.toString(), compartment.x + 10, compartment.y + 40);
+      context.fillStyle = 'black';
+      context.font = 'bold 50px Open Sans';
+      context.lineWidth = 6;
+      context.strokeStyle = '#44A0D8'; // Change the color of the outline as desired
+      context.strokeText(compartment.number.toString(), compartment.x + 15, compartment.y + 52);
+      context.fillText(compartment.number.toString(), compartment.x + 15, compartment.y + 52);
     }
   });
 </script>
