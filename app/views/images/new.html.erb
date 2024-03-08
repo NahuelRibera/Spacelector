@@ -15,6 +15,10 @@
       <%= form.file_field :file, required: true, id: 'imageFileInput', capture: 'camera' %>
     </div>
 
+    <div id="image-preview-container" style="display: none;">
+      <img id="imagePreview" src="#" alt="Image preview" style="max-width: 100%;"/>
+    </div>
+
     <br>
 
     <!-- Select Compartments button -->
@@ -45,24 +49,50 @@
 </section>
 
 <script>
-  // Existing script to handle image file selection
-  document.getElementById('imageFileInput').addEventListener('change', function() {
-    const fileInput = this;
-    const selectCompartmentsButton = document.getElementById('selectCompartmentsButton');
-    const imageCanvas = document.getElementById('imageCanvas');
-    const compartmentNamesContainer = document.getElementById('compartmentNamesContainer');
+document.getElementById('imageFileInput').addEventListener('change', function(event) {
+  const fileInput = this;
+  const file = fileInput.files[0];
+  const imagePreviewContainer = document.getElementById('image-preview-container');
+  const imagePreview = document.getElementById('imagePreview');
 
-    // Show the select compartments button if a file is selected
-    if (fileInput.files.length > 0) {
-      selectCompartmentsButton.style.display = 'block';
-    } else {
-      alert('Please choose a file first.');
-      selectCompartmentsButton.style.display = 'none';
-      imageCanvas.style.display = 'none';
-      compartmentNamesContainer.style.display = 'none';
-    }
-  });
+  if (file) {
+    if (file.type === 'image/heic' || file.name.endsWith('.heic')) {
+      const formData = new FormData();
+      formData.append('file', file);
 
+fetch('/convert_heic', {
+  method: 'POST',
+  body: formData
+})
+.then(response => {
+  if (!response.ok) {
+    return response.text().then(text => {
+      // If the response is HTML (likely an error page), throw a more useful error
+      if (response.headers.get('Content-Type').includes('text/html')) {
+        throw new Error('A server error occurred. Please try again.');
+      }
+      // Otherwise, assume it's text that can be parsed as JSON
+      return JSON.parse(text);
+    });
+  }
+  return response.json();
+})
+.then(data => {
+  // Handle the successful response here
+})
+.catch(error => {
+  console.error('Error uploading and converting HEIC image:', error);
+  alert(error.message); // Show a more user-friendly error message
+});
+
+
+            } else {
+              // For non-HEIC images, you can create a local URL to preview the image directly
+              imagePreview.src = URL.createObjectURL(file);
+              imagePreviewContainer.style.display = 'block';
+            }
+          }
+        });
   // Existing script to initialize the canvas and handle compartment selection
   document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('imageCanvas');

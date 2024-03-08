@@ -23,7 +23,21 @@ class ImagesController < ApplicationController
     @compartments = @image.compartments || [] # Initialize @compartments to an empty array if it's nil
   end
 
+  def convert_heic
+    file = params[:file]
 
+    if file.content_type == 'image/heic'
+      # ... existing logic to convert the file ...
+
+      url = url_for(converted_blob) # Generates a URL for direct access to the blob
+      render json: { preview_url: url }, status: :ok
+    else
+      render json: { error: "Unsupported file type." }, status: :unprocessable_entity
+    end
+  rescue => e
+    Rails.logger.error("HEIC conversion failed: #{e.message}")
+    render json: { error: "Error processing the image: #{e.message}" }, status: :unprocessable_entity
+  end
 
   def destroy
     @space = Space.find(params[:space_id])
