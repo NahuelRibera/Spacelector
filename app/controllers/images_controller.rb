@@ -1,5 +1,6 @@
 class ImagesController < ApplicationController
   before_action :set_space, only: [:new, :create, :show]
+  skip_before_action :verify_authenticity_token, only: [:convert_heic]
 
   def create
     @image = @space.images.new(image_params)
@@ -27,16 +28,38 @@ class ImagesController < ApplicationController
     file = params[:file]
 
     if file.content_type == 'image/heic'
-      # ... existing logic to convert the file ...
+      require "image_processing/mini_magick"
 
-      url = url_for(converted_blob) # Generates a URL for direct access to the blob
-      render json: { preview_url: url }, status: :ok
+      # Temporarily save the uploaded file to disk
+      uploaded_file = Tempfile.new(['upload', '.heic'])
+      File.binwrite(uploaded_file.path, file.read)
+
+      # Perform the conversion
+      processed_image = ImageProcessing::MiniMagick
+                          .source(uploaded_file.path)
+                          .convert("jpg")
+                          .call
+
+      # Create a new blob from the processed image
+      converted_blob = ActiveStorage::Blob.create_and_upload!(
+        io: File.open(processed_image.path, 'rb'),
+        filename: "#{file.original_filename.split('.').first}.jpg",
+        content_type: 'image/jpeg'
+      )
+
+      # Clean up temporary files
+      uploaded_file.close
+      uploaded_file.unlink
+      processed_image.close
+      processed_image.unlink
+
+      # Respond with the URL to the converted image
+      render json: { preview_url: rails_blob_url(converted_blob) }, status: :ok
     else
       render json: { error: "Unsupported file type." }, status: :unprocessable_entity
     end
   rescue => e
-    Rails.logger.error("HEIC conversion failed: #{e.message}")
-    render json: { error: "Error processing the image: #{e.message}" }, status: :unprocessable_entity
+    render json: { error: e.message }, status: :internal_server_error
   end
 
   def destroy

@@ -49,50 +49,42 @@
 </section>
 
 <script>
-document.getElementById('imageFileInput').addEventListener('change', function(event) {
+document.getElementById('imageFileInput').addEventListener('change', async function(event) {
   const fileInput = this;
   const file = fileInput.files[0];
   const imagePreviewContainer = document.getElementById('image-preview-container');
   const imagePreview = document.getElementById('imagePreview');
 
   if (file) {
-    if (file.type === 'image/heic' || file.name.endsWith('.heic')) {
-      const formData = new FormData();
-      formData.append('file', file);
+    // Prepare FormData to send the file to the server
+    const formData = new FormData();
+    formData.append('file', file);
 
-fetch('/convert_heic', {
-  method: 'POST',
-  body: formData
-})
-.then(response => {
-  if (!response.ok) {
-    return response.text().then(text => {
-      // If the response is HTML (likely an error page), throw a more useful error
-      if (response.headers.get('Content-Type').includes('text/html')) {
-        throw new Error('A server error occurred. Please try again.');
+    try {
+      // Attempt to upload and convert the file on the server
+      const response = await fetch('/convert_heic', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error('Server error during conversion.');
+
+      // Expecting { preview_url: 'url_to_converted_image' } from the server
+      const data = await response.json();
+      if (data.preview_url) {
+        // Update the src of the imagePreview and display the container
+        imagePreview.src = data.preview_url;
+        imagePreviewContainer.style.display = 'block';
+      } else {
+        throw new Error('Invalid server response.');
       }
-      // Otherwise, assume it's text that can be parsed as JSON
-      return JSON.parse(text);
-    });
+    } catch (error) {
+      console.error('Error uploading and converting HEIC image:', error);
+      alert('There was an error processing the HEIC image. Please try again.');
+    }
   }
-  return response.json();
-})
-.then(data => {
-  // Handle the successful response here
-})
-.catch(error => {
-  console.error('Error uploading and converting HEIC image:', error);
-  alert(error.message); // Show a more user-friendly error message
 });
 
-
-            } else {
-              // For non-HEIC images, you can create a local URL to preview the image directly
-              imagePreview.src = URL.createObjectURL(file);
-              imagePreviewContainer.style.display = 'block';
-            }
-          }
-        });
   // Existing script to initialize the canvas and handle compartment selection
   document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('imageCanvas');
