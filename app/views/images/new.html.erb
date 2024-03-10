@@ -72,27 +72,41 @@ document.addEventListener('DOMContentLoaded', function() {
       reader.readAsDataURL(selectedFile);
     }
   });
-    // Function to draw compartments on the canvas
-  function drawCompartments(imageSrc) {
-    const img = new Image();
-    img.onload = function() {
-      // Clear the canvas and draw the loaded image
-      canvas.width = img.width;
-      canvas.height = img.height;
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      context.drawImage(img, 0, 0);
-      // Now the image is on the canvas, we can draw the compartments
-      compartments.forEach((compartment, index) => {
-        context.beginPath();
-        context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
-        context.stroke();
-        context.fillStyle = '#44A0D8'; // Set color
-        context.font = 'bold 20px Open Sans'; // Set font size and style
-        context.fillText((index + 1).toString(), compartment.x + 10, compartment.y + 25); // Draw number
-      });
-    };
-    img.src = imageSrc; // Set the source of the image to trigger the load event
+
+let loadedImage = null; // This will store the last loaded image for redrawing
+
+// Add the drawCompartment function if it's not already there
+function drawCompartment(compartment, index) {
+  context.strokeStyle = '#44A0D8';
+  context.lineWidth = 4.5;
+  context.beginPath();
+  context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
+  context.stroke();
+  context.fillStyle = '#44A0D8';
+  context.font = 'bold 20px Open Sans';
+  context.fillText((index + 1).toString(), compartment.x + 10, compartment.y + 25);
+}
+
+// Update drawCompartments to accept an image source parameter
+function drawCompartments(imageSrc) {
+  const img = new Image();
+  img.onload = function() {
+    canvas.width = img.width;
+    canvas.height = img.height;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(img, 0, 0);
+    loadedImage = img; // Set the loaded image
+    compartments.forEach(drawCompartment);
+  };
+  if (imageSrc) {
+    img.src = imageSrc;
+  } else if (loadedImage) {
+    // If imageSrc is not provided, redraw the last loaded image
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(loadedImage, 0, 0);
+    compartments.forEach(drawCompartment);
   }
+}
 
     // Function to save compartment data
     function saveCompartment() {
@@ -133,31 +147,30 @@ document.addEventListener('DOMContentLoaded', function() {
       startY = (event.clientY - rect.top) * scaleY;
     }
 
-   function handleMove(event) {
-    if (!isDrawing) return;
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    endX = (event.clientX - rect.left) * scaleX;
-    endY = (event.clientY - rect.top) * scaleY;
+function handleMove(event) {
+  if (!isDrawing) return;
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+  endX = (event.clientX - rect.left) * scaleX;
+  endY = (event.clientY - rect.top) * scaleY;
 
-    if (loadedImage) {
-        context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-        context.drawImage(loadedImage, 0, 0, canvas.width, canvas.height); // Redraw the stored image
+  // Clear the canvas and redraw the image
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.drawImage(loadedImage, 0, 0, canvas.width, canvas.height);
 
-        // Redraw existing compartments
-        compartments.forEach(compartment => {
-            context.beginPath();
-            context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
-            context.stroke();
-        });
+  // Redraw existing compartments
+  compartments.forEach(drawCompartment);
 
-        // Draw the current rectangle
-        context.beginPath();
-        context.rect(startX, startY, endX - startX, endY - startY);
-        context.stroke();
-    }
-  }
+  // Draw the current rectangle being drawn
+  const currentCompartment = {
+    x: Math.min(startX, endX),
+    y: Math.min(startY, endY),
+    width: Math.abs(endX - startX),
+    height: Math.abs(endY - startY)
+  };
+  drawCompartment(currentCompartment, compartments.length);
+}
 
 
     function handleEnd(event) {
