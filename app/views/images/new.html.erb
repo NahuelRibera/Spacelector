@@ -49,83 +49,50 @@
 </section>
 
 <script>
-document.getElementById('imageFileInput').addEventListener('change', async function(event) {
-  const fileInput = this;
-  const file = fileInput.files[0];
-  const imagePreviewContainer = document.getElementById('image-preview-container');
+document.addEventListener('DOMContentLoaded', function() {
+  const canvas = document.getElementById('imageCanvas');
+  const context = canvas.getContext('2d');
+  const compartmentNamesContainer = document.getElementById('compartmentNamesContainer');
   const imagePreview = document.getElementById('imagePreview');
+  const compartments = [];
+  let isDrawing = false;
+  let startX, startY, endX, endY;
+  let selectedFile = null;
 
-  if (file) {
-    // Prepare FormData to send the file to the server
-    const formData = new FormData();
-    formData.append('file', file);
-
-    try {
-      // Attempt to upload and convert the file on the server
-      const response = await fetch('/convert_heic', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) throw new Error('Server error during conversion.');
-
-      // Expecting { preview_url: 'url_to_converted_image' } from the server
-      const data = await response.json();
-      if (data.preview_url) {
-        // Update the src of the imagePreview and display the container
-        imagePreview.src = data.preview_url;
-        imagePreviewContainer.style.display = 'block';
-      } else {
-        throw new Error('Invalid server response.');
-      }
-    } catch (error) {
-      console.error('Error uploading and converting HEIC image:', error);
-      alert('There was an error processing the HEIC image. Please try again.');
+  // This handler will simply store the selected file object
+  document.getElementById('imageFileInput').addEventListener('change', function(event) {
+    selectedFile = event.target.files[0]; // Store the selected file
+    if (selectedFile.type !== 'image/heic') {
+      // For non-.heic files, show the preview immediately
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = 'block';
+      };
+      reader.readAsDataURL(selectedFile);
     }
-  }
-});
-
-  // Existing script to initialize the canvas and handle compartment selection
-  document.addEventListener('DOMContentLoaded', function() {
-    const canvas = document.getElementById('imageCanvas');
-    const context = canvas.getContext('2d');
-    const compartmentNamesContainer = document.getElementById('compartmentNamesContainer');
-    const compartments = [];
-    let isDrawing = false;
-    let startX, startY, endX, endY;
-
+  });
     // Function to draw compartments on the canvas
-    function drawCompartments() {
-      const fileInput = document.getElementById('imageFileInput');
-      if (fileInput.files.length > 0) {
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          const img = new Image();
-          img.onload = function() {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas first
-            context.drawImage(img, 0, 0); // Draw the image
-            loadedImage = img; // Store the loaded image globally
-
-            context.strokeStyle = '#44A0D8'; // Set the stroke color
-            context.lineWidth = 4.5; // Set the line width
-
-            compartments.forEach((compartment, index) => {
-              context.beginPath();
-              context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
-              context.stroke();
-              context.fillStyle = '#44A0D8'; // Set color
-              context.font = 'bold 20px Open Sans'; // Set font size and style
-              context.fillText((index + 1).toString(), compartment.x + 10, compartment.y + 25); // Draw number
-            });
-          };
-          img.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    }
+  function drawCompartments(imageSrc) {
+    const img = new Image();
+    img.onload = function() {
+      // Clear the canvas and draw the loaded image
+      canvas.width = img.width;
+      canvas.height = img.height;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(img, 0, 0);
+      // Now the image is on the canvas, we can draw the compartments
+      compartments.forEach((compartment, index) => {
+        context.beginPath();
+        context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
+        context.stroke();
+        context.fillStyle = '#44A0D8'; // Set color
+        context.font = 'bold 20px Open Sans'; // Set font size and style
+        context.fillText((index + 1).toString(), compartment.x + 10, compartment.y + 25); // Draw number
+      });
+    };
+    img.src = imageSrc; // Set the source of the image to trigger the load event
+  }
 
     // Function to save compartment data
     function saveCompartment() {
@@ -214,19 +181,53 @@ document.getElementById('imageFileInput').addEventListener('change', async funct
 
     canvas.addEventListener('touchend', handleEnd);
 
-    // Show canvas and input field when "Select Compartments" button is clicked
-    const selectCompartmentsButton = document.getElementById('selectCompartmentsButton');
-    selectCompartmentsButton.addEventListener('click', function() {
-      const fileInput = document.getElementById('imageFileInput');
-      if (fileInput.files.length === 0) {
-        alert('Please choose a file first.');
-        return;
-      }
+   const selectCompartmentsButton = document.getElementById('selectCompartmentsButton');
+  selectCompartmentsButton.addEventListener('click', async function() {
+    if (!selectedFile) {
+      alert('Please choose a file first.');
+      return;
+    }
 
-      drawCompartments();
-      canvas.style.display = 'block';
+    // If it's a .heic file, handle conversion
+    if (selectedFile.type === 'image/heic') {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
+      try {
+        const response = await fetch('/convert_heic', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!response.ok) throw new Error('Server error during conversion.');
+
+        const data = await response.json();
+        if (data.preview_url) {
+          // Set the image preview source to the converted image URL
+          imagePreview.src = data.preview_url;
+          // Ensure the image is displayed and the compartments container is shown
+          imagePreview.style.display = 'block';
+          compartmentNamesContainer.style.display = 'block';
+          // Ensure the image is loaded before drawing on the canvas
+          imagePreview.onload = () => {
+            drawCompartments(imagePreview.src); // Draw compartments using the new image URL
+          }
+        } else {
+          throw new Error('Invalid server response.');
+        }
+      } catch (error) {
+        console.error('Error uploading and converting HEIC image:', error);
+        alert('There was an error processing the HEIC image. Please try again.');
+      }
+    } else {
+      // For non-.heic files, we can draw immediately since we have shown the preview on selection
+      drawCompartments(imagePreview.src);
       compartmentNamesContainer.style.display = 'block';
-    });
+    }
+
+    // Display the canvas for drawing compartments
+    canvas.style.display = 'block';
+  });
 
     // New event listener to prevent upload if compartments are not named
     const uploadButton = document.getElementById('uploadButton');
