@@ -1,11 +1,11 @@
 class ObjectInfosController < ApplicationController
-  before_action :authenticate_user! # Assuming you're using Devise for authentication
-  before_action :set_compartment, only: [:create]
+  before_action :authenticate_user!
+  before_action :set_compartment, only: [:create_or_update]
 
-  def create
-    @object_info = @compartment.object_infos.build(object_info_params)
-    if @object_info.save
-      render json: @object_info, status: :created
+  def create_or_update
+    @object_info = @compartment.object_infos.first_or_initialize
+    if @object_info.update(object_info_params)
+      render json: @object_info, status: :ok
     else
       render json: @object_info.errors, status: :unprocessable_entity
     end
@@ -17,8 +17,7 @@ class ObjectInfosController < ApplicationController
     @compartment = Compartment.find(params[:compartment_id])
   end
 
-
   def object_info_params
-    params.require(:object_info).permit(:description) # Ensure these params match what's sent by your JS fetch request
+    params.require(:object_info).permit(:description)
   end
 end
