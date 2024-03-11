@@ -27,8 +27,11 @@ Rails.application.routes.draw do
   end
 
   resources :compartments do
-    resources :object_infos, only: [:create], as: 'compartment_object_infos'
+    resources :object_infos do
+      post 'create_or_update', on: :collection
+    end
   end
+
 
   get '/profile', to: 'profiles#show', as: :profile
 

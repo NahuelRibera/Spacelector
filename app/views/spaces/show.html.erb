@@ -231,34 +231,35 @@ function waitForCompartmentInfoToBeReady(compartmentId, callback) {
     return box;
   }
 
-  function saveCompartmentInfoDebounced(compartmentId, description) {
-    console.log(`Saving description for compartment ${compartmentId}: '${description}'`);
+function saveCompartmentInfoDebounced(compartmentId, description) {
+  console.log(`Saving description for compartment ${compartmentId}: '${description}'`);
 
-    fetch(`/compartments/${compartmentId}/object_infos`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      },
-      body: JSON.stringify({ object_info: { description: description } })
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Server Response:', data);
-      const textarea = document.getElementById('description-' + data.compartment_id);
-      if (textarea) {
-        textarea.value = data.description;
-      }
-    })
-    .catch(error => {
-      console.error('Error saving:', error);
-    });
-  }
+  fetch(`/compartments/${compartmentId}/object_infos/create_or_update`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    },
+    body: JSON.stringify({ object_info: { description: description } })
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.statusText}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Server Response:', data);
+    const textarea = document.getElementById('description-' + compartmentId);
+    if (textarea) {
+      textarea.value = data.description; // Ensure the textarea is updated with the saved description
+    }
+  })
+  .catch(error => {
+    console.error('Error saving:', error);
+  });
+}
+
 
   document.addEventListener('DOMContentLoaded', function() {
     // Assuming you're using Devise or similar for authentication
