@@ -42,7 +42,7 @@
     width: 100%;
     border-radius: 30px; // Rounded corners
     border: 1px solid #e6e6e6; // Light grey border
-    padding: 5px 15px; // Padding inside the search bar
+    padding: 4px 15px; // Padding inside the search bar
     margin-left: 20px;
 
     &:focus {
@@ -55,6 +55,7 @@
       padding: 3px 10px;
       font-size: 13px;
       margin-left: 15px;
+      margin-right: 15px;
     }
   }
 
@@ -236,7 +237,7 @@
   font-weight: 500;
   box-shadow: 0 0 0.25px #44A0D8, 0 0 0.5px #44A0D8, 0 0 0.75px #44A0D8, 0 0 1.25px #44A0D8, 0 0 1.75px #44A0D8, 0 0 2px #44A0D8, 0 0 2.5px #44A0D8, 0 0 3.75px #44A0D8;
   transition: all 0.3s ease-in-out;
-  padding: 2.5px 10px;
+  padding: 4.1px 10px;
   margin: 0 10px;
   font-family: 'Open Sans', sans-serif;
   }

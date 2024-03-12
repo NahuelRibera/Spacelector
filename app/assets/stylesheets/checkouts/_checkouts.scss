@@ -6,17 +6,53 @@
   align-items: center;
 }
 
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h3 {
+  font-size: 30px;
+
+  @media(min-width: 768px) {
+    font-size: 40px;
+  }
+}
+
 .title-container {
-  margin-bottom: 1em; // Adjust this to reduce the space between the titles and cards
+  // margin-bottom: 15em; // Adjust this to reduce the space between the titles and cards
+  margin-top: 20px;
+
+  @media(max-width: 768px) {
+    margin-top: -10px;
+    width: 70vw;
+    margin-bottom: 0px;
+  }
 
   .main-title {
     font-size: 4.5em;
-    color: #000000;
+    color: #333333;
     font-weight: bold;
+
+    @media(max-width: 768px) {
+      font-size: 50px;
+    }
   }
 
   .subtitle {
     color: #808080;
+
+    @media(max-width: 768px) {
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    @media(min-width: 768px) {
+      margin-top: 15px;
+    }
   }
 }
 
@@ -29,7 +65,8 @@
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
-    gap: 1em;
+    gap: 5px;
+    margin-bottom: 40px;
   }
 }
 
@@ -48,17 +85,26 @@
     box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.15);
   }
 
+  @media(min-width: 768px) {
+    width: 400px;
+  }
+
   .card-header {
-    background-color: #6272a4; // Adjust to match your desired header color
+    background-color: #44A0D8; // Adjust to match your desired header color
     color: #ffffff; // Text color for the header
     padding: 20px;
     border-radius: 15px 15px 0 0;
-    font-size: 1.5em;
+    font-size: 25px;
     font-weight: bold;
     text-align: center; // Ensure text is centered
     display: flex; // Use flexbox for vertical centering
     align-items: center; // Align items vertically
     justify-content: center; // Center content horizontally
+    font-family: 'Open Sans', sans-serif;
+
+    @media(min-width: 768px) {
+
+    }
 
     h3 {
       margin: 0; // Reset default margin
@@ -73,15 +119,23 @@
     .price {
       font-size: 2.5em; // Adjust the font size as necessary
       font-weight: bold;
-      color: #444444; // Price color
-      margin: 15px 0;
+      color: #333333; // Price color
+
+
+      @media(min-width: 768px) {
+        font-size: 50px;
+      }
     }
 
 
     .billing-cycle {
       font-size: 1em;
-      color: #666666; // Billing cycle text color
+      color: #808080; // Billing cycle text color
       margin-bottom: 30px;
+
+      @media(min-width: 768px) {
+        font-size: 20px;
+      }
     }
 
 
@@ -102,6 +156,7 @@
 
       &:hover {
         background-color: darken(#44A0D8, 10%);
+        text-decoration: none;
       }
     }
   }

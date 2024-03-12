@@ -45,10 +45,9 @@
             <div class="title">
               <h5><%= image.title %></h5>
             </div>
-            <%= form_with url: space_image_path(@space, image), method: :delete,
-                          data: { confirm: 'Are you sure you want to delete this image?' }, class: "delete-image-form" do |form| %>
-              <%= form.submit 'X', class: "delete" %>
-            <% end %>
+             <%= form_with url: space_image_path(@space, image), method: :delete, class: "delete-image-form", data: { confirm: 'Are you sure you want to delete this image?' } do |form| %>
+            <%= form.submit 'X', class: "delete" %>
+          <% end %>
           </div>
         </div>
         <!-- Rest of your code -->
@@ -75,6 +74,19 @@
       textarea.style.height = textarea.scrollHeight + 'px'; // Set the height to the scrollHeight, ensuring all content is visible
     });
   }
+
+  document.addEventListener('DOMContentLoaded', function() {
+  var deleteForms = document.querySelectorAll('.delete-image-form');
+
+  deleteForms.forEach(function(form) {
+    form.addEventListener('submit', function(event) {
+      var confirmMessage = form.getAttribute('data-confirm');
+      if (!confirm(confirmMessage)) {
+        event.preventDefault();
+      }
+    });
+  });
+});
 
   document.addEventListener('DOMContentLoaded', handlePageLoad);
   // Define the debounce function
@@ -399,9 +411,12 @@ function saveCompartmentInfoDebounced(compartmentId, description) {
       context.strokeStyle = '#44A0D8';
       context.lineWidth = 4.5;
       context.stroke();
-      context.fillStyle = '#44A0D8';
-      context.font = 'bold 20px Open Sans';
-      context.fillText(compartment.number.toString(), compartment.x + 10, compartment.y + 25);
+      context.fillStyle = 'black';
+      context.font = 'bold 50px Open Sans';
+      context.lineWidth = 6;
+      context.strokeStyle = '#44A0D8'; // Change the color of the outline as desired
+      context.strokeText(compartment.number.toString(), compartment.x + 15, compartment.y + 52);
+      context.fillText(compartment.number.toString(), compartment.x + 15, compartment.y + 52);
     }
   });
 </script>
