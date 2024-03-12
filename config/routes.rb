@@ -27,8 +27,11 @@ Rails.application.routes.draw do
   end
 
   resources :compartments do
-    resources :object_infos, only: [:create], as: 'compartment_object_infos'
+    resources :object_infos do
+      post 'create_or_update', on: :collection
+    end
   end
+
 
   get '/profile', to: 'profiles#show', as: :profile
 
@@ -37,4 +40,5 @@ Rails.application.routes.draw do
   get 'checkout/success', to: 'checkouts#success'
   get 'billing', to: 'billings#show'
   post 'compartments/:compartment_id/object_infos', to: 'object_infos#create'
+  post 'convert_heic', to: 'images#convert_heic', as: :convert_heic
 end

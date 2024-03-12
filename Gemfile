@@ -86,5 +86,9 @@ gem 'omniauth-google-oauth2'
 
 gem "omniauth-rails_csrf_protection","~> 1.0"
 
+gem 'mini_magick'
+
+gem 'image_processing', '~> 1.2'
+
 gem "stripe", "~> 10.8"
 gem "pay", "~> 7.1"
