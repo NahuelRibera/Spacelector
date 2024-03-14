@@ -8,6 +8,10 @@
   @media(max-height: 440px){
     margin-top: 70px
   }
+
+  @media(max-height: 400px){
+    margin-top: 60px
+  }
 }
 
 
@@ -32,6 +36,10 @@ nav {
   text-decoration: none;
   border-radius: 10px;
   display: inline-block;
+
+  @media(max-height: 440px){
+    padding: 0;
+  }
 }
 
 .button:hover {
