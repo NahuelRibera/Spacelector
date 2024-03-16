@@ -1,20 +1,36 @@
 <section id="content" class="set">
-  <div class="header">
+  <div class="header-space">
     <div class="space-name">
       <h1><%= @space.name %></h1>
         <a href="#" id="rename-button">
       <i id="rename-icon" class="fas fa-pen-to-square"></i>
     </a>    </div>
+    <div class="rotated-hud">
+      <% if @space.parent_space %>
+        <%= link_to raw('<i class="fa-solid fa-arrow-left"></i> Back to \''.html_safe + j(@space.parent_space.name) + '\''), space_path(@space.parent_space), class: "back_to" %>
+      <% else %>
+       <%= link_to raw('<i class="fa-solid fa-arrow-left"></i> Back'), spaces_path, class: "back" %>
+      <% end %>
+
+      <%= link_to raw('<i class="fa-solid fa-arrow-up-from-bracket"></i> Upload image'), new_space_image_path(@space), class: "upload" %>
+
+
       <%= link_to '+ New', new_space_path(parent_space_id: @space.id), class: "new" %>
+    </div>
+    <div class="default-hud">
+      <%= link_to '+ New', new_space_path(parent_space_id: @space.id), class: "new" %>
+    </div>
   </div>
 
-  <% if @space.parent_space %>
-    <%= link_to raw('<i class="fa-solid fa-arrow-left"></i> Back to \''.html_safe + j(@space.parent_space.name) + '\''), space_path(@space.parent_space), class: "back_to" %>
-  <% else %>
-    <%= link_to raw('<i class="fa-solid fa-arrow-left"></i> Back'), spaces_path, class: "back" %>
-  <% end %>
+  <div class="default-hud">
+    <% if @space.parent_space %>
+      <%= link_to raw('<i class="fa-solid fa-arrow-left"></i> Back to \''.html_safe + j(@space.parent_space.name) + '\''), space_path(@space.parent_space), class: "back_to" %>
+    <% else %>
+      <%= link_to raw('<i class="fa-solid fa-arrow-left"></i> Back'), spaces_path, class: "back" %>
+    <% end %>
 
-  <%= link_to raw('<i class="fa-solid fa-arrow-up-from-bracket"></i> Upload image'), new_space_image_path(@space), class: "upload" %>
+    <%= link_to raw('<i class="fa-solid fa-arrow-up-from-bracket"></i> Upload image'), new_space_image_path(@space), class: "upload" %>
+  </div>
 
   <ul class="space-list">
     <% @child_spaces.each do |child_space| %>
