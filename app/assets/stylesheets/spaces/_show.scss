@@ -491,6 +491,16 @@ a {
     top: 50%;
     max-height: calc(90vh - 100px); /* Set maximum height to fill viewport height minus 100px */
   }
+
+  @media (max-height: 440px) {
+    /* Propiedades para pantallas pequeñas (como iPhone 14) */
+    width: fit-content; /* Ancho del 90% del viewport */
+    max-height: 350px; /* Altura máxima de 440px */
+    max-width: 860px;
+    top: 50%; /* Posición vertical centrada */
+    left: 50%; /* Posición horizontal centrada */
+    transform: translate(-50%, -50%); /* Centrar el modal */
+  }
 }
 
 #image-modal{
@@ -512,6 +522,12 @@ a {
     max-width: 80vw;
     max-height: 85vh;
   }
+
+  @media (max-height: 440px) {
+    width: auto; /* Ajustando el ancho del modal-canvas */
+    height: 329px; /* Ajustando la altura del modal-canvas */
+    overflow: hidden;
+  }
 }
 
 .image-card:hover {
@@ -527,8 +543,12 @@ a {
     flex-direction: column; /* Stack items vertically */
     align-items: center; /* Center items horizontally */
     overflow-y: auto; /* Enable vertical scrolling */
-
   }
+
+  @media (max-height: 440px) {
+    width: fit-content;
+  }
+
 }
 
 .compartment-info-container {
@@ -548,6 +568,13 @@ a {
     width: 90%; /* Adjust as needed */
     margin-top: 5px; /* Add margin for separation */
     padding: 0px;
+  }
+
+  @media (max-height: 440px) {
+    /* Override existing styles for smaller screens */
+    max-width: 330px; /* Adjust as needed */
+    max-height: 330px;
+    // width: 90%; /* Adjust as needed */
   }
 }
 
