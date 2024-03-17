@@ -190,15 +190,6 @@ function waitForCompartmentInfoToBeReady(compartmentId, callback) {
   checkForCompartmentInfo();
 }
 
-  // Function to save text area content to localStorage
-  function saveTextAreaContent(compartmentId, content) {
-    localStorage.setItem(`compartment_${compartmentId}_text`, content);
-  }
-
-  // Function to load text area content from localStorage
-  function loadTextAreaContent(compartmentId) {
-    return localStorage.getItem(`compartment_${compartmentId}_text`) || '';
-  }
 
   document.addEventListener('DOMContentLoaded', handlePageLoad);
   // Define the debounce function
@@ -216,9 +207,8 @@ function waitForCompartmentInfoToBeReady(compartmentId, callback) {
 
   function autoResizeTextarea(event) {
     const textarea = event.target;
-    textarea.style.height = 'auto'; // Reset height to auto to properly calculate new height
-    textarea.style.height = textarea.scrollHeight + 'px'; // Set the height to the scrollHeight, ensuring all content is visible
-    saveTextAreaContent(textarea.dataset.compartmentId, textarea.value); // Save content to localStorage
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
   }
 
   function createCompartmentInfoBox(compartment) {
@@ -234,26 +224,24 @@ function waitForCompartmentInfoToBeReady(compartmentId, callback) {
     const textarea = document.createElement('textarea');
     textarea.id = 'description-' + compartment.id;
     textarea.dataset.compartmentId = compartment.id;
-    textarea.value = loadTextAreaContent(compartment.id); // Load content from localStorage
 
-    // Weird code
+    // Previously: textarea.value = loadTextAreaContent(compartment.id);
+    // Adjusted: Load compartment description directly from the server if needed, or initialize as empty.
+    textarea.value = ''; // Placeholder, assuming you'll fetch and set this value dynamically.
 
     textarea.addEventListener('input', debounce((event) => {
       const debouncedCompartmentId = event.target.dataset.compartmentId;
       const descriptionValue = event.target.value;
       console.log(`Textarea value for compartment ${debouncedCompartmentId}: '${descriptionValue}'`);
       console.log(`Event listener triggered for compartment ${debouncedCompartmentId}`);
+      // Previously: saveCompartmentInfoDebounced + saveTextAreaContent, now directly saving to server.
       saveCompartmentInfoDebounced(debouncedCompartmentId, descriptionValue);
-      saveTextAreaContent(debouncedCompartmentId, descriptionValue);
     }, 500));
 
-    // Bind input event to auto resize textarea
-    textarea.addEventListener('input', debounce(autoResizeTextarea, 300)); // Debounce the input event to avoid rapid resizing
+    textarea.addEventListener('input', debounce(autoResizeTextarea, 300));
 
     box.appendChild(label);
     box.appendChild(textarea);
-
-    // Initial auto-resize
     autoResizeTextarea({ target: textarea });
 
     return box;
