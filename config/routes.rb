@@ -27,11 +27,13 @@ Rails.application.routes.draw do
   end
 
   resources :compartments do
-    resources :object_infos do
-      post 'create_or_update', on: :collection
+    resources :object_infos, except: [:show] do
+      collection do
+        post 'create_or_update'
+      end
+      get 'last', on: :member, to: 'object_infos#last'
     end
   end
-
 
   get '/profile', to: 'profiles#show', as: :profile
 
@@ -41,4 +43,5 @@ Rails.application.routes.draw do
   get 'billing', to: 'billings#show'
   post 'compartments/:compartment_id/object_infos', to: 'object_infos#create'
   post 'convert_heic', to: 'images#convert_heic', as: :convert_heic
+  get 'compartments/:compartment_id/object_infos/last', to: 'object_infos#last', as: 'fetch_last_compartment_object_info'
 end
