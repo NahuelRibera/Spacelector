@@ -1,6 +1,6 @@
 class ObjectInfosController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_compartment, only: [:create_or_update]
+  before_action :set_compartment, only: [:create_or_update, :last]
 
   def create_or_update
     @object_info = @compartment.object_infos.first_or_initialize
@@ -8,6 +8,15 @@ class ObjectInfosController < ApplicationController
       render json: @object_info, status: :ok
     else
       render json: @object_info.errors, status: :unprocessable_entity
+    end
+  end
+
+  def last
+    @object_info = @compartment.object_infos.last
+    if @object_info
+      render json: @object_info, status: :ok
+    else
+      render json: {}, status: :not_found
     end
   end
 
