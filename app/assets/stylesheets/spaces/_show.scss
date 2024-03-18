@@ -495,8 +495,9 @@ a {
   @media (max-height: 440px) {
     /* Propiedades para pantallas pequeñas (como iPhone 14) */
     width: fit-content; /* Ancho del 90% del viewport */
-    max-height: 350px; /* Altura máxima de 440px */
-    max-width: 860px;
+    height: fit-content;
+    max-height: 390px; /* Altura máxima de 440px */
+    max-width: 900px;
     top: 50%; /* Posición vertical centrada */
     left: 50%; /* Posición horizontal centrada */
     transform: translate(-50%, -50%); /* Centrar el modal */
@@ -524,9 +525,8 @@ a {
   }
 
   @media (max-height: 440px) {
-    width: auto; /* Ajustando el ancho del modal-canvas */
-    height: 329px; /* Ajustando la altura del modal-canvas */
-    overflow: hidden;
+    max-width: 80vw;
+    max-height: 80vh;
   }
 }
 
