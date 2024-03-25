@@ -35,7 +35,7 @@
     <div class='btn-row'>
 
   <% if @space.parent_space %>
-  <%= link_to "Back to '#{j @space}'s Parent Space", space_path(@space.parent_space), class: "back_to" %>
+  <%= link_to "Back to '#{j @space.name}'s Parent Space", space_path(@space.parent_space), class: "back_to" %>
 <% else %>
   <%= link_to 'Back', spaces_path, class: "back_form" %>
 <% end %>
