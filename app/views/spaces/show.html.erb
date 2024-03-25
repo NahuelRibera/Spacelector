@@ -291,6 +291,23 @@ function saveCompartmentInfoDebounced(compartmentId, description) {
   });
 }
 
+function checkConversionComplete(imageId) {
+  fetch(`/images/${imageId}/conversion_complete`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.converted) {
+        // Update the image source to the new converted image URL
+        let imgElement = document.querySelector(`img[data-image-id="${imageId}"]`);
+        if (imgElement) {
+          imgElement.src = data.url;
+        }
+      } else {
+        // If not yet converted, check again after a delay
+        setTimeout(() => checkConversionComplete(imageId), 3000); // Check every 3 seconds
+      }
+    });
+}
+
 
   document.addEventListener('DOMContentLoaded', function() {
     // Assuming you're using Devise or similar for authentication

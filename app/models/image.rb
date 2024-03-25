@@ -6,12 +6,14 @@ class Image < ApplicationRecord
   validates :title, presence: true
   after_create_commit :convert_heic_to_jpeg
 
+  def converted?
+    file.attached? && (file.content_type != 'image/heic' || file.blob.filename.extension_without_delimiter != 'heic')
+  end
+
   private
 
-  # Convert HEIC image to JPEG
   def convert_heic_to_jpeg
     return unless file.attached? && file.content_type == 'image/heic'
-    # Perform the conversion in a background job for performance
     ConvertHeicToJpegJob.perform_later(file.blob.id)
   end
 end

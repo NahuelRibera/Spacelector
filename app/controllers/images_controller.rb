@@ -1,5 +1,5 @@
 class ImagesController < ApplicationController
-  before_action :set_space, only: [:new, :create, :show]
+  before_action :set_space, only: [:new, :create, :show, :destroy]
   skip_before_action :verify_authenticity_token, only: [:convert_heic]
 
   def create
@@ -22,6 +22,15 @@ class ImagesController < ApplicationController
   def show
     @image = Image.find(params[:id])
     @compartments = @image.compartments || [] # Initialize @compartments to an empty array if it's nil
+  end
+
+  def conversion_complete
+    image = Image.find(params[:id])
+    if image.converted?
+      render json: { converted: true, url: rails_blob_url(image.file) }
+    else
+      render json: { converted: false }
+    end
   end
 
   def convert_heic
