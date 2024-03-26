@@ -339,13 +339,31 @@ a {
   text-decoration: none; /* Remove text-decoration on hover for anchor tags */
 }
 
-@media (max-height: 1000px) {
+@media (min-height: 950px) {
+  .image-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .grid-image {
+    height: 380px;
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Adjust font size for smaller screens */
+  }
+}
+
+@media (max-height: 950px) {
   .image-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
   .grid-image {
-    height: 160px;
+    height: 170px;
   }
 
   .back,
@@ -418,6 +436,81 @@ a {
 
   .header-space h1 {
     font-size: 20px;
+  }
+}
+
+/* iPad Mini portrait (768x1024) */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .image-grid {
+    grid-template-columns: repeat(4, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 180px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+}
+
+/* iPad Air portrait (820x1180) */
+@media (min-width: 820px) and (max-width: 1180px) and (orientation: portrait) {
+  .image-grid {
+    grid-template-columns: repeat(4, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 195px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+}
+
+/* iPad Pro portrait (1024x1366) */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
+  .image-grid {
+    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 195px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
   }
 }
 
