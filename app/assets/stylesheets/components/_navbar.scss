@@ -304,3 +304,15 @@
   box-shadow: 0 0 0.5px #44A0D8, 0 0 1px #44A0D8, 0 0 1.5px #44A0D8, 0 0 2.5px #44A0D8, 0 0 3.5px #44A0D8, 0 0 4px #44A0D8, 0 0 5px #44A0D8, 0 0 7.5px #44A0D8;
   }
 }
+
+/* iPad Mini landscape (768x1024) */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .navbar {
+    height: 50px;
+  }
+
+  .logo {
+    max-width: 115px; /* Adjust the maximum width as needed */
+    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+  }
+}

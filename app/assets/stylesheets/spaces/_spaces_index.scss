@@ -14,6 +14,19 @@
   }
 }
 
+/* iPhone SE portrait */
+@media (min-width: 375px) and (max-width: 667px) and (orientation: portrait) {
+  #content {
+    margin-top: 70px;
+  }
+}
+
+/* iPad Mini landscape (768x1024) */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  #content {
+    margin-top: 70px;
+  }
+}
 
 
 h1 {
