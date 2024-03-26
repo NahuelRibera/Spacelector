@@ -316,3 +316,27 @@
     height: auto; /* Let the browser calculate the height to maintain aspect ratio */
   }
 }
+
+/* iPad Air landscape (820x1180) */
+@media (min-width: 1050px) and (max-width: 1180px) and (orientation: landscape) {
+  .navbar {
+    height: 50px;
+  }
+
+  .logo {
+    max-width: 115px; /* Adjust the maximum width as needed */
+    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+  }
+}
+
+/* iPad Pro landscape (1024x1366) */
+@media (min-width: 1181px) and (max-width: 1366px) and (orientation: landscape) {
+  .navbar {
+    height: 60px;
+  }
+
+  .logo {
+    max-width: 125px; /* Adjust the maximum width as needed */
+    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+  }
+}

@@ -28,6 +28,20 @@
   }
 }
 
+/* iPad Air landscape (820x1180) */
+@media (min-width: 1050px) and (max-width: 1180px) and (orientation: landscape) {
+  #content {
+    margin-top: 70px;
+  }
+}
+
+
+/* iPad Pro landscape (1024x1366) */
+@media (min-width: 1181px) and (max-width: 1366px) and (orientation: landscape) {
+  #content {
+    margin-top: 82px;
+  }
+}
 
 h1 {
   margin: 0;
