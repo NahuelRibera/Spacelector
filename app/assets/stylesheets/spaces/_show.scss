@@ -537,7 +537,7 @@ a {
 }
 
 
-/* iPad Mini landscape (768x1024) */
+/* iPad Mini landscape (768x1024) aaa*/
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   .image-grid {
     grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
@@ -581,6 +581,38 @@ a {
 
   #rename-icon {
     font-size: 11px;
+  }
+
+  .modal-overlay {
+  width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .modal-content {
+    width: fit-content; /* Ancho del 90% del viewport */
+    height: fit-content;
+    max-height: 80vh;
+    top: 50%; /* Posición vertical centrada */
+    left: 50%; /* Posición horizontal centrada */
+    transform: translate(-50%, -50%); /* Centrar el modal */
+  }
+
+  .modal-body {
+      width: fit-content;
+  }
+
+  .modal-canvas {
+    max-width: 80vw;
+    max-height: 80vh;
+  }
+
+  .compartment-info-container {
+    width: 100%; /* Adjust as needed */
+    height: 100%;
+    margin-top: 5px; /* Add margin for separation */
+    padding: 0px;
+    overflow-y: auto;
   }
 }
 
