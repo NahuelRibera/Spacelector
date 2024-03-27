@@ -305,6 +305,18 @@
   }
 }
 
+/* iPad Mini portrait (768x1024) */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+.navbar {
+  height: 55px;
+}
+
+.logo {
+  max-width: 115px; /* Adjust the maximum width as needed */
+  height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+}
+}
+
 /* iPad Mini landscape (768x1024) */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   .navbar {
@@ -328,6 +340,7 @@
     height: auto; /* Let the browser calculate the height to maintain aspect ratio */
   }
 }
+
 
 /* iPad Pro landscape (1024x1366) */
 @media (min-width: 1181px) and (max-width: 1366px) and (orientation: landscape) {

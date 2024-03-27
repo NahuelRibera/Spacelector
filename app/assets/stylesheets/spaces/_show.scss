@@ -446,7 +446,7 @@ a {
   }
 
   .grid-image {
-    height: 180px; /* Ajuste de altura para iPad Mini */
+    height: 190px; /* Ajuste de altura para iPad Mini */
   }
 
   .back,
@@ -461,6 +461,28 @@ a {
     padding: 0;
     grid-template-columns: repeat(5, 1fr);
     gap: 20px;
+  }
+
+  .space-list li {
+    padding: 8px 14px;
+  }
+
+  .space-list li a {
+    font-size: 16px;
+  }
+
+  .title h5 {
+    font-size: 16px;
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+
+  .header-space h1{
+    font-size: 25px;
+  }
+
+  #rename-icon {
+    font-size: 11px;
   }
 }
 
@@ -496,7 +518,7 @@ a {
   }
 
   .grid-image {
-    height: 195px; /* Ajuste de altura para iPad Mini */
+    height: 200px; /* Ajuste de altura para iPad Mini */
   }
 
   .back,
