@@ -439,381 +439,9 @@ a {
   }
 }
 
-/* iPad Mini portrait (768x1024) */
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-  .image-grid {
-    grid-template-columns: repeat(4, 1fr); /* Ajuste para iPad Mini */
-  }
+//////////////////////////////////////////////////////////////////////////////////////
 
-  .grid-image {
-    height: 190px; /* Ajuste de altura para iPad Mini */
-  }
-
-  .back,
-  .back_to,
-  .new,
-  .create,
-  .upload {
-    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
-  }
-
-  .space-list {
-    padding: 0;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-  }
-
-  .space-list li {
-    padding: 8px 14px;
-  }
-
-  .space-list li a {
-    font-size: 16px;
-  }
-
-  .title h5 {
-    font-size: 16px;
-    margin-top: -2px;
-    margin-bottom: -2px;
-  }
-
-  .header-space h1{
-    font-size: 25px;
-  }
-
-  #rename-icon {
-    font-size: 11px;
-  }
-}
-
-/* iPad Air portrait (820x1180) */
-@media (min-width: 820px) and (max-width: 1180px) and (orientation: portrait) {
-  .image-grid {
-    grid-template-columns: repeat(4, 1fr); /* Ajuste para iPad Mini */
-  }
-
-  .grid-image {
-    height: 195px; /* Ajuste de altura para iPad Mini */
-  }
-
-  .back,
-  .back_to,
-  .new,
-  .create,
-  .upload {
-    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
-  }
-
-  .space-list {
-    padding: 0;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-  }
-}
-
-/* iPad Pro portrait (1024x1366) */
-@media (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
-  .image-grid {
-    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
-  }
-
-  .grid-image {
-    height: 200px; /* Ajuste de altura para iPad Mini */
-  }
-
-  .back,
-  .back_to,
-  .new,
-  .create,
-  .upload {
-    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
-  }
-
-  .space-list {
-    padding: 0;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-  }
-}
-
-
-/* iPad Mini landscape (768x1024) aaa*/
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  .image-grid {
-    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
-  }
-
-  .grid-image {
-    height: 190px; /* Ajuste de altura para iPad Mini */
-  }
-
-  .back,
-  .back_to,
-  .new,
-  .create,
-  .upload {
-    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
-  }
-
-  .space-list {
-    padding: 0;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-  }
-
-  .space-list li {
-    padding: 8px 14px;
-  }
-
-  .space-list li a {
-    font-size: 16px;
-  }
-
-  .title h5 {
-    font-size: 16px;
-    margin-top: -2px;
-    margin-bottom: -2px;
-  }
-
-  .header-space h1{
-    font-size: 25px;
-  }
-
-  #rename-icon {
-    font-size: 11px;
-  }
-
-  .modal-overlay {
-  width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .modal-content {
-    width: fit-content; /* Ancho del 90% del viewport */
-    height: fit-content;
-    max-height: 80vh;
-    top: 50%; /* Posición vertical centrada */
-    left: 50%; /* Posición horizontal centrada */
-    transform: translate(-50%, -50%); /* Centrar el modal */
-  }
-
-  .modal-body {
-      width: fit-content;
-  }
-
-  .modal-canvas {
-    max-width: 80vw;
-    max-height: 80vh;
-  }
-
-  .compartment-info-container {
-    width: 100%; /* Adjust as needed */
-    height: 100%;
-    margin-top: 5px; /* Add margin for separation */
-    padding: 0px;
-    overflow-y: auto;
-  }
-}
-
-/* iPad Air landscape (820x1180) */
-@media (min-width: 1050px) and (max-width: 1180px) and (orientation: landscape) {
-  .image-grid {
-    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
-  }
-
-  .grid-image {
-    height: 210px; /* Ajuste de altura para iPad Mini */
-  }
-
-  .back,
-  .back_to,
-  .new,
-  .create,
-  .upload {
-    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
-  }
-
-  .space-list {
-    padding: 0;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-  }
-
-  .space-list li {
-    padding: 8px 14px;
-  }
-
-  .space-list li a {
-    font-size: 16px;
-  }
-
-  .title h5 {
-    font-size: 16px;
-    margin-top: -2px;
-    margin-bottom: -2px;
-  }
-
-  .header-space h1{
-    font-size: 25px;
-  }
-
-  #rename-icon {
-    font-size: 11px;
-  }
-}
-
-/* iPad Pro landscape (1024x1366) */
-@media (min-width: 1181px) and (max-width: 1366px) and (orientation: landscape) {
-  .image-grid {
-    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
-  }
-
-  .grid-image {
-    height: 265px; /* Ajuste de altura para iPad Mini */
-  }
-
-  .back,
-  .back_to,
-  .new,
-  .create,
-  .upload {
-    font-size: 14px; /* Tamaño de fuente para pantallas más pequeñas */
-  }
-
-  .space-list {
-    padding: 0;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-  }
-
-  .space-list li {
-    padding: 10px 14px;
-  }
-
-  .space-list li a {
-    font-size: 18px;
-  }
-
-  .title h5 {
-    font-size: 18px;
-    margin-top: -2px;
-    margin-bottom: -2px;
-  }
-
-  .header-space h1{
-    font-size: 30px;
-  }
-
-  #rename-icon {
-    font-size: 13px;
-  }
-}
-
-/* iPhone SE portrait */
-@media (min-width: 375px) and (max-width: 667px) and (orientation: portrait) {
-  .space-list li {
-    padding: 8px 12px;
-  }
-}
-
-/* iPhone SE landscape */
-@media (min-width: 375px) and (max-width: 667px) and (orientation: landscape) {
-  .space-list li {
-    padding: 6px 12px;
-  }
-
-  .grid-image {
-    height: 40px; /* Ajuste de altura para iPad Mini */
-  }
-
-  .space-list {
-    padding: 0;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-}
-
-/* iPhone X landscape */
-@media (min-width: 389px) and (max-width: 896px) and (orientation: landscape) {
-  .space-list li {
-    padding: 8px 12px;
-  }
-
-  .grid-image {
-    height: 40px; /* Ajuste de altura para iPad Mini */
-  }
-
-  .title h5{
-    padding: 0;
-    margin-bottom: -2px;
-    margin-top: -2px;
-  }
-}
-
-/* iPhone 12 Pro portrait */
-@media (min-width: 390px) and (max-width: 844px) and (orientation: portrait) {
-  .space-list li {
-    padding: 8px 12px;
-  }
-
-  .title h5{
-    padding: 0;
-    margin-bottom: -2px;
-    margin-top: -2px;
-  }
-}
-
-/* iPhone 12 Pro landscape */
-@media (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
-  .space-list li {
-    padding: 8px 12px;
-  }
-
-  .grid-image {
-    height: 155px; /* Ajuste de altura para iPad Mini */
-  }
-
-  .title h5{
-    padding: 0;
-    margin-bottom: -2px;
-    margin-top: -2px;
-  }
-}
-
-/* iPhone 14 Pro Max portrait */
-@media (min-width: 845px) and (max-width: 932px) and (orientation: portrait) {
-  .space-list li {
-    padding: 8px 14px;
-  }
-
-  .grid-image {
-    height: 190px; /* Ajuste de altura para iPad Mini */
-  }
-
-  .title h5{
-    padding: 0;
-    margin-bottom: -2px;
-    margin-top: -2px;
-  }
-}
-
-/* iPhone 14 Pro Max landscape */
-@media (min-width: 845px) and (max-width: 932px) and (orientation: landscape) {
-  .space-list li {
-    padding: 8px 14px;
-  }
-
-  .grid-image {
-    height: 165px; /* Ajuste de altura para iPad Mini */
-  }
-
-  .title h5{
-    padding: 0;
-    margin-bottom: -2px;
-    margin-top: -2px;
-  }
-}
+////////////////////////////////////////////////////////////////////////////////////////////
 
 .image-container {
   position: relative;
@@ -1031,4 +659,392 @@ textarea {
   .rotated-hud{
     display: none;
   }
+}
+
+///////////////////////////////////////////////////////////////////////////
+/* iPad Mini portrait (768x1024) */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .image-grid {
+    grid-template-columns: repeat(4, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 190px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .space-list li {
+    padding: 8px 14px;
+  }
+
+  .space-list li a {
+    font-size: 16px;
+  }
+
+  .title h5 {
+    font-size: 16px;
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+
+  .header-space h1{
+    font-size: 25px;
+  }
+
+  #rename-icon {
+    font-size: 11px;
+  }
+}
+
+/* iPad Air portrait (820x1180) */
+@media (min-width: 820px) and (max-width: 1180px) and (orientation: portrait) {
+  .image-grid {
+    grid-template-columns: repeat(4, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 195px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+}
+
+/* iPad Pro portrait (1024x1366) */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
+  .image-grid {
+    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 200px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+}
+
+
+/* iPad Mini landscape (768x1024) aaa*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .image-grid {
+    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 190px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .space-list li {
+    padding: 8px 14px;
+  }
+
+  .space-list li a {
+    font-size: 16px;
+  }
+
+  .title h5 {
+    font-size: 16px;
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+
+  .header-space h1{
+    font-size: 25px;
+  }
+
+  #rename-icon {
+    font-size: 11px;
+  }
+
+  .modal-overlay {
+  width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .modal-content {
+    width: fit-content; /* Ancho del 90% del viewport */
+    height: fit-content;
+    max-height: 90vh;
+    max-width: 95vw;
+    top: 50%; /* Posición vertical centrada */
+    left: 50%; /* Posición horizontal centrada */
+    transform: translate(-50%, -50%); /* Centrar el modal */
+  }
+
+  .modal-body {
+      width: fit-content;
+      height: fit-content;
+      max-height: 59.5vh;
+  }
+
+  .modal-canvas {
+    max-width: 95vw;
+    height: 500px;
+    width: auto;
+    display: block;
+  }
+
+  .compartment-info-container {
+    width: 400px; /* Adjust as needed */
+    max-height: 200px;
+    margin-top: 5px; /* Add margin for separation */
+    padding: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+  }
+}
+
+/* iPad Air landscape (820x1180) */
+@media (min-width: 1050px) and (max-width: 1180px) and (orientation: landscape) {
+  .image-grid {
+    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 210px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .space-list li {
+    padding: 8px 14px;
+  }
+
+  .space-list li a {
+    font-size: 16px;
+  }
+
+  .title h5 {
+    font-size: 16px;
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+
+  .header-space h1{
+    font-size: 25px;
+  }
+
+  #rename-icon {
+    font-size: 11px;
+  }
+}
+
+/* iPad Pro landscape (1024x1366) */
+@media (min-width: 1181px) and (max-width: 1366px) and (orientation: landscape) {
+  .image-grid {
+    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 265px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 14px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .space-list li {
+    padding: 10px 14px;
+  }
+
+  .space-list li a {
+    font-size: 18px;
+  }
+
+  .title h5 {
+    font-size: 18px;
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+
+  .header-space h1{
+    font-size: 30px;
+  }
+
+  #rename-icon {
+    font-size: 13px;
+  }
+}
+
+/* iPhone SE portrait */
+@media (min-width: 375px) and (max-width: 667px) and (orientation: portrait) {
+  .space-list li {
+    padding: 8px 12px;
+  }
+}
+
+/* iPhone SE landscape */
+@media (min-width: 375px) and (max-width: 667px) and (orientation: landscape) {
+  .space-list li {
+    padding: 6px 12px;
+  }
+
+  .grid-image {
+    height: 40px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}
+
+/* iPhone X landscape */
+@media (min-width: 389px) and (max-width: 896px) and (orientation: landscape) {
+  .space-list li {
+    padding: 8px 12px;
+  }
+
+  .grid-image {
+    height: 40px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .title h5{
+    padding: 0;
+    margin-bottom: -2px;
+    margin-top: -2px;
+  }
+}
+
+/* iPhone 12 Pro portrait */
+@media (min-width: 390px) and (max-width: 844px) and (orientation: portrait) {
+  .space-list li {
+    padding: 8px 12px;
+  }
+
+  .title h5{
+    padding: 0;
+    margin-bottom: -2px;
+    margin-top: -2px;
+  }
+}
+
+/* iPhone 12 Pro landscape */
+@media (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
+  .space-list li {
+    padding: 8px 12px;
+  }
+
+  .grid-image {
+    height: 155px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .title h5{
+    padding: 0;
+    margin-bottom: -2px;
+    margin-top: -2px;
+  }
+}
+
+/* iPhone 14 Pro Max portrait */
+@media (min-width: 845px) and (max-width: 932px) and (orientation: portrait) {
+  .space-list li {
+    padding: 8px 14px;
+  }
+
+  .grid-image {
+    height: 190px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .title h5{
+    padding: 0;
+    margin-bottom: -2px;
+    margin-top: -2px;
+  }
+}
+
+/* iPhone 14 Pro Max landscape */
+@media (min-width: 845px) and (max-width: 932px) and (orientation: landscape) {
+  .space-list li {
+    padding: 8px 14px;
+  }
+
+  .grid-image {
+    height: 165px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .title h5{
+    padding: 0;
+    margin-bottom: -2px;
+    margin-top: -2px;
+  }
+}
+
+@media (min-width: 1000px) {
+  grid-template-columns: repeat(5, 1fr);
 }
