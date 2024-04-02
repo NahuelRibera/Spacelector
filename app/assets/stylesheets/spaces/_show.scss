@@ -662,6 +662,8 @@ textarea {
 }
 
 ///////////////////////////////////////////////////////////////////////////
+///
+
 /* iPad Mini portrait (768x1024) */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .image-grid {
@@ -710,7 +712,7 @@ textarea {
 }
 
 /* iPad Air portrait (820x1180) */
-@media (min-width: 820px) and (max-width: 1180px) and (orientation: portrait) {
+@media (min-width: 768px) and (max-width: 820px) and (orientation: portrait) {
   .image-grid {
     grid-template-columns: repeat(4, 1fr); /* Ajuste para iPad Mini */
   }
@@ -1047,4 +1049,92 @@ textarea {
 
 @media (min-width: 1000px) {
   grid-template-columns: repeat(5, 1fr);
+}
+
+// iphone 14 pro max (430x932)
+@media (min-width: 845px) and (max-width: 932px) and (orientation: landscape) {
+
+  #rename-icon {
+    font-size: 9px;
+  }
+
+  .image-grid {
+    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 150px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .space-list li {
+    padding: 8px 14px;
+  }
+
+  .space-list li a {
+    font-size: 16px;
+  }
+
+  .title h5 {
+    font-size: 16px;
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+
+  .header-space h1{
+    font-size: 20px;
+  }
+
+  .modal-overlay {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .modal-content {
+    width: fit-content; /* Ancho del 90% del viewport */
+    height: fit-content;
+    max-height: 90vh;
+    max-width: 95vw;
+    top: 50%; /* Posición vertical centrada */
+    left: 50%; /* Posición horizontal centrada */
+    transform: translate(-50%, -50%); /* Centrar el modal */
+  }
+
+  .modal-body {
+      width: fit-content;
+      height: fit-content;
+      max-height: 350px;
+  }
+
+  .modal-canvas {
+    max-width: 90vw;
+    height: 350px;
+    width: auto;
+    display: block;
+  }
+
+  .compartment-info-container {
+    max-height: 345px;
+    width: fit-content;
+    margin-top: 0px; /* Add margin for separation */
+    padding: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    padding-left: 10px;
+  }
 }
