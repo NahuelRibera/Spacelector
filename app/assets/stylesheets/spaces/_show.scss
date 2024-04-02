@@ -1260,3 +1260,15 @@ textarea {
     padding-left: 10px;
   }
 }
+
+/* iPad Pro landscape (1024x1366) */
+@media (min-width: 1367px) {
+  .image-grid {
+    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 300px; /* Ajuste de altura para iPad Mini */
+  }
+
+}
