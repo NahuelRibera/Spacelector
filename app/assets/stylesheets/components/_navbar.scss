@@ -353,3 +353,39 @@
     height: auto; /* Let the browser calculate the height to maintain aspect ratio */
   }
 }
+
+/* iPhone 12 Pro landscape */
+@media (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
+  .navbar {
+    height: 42px;
+  }
+
+  .logo {
+    max-width: 110px; /* Adjust the maximum width as needed */
+    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+  }
+
+  .search-form {
+    .search-input {
+      padding: 2px 10px;
+    }
+  }
+}
+
+
+@media (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
+  .navbar {
+    height: 42px;
+  }
+
+  .logo {
+    max-width: 110px; /* Adjust the maximum width as needed */
+    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+  }
+
+  .search-form {
+    .search-input {
+      padding: 2px 10px;
+    }
+  }
+}

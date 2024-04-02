@@ -56,6 +56,14 @@
   }
 }
 
+/* iPhone 12 Pro landscape */
+@media (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
+  #content {
+    margin-top: 58px;
+  }
+}
+
+
 h1 {
   margin: 0;
   color: #333; /* Google Drive text color */
