@@ -357,7 +357,7 @@
 /* iPhone 12 Pro landscape */
 @media (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
   .navbar {
-    height: 42px;
+    height: 37px;
   }
 
   .logo {
@@ -367,7 +367,8 @@
 
   .search-form {
     .search-input {
-      padding: 2px 10px;
+      padding: 1px 10px;
+      font-size: 14px;
     }
   }
 }
