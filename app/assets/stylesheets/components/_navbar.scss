@@ -15,6 +15,11 @@
     max-width: 120px; /* Adjust the maximum width as needed */
     height: auto; /* Let the browser calculate the height to maintain aspect ratio */
   }
+
+  @media (max-height: 375px) {
+    max-width: 110px; /* Adjust the maximum width as needed */
+    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+  }
 }
 
 .navbar {
@@ -38,6 +43,10 @@
 
   @media(max-height: 400px){
     height: 45px;
+  }
+
+  @media(max-height: 375px){
+    height: 10px;
   }
 }
 
@@ -74,6 +83,13 @@
     @media (max-height: 440px) {
       padding: 3px 10px;
       font-size: 14px;
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+
+    @media (max-height: 375px) {
+      padding: 3px 10px;
+      font-size: 12px;
       margin-left: 15px;
       margin-right: 15px;
     }
@@ -145,7 +161,7 @@
 }
 
 .nav-item .nav-link.premium-trial {
-  @media (min-width: 768px) {
+  @media (min-width: 1367px) {
 
   background: white;
   color: black;
@@ -160,7 +176,7 @@
   font-family: 'Open Sans', sans-serif;
   }
 
-  @media (min-width: 768px) {
+  @media (max-width: 1367px) {
     display: none;
   }
 
@@ -219,9 +235,13 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1367px) {
   .premium-trial .text {
     display: none; /* Hide the text */
+  }
+
+  .premium-trial a {
+    display: none;
   }
 
   .image-logo {
@@ -235,40 +255,24 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1367px) {
   .premium-trial .nav-link {
     display: none; /* Hide the anchor on screens with a maximum width of 768px */
   }
 }
 
 .navbar-crown {
-  @media (min-width: 768px) {
+  @media (min-width: 1367px) {
     display: none;
 }
 }
 
 .premium-trial {
-  @media (min-width: 768px){
-    background: white;
-  color: black;
-  border: none;
-  border-radius: 30px;
-  font-size: 14px;
-  font-weight: 500;
-  box-shadow: 0 0 0.25px #44A0D8, 0 0 0.5px #44A0D8, 0 0 0.75px #44A0D8, 0 0 1.25px #44A0D8, 0 0 1.75px #44A0D8, 0 0 2px #44A0D8, 0 0 2.5px #44A0D8, 0 0 3.75px #44A0D8;
-  transition: all 0.3s ease-in-out;
-  padding: 4.1px 10px;
-  margin: 0 10px;
-  font-family: 'Open Sans', sans-serif;
-  }
-  &:hover{
-    background: #f4fbff;
-  color: rgb(0, 0, 0);
-  text-decoration: none;
-  box-shadow: 0 0 0.5px #44A0D8, 0 0 1px #44A0D8, 0 0 1.5px #44A0D8, 0 0 2.5px #44A0D8, 0 0 3.5px #44A0D8, 0 0 4px #44A0D8, 0 0 5px #44A0D8, 0 0 7.5px #44A0D8;
+  @media (max-width: 1367px){
+    display: none;
   }
 
-  @media (min-width: 768px){
+  @media (min-width: 1367px){
     background: white;
   color: black;
   border: none;
@@ -286,5 +290,91 @@
   color: rgb(0, 0, 0);
   text-decoration: none;
   box-shadow: 0 0 0.5px #44A0D8, 0 0 1px #44A0D8, 0 0 1.5px #44A0D8, 0 0 2.5px #44A0D8, 0 0 3.5px #44A0D8, 0 0 4px #44A0D8, 0 0 5px #44A0D8, 0 0 7.5px #44A0D8;
+  }
+}
+
+/* iPad Mini portrait (768x1024) */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+.navbar {
+  height: 55px;
+}
+
+.logo {
+  max-width: 115px; /* Adjust the maximum width as needed */
+  height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+}
+}
+
+/* iPad Mini landscape (768x1024) */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .navbar {
+    height: 50px;
+  }
+
+  .logo {
+    max-width: 115px; /* Adjust the maximum width as needed */
+    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+  }
+}
+
+/* iPad Air landscape (820x1180) */
+@media (min-width: 1050px) and (max-width: 1180px) and (orientation: landscape) {
+  .navbar {
+    height: 50px;
+  }
+
+  .logo {
+    max-width: 115px; /* Adjust the maximum width as needed */
+    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+  }
+}
+
+
+/* iPad Pro landscape (1024x1366) */
+@media (min-width: 1181px) and (max-width: 1366px) and (orientation: landscape) {
+  .navbar {
+    height: 60px;
+  }
+
+  .logo {
+    max-width: 125px; /* Adjust the maximum width as needed */
+    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+  }
+}
+
+/* iPhone 12 Pro landscape */
+@media (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
+  .navbar {
+    height: 37px;
+  }
+
+  .logo {
+    max-width: 110px; /* Adjust the maximum width as needed */
+    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+  }
+
+  .search-form {
+    .search-input {
+      padding: 1px 10px;
+      font-size: 14px;
+    }
+  }
+}
+
+// iphone 14 pro max (430x932)
+@media (min-width: 845px) and (max-width: 932px) and (orientation: landscape) {
+  .navbar {
+    height: 42px;
+  }
+
+  .logo {
+    max-width: 110px; /* Adjust the maximum width as needed */
+    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+  }
+
+  .search-form {
+    .search-input {
+      padding: 2px 10px;
+    }
   }
 }

@@ -303,6 +303,10 @@ a {
   @media (max-height: 400px) {
     margin-top: 15px;
   }
+
+  @media (max-height: 376px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .grid-image {
@@ -316,6 +320,10 @@ a {
     box-shadow: 0 3px 7px rgba(0,0,0,0.07);
 
   }
+  @media (max-width: 375px) {
+    height: 150px;
+  }
+
 }
 
 .back,
@@ -331,13 +339,31 @@ a {
   text-decoration: none; /* Remove text-decoration on hover for anchor tags */
 }
 
-@media (max-width: 768px) {
+@media (min-height: 950px) {
+  .image-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .grid-image {
+    height: 380px;
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Adjust font size for smaller screens */
+  }
+}
+
+@media (max-height: 950px) {
   .image-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
   .grid-image {
-    height: 160px;
+    height: 170px;
   }
 
   .back,
@@ -356,6 +382,24 @@ a {
 
   .grid-image {
     height: 160px;
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Adjust font size for smaller screens */
+  }
+}
+
+@media (max-height: 375px) {
+  .image-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .grid-image {
+    height: 130px;
   }
 
   .back,
@@ -395,7 +439,9 @@ a {
   }
 }
 
+//////////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////////////////
 
 .image-container {
   position: relative;
@@ -491,6 +537,17 @@ a {
     top: 50%;
     max-height: calc(90vh - 100px); /* Set maximum height to fill viewport height minus 100px */
   }
+
+  @media (max-height: 440px) {
+    /* Propiedades para pantallas pequeñas (como iPhone 14) */
+    width: fit-content; /* Ancho del 90% del viewport */
+    height: fit-content;
+    max-height: 390px; /* Altura máxima de 440px */
+    max-width: 900px;
+    top: 50%; /* Posición vertical centrada */
+    left: 50%; /* Posición horizontal centrada */
+    transform: translate(-50%, -50%); /* Centrar el modal */
+  }
 }
 
 #image-modal{
@@ -512,6 +569,16 @@ a {
     max-width: 80vw;
     max-height: 85vh;
   }
+
+  @media (max-height: 440px) {
+    max-width: 80vw;
+    max-height: 80vh;
+  }
+
+  @media (max-height: 390px) {
+    max-width: 90vw;
+    max-height: 85vh;
+  }
 }
 
 .image-card:hover {
@@ -527,8 +594,12 @@ a {
     flex-direction: column; /* Stack items vertically */
     align-items: center; /* Center items horizontally */
     overflow-y: auto; /* Enable vertical scrolling */
-
   }
+
+  @media (max-height: 440px) {
+    width: fit-content;
+  }
+
 }
 
 .compartment-info-container {
@@ -548,6 +619,13 @@ a {
     width: 90%; /* Adjust as needed */
     margin-top: 5px; /* Add margin for separation */
     padding: 0px;
+  }
+
+  @media (max-height: 440px) {
+    /* Override existing styles for smaller screens */
+    max-width: 330px; /* Adjust as needed */
+    max-height: 330px;
+    // width: 90%; /* Adjust as needed */
   }
 }
 
@@ -581,4 +659,656 @@ textarea {
   .rotated-hud{
     display: none;
   }
+}
+
+///////////////////////////////////////////////////////////////////////////
+///
+
+/* iPad Mini portrait (768x1024) */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .image-grid {
+    grid-template-columns: repeat(4, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 190px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .space-list li {
+    padding: 8px 14px;
+  }
+
+  .space-list li a {
+    font-size: 16px;
+  }
+
+  .title h5 {
+    font-size: 16px;
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+
+  .header-space h1{
+    font-size: 25px;
+  }
+
+  #rename-icon {
+    font-size: 11px;
+  }
+}
+
+/* iPad Air portrait (820x1180) */
+@media (min-width: 768px) and (max-width: 820px) and (orientation: portrait) {
+  .image-grid {
+    grid-template-columns: repeat(4, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 195px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+}
+
+/* iPad Pro portrait (1024x1366) */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
+  .image-grid {
+    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 200px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+}
+
+
+/* iPad Mini landscape (768x1024) aaa*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .image-grid {
+    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 190px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .space-list li {
+    padding: 8px 14px;
+  }
+
+  .space-list li a {
+    font-size: 16px;
+  }
+
+  .title h5 {
+    font-size: 16px;
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+
+  .header-space h1{
+    font-size: 25px;
+  }
+
+  #rename-icon {
+    font-size: 11px;
+  }
+
+
+  .modal-overlay {
+    width: 100%;
+    height: 110%;
+    overflow: hidden;
+  }
+
+  .modal-content {
+    width: fit-content; /* Ancho del 90% del viewport */
+    height: fit-content;
+    max-height: 90vh;
+    max-width: 95vw;
+    top: 50%; /* Posición vertical centrada */
+    left: 50%; /* Posición horizontal centrada */
+    transform: translate(-50%, -50%); /* Centrar el modal */
+  }
+
+  .modal-body {
+      width: fit-content;
+      height: fit-content;
+      max-height: 570px;
+  }
+
+  .modal-canvas {
+    max-width: 710px;
+    height: 570px;
+    width: auto;
+    display: block;
+  }
+
+  .compartment-info-container {
+    max-height: 575px;
+    width: fit-content;
+    margin-top: 0px; /* Add margin for separation */
+    padding: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    padding-left: 10px;
+  }
+
+  textarea {
+    min-width: 170px;
+  }
+}
+
+/* iPad Air landscape (820x1180) */
+@media (min-width: 1050px) and (max-width: 1180px) and (orientation: landscape) {
+  .image-grid {
+    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 210px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .space-list li {
+    padding: 8px 14px;
+  }
+
+  .space-list li a {
+    font-size: 16px;
+  }
+
+  .title h5 {
+    font-size: 16px;
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+
+  .header-space h1{
+    font-size: 25px;
+  }
+
+  #rename-icon {
+    font-size: 11px;
+  }
+
+  .modal-overlay {
+    width: 100%;
+    height: 110%;
+    overflow: hidden;
+  }
+
+  .modal-content {
+    width: fit-content; /* Ancho del 90% del viewport */
+    height: fit-content;
+    max-height: 90vh;
+    max-width: 95vw;
+    top: 50%; /* Posición vertical centrada */
+    left: 50%; /* Posición horizontal centrada */
+    transform: translate(-50%, -50%); /* Centrar el modal */
+  }
+
+  .modal-body {
+      width: fit-content;
+      height: fit-content;
+      max-height: 660px;
+  }
+
+  .modal-canvas {
+    max-width: 800px;
+    height: 660px;
+    width: auto;
+    display: block;
+  }
+
+  .compartment-info-container {
+    max-height: 655px;
+    width: fit-content;
+    margin-top: 0px; /* Add margin for separation */
+    padding: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    padding-left: 10px;
+  }
+
+  textarea {
+    min-width: 200px;
+  }
+}
+
+/* iPad Pro landscape (1024x1366) */
+@media (min-width: 1181px) and (max-width: 1366px) and (orientation: landscape) {
+  .image-grid {
+    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 265px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 14px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .space-list li {
+    padding: 10px 14px;
+  }
+
+  .space-list li a {
+    font-size: 18px;
+  }
+
+  .title h5 {
+    font-size: 18px;
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+
+  .header-space h1{
+    font-size: 30px;
+  }
+
+  #rename-icon {
+    font-size: 13px;
+  }
+
+  .modal-overlay {
+    width: 100%;
+    height: 110%;
+    overflow: hidden;
+  }
+
+  .modal-content {
+    width: fit-content; /* Ancho del 90% del viewport */
+    height: fit-content;
+    max-height: 90vh;
+    max-width: 95vw;
+    top: 50%; /* Posición vertical centrada */
+    left: 50%; /* Posición horizontal centrada */
+    transform: translate(-50%, -50%); /* Centrar el modal */
+  }
+
+  .modal-body {
+      width: fit-content;
+      height: fit-content;
+      max-height: 800px;
+  }
+
+  .modal-canvas {
+    max-width: 950px;
+    height: 800px;
+    width: auto;
+    display: block;
+  }
+
+  .compartment-info-container {
+    max-height: 795px;
+    width: fit-content;
+    margin-top: 0px; /* Add margin for separation */
+    padding: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    padding-left: 10px;
+  }
+
+  textarea {
+    min-width: 200px;
+  }
+}
+
+/* iPhone SE portrait */
+@media (min-width: 375px) and (max-width: 667px) and (orientation: portrait) {
+  .space-list li {
+    padding: 8px 12px;
+  }
+}
+
+/* iPhone SE landscape */
+@media (min-width: 375px) and (max-width: 667px) and (orientation: landscape) {
+  .space-list li {
+    padding: 6px 12px;
+  }
+
+  .grid-image {
+    height: 40px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}
+
+/* iPhone X landscape */
+@media (min-width: 389px) and (max-width: 896px) and (orientation: landscape) {
+  .space-list li {
+    padding: 8px 12px;
+  }
+
+  .grid-image {
+    height: 40px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .title h5{
+    padding: 0;
+    margin-bottom: -2px;
+    margin-top: -2px;
+  }
+
+  .modal-overlay {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .modal-content {
+    width: fit-content; /* Ancho del 90% del viewport */
+    height: fit-content;
+    max-height: 90vh;
+    max-width: 95vw;
+    top: 50%; /* Posición vertical centrada */
+    left: 50%; /* Posición horizontal centrada */
+    transform: translate(-50%, -50%); /* Centrar el modal */
+  }
+
+  .modal-body {
+      width: fit-content;
+      height: fit-content;
+      max-height: 300px;
+  }
+
+  .modal-canvas {
+    max-width: 400px;
+    height: 300px;
+    width: auto;
+    display: block;
+  }
+
+  .compartment-info-container {
+    max-height: 290px;
+    width: fit-content;
+    margin-top: 0px; /* Add margin for separation */
+    padding: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    padding-left: 10px;
+  }
+}
+
+/* iPhone 12 Pro portrait */
+@media (min-width: 390px) and (max-width: 844px) and (orientation: portrait) {
+  .space-list li {
+    padding: 8px 12px;
+  }
+
+  .title h5{
+    padding: 0;
+    margin-bottom: -2px;
+    margin-top: -2px;
+  }
+}
+
+/* iPhone 12 Pro landscape */
+@media (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
+  .space-list li {
+    padding: 8px 12px;
+  }
+
+  .grid-image {
+    height: 155px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .title h5{
+    padding: 0;
+    margin-bottom: -2px;
+    margin-top: -2px;
+  }
+
+  .header-space h1{
+    font-size: 20px;
+  }
+
+  .modal-overlay {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .modal-content {
+    width: fit-content; /* Ancho del 90% del viewport */
+    height: fit-content;
+    max-height: 90vh;
+    max-width: 95vw;
+    top: 50%; /* Posición vertical centrada */
+    left: 50%; /* Posición horizontal centrada */
+    transform: translate(-50%, -50%); /* Centrar el modal */
+  }
+
+  .modal-body {
+      width: fit-content;
+      height: fit-content;
+      max-height: 320px;
+  }
+
+  .modal-canvas {
+    max-width: 90vw;
+    height: 320px;
+    width: auto;
+    display: block;
+  }
+
+  .compartment-info-container {
+    max-height: 315px;
+    width: fit-content;
+    margin-top: 0px; /* Add margin for separation */
+    padding: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    padding-left: 10px;
+  }
+}
+
+/* iPhone 14 Pro Max portrait */
+@media (min-width: 845px) and (max-width: 932px) and (orientation: portrait) {
+  .space-list li {
+    padding: 8px 14px;
+  }
+
+  .grid-image {
+    height: 190px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .title h5{
+    padding: 0;
+    margin-bottom: -2px;
+    margin-top: -2px;
+  }
+}
+
+
+@media (min-width: 1000px) {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+// iphone 14 pro max (430x932)
+@media (min-width: 845px) and (max-width: 932px) and (orientation: landscape) {
+
+  #rename-icon {
+    font-size: 9px;
+  }
+
+  .image-grid {
+    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 150px; /* Ajuste de altura para iPad Mini */
+  }
+
+  .back,
+  .back_to,
+  .new,
+  .create,
+  .upload {
+    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+  }
+
+  .space-list {
+    padding: 0;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+
+  .space-list li {
+    padding: 8px 14px;
+  }
+
+  .space-list li a {
+    font-size: 16px;
+  }
+
+  .title h5 {
+    font-size: 16px;
+    margin-top: -2px;
+    margin-bottom: -2px;
+  }
+
+  .header-space h1{
+    font-size: 20px;
+  }
+
+  .modal-overlay {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .modal-content {
+    width: fit-content; /* Ancho del 90% del viewport */
+    height: fit-content;
+    max-height: 90vh;
+    max-width: 95vw;
+    top: 50%; /* Posición vertical centrada */
+    left: 50%; /* Posición horizontal centrada */
+    transform: translate(-50%, -50%); /* Centrar el modal */
+  }
+
+  .modal-body {
+      width: fit-content;
+      height: fit-content;
+      max-height: 350px;
+  }
+
+  .modal-canvas {
+    max-width: 90vw;
+    height: 350px;
+    width: auto;
+    display: block;
+  }
+
+  .compartment-info-container {
+    max-height: 345px;
+    width: fit-content;
+    margin-top: 0px; /* Add margin for separation */
+    padding: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    padding-left: 10px;
+  }
+}
+
+/* iPad Pro landscape (1024x1366) */
+@media (min-width: 1367px) {
+  .image-grid {
+    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+  }
+
+  .grid-image {
+    height: 300px; /* Ajuste de altura para iPad Mini */
+  }
+
 }

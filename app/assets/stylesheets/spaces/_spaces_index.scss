@@ -14,6 +14,61 @@
   }
 }
 
+/* iPhone SE portrait */
+@media (min-width: 375px) and (max-width: 667px) and (orientation: portrait) {
+  #content {
+    margin-top: 70px;
+  }
+}
+
+/* iPad Mini portrait (768x1024) */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  #content {
+    margin-top: 75px;
+  }
+}
+
+/* iPad Mini landscape (768x1024) */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  #content {
+    margin-top: 70px;
+  }
+}
+
+/* iPad Air landscape (820x1180) */
+@media (min-width: 1050px) and (max-width: 1180px) and (orientation: landscape) {
+  #content {
+    margin-top: 70px;
+  }
+}
+
+/* iPad Pro portrait (1024x1366) */
+@media (min-width: 1181px) and (max-width: 1366px) and (orientation: portrait) {
+  #content {
+    margin-top: 82px;
+  }
+}
+
+/* iPad Pro landscape (1024x1366) */
+@media (min-width: 1181px) and (max-width: 1366px) and (orientation: landscape) {
+  #content {
+    margin-top: 82px;
+  }
+}
+
+/* iPhone 12 Pro landscape */
+@media (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
+  #content {
+    margin-top: 53px;
+  }
+}
+
+// iphone 14 pro max (430x932)
+@media (min-width: 845px) and (max-width: 932px) and (orientation: landscape) {
+  #content {
+    margin-top: 58px;
+  }
+}
 
 
 h1 {
