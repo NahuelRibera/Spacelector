@@ -1075,6 +1075,46 @@ textarea {
     margin-bottom: -2px;
     margin-top: -2px;
   }
+
+  .modal-overlay {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .modal-content {
+    width: fit-content; /* Ancho del 90% del viewport */
+    height: fit-content;
+    max-height: 90vh;
+    max-width: 95vw;
+    top: 50%; /* Posición vertical centrada */
+    left: 50%; /* Posición horizontal centrada */
+    transform: translate(-50%, -50%); /* Centrar el modal */
+  }
+
+  .modal-body {
+      width: fit-content;
+      height: fit-content;
+      max-height: 300px;
+  }
+
+  .modal-canvas {
+    max-width: 400px;
+    height: 300px;
+    width: auto;
+    display: block;
+  }
+
+  .compartment-info-container {
+    max-height: 290px;
+    width: fit-content;
+    margin-top: 0px; /* Add margin for separation */
+    padding: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    padding-left: 10px;
+  }
 }
 
 /* iPhone 12 Pro portrait */
