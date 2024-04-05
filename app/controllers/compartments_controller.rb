@@ -2,7 +2,6 @@ class CompartmentsController < ApplicationController
   before_action :set_image, only: [:index, :create, :update, :destroy]
   before_action :set_compartment, only: [:update, :destroy]
 
-  # POST /images/:image_id/compartments
   def create
     @compartment = @image.compartments.new(compartment_params)
     if @compartment.save
@@ -14,7 +13,6 @@ class CompartmentsController < ApplicationController
 
   def create_or_update_object_info
     puts "Description received: #{params[:object_info][:description]}"
-    # Rest of your logic to handle the creation or update
   end
 
   def index
@@ -23,7 +21,6 @@ class CompartmentsController < ApplicationController
     render json: compartments
   end
 
-  # PATCH/PUT /images/:image_id/compartments/:id
   def update
     if @compartment.update(compartment_params)
       redirect_to @image, notice: 'Compartment was successfully updated.'
@@ -32,7 +29,6 @@ class CompartmentsController < ApplicationController
     end
   end
 
-  # DELETE /images/:image_id/compartments/:id
   def destroy
     @compartment.destroy
     redirect_to @image, notice: 'Compartment was successfully destroyed.'
@@ -40,7 +36,6 @@ class CompartmentsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_image
     @image = Image.find(params[:image_id])
   end

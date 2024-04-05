@@ -73,12 +73,12 @@
 
 h1 {
   margin: 0;
-  color: #333; /* Google Drive text color */
-  font-size: 40px; /* Adjust as needed */
+  color: #333;
+  font-size: 40px;
 }
 
 nav {
-  background-color: rgb(240, 240, 240); /* Dark background for the navbar */
+  background-color: rgb(240, 240, 240);
   color: #fff;
   padding: 15px;
   text-align: center;
@@ -86,7 +86,7 @@ nav {
 
 .new {
   color: #fff;
-  background-color: #4285f4; /* Google Drive blue */
+  background-color: #4285f4;
   padding: 8px 16px;
   text-decoration: none;
   border-radius: 10px;
@@ -98,22 +98,22 @@ nav {
 }
 
 .button:hover {
-  background-color: #357ae8; /* Darker blue on hover */
+  background-color: #357ae8;
 }
 
 .space-list {
   list-style-type: none;
   padding: 0;
   display: flex;
-  flex-wrap: wrap; /* Enable wrapping */
-  gap: 20px; /* Adjust the space between spaces */
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .space-list li {
-  flex: 0 0 calc(20% - 20px); /* Adjust the width and space between spaces */
-  box-sizing: border-box; /* Include padding and border in the width */
-  border: 1px solid #ddd; /* Light gray border around each space */
-  border-radius: 10px; /* Rounded corners */
+  flex: 0 0 calc(20% - 20px);
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 10px;
   padding: 16px;
   text-align: left;
   transition: box-shadow 0.2s ease-in-out;
@@ -141,7 +141,7 @@ nav {
 
 a {
   text-decoration: none;
-  color: #333; /* Google Drive text color */
+  color: #333;
   font-size: 20px;
 }
 
@@ -156,5 +156,5 @@ a:hover {
 }
 
 .space-box a:hover {
-  text-decoration: none; /* Remove underline on hover */
+  text-decoration: none;
 }

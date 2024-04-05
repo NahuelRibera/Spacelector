@@ -2,7 +2,7 @@ module ImagesHelper
   def compartments_for_image(image)
     image.compartments.select(:id, :name, :x, :y, :width, :height).map do |compartment|
       {
-        id: compartment.id, # Ensure the ID is included here
+        id: compartment.id,
         name: compartment.name,
         x: compartment.x,
         y: compartment.y,

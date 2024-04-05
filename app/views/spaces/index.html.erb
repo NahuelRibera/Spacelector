@@ -37,7 +37,6 @@
       });
     </script>
   <% else %>
-    <!-- Display a link to sign in with Google -->
     <div class="welcome-message">
       <h1>Welcome to Our Service</h1>
       <p>Please <%= link_to 'sign in with Google', user_google_oauth2_omniauth_authorize_path %> to manage your spaces.</p>

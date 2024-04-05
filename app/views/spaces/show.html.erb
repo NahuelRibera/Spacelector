@@ -2,19 +2,17 @@
   <div class="header-space">
     <div class="space-name">
       <h1><%= @space.name %></h1>
-        <a href="#" id="rename-button">
+      <a href="#" id="rename-button">
       <i id="rename-icon" class="fas fa-pen-to-square"></i>
-    </a>    </div>
+      </a>
+    </div>
     <div class="rotated-hud">
       <% if @space.parent_space %>
         <%= link_to raw('<i class="fa-solid fa-arrow-left"></i> Back to \''.html_safe + j(@space.parent_space.name) + '\''), space_path(@space.parent_space), class: "back_to" %>
       <% else %>
        <%= link_to raw('<i class="fa-solid fa-arrow-left"></i> Back'), spaces_path, class: "back" %>
       <% end %>
-
       <%= link_to raw('<i class="fa-solid fa-arrow-up-from-bracket"></i> Upload image'), new_space_image_path(@space), class: "upload" %>
-
-
       <%= link_to '+ New', new_space_path(parent_space_id: @space.id), class: "new" %>
     </div>
     <div class="default-hud">
@@ -28,7 +26,6 @@
     <% else %>
       <%= link_to raw('<i class="fa-solid fa-arrow-left"></i> Back'), spaces_path, class: "back" %>
     <% end %>
-
     <%= link_to raw('<i class="fa-solid fa-arrow-up-from-bracket"></i> Upload image'), new_space_image_path(@space), class: "upload" %>
   </div>
 
@@ -50,7 +47,6 @@
       <% if image.file.attached? %>
         <div class="image-container">
           <div class="image-card">
-            <%# Check if the image is a HEIC file and conditionally apply resizing %>
             <% if image.file.content_type == 'image/heic' %>
               <%= image_tag(image.file.variant(resize_to_limit: [1920, 1080]), class: "grid-image example-image", alt: "image-#{index + 1}",
                             data: { image_id: image.id, compartments: compartments_for_image(image).to_json }) %>
@@ -66,7 +62,6 @@
           <% end %>
           </div>
         </div>
-        <!-- Rest of your code -->
       <% end %>
     <% end %>
   </div>

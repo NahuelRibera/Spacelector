@@ -3,22 +3,22 @@
 }
 
 .logo {
-  max-width: 160px; /* Adjust the maximum width as needed */
-  height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+  max-width: 160px;
+  height: auto;
 
   @media (max-width: 768px) {
-    max-width: 100px; /* Adjust the maximum width as needed */
-    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+    max-width: 100px;
+    height: auto;
   }
 
   @media (max-height: 440px) {
-    max-width: 120px; /* Adjust the maximum width as needed */
-    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+    max-width: 120px;
+    height: auto;
   }
 
   @media (max-height: 375px) {
-    max-width: 110px; /* Adjust the maximum width as needed */
-    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+    max-width: 110px;
+    height: auto;
   }
 }
 
@@ -33,8 +33,8 @@
   height: 67px;
   border-bottom: 1px solid #e6e6e6;
   display: flex;
-  justify-content: space-between; // This will space out the logo and the nav items
-  padding: 0 20px; // Added padding for a bit of space on the sides
+  justify-content: space-between;
+  padding: 0 20px;
   overflow: visible;
 
   @media(max-height: 440px){
@@ -51,25 +51,25 @@
 }
 
 .navbar-search-container {
-  flex-grow: 1; // Allow the search container to fill the space
+  flex-grow: 1;
   display: flex;
-  justify-content: center; // Center the search form
+  justify-content: center;
   margin-right: 20px;
  }
 
  .search-form {
   display: flex;
-  width: 100%; // Full width to align with the design
+  width: 100%;
   .search-input {
     width: 100%;
-    border-radius: 30px; // Rounded corners
-    border: 1px solid #e6e6e6; // Light grey border
-    padding: 4px 15px; // Padding inside the search bar
+    border-radius: 30px;
+    border: 1px solid #e6e6e6;
+    padding: 4px 15px;
     margin-left: 20px;
 
     &:focus {
       outline: none;
-      border-color: #44A0D8; // Focus color
+      border-color: #44A0D8;
       box-shadow: 0 0 0.5px #44A0D8, 0 0 1px #44A0D8, 0 0 1.5px #44A0D8;
     }
 
@@ -97,36 +97,34 @@
 
   .search-input::placeholder {
     content: "What are you looking for?";
-    /* Change the placeholder text */
   }
 
-  // Hiding the submit button, Enter key will submit the form
   input[type="submit"] {
     display: none;
   }
  }
 
  .search-input::placeholder {
-  content: "What are you looking for?"; /* Change the placeholder text */
+  content: "What are you looking for?";
 }
 
 .sign-out-button {
-  background: none; // Removes any background
-  border: none; // Removes the border
-  padding: 0; // Removes padding
-  margin: 0; // Adjust as needed
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
 
   &:hover {
-    background: none; // Keeps the background transparent on hover
-    opacity: 0.8; // Optional: slight transparency effect on hover
+    background: none;
+    opacity: 0.8;
   }
 
   img {
-    height: 17px; // Adjust the size as needed
+    height: 17px;
     width: auto;
 
     @media (max-width: 768px) {
-      height: 13px; // Adjust the size as needed
+      height: 13px;
     width: auto;
     }
   }
@@ -141,13 +139,13 @@
 .navbar-nav {
   display: flex;
   align-items: center;
-  margin-right: 10px; // Reduce the space on the right side
+  margin-right: 10px;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  margin-left: 0.5rem; // Ensure consistent spacing between nav items
+  margin-left: 0.5rem;
 }
 
 .nav-link, .btn-login {
@@ -156,8 +154,8 @@
   font-weight: bold;
   padding: 0.5rem 0.75rem;
   font-size: 0.9rem;
-  display: flex; // Align horizontally
-  align-items: center; // Center vertically
+  display: flex;
+  align-items: center;
 }
 
 .nav-item .nav-link.premium-trial {
@@ -193,51 +191,49 @@
   border: 1px solid #01C1AD;
   border-radius: 20px;
   color: white;
-  background-color: #4285f4; // Adjusted for consistency with your blue button
+  background-color: #4285f4;
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
   text-transform: capitalize;
   font-weight: bold;
-  margin-left: 1rem; // Adjust the margin as needed
+  margin-left: 1rem;
 
   @media (max-width: 768px) {
     margin-left: 0px;
   }
 
   &:hover {
-    background-color: #357ae8; // Darker blue on hover
+    background-color: #357ae8;
   }
 }
 
-/* Responsive styles for smaller screens */
 @media screen and (max-width: 768px) {
   .navbar {
-    height: auto; // Adjust height for mobile
-    flex-direction: row; // Keep items in a row
-    padding: 10px; // Reduce padding for mobile
+    height: auto;
+    flex-direction: row;
+    padding: 10px;
   }
 
   .navbar-brand img {
-    max-height: 28px; // Slightly smaller logo for mobile
+    max-height: 28px;
   }
 
   .navbar-nav {
-    justify-content: flex-end; // Keep items to the right
+    justify-content: flex-end;
   }
 
   .nav-item, .nav-link, .btn-login {
-    // padding: 0.25rem 0.5rem;
-    font-size: 0.8rem; // Slightly smaller font size for mobile
+    font-size: 0.8rem;
   }
 
   .btn-login {
-    margin-left: 0px; // Reduce margin for mobile
+    margin-left: 0px;
   }
 }
 
 @media (max-width: 1367px) {
   .premium-trial .text {
-    display: none; /* Hide the text */
+    display: none;
   }
 
   .premium-trial a {
@@ -245,19 +241,19 @@
   }
 
   .image-logo {
-    display: inline-block; /* Display the image */
+    display: inline-block;
     background-image: url('crown.png');
-    width: 20px; /* Adjust width as needed */
-    height: auto; /* Adjust height as needed */
-    background-size: cover; /* Ensure the image covers the span */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
+    width: 20px;
+    height: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
     margin-bottom: 3px;
   }
 }
 
 @media (max-width: 1367px) {
   .premium-trial .nav-link {
-    display: none; /* Hide the anchor on screens with a maximum width of 768px */
+    display: none;
   }
 }
 
@@ -293,64 +289,58 @@
   }
 }
 
-/* iPad Mini portrait (768x1024) */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
 .navbar {
   height: 55px;
 }
 
 .logo {
-  max-width: 115px; /* Adjust the maximum width as needed */
-  height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+  max-width: 115px;
+  height: auto;
 }
 }
 
-/* iPad Mini landscape (768x1024) */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   .navbar {
     height: 50px;
   }
 
   .logo {
-    max-width: 115px; /* Adjust the maximum width as needed */
-    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+    max-width: 115px;
+    height: auto;
   }
 }
 
-/* iPad Air landscape (820x1180) */
 @media (min-width: 1050px) and (max-width: 1180px) and (orientation: landscape) {
   .navbar {
     height: 50px;
   }
 
   .logo {
-    max-width: 115px; /* Adjust the maximum width as needed */
-    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+    max-width: 115px;
+    height: auto;
   }
 }
 
-
-/* iPad Pro landscape (1024x1366) */
 @media (min-width: 1181px) and (max-width: 1366px) and (orientation: landscape) {
   .navbar {
     height: 60px;
   }
 
   .logo {
-    max-width: 125px; /* Adjust the maximum width as needed */
-    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+    max-width: 125px;
+    height: auto;
   }
 }
 
-/* iPhone 12 Pro landscape */
 @media (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
   .navbar {
     height: 37px;
   }
 
   .logo {
-    max-width: 110px; /* Adjust the maximum width as needed */
-    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+    max-width: 110px;
+    height: auto;
   }
 
   .search-form {
@@ -361,15 +351,14 @@
   }
 }
 
-// iphone 14 pro max (430x932)
 @media (min-width: 845px) and (max-width: 932px) and (orientation: landscape) {
   .navbar {
     height: 42px;
   }
 
   .logo {
-    max-width: 110px; /* Adjust the maximum width as needed */
-    height: auto; /* Let the browser calculate the height to maintain aspect ratio */
+    max-width: 110px;
+    height: auto;
   }
 
   .search-form {
