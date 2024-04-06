@@ -4,7 +4,15 @@ class ImagesController < ApplicationController
 
   def create
     @image = @space.images.new(image_params)
-    @image.file.attach(params[:image][:file])
+
+    if params[:image][:file].content_type == 'image/heic'
+      # Process and resize the image before attaching
+      processed_image = process_heic_image(params[:image][:file])
+      @image.file.attach(io: processed_image, filename: 'processed_image.jpg', content_type: 'image/jpeg')
+    else
+      @image.file.attach(params[:image][:file])
+    end
+
     @image.file_path = @image.file.key
 
     if @image.save
@@ -43,27 +51,30 @@ class ImagesController < ApplicationController
       uploaded_file = Tempfile.new(['upload', '.heic'])
       File.binwrite(uploaded_file.path, file.read)
 
-      # Perform the conversion
-      processed_image = ImageProcessing::MiniMagick
-                          .source(uploaded_file.path)
-                          .convert("jpg")
-                          .call
+      begin
+        # Perform the conversion and resize
+        processed_image = ImageProcessing::MiniMagick
+                              .source(uploaded_file.path)
+                              .convert("jpg")
+                              .resize_to_limit(1920, 1080) # Add resizing here
+                              .call
 
-      # Create a new blob from the processed image
-      converted_blob = ActiveStorage::Blob.create_and_upload!(
-        io: File.open(processed_image.path, 'rb'),
-        filename: "#{file.original_filename.split('.').first}.jpg",
-        content_type: 'image/jpeg'
-      )
+        # Create a new blob from the processed image
+        converted_blob = ActiveStorage::Blob.create_and_upload!(
+          io: File.open(processed_image.path, 'rb'),
+          filename: "#{file.original_filename.split('.').first}.jpg",
+          content_type: 'image/jpeg'
+        )
 
-      # Clean up temporary files
-      uploaded_file.close
-      uploaded_file.unlink
-      processed_image.close
-      processed_image.unlink
-
-      # Respond with the URL to the converted image
-      render json: { preview_url: rails_blob_url(converted_blob) }, status: :ok
+        # Respond with the URL to the converted and resized image
+        render json: { preview_url: rails_blob_url(converted_blob) }, status: :ok
+      ensure
+        # Clean up temporary files
+        uploaded_file.close
+        uploaded_file.unlink
+        processed_image.close
+        processed_image.unlink if processed_image
+      end
     else
       render json: { error: "Unsupported file type." }, status: :unprocessable_entity
     end
@@ -79,6 +90,23 @@ class ImagesController < ApplicationController
   end
 
   private
+
+  def process_heic_image(file)
+    require "image_processing/mini_magick"
+
+    # Temporarily save the uploaded file to disk
+    uploaded_file = Tempfile.new(['upload', '.heic'])
+    File.binwrite(uploaded_file.path, file.read)
+
+    # Perform the conversion and resize
+    processed_image = ImageProcessing::MiniMagick
+                          .source(uploaded_file.path)
+                          .convert("jpg")
+                          .resize_to_limit(1920, 1080)
+                          .call
+
+    processed_image # This will return the path to the processed image
+  end
 
   def image_params
     params.require(:image).permit(:file, :title, compartments_attributes: [:name, :x, :y, :width, :height])
