@@ -6,9 +6,7 @@
     <% if @space.parent_space_id %>
       <%= form.hidden_field :parent_space_id %>
     <% end %>
-    <%# <div class="card-field"> %>
-      <%= form.text_field :name, required: true, class: 'text-field' %>
-    <%# </div> %>
+    <%= form.text_field :name, required: true, class: 'text-field' %>
     <div class='btn-row'>
     <% if @space.parent_space %>
       <%= link_to "Back to '#{j @space.parent_space.name}'", space_path(@space.parent_space), class: "back_to" %>

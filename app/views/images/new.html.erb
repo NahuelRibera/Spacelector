@@ -1,114 +1,99 @@
 <section id="content-card" class="set-card">
   <div class='card-general'>
     <h1>Upload Image</h1>
-<%# <br> %>
-  <%= form_with model: @image, url: space_images_path(@space), local: true, class: 'image-form' do |form| %>
-    <div class="field">
-      <%= form.label :title, 'Title' %>
-      <%= form.text_field :title, required: true, class: 'text-field' %>
-    </div>
+      <%= form_with model: @image, url: space_images_path(@space), local: true, class: 'image-form' do |form| %>
+      <div class="field">
+        <%= form.label :title, 'Title' %>
+        <%= form.text_field :title, required: true, class: 'text-field' %>
+      </div>
 
-    <br>
+      <br>
 
-    <div class="field">
-      <%# <%= form.label :file, 'Image' %>
-      <%= form.file_field :file, required: true, id: 'imageFileInput', capture: 'camera' %>
-    </div>
+      <div class="field">
+        <%= form.file_field :file, required: true, id: 'imageFileInput', capture: 'camera' %>
+      </div>
 
-    <div id="image-preview-container" style="display: none;">
-      <img id="imagePreview" src="#" alt="Image preview" style="max-width: 100%;"/>
-    </div>
+      <div id="image-preview-container" style="display: none;">
+        <img id="imagePreview" src="#" alt="Image preview" style="max-width: 100%;"/>
+      </div>
 
-    <br>
+      <br>
 
-    <!-- Select Compartments button -->
-    <button id="selectCompartmentsButton" type="button" class="btn back_form">Select Compartments</button>
+      <button id="selectCompartmentsButton" type="button" class="btn back_form">Select Compartments</button>
 
-    <br>
+      <br>
 
-    <!-- Canvas for drawing compartments -->
-    <canvas id="imageCanvas" class="image-canvas" style="display: none; max-width: 100%; width: 550px; height: auto; margin-bottom: 20px"></canvas>
+      <canvas id="imageCanvas" class="image-canvas" style="display: none; max-width: 100%; width: 550px; height: auto; margin-bottom: 20px"></canvas>
 
-    <!-- Container for compartment name input fields -->
-    <div id="compartmentNamesContainer" style="display: none;"></div>
+      <div id="compartmentNamesContainer" style="display: none;"></div>
 
-    <div class='btn-row'>
-
-  <% if @space.parent_space %>
-  <%= link_to "Back to '#{j @space.name}'s Parent Space", space_path(@space.parent_space), class: "back_to" %>
-<% else %>
-  <%= link_to 'Back', spaces_path, class: "back_form" %>
-<% end %>
-
-  <%= form.submit "Upload", class:"custom-btn", style: "justify-content: center;", id: 'uploadButton' %>
+      <div class='btn-row'>
+        <% if @space.parent_space %>
+          <%= link_to "Back to '#{j @space.name}'s Parent Space", space_path(@space.parent_space), class: "back_to" %>
+        <% else %>
+          <%= link_to 'Back', spaces_path, class: "back_form" %>
+        <% end %>
+        <%= form.submit "Upload", class:"custom-btn", style: "justify-content: center;", id: 'uploadButton' %>
+      </div>
+    <% end %>
   </div>
-  <% end %>
-
-
-</div>
 </section>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const canvas = document.getElementById('imageCanvas');
-  const context = canvas.getContext('2d');
-  const compartmentNamesContainer = document.getElementById('compartmentNamesContainer');
-  const imagePreview = document.getElementById('imagePreview');
-  const compartments = [];
-  let isDrawing = false;
-  let startX, startY, endX, endY;
-  let selectedFile = null;
+  document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('imageCanvas');
+    const context = canvas.getContext('2d');
+    const compartmentNamesContainer = document.getElementById('compartmentNamesContainer');
+    const imagePreview = document.getElementById('imagePreview');
+    const compartments = [];
+    let isDrawing = false;
+    let startX, startY, endX, endY;
+    let selectedFile = null;
 
-  // This handler will simply store the selected file object
-  document.getElementById('imageFileInput').addEventListener('change', function(event) {
-    selectedFile = event.target.files[0]; // Store the selected file
-    if (selectedFile.type !== 'image/heic') {
-      // For non-.heic files, show the preview immediately
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        imagePreview.src = e.target.result;
-        imagePreview.style.display = 'block';
-      };
-      reader.readAsDataURL(selectedFile);
+    document.getElementById('imageFileInput').addEventListener('change', function(event) {
+      selectedFile = event.target.files[0];
+      if (selectedFile.type !== 'image/heic') {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          imagePreview.src = e.target.result;
+          imagePreview.style.display = 'block';
+        };
+        reader.readAsDataURL(selectedFile);
+      }
+    });
+
+    let loadedImage = null;
+
+    function drawCompartment(compartment, index) {
+      context.strokeStyle = '#44A0D8';
+      context.lineWidth = 4.5;
+      context.beginPath();
+      context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
+      context.stroke();
+      context.fillStyle = '#44A0D8';
+      context.font = 'bold 20px Open Sans';
+      context.fillText((index + 1).toString(), compartment.x + 10, compartment.y + 25);
     }
-  });
 
-let loadedImage = null; // This will store the last loaded image for redrawing
+    function drawCompartments(imageSrc) {
+      const img = new Image();
+      img.onload = function() {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(img, 0, 0);
+        loadedImage = img;
+        compartments.forEach(drawCompartment);
+      };
+      if (imageSrc) {
+        img.src = imageSrc;
+      } else if (loadedImage) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(loadedImage, 0, 0);
+        compartments.forEach(drawCompartment);
+      }
+    }
 
-// Add the drawCompartment function if it's not already there
-function drawCompartment(compartment, index) {
-  context.strokeStyle = '#44A0D8';
-  context.lineWidth = 4.5;
-  context.beginPath();
-  context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
-  context.stroke();
-  context.fillStyle = '#44A0D8';
-  context.font = 'bold 20px Open Sans';
-  context.fillText((index + 1).toString(), compartment.x + 10, compartment.y + 25);
-}
-
-// Update drawCompartments to accept an image source parameter
-function drawCompartments(imageSrc) {
-  const img = new Image();
-  img.onload = function() {
-    canvas.width = img.width;
-    canvas.height = img.height;
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(img, 0, 0);
-    loadedImage = img; // Set the loaded image
-    compartments.forEach(drawCompartment);
-  };
-  if (imageSrc) {
-    img.src = imageSrc;
-  } else if (loadedImage) {
-    // If imageSrc is not provided, redraw the last loaded image
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(loadedImage, 0, 0);
-    compartments.forEach(drawCompartment);
-  }
-}
-
-    // Function to save compartment data
     function saveCompartment() {
       const width = Math.abs(startX - endX);
       const height = Math.abs(startY - endY);
@@ -116,7 +101,6 @@ function drawCompartments(imageSrc) {
       const y = Math.min(startY, endY);
       const compartment = { x, y, width, height };
 
-      // Update or create new hidden inputs
       updateOrCreateHiddenInputs(compartment, compartments.length);
 
       compartments.push(compartment);
@@ -137,7 +121,6 @@ function drawCompartments(imageSrc) {
       });
     }
 
-    // Mouse and touch event listeners
     function handleStart(event) {
       isDrawing = true;
       const rect = canvas.getBoundingClientRect();
@@ -147,30 +130,27 @@ function drawCompartments(imageSrc) {
       startY = (event.clientY - rect.top) * scaleY;
     }
 
-function handleMove(event) {
-  if (!isDrawing) return;
-  const rect = canvas.getBoundingClientRect();
-  const scaleX = canvas.width / rect.width;
-  const scaleY = canvas.height / rect.height;
-  endX = (event.clientX - rect.left) * scaleX;
-  endY = (event.clientY - rect.top) * scaleY;
+    function handleMove(event) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      endX = (event.clientX - rect.left) * scaleX;
+      endY = (event.clientY - rect.top) * scaleY;
 
-  // Clear the canvas and redraw the image
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  context.drawImage(loadedImage, 0, 0, canvas.width, canvas.height);
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(loadedImage, 0, 0, canvas.width, canvas.height);
 
-  // Redraw existing compartments
-  compartments.forEach(drawCompartment);
+      compartments.forEach(drawCompartment);
 
-  // Draw the current rectangle being drawn
-  const currentCompartment = {
-    x: Math.min(startX, endX),
-    y: Math.min(startY, endY),
-    width: Math.abs(endX - startX),
-    height: Math.abs(endY - startY)
-  };
-  drawCompartment(currentCompartment, compartments.length);
-}
+      const currentCompartment = {
+        x: Math.min(startX, endX),
+        y: Math.min(startY, endY),
+        width: Math.abs(endX - startX),
+        height: Math.abs(endY - startY)
+      };
+      drawCompartment(currentCompartment, compartments.length);
+    }
 
 
     function handleEnd(event) {
@@ -194,55 +174,48 @@ function handleMove(event) {
 
     canvas.addEventListener('touchend', handleEnd);
 
-   const selectCompartmentsButton = document.getElementById('selectCompartmentsButton');
-  selectCompartmentsButton.addEventListener('click', async function() {
-    if (!selectedFile) {
-      alert('Please choose a file first.');
-      return;
-    }
-
-    // If it's a .heic file, handle conversion
-    if (selectedFile.type === 'image/heic') {
-      const formData = new FormData();
-      formData.append('file', selectedFile);
-
-      try {
-        const response = await fetch('/convert_heic', {
-          method: 'POST',
-          body: formData,
-        });
-
-        if (!response.ok) throw new Error('Server error during conversion.');
-
-        const data = await response.json();
-        if (data.preview_url) {
-          // Set the image preview source to the converted image URL
-          imagePreview.src = data.preview_url;
-          // Ensure the image is displayed and the compartments container is shown
-          imagePreview.style.display = 'block';
-          compartmentNamesContainer.style.display = 'block';
-          // Ensure the image is loaded before drawing on the canvas
-          imagePreview.onload = () => {
-            drawCompartments(imagePreview.src); // Draw compartments using the new image URL
-          }
-        } else {
-          throw new Error('Invalid server response.');
-        }
-      } catch (error) {
-        console.error('Error uploading and converting HEIC image:', error);
-        alert('There was an error processing the HEIC image. Please try again.');
+    const selectCompartmentsButton = document.getElementById('selectCompartmentsButton');
+    selectCompartmentsButton.addEventListener('click', async function() {
+      if (!selectedFile) {
+        alert('Please choose a file first.');
+        return;
       }
-    } else {
-      // For non-.heic files, we can draw immediately since we have shown the preview on selection
-      drawCompartments(imagePreview.src);
-      compartmentNamesContainer.style.display = 'block';
-    }
 
-    // Display the canvas for drawing compartments
-    canvas.style.display = 'block';
-  });
+      if (selectedFile.type === 'image/heic') {
+        const formData = new FormData();
+        formData.append('file', selectedFile);
 
-    // New event listener to prevent upload if compartments are not named
+        try {
+          const response = await fetch('/convert_heic', {
+            method: 'POST',
+            body: formData,
+          });
+
+          if (!response.ok) throw new Error('Server error during conversion.');
+
+          const data = await response.json();
+          if (data.preview_url) {
+            imagePreview.src = data.preview_url;
+            imagePreview.style.display = 'block';
+            compartmentNamesContainer.style.display = 'block';
+            imagePreview.onload = () => {
+              drawCompartments(imagePreview.src);
+            }
+          } else {
+            throw new Error('Invalid server response.');
+          }
+        } catch (error) {
+          console.error('Error uploading and converting HEIC image:', error);
+          alert('There was an error processing the HEIC image. Please try again.');
+        }
+      } else {
+        drawCompartments(imagePreview.src);
+        compartmentNamesContainer.style.display = 'block';
+      }
+
+      canvas.style.display = 'block';
+    });
+
     const uploadButton = document.getElementById('uploadButton');
     uploadButton.addEventListener('click', function(event) {
       const compartmentInputs = compartmentNamesContainer.querySelectorAll('input');

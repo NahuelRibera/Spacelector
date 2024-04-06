@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :spaces do
     resources :images, only: [:new, :create, :show, :destroy, :update] do
-      resources :compartments, only: [:index] # Add index to fetch compartments for an image
+      resources :compartments, only: [:index]
     end
     collection do
       get 'search'
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   patch '/spaces/:id/update_name', to: 'spaces#update_name', as: 'update_space_name'
 
   resources :images, only: [] do
-    resources :compartments, only: [:index] # This line sets up the route
+    resources :compartments, only: [:index]
   end
 
   resources :boxes, only: [] do

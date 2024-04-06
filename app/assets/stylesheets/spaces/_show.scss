@@ -16,7 +16,7 @@ a:hover{
 
 .header-space {
   display: flex;
-  flex-wrap: wrap; /* Added to handle small screen sizes */
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   text-align: center;
@@ -32,26 +32,25 @@ a:hover{
 }
 
 .compartment-info-container {
-  max-width: 30%; // Adjust as necessary
+  max-width: 30%;
   display: flex;
   flex-direction: column;
-  padding-left: 20px; // Give some space between the image and the info boxes
+  padding-left: 20px;
 }
 
 .compartment-info {
   margin-bottom: 10px;
-  // Apply additional styles as needed
 }
 
 .compartment-info-trigger {
   position: absolute;
-  top: 0; // Adjust according to the desired placement
-  left: 0; // Adjust according to the desired placement
-  z-index: 10; // Ensure it's above the image
-  background-color: rgba(255,255,255,0.7); // Optional: for visibility
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(255,255,255,0.7);
   padding: 5px;
   border-radius: 5px;
-  display: none; // Initially hidden, show it on specific events
+  display: none;
 }
 
 .space-name {
@@ -68,7 +67,7 @@ a:hover{
 }
 
 #rename-icon {
-  color: #333; /* Change to your desired color */
+  color: #333;
   font-size: 14px;
   display: block;
   margin-bottom: 10px;
@@ -118,7 +117,7 @@ h1 {
 
 .back {
   color:#333;
-  background-color: #e6e6e6; /* Google Drive blue */
+  background-color: #e6e6e6;
   padding: 8px 16px;
   text-decoration: none;
   border-radius: 10px;
@@ -139,7 +138,7 @@ h1 {
 
 .back_to {
   color: #333;
-  background-color: #e6e6e6; /* Google Drive blue */
+  background-color: #e6e6e6;
   padding: 8px 16px;
   text-decoration: none;
   border-radius: 10px;
@@ -159,7 +158,7 @@ h1 {
 
 .upload {
   color: #333;
-  background-color: #e6e6e6; /* Google Drive blue */
+  background-color: #e6e6e6;
   padding: 8px 16px;
   text-decoration: none;
   border-radius: 10px;
@@ -233,7 +232,6 @@ h1 {
   }
 }
 
-
 a {
   text-decoration: none;
   color: #333;
@@ -242,7 +240,6 @@ a {
 
 .delete {
   color: white;
-  // padding: 2.5px 8px;
   text-decoration: none;
   border-radius: 50%;
   display: inline-block;
@@ -311,9 +308,9 @@ a {
 
 .grid-image {
   width: 100%;
-  height: 330px; // Set height to auto to maintain aspect ratio
+  height: 330px;
   border-radius: 10px;
-  display: block; // Ensure the image is treated as a block element
+  display: block;
   object-fit: cover;
 
   &:hover {
@@ -332,11 +329,11 @@ a {
   .new,
   .create,
   .upload {
-    font-size: 16px; /* Adjust font size for smaller screens */
+    font-size: 16px;
   }
 
 .space-list:hover a {
-  text-decoration: none; /* Remove text-decoration on hover for anchor tags */
+  text-decoration: none;
 }
 
 @media (min-height: 950px) {
@@ -353,7 +350,7 @@ a {
   .new,
   .create,
   .upload {
-    font-size: 12px; /* Adjust font size for smaller screens */
+    font-size: 12px;
   }
 }
 
@@ -371,7 +368,7 @@ a {
   .new,
   .create,
   .upload {
-    font-size: 12px; /* Adjust font size for smaller screens */
+    font-size: 12px;
   }
 }
 
@@ -389,7 +386,7 @@ a {
   .new,
   .create,
   .upload {
-    font-size: 12px; /* Adjust font size for smaller screens */
+    font-size: 12px;
   }
 }
 
@@ -407,17 +404,17 @@ a {
   .new,
   .create,
   .upload {
-    font-size: 12px; /* Adjust font size for smaller screens */
+    font-size: 12px;
   }
 }
 
 @media (max-width: 768px) {
   .space-list li a {
-    font-size: 15px; /* Adjust font size for smaller screens */
+    font-size: 15px;
   }
 
   .title h5 {
-    font-size: 15px; /* Adjust font size for smaller screens */
+    font-size: 15px;
   }
 
   .header-space h1 {
@@ -427,11 +424,11 @@ a {
 
 @media (max-height: 440px) {
   .space-list li a {
-    font-size: 15px; /* Adjust font size for smaller screens */
+    font-size: 15px;
   }
 
   .title h5 {
-    font-size: 15px; /* Adjust font size for smaller screens */
+    font-size: 15px;
   }
 
   .header-space h1 {
@@ -471,11 +468,11 @@ a {
 
 .modal-body {
   display: flex;
-  align-items: flex-start; // Align items to the top
+  align-items: flex-start;
 }
 
 .modal-image, .modal-canvas {
-  max-width: 70%; // Adjust as necessary
+  max-width: 70%;
 }
 
 .title {
@@ -485,15 +482,15 @@ a {
 }
 
 .modal-overlay {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 9999; /* Sit on top */
-  left: 50%; /* Center horizontally */
-  top: 50%; /* Center vertically */
-  transform: translate(-50%, -50%); /* Center the element precisely */
-  width: 100%; /* Full width */
-  height: 300%; /* Full height */
-  background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 300%;
+  background-color: rgba(0,0,0,0.7);
 
   @media (max-width: 768px) {
     width: 100%;
@@ -506,7 +503,7 @@ a {
 .modal-content {
   background-color: #fefefe;
   padding: 10px;
-  border: 1px solid; /* Add a border style */
+  border: 1px solid;
   border-radius: 10px;
   // display: flex;
   // margin-top: 3vw;
@@ -515,15 +512,12 @@ a {
   height: fit-content;
   position: fixed;
 
-
-  // margin-left: 150px;
-
   @media (min-width: 1200px) {
     margin: auto;
     display: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Center the element precisely */
+    transform: translate(-50%, -50%);
   }
 
   @media (max-width: 768px) {
@@ -531,22 +525,21 @@ a {
     justify-content: center;
     align-items: center;
     margin-top: 30px;
-    overflow: auto; /* Enable vertical scrolling */
+    overflow: auto;
     left: 50%;
-    transform: translate(-50%, -50%); /* Center the element precisely */
+    transform: translate(-50%, -50%);
     top: 50%;
-    max-height: calc(90vh - 100px); /* Set maximum height to fill viewport height minus 100px */
+    max-height: calc(90vh - 100px);
   }
 
   @media (max-height: 440px) {
-    /* Propiedades para pantallas pequeñas (como iPhone 14) */
-    width: fit-content; /* Ancho del 90% del viewport */
+    width: fit-content;
     height: fit-content;
-    max-height: 390px; /* Altura máxima de 440px */
+    max-height: 390px;
     max-width: 900px;
-    top: 50%; /* Posición vertical centrada */
-    left: 50%; /* Posición horizontal centrada */
-    transform: translate(-50%, -50%); /* Centrar el modal */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -558,7 +551,7 @@ a {
   border-radius: 10px;
   display: flex;
   justify-content: center;
-  align-items: center; /* Center vertically */
+  align-items: center;
 
   @media (min-width: 1200px) {
     max-width: 90vw;
@@ -590,10 +583,9 @@ a {
   align-items: flex-start;
 
   @media (max-width: 768px) {
-    /* Override existing styles for smaller screens */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    overflow-y: auto; /* Enable vertical scrolling */
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
   }
 
   @media (max-height: 440px) {
@@ -603,8 +595,8 @@ a {
 }
 
 .compartment-info-container {
-  overflow-y: auto; /* Enable vertical scrolling */
-  padding-left: 18px; /* Add padding for better readability */
+  overflow-y: auto;
+  padding-left: 18px;
   padding-right: 5px;
   padding-top: 0px;
 
@@ -614,34 +606,30 @@ a {
   }
 
   @media (max-width: 768px) {
-    /* Override existing styles for smaller screens */
-    max-width: 90%; /* Adjust as needed */
-    width: 90%; /* Adjust as needed */
-    margin-top: 5px; /* Add margin for separation */
+    max-width: 90%;
+    width: 90%;
+    margin-top: 5px;
     padding: 0px;
   }
 
   @media (max-height: 440px) {
-    /* Override existing styles for smaller screens */
-    max-width: 330px; /* Adjust as needed */
+    max-width: 330px;
     max-height: 330px;
-    // width: 90%; /* Adjust as needed */
   }
 }
 
 textarea {
-  width: 100%; /* Set the width to 100% to fill the container */
+  width: 100%;
   min-width: 150px;
-  min-height: 44px; /* Set a fixed or percentage height */
-  padding: 10px; /* Add padding for better readability */
+  min-height: 44px;
+  padding: 10px;
   border: 1px solid #ddd;
-  border-radius: 5px; /* Add border radius for rounded corners */
-  font-family: 'open sans', sans-serif; /* Specify a font family */
-  font-size: 15px; /* Specify a font size */
-  line-height: 1.5; /* Specify line height for readability */
-  resize: none; /* Disable manual resizing */
+  border-radius: 5px;
+  font-family: 'open sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  resize: none;
   overflow: hidden;
-  /* Add any additional styles as needed */
 
   @media (max-width: 768px) {
   }
@@ -664,14 +652,13 @@ textarea {
 ///////////////////////////////////////////////////////////////////////////
 ///
 
-/* iPad Mini portrait (768x1024) */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .image-grid {
-    grid-template-columns: repeat(4, 1fr); /* Ajuste para iPad Mini */
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .grid-image {
-    height: 190px; /* Ajuste de altura para iPad Mini */
+    height: 190px;
   }
 
   .back,
@@ -679,7 +666,7 @@ textarea {
   .new,
   .create,
   .upload {
-    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+    font-size: 12px;
   }
 
   .space-list {
@@ -711,14 +698,13 @@ textarea {
   }
 }
 
-/* iPad Air portrait (820x1180) */
 @media (min-width: 768px) and (max-width: 820px) and (orientation: portrait) {
   .image-grid {
-    grid-template-columns: repeat(4, 1fr); /* Ajuste para iPad Mini */
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .grid-image {
-    height: 195px; /* Ajuste de altura para iPad Mini */
+    height: 195px;
   }
 
   .back,
@@ -726,7 +712,7 @@ textarea {
   .new,
   .create,
   .upload {
-    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+    font-size: 12px;
   }
 
   .space-list {
@@ -736,14 +722,13 @@ textarea {
   }
 }
 
-/* iPad Pro portrait (1024x1366) */
 @media (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
   .image-grid {
-    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+    grid-template-columns: repeat(5, 1fr);
   }
 
   .grid-image {
-    height: 200px; /* Ajuste de altura para iPad Mini */
+    height: 200px;
   }
 
   .back,
@@ -751,7 +736,7 @@ textarea {
   .new,
   .create,
   .upload {
-    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+    font-size: 12px;
   }
 
   .space-list {
@@ -761,15 +746,13 @@ textarea {
   }
 }
 
-
-/* iPad Mini landscape (768x1024) aaa*/
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   .image-grid {
-    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+    grid-template-columns: repeat(5, 1fr);
   }
 
   .grid-image {
-    height: 190px; /* Ajuste de altura para iPad Mini */
+    height: 190px;
   }
 
   .back,
@@ -777,7 +760,7 @@ textarea {
   .new,
   .create,
   .upload {
-    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+    font-size: 12px;
   }
 
   .space-list {
@@ -816,13 +799,13 @@ textarea {
   }
 
   .modal-content {
-    width: fit-content; /* Ancho del 90% del viewport */
+    width: fit-content;
     height: fit-content;
     max-height: 90vh;
     max-width: 95vw;
-    top: 50%; /* Posición vertical centrada */
-    left: 50%; /* Posición horizontal centrada */
-    transform: translate(-50%, -50%); /* Centrar el modal */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .modal-body {
@@ -841,7 +824,7 @@ textarea {
   .compartment-info-container {
     max-height: 575px;
     width: fit-content;
-    margin-top: 0px; /* Add margin for separation */
+    margin-top: 0px;
     padding: 0px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -854,14 +837,13 @@ textarea {
   }
 }
 
-/* iPad Air landscape (820x1180) */
 @media (min-width: 1050px) and (max-width: 1180px) and (orientation: landscape) {
   .image-grid {
-    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+    grid-template-columns: repeat(5, 1fr);
   }
 
   .grid-image {
-    height: 210px; /* Ajuste de altura para iPad Mini */
+    height: 210px;
   }
 
   .back,
@@ -869,7 +851,7 @@ textarea {
   .new,
   .create,
   .upload {
-    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+    font-size: 12px;
   }
 
   .space-list {
@@ -907,13 +889,13 @@ textarea {
   }
 
   .modal-content {
-    width: fit-content; /* Ancho del 90% del viewport */
+    width: fit-content;
     height: fit-content;
     max-height: 90vh;
     max-width: 95vw;
-    top: 50%; /* Posición vertical centrada */
-    left: 50%; /* Posición horizontal centrada */
-    transform: translate(-50%, -50%); /* Centrar el modal */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .modal-body {
@@ -932,7 +914,7 @@ textarea {
   .compartment-info-container {
     max-height: 655px;
     width: fit-content;
-    margin-top: 0px; /* Add margin for separation */
+    margin-top: 0px;
     padding: 0px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -945,14 +927,13 @@ textarea {
   }
 }
 
-/* iPad Pro landscape (1024x1366) */
 @media (min-width: 1181px) and (max-width: 1366px) and (orientation: landscape) {
   .image-grid {
-    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+    grid-template-columns: repeat(5, 1fr);
   }
 
   .grid-image {
-    height: 265px; /* Ajuste de altura para iPad Mini */
+    height: 265px;
   }
 
   .back,
@@ -960,7 +941,7 @@ textarea {
   .new,
   .create,
   .upload {
-    font-size: 14px; /* Tamaño de fuente para pantallas más pequeñas */
+    font-size: 14px;
   }
 
   .space-list {
@@ -998,13 +979,13 @@ textarea {
   }
 
   .modal-content {
-    width: fit-content; /* Ancho del 90% del viewport */
+    width: fit-content;
     height: fit-content;
     max-height: 90vh;
     max-width: 95vw;
-    top: 50%; /* Posición vertical centrada */
-    left: 50%; /* Posición horizontal centrada */
-    transform: translate(-50%, -50%); /* Centrar el modal */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .modal-body {
@@ -1023,7 +1004,7 @@ textarea {
   .compartment-info-container {
     max-height: 795px;
     width: fit-content;
-    margin-top: 0px; /* Add margin for separation */
+    margin-top: 0px;
     padding: 0px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -1050,7 +1031,7 @@ textarea {
   }
 
   .grid-image {
-    height: 40px; /* Ajuste de altura para iPad Mini */
+    height: 40px;
   }
 
   .space-list {
@@ -1067,7 +1048,7 @@ textarea {
   }
 
   .grid-image {
-    height: 40px; /* Ajuste de altura para iPad Mini */
+    height: 40px;
   }
 
   .title h5{
@@ -1083,13 +1064,13 @@ textarea {
   }
 
   .modal-content {
-    width: fit-content; /* Ancho del 90% del viewport */
+    width: fit-content;
     height: fit-content;
     max-height: 90vh;
     max-width: 95vw;
-    top: 50%; /* Posición vertical centrada */
-    left: 50%; /* Posición horizontal centrada */
-    transform: translate(-50%, -50%); /* Centrar el modal */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .modal-body {
@@ -1108,7 +1089,7 @@ textarea {
   .compartment-info-container {
     max-height: 290px;
     width: fit-content;
-    margin-top: 0px; /* Add margin for separation */
+    margin-top: 0px;
     padding: 0px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -1137,7 +1118,7 @@ textarea {
   }
 
   .grid-image {
-    height: 155px; /* Ajuste de altura para iPad Mini */
+    height: 155px;
   }
 
   .title h5{
@@ -1157,13 +1138,13 @@ textarea {
   }
 
   .modal-content {
-    width: fit-content; /* Ancho del 90% del viewport */
+    width: fit-content;
     height: fit-content;
     max-height: 90vh;
     max-width: 95vw;
-    top: 50%; /* Posición vertical centrada */
-    left: 50%; /* Posición horizontal centrada */
-    transform: translate(-50%, -50%); /* Centrar el modal */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .modal-body {
@@ -1182,7 +1163,7 @@ textarea {
   .compartment-info-container {
     max-height: 315px;
     width: fit-content;
-    margin-top: 0px; /* Add margin for separation */
+    margin-top: 0px;
     padding: 0px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -1198,7 +1179,7 @@ textarea {
   }
 
   .grid-image {
-    height: 190px; /* Ajuste de altura para iPad Mini */
+    height: 190px;
   }
 
   .title h5{
@@ -1221,11 +1202,11 @@ textarea {
   }
 
   .image-grid {
-    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+    grid-template-columns: repeat(5, 1fr);
   }
 
   .grid-image {
-    height: 150px; /* Ajuste de altura para iPad Mini */
+    height: 150px;
   }
 
   .back,
@@ -1233,7 +1214,7 @@ textarea {
   .new,
   .create,
   .upload {
-    font-size: 12px; /* Tamaño de fuente para pantallas más pequeñas */
+    font-size: 12px;
   }
 
   .space-list {
@@ -1267,13 +1248,13 @@ textarea {
   }
 
   .modal-content {
-    width: fit-content; /* Ancho del 90% del viewport */
+    width: fit-content;
     height: fit-content;
     max-height: 90vh;
     max-width: 95vw;
-    top: 50%; /* Posición vertical centrada */
-    left: 50%; /* Posición horizontal centrada */
-    transform: translate(-50%, -50%); /* Centrar el modal */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .modal-body {
@@ -1292,7 +1273,7 @@ textarea {
   .compartment-info-container {
     max-height: 345px;
     width: fit-content;
-    margin-top: 0px; /* Add margin for separation */
+    margin-top: 0px;
     padding: 0px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -1304,11 +1285,11 @@ textarea {
 /* iPad Pro landscape (1024x1366) */
 @media (min-width: 1367px) {
   .image-grid {
-    grid-template-columns: repeat(5, 1fr); /* Ajuste para iPad Mini */
+    grid-template-columns: repeat(5, 1fr);
   }
 
   .grid-image {
-    height: 300px; /* Ajuste de altura para iPad Mini */
+    height: 300px;
   }
 
 }
