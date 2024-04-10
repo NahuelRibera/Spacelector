@@ -44,17 +44,21 @@
     <div class="row align-items-center">
       <!-- Image column -->
       <div class="col-md-6">
-        <img src="path_to_your_image.jpg" alt="Showcase Image" class="img-fluid">
+        <%= image_tag "boombbba.png", alt: "Showcase Image", class: "img-fluid" %>
       </div>
       <!-- Text and CTA column -->
       <div class="col-md-6">
         <div class="hero-content">
-          <div class="logo">
-            <img src="path_to_your_logo.png" alt="Logo" class="logo-image">
+          <div class="logo-2">
+            <%= image_tag "spacelector.png", class: "logo-image"%>
           </div>
-          <h1>Store, access, and share your files in one secure place</h1>
-          <p>Store any and every file. Access files anytime, anywhere from your desktop and mobile devices. Control how files are shared.</p>
-          <a href="#" class="btn btn-primary">Get started</a>
+          <h1>Store and find your belongings fast, in one secure place</h1>
+          <p>Store and find anything. Access to your space anytime, anywhere from your desktop and mobile devices. Find anything in seconds.</p>
+            <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
+              <%= button_tag(type: 'submit', class: 'btn btn-primary') do %>
+                Get Started
+              <% end %>
+            <% end %>
         </div>
       </div>
     </div>
@@ -95,19 +99,6 @@
   </div>
 </div>
 
-<!-- Hero Section -->
-<div class="hero-section">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <h1>Manage Your Space With Ease</h1>
-        <p>Our app transforms your physical storage into an easily navigable digital space.</p>
-        <a href="#" class="btn btn-primary">Get Started</a>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Feature Columns -->
 <div class="feature-columns">
   <div class="container">
@@ -128,27 +119,20 @@
   </div>
 </div>
 
-<!-- More Information Sections -->
-<div class="more-info-sections">
+<!-- Hero Section -->
+<div class="hero-section">
   <div class="container">
     <div class="row">
-      <!-- Add your additional sections here with .col-12 or .col-md-6 etc. -->
+      <div class="col-12">
+        <h1>Manage Your Space With Ease</h1>
+        <p>Our app transforms your physical storage into an easily navigable digital space.</p>
+        <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
+          <%= button_tag(type: 'submit', class: 'btn btn-primary') do %>
+            Get Started
+          <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
-</div>
-
-<!-- Testimonials -->
-<div class="testimonials">
-  <div class="container">
-    <!-- Testimonials carousel or grid here -->
-  </div>
-</div>
-
-<!-- Call to Action -->
-<div class="call-to-action">
-  <div class="container">
-    <h2>Ready to Organize Your Space?</h2>
-    <a href="#" class="btn btn-primary btn-lg">Sign Up Now</a>
   </div>
 </div>
   <% end %>

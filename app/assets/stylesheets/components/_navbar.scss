@@ -367,3 +367,28 @@
     }
   }
 }
+
+.google-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0; // Ensure there's no margin that might affect the layout
+  display: flex; // This will help center the image vertically
+  align-items: center; // Align the image vertically in the button
+
+  &:hover, &:focus {
+    outline: none;
+    background: none; // Remove background change on hover/focus
+  }
+
+  img {
+    height: 35px; // Set the initial height to match the size of the sign-out button
+    width: auto; // Maintain aspect ratio
+
+    @media (max-width: 768px) {
+      height: 25px; // Adjust the size on smaller screens
+    }
+
+    // You can add more media queries if necessary to adjust the image size on various screen sizes
+  }
+}
