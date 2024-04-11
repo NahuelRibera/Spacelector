@@ -170,31 +170,41 @@ $background-light: #f8f9fa;
 $text-color: #4a4a4a;
 
 .hero {
-  padding: 4rem 0;
+  padding: 11rem 0;
   background-color: #fff; // or any color that matches your design
   .container {
     display: flex;
     align-items: center;
   }
-  img.img-fluid {
-    max-width: 100%;
+  img.img-1 {
+    width: 700px;
     height: auto;
+    align-items: center;
+    justify-content: center;
   }
+
+  .img {
+    margin-right: 20px;
+  }
+
   .hero-content {
+    width: 660px;
+    margin-left: 20px;
+
     .logo-2 {
-      margin-bottom: 2rem;
+      margin-bottom: 50px;
     }
     .logo-image {
-      height: 60px; // Set the height of your logo
+      height: 75px; // Set the height of your logo
     }
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+      font-size: 45px;
+      margin-bottom: 35px;
       color: #333; // or your chosen color for headings
     }
     p {
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
+      font-size: 20px;
+      margin-bottom: 55px;
       color: #666; // or your chosen color for text
     }
     .btn-primary {
@@ -288,6 +298,7 @@ a {
     font-size: 2.5rem;
     color: $secondary-color;
     margin-bottom: 1rem;
+
   }
 
   p {
@@ -375,4 +386,8 @@ a {
       margin-bottom: 1rem;
     }
   }
+}
+
+.hero-content h1{
+  text-align: left;
 }
