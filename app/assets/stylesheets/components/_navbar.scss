@@ -439,7 +439,7 @@
   font-family: 'open sans', sans-serif;
   font-size: 16px;
   font-weight:400;
-  margin-left: 11px;
+  // margin-left: 11px;
 
 
   &:hover {
@@ -473,4 +473,9 @@
     border: 1px solid #44A0D8;
     color: #44A0D8;
   }
+}
+
+.right-buttons {
+  display: flex;
+  gap: 20px;
 }
