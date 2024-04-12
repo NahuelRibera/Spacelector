@@ -185,6 +185,89 @@ function waitForCompartmentInfoToBeReady(compartmentId, callback) {
   checkForCompartmentInfo();
 }
 
+// JavaScript for handling the search autocomplete dropdown
+
+// JavaScript for handling the search autocomplete dropdown
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.querySelector('.search-input');
+  const searchResultsDropdown = document.getElementById('search-results-dropdown');
+
+searchInput.addEventListener('input', debounce(function(event) {
+  const query = event.target.value;
+
+  if (query.length > 1) {
+    // To avoid too many requests for short queries
+    fetch(`/autocomplete_search?query=${encodeURIComponent(query)}`, {
+      headers: {
+        'Accept': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Clear previous results
+      searchResultsDropdown.innerHTML = '';
+
+      // Add new results to the dropdown
+      data.forEach((description) => {
+        const resultItem = document.createElement('div');
+        resultItem.classList.add('search-result-item');
+        resultItem.textContent = description;
+        resultItem.addEventListener('click', () => {
+          // Redirect the user as needed here
+          window.location.href = `/spaces/search?query=${encodeURIComponent(description)}`;
+        });
+        searchResultsDropdown.appendChild(resultItem);
+      });
+
+      // Show the results dropdown if there are results
+      searchResultsDropdown.style.display = data.length > 0 ? 'block' : 'none';
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  } else {
+    searchResultsDropdown.style.display = 'none';
+  }
+}, 200));
+
+  // Hide the dropdown when clicking outside
+  document.addEventListener('click', function(event) {
+    if (!searchInput.contains(event.target)) {
+      searchResultsDropdown.style.display = 'none';
+    }
+  });
+});
+
+// Debounce function
+function debounce(func, wait, immediate) {
+  var timeout;
+  return function() {
+    var context = this, args = arguments;
+    var later = function() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+};
+
+
+// Debounce function to limit the number of AJAX calls made while typing
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
 
   document.addEventListener('DOMContentLoaded', handlePageLoad);
   // Define the debounce function

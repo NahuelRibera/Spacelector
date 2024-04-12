@@ -16,9 +16,11 @@
   <% if user_signed_in? %>
     <div class="navbar-search-container">
       <%= form_with url: search_spaces_path, method: :get, local: true, class: "search-form" do |form| %>
-        <%= form.text_field :query, placeholder: "What are you looking for?", class: "search-input" %>
+        <%= form.text_field :query, placeholder: "What are you looking for?", autocomplete: "off", class: "search-input" %>
       <% end %>
     </div>
+    <!-- Somewhere in your HTML, possibly at the end of the body -->
+    <div id="search-results-dropdown" class="search-results-dropdown"></div>
 
     <ul class="navbar-nav">
       <a href="<%= checkout_path %>" class="premium-trial">

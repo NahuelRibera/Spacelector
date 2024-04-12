@@ -45,4 +45,5 @@ Rails.application.routes.draw do
   post 'convert_heic', to: 'images#convert_heic', as: :convert_heic
   get 'compartments/:compartment_id/object_infos/last', to: 'object_infos#last', as: 'fetch_last_compartment_object_info'
   get 'images/:id/conversion_complete', to: 'images#conversion_complete', as: :conversion_complete
+  get 'autocomplete_search', to: 'spaces#autocomplete_search'
 end
