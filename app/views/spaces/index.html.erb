@@ -37,6 +37,7 @@
       });
     </script>
   <% else %>
+  <%# /////////////////////////////////////////////////////////////////////// %>
   </section>
   <section id="content">
 <div class="hero">
@@ -44,7 +45,7 @@
     <div class="row align-items-center">
       <!-- Image column -->
       <div class="col-md-6">
-        <%= image_tag "boombbba.png", alt: "Showcase Image", class: "img-fluid" %>
+        <%= image_tag "boombbba.png", alt: "Showcase Image", class: "img-1" %>
       </div>
       <!-- Text and CTA column -->
       <div class="col-md-6">
@@ -55,7 +56,7 @@
           <h1>Store and find your belongings fast, in one secure place</h1>
           <p>Store and find anything. Access to your space anytime, anywhere from your desktop and mobile devices. Find anything in seconds.</p>
             <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
-              <%= button_tag(type: 'submit', class: 'btn btn-primary') do %>
+              <%= button_tag(type: 'submit', class: 'btn go-to') do %>
                 Get Started
               <% end %>
             <% end %>
@@ -127,7 +128,7 @@
         <h1>Manage Your Space With Ease</h1>
         <p>Our app transforms your physical storage into an easily navigable digital space.</p>
         <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
-          <%= button_tag(type: 'submit', class: 'btn btn-primary') do %>
+          <%= button_tag(type: 'submit', class: 'btn go-to') do %>
             Get Started
           <% end %>
         <% end %>
