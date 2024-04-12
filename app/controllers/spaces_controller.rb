@@ -43,6 +43,16 @@ class SpacesController < ApplicationController
     end
   end
 
+  def autocomplete_search
+    query = params[:query]
+    results = Compartment.joins(:object_infos)
+                         .where("object_infos.description ILIKE ?", "%#{query}%")
+                         .limit(5) # you can set a limit to the number of results
+                         .distinct
+                         .pluck(:description)
+    render json: results # This will return an array of descriptions
+  end
+
   def show
     @space = Space.find(params[:id])
     @image = @space.images.first # Or fetch the desired image using your logic
