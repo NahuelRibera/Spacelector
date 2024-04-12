@@ -47,10 +47,15 @@ class SpacesController < ApplicationController
     query = params[:query]
     results = Compartment.joins(:object_infos)
                          .where("object_infos.description ILIKE ?", "%#{query}%")
-                         .limit(5) # you can set a limit to the number of results
+                         .limit(5)
                          .distinct
-                         .pluck(:description)
-    render json: results # This will return an array of descriptions
+                         .pluck('object_infos.description')
+
+    # Split by slashes or commas and then further split by spaces to get individual words
+    results = results.map { |description| description.split(/[\/,]/).map(&:strip) }.flatten
+    results = results.map { |item| item.split(/\s+/) }.flatten
+    results = results.select { |word| word.downcase.start_with?(query.downcase) }
+    render json: results.uniq
   end
 
   def show
