@@ -479,3 +479,25 @@
   display: flex;
   gap: 20px;
 }
+
+/* Add this CSS to your stylesheets */
+.search-results-dropdown {
+  position: absolute;
+  top: 100%; /* Adjust if necessary based on the exact position of your search bar */
+  left: 0;
+  width: 100%; /* May need to adjust based on the width of your search bar */
+  background-color: #fff;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1000;
+  display: none; /* Initially hidden */
+}
+
+.search-result-item {
+  padding: 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+}
+
+.search-result-item:hover {
+  background-color: #f6f6f6;
+}

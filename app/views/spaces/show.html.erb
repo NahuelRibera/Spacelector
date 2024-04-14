@@ -185,6 +185,21 @@ function waitForCompartmentInfoToBeReady(compartmentId, callback) {
   checkForCompartmentInfo();
 }
 
+// JavaScript for handling the search autocomplete dropdow
+
+
+// Debounce function to limit the number of AJAX calls made while typing
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
 
   document.addEventListener('DOMContentLoaded', handlePageLoad);
   // Define the debounce function
@@ -220,6 +235,11 @@ function createCompartmentInfoBox(compartment) {
   textarea.id = 'description-' + compartment.id;
   textarea.dataset.compartmentId = compartment.id;
 
+  fetchCompartmentObjectInfo(compartment.id).then(description => {
+    textarea.value = description; // Set the fetched description
+    autoResizeTextarea({target: textarea}); // Adjust the textarea height based on the new content
+  });
+
   // Fetch the latest object_info for this compartment and update the textarea value
   fetchCompartmentObjectInfo(compartment.id).then(description => {
     textarea.value = description; // Set the fetched description
@@ -229,6 +249,7 @@ function createCompartmentInfoBox(compartment) {
     const compartmentId = event.target.dataset.compartmentId;
     const descriptionValue = event.target.value;
     saveCompartmentInfoDebounced(compartmentId, descriptionValue);
+    autoResizeTextarea(event); // Ensure resizing on manual input as well
   }, 500));
 
   box.appendChild(label);
