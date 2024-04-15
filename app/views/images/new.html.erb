@@ -121,8 +121,19 @@
       });
     }
 
+    function disableScroll() {
+      document.body.style.overflow = 'hidden';
+      document.body.style.height = '100%';
+    }
+
+    function enableScroll() {
+      document.body.style.overflow = 'auto';
+      document.body.style.height = 'auto';
+    }
+
     function handleStart(event) {
       isDrawing = true;
+      disableScroll();
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvas.width / rect.width;
       const scaleY = canvas.height / rect.height;
@@ -155,6 +166,7 @@
 
     function handleEnd(event) {
       isDrawing = false;
+      enableScroll();
       saveCompartment();
     }
 
@@ -163,14 +175,14 @@
     canvas.addEventListener('mouseup', handleEnd);
 
     canvas.addEventListener('touchstart', function(event) {
-      event.preventDefault();
+      event.preventDefault(); // Prevents the default touch action from happening
       handleStart(event.touches[0]);
-    });
+    }, { passive: false });
 
     canvas.addEventListener('touchmove', function(event) {
-      event.preventDefault();
+      event.preventDefault(); // Prevents the default touch action from happening
       handleMove(event.touches[0]);
-    });
+    }, { passive: false });
 
     canvas.addEventListener('touchend', handleEnd);
 
