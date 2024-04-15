@@ -169,27 +169,40 @@ $secondary-color: #333;
 $background-light: #f8f9fa;
 $text-color: #4a4a4a;
 
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .hero {
   padding: 11rem 0;
   background-color: #fff; // or any color that matches your design
   .container {
     display: flex;
     align-items: center;
+    max-width: 90vw;
+    justify-content: center;
+    gap: 40px;
   }
   img.img-1 {
     width: 700px;
     height: auto;
     align-items: center;
     justify-content: center;
+    margin-right: 50px;
   }
 
-  .img {
-    margin-right: 20px;
+
+  .col-md-6 {
+    height: fit-content;
+    width: fit-content;
   }
 
   .hero-content {
-    width: 660px;
-    margin-left: 20px;
+    margin-left: 50px;
+    width: fit-content;
+    max-width: 650px;
 
     .logo-2 {
       margin-bottom: 50px;
@@ -197,25 +210,96 @@ $text-color: #4a4a4a;
     .logo-image {
       height: 75px; // Set the height of your logo
     }
+
     h1 {
-      font-size: 45px;
+      font-size: 50px;
       margin-bottom: 35px;
       color: #333; // or your chosen color for headings
     }
+
+    h2 {
+      font-size: 40px;
+      margin-bottom: 35px;
+      color: #333; // or your chosen color for headings
+    }
+
     p {
       font-size: 20px;
-      margin-bottom: 55px;
       color: #666; // or your chosen color for text
     }
+
     .btn-primary {
       background-color: #4285f4; // or your primary color
       border: none;
+      margin-top: 55px;
+
       &:hover {
         background-color: darken(#4285f4, 10%); // or the darkened primary color
       }
     }
   }
 }
+
+
+.hero-2 {
+  padding: 11rem 0;
+  background-color: #fff; // or any color that matches your design
+
+  .container {
+    display: flex;
+    align-items: center;
+    max-width: 90vw;
+    justify-content: center;
+  }
+  img.img-2 {
+    width: 700px;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    margin-left: 50px;
+  }
+
+.hero-content-2 {
+  margin-right: 50px;
+  width: fit-content;
+  max-width: 650px;
+
+  .logo-2 {
+    margin-bottom: 50px;
+  }
+  .logo-image {
+    height: 75px; // Set the height of your logo
+  }
+
+  h1 {
+    font-size: 50px;
+    margin-bottom: 35px;
+    color: #333; // or your chosen color for headings
+  }
+
+  h2 {
+    font-size: 40px;
+    margin-bottom: 35px;
+    color: #333; // or your chosen color for headings
+  }
+
+  p {
+    font-size: 20px;
+    color: #666; // or your chosen color for text
+  }
+
+  .btn-primary {
+    background-color: #4285f4; // or your primary color
+    border: none;
+    margin-top: 55px;
+
+    &:hover {
+      background-color: darken(#4285f4, 10%); // or the darkened primary color
+    }
+  }
+}
+}
+
 
 @media (max-width: 768px) {
   .hero {
@@ -391,4 +475,34 @@ a {
 
 .hero-content h1{
   text-align: left;
+}
+
+#content-home {
+  margin-top: -50px;
+}
+
+
+
+.review-section {
+  padding: 5rem 0;
+}
+
+.review-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.comment {
+  font-size: 16px;
+  line-height: 1.6;
 }
