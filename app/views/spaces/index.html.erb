@@ -39,10 +39,10 @@
   <% else %>
   <%# /////////////////////////////////////////////////////////////////////// %>
   </section>
-  <section id="content">
+  <section id="content-home">
 <div class="hero">
   <div class="container">
-    <div class="row align-items-center">
+    <div class="row">
       <!-- Image column -->
       <div class="col-md-6">
         <%= image_tag "boombbba.png", alt: "Showcase Image", class: "img-1" %>
@@ -53,8 +53,9 @@
           <div class="logo-2">
             <%= image_tag "spacelector.png", class: "logo-image"%>
           </div>
-          <h1>Store and find your belongings fast, in one secure place</h1>
-          <p>Store and find anything. Access to your space anytime, anywhere from your desktop and mobile devices. Find anything in seconds.</p>
+          <h1>What are you looking for?</h1>
+
+          <p>Manage your space to access your belongings. Take or upload a<br>picture, select spaces, add information.<strong> Find anything in seconds.</strong></p>
             <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
               <%= button_tag(type: 'submit', class: 'btn go-to') do %>
                 Get Started
@@ -67,41 +68,84 @@
 </div>
 
 <!-- Info Section - Text Left, Image Right -->
-<div class="info-section bg-light">
+<div class="hero-2 bg-light img-right">
   <div class="container">
-    <div class="row align-items-center">
+    <div class="row">
       <!-- Text column -->
       <div class="col-md-6">
-        <h2>Visualize Your Space: Create and Customize Compartments</h2>
+        <div class="hero-content-2">
+
+        <h2>Visualize Your Space:<br>Create and Customize Compartments</h2>
         <p>Simplify how you organize with our compartmental visualization feature. Upload images of your storage areas and easily draw compartments directly on the photos. Each compartment can be labeled and customized to represent distinct sections of your space, such as drawers or shelves.</p>
+      </div>
       </div>
       <!-- Image column -->
       <div class="col-md-6">
-        <%= image_tag "secondfeature.png", alt: "Showcase Image", class: "img-fluid" %>
+        <%= image_tag "secondfeature.png", alt: "Showcase Image", class: "img-2" %>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Info Section - Image Left, Text Right -->
-<div class="info-section">
+<div class="hero">
   <div class="container">
-    <div class="row align-items-center">
+    <div class="row">
       <!-- Image column -->
       <div class="col-md-6">
-        <%= image_tag "firstfeature2.png", alt: "Showcase Image", class: "img-fluid" %>
+        <%= image_tag "firstfeature2.png", alt: "Showcase Image", class: "img-1" %>
       </div>
       <!-- Text column -->
       <div class="col-md-6">
-        <h2>Enhanced Search: Find Items by Text and Image</h2>
+      <div class="hero-content">
+        <h2>Enhanced Search:<br>Find Items by Text and Image</h2>
         <p>Experience a new level of searching where visuals meet text. With our advanced search options, you're not limited to just typing keywords. Our platform allows you to navigate visually through spaces and compartments and utilize a traditional text search to pinpoint your items. Whether it’s a quick glance at an image or a specific keyword entry, finding what you need becomes seamless and intuitive.</p>
+      </div>
       </div>
     </div>
   </div>
 </div>
 
+
+<!-- Review Section -->
+<div class="review-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-3">
+        <div class="review-card">
+          <%= image_tag "mecanico.jpg", alt: "Profile Image", class: "profile-image" %>
+          <p class="comment">As a mechanic, keeping my workshop organized has always been a challenge. I can label compartments for different tools, parts, and equipment. Need a specific wrench or socket? Just type it into the search bar, and voila! The highlighted results show me exactly where it is.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="review-card">
+          <%= image_tag "velero.jpg", alt: "Profile Image", class: "profile-image" %>
+          <p class="comment">In the world of tattooing, precision and organization are key, and this app delivers on both fronts. I can photograph each workstation, label compartments for ink, needles, and equipment, and even add notes for specific client preferences. A definite must-have for any tattoo artist serious about their craft!</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="review-card">
+          <%= image_tag "tattoo.jpg", alt: "Profile Image", class: "profile-image" %>
+          <p class="comment">In the world of tattooing, precision and organization are key, and this app delivers on both fronts. I can photograph each workstation, label compartments for ink, needles, and equipment, and even add notes for specific client preferences. A definite must-have for any tattoo artist serious about their craft!
+</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="review-card">
+          <%= image_tag "mecanico.jpg", alt: "Profile Image", class: "profile-image" %>
+          <p class="comment">As a mechanic, keeping my workshop organized has always been a challenge. I can label compartments for different tools, parts, and equipment. Need a specific wrench or socket? Just type it into the search bar, and voila! The highlighted results show me exactly where it is.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 <!-- Feature Columns -->
-<div class="feature-columns">
+<div class="feature-column">
   <div class="container">
     <div class="row">
       <div class="col-md-4">
