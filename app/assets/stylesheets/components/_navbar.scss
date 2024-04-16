@@ -501,3 +501,37 @@
 .search-result-item:hover {
   background-color: #f6f6f6;
 }
+
+
+//////////
+///
+///  font-family: 'Open Sans', sans-serif;
+
+.nav-section-item {
+  display: flex;
+  align-items: center;
+  margin: 0 0.5rem; // Maintain margin on the left and right
+}
+
+.nav-link-section {
+  color: #333;
+  text-transform: capitalize;
+  font-weight: 400; // This is the font weight that was originally set
+  padding: 0.5rem 0.75rem;
+  font-size: 20px; // Original font size
+  font-family: 'Open Sans', sans-serif; // Maintain the Open Sans font family
+  display: flex;
+  align-items: center;
+  transition: color 0.3s; // Transition for color only
+
+  &:hover {
+    color: #44A0D8; // Text turns full black on hover
+    text-decoration: none; // No underline on hover
+    background-color: transparent; // No background color on hover
+    box-shadow: none; // No box shadow on hover
+  }
+
+  &.active {
+    border-bottom: 2px solid blue; // Underline for active state as shown in the image
+  }
+}
