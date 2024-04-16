@@ -4,10 +4,10 @@
     <%= image_tag "spacelector.png", class: "logo" %>
     <% if !user_signed_in? %>
       <ul class="navbar-nav">
-        <li class="nav-item"><%= link_to "Overview", "#section1", class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Features", "#section2", class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Pricing", "#section3", class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Download", "#section4", class: "nav-link" %></li>
+          <li class="nav-section-item"><%= link_to "Overview", "#section1", class: "nav-link-section" %></li>
+          <li class="nav-section-item"><%= link_to "Features", "#section2", class: "nav-link-section" %></li>
+          <li class="nav-section-item"><%= link_to "Pricing", "#section3", class: "nav-link-section" %></li>
+          <li class="nav-section-item"><%= link_to "Download", "#section4", class: "nav-link-section" %></li>
       </ul>
     <% end %>
   <% end %>
@@ -48,3 +48,55 @@
     </div>
   <% end %>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const navLinks = document.querySelectorAll('.nav-link-section');
+    const sections = document.querySelectorAll('section'); // Ensure the selector matches your sections
+
+    // Set the 'active' class based on the scroll position
+    function setActiveLinkOnScroll() {
+      let currentSectionIndex = -1;
+      sections.forEach((section, index) => {
+        const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionBottom) {
+          currentSectionIndex = index;
+        }
+      });
+
+      if (currentSectionIndex !== -1) {
+        navLinks.forEach((link, index) => {
+          link.classList.toggle('active', index === currentSectionIndex);
+        });
+      }
+    }
+
+    // Listen to scroll events
+    window.addEventListener('scroll', setActiveLinkOnScroll);
+
+    // Smooth scroll to the section when a nav link is clicked
+    navLinks.forEach((link, index) => {
+      link.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default anchor behavior
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+
+        // Perform smooth scrolling to the target section
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+
+        // Set 'active' class after scrolling ends
+        navLinks.forEach(lnk => lnk.classList.remove('active'));
+        link.classList.add('active');
+
+        // Update the URL hash without page jump
+        history.pushState(null, null, '#' + targetId);
+      });
+    });
+
+    // Update active link on load and when resizing or changing the orientation of the device
+    setActiveLinkOnScroll();
+    window.addEventListener('resize', setActiveLinkOnScroll);
+    window.addEventListener('orientationchange', setActiveLinkOnScroll);
+  });
+</script>
