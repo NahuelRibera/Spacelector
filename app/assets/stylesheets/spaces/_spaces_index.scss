@@ -506,3 +506,34 @@ a {
   font-size: 16px;
   line-height: 1.6;
 }
+
+.discover {
+  text-align: center;
+    margin-top: 20px; /* Adjust as needed */
+    margin-bottom: 20px; /* Adjust as needed */
+  }
+
+  .discover hr {
+    border-top: 1px solid #ccc;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 100px;
+  }
+
+  .discover a {
+    display: block; /* Makes the entire line clickable */
+    color: #666666; /* Adjust link color as needed */
+    text-decoration: none;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 25px;
+  }
+
+  .arrow a{
+    margin-top: 5px;
+    color: #666666;
+  }
+
+  .discover a:hover {
+    text-decoration: none; /* Add underline on hover */
+  }
