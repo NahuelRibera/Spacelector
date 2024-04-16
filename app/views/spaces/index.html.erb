@@ -55,7 +55,7 @@
           </div>
           <h1>What are you looking for?</h1>
 
-          <p>Manage your space to access your belongings. Take or upload a<br>picture, select spaces, add information.<strong> Find anything in seconds.</strong></p>
+          <p style="margin-bottom: 35px;">Manage your space to access your belongings. Take or upload a<br>picture, select spaces, add information.<strong> Find anything in seconds.</strong></p>
             <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
               <%= button_tag(type: 'submit', class: 'btn go-to') do %>
                 Get Started
@@ -120,7 +120,9 @@
       <div class="col-md-3">
         <div class="review-card">
           <%= image_tag "velero.jpg", alt: "Profile Image", class: "profile-image" %>
-          <p class="comment">In the world of tattooing, precision and organization are key, and this app delivers on both fronts. I can photograph each workstation, label compartments for ink, needles, and equipment, and even add notes for specific client preferences. A definite must-have for any tattoo artist serious about their craft!</p>
+          <p class="comment">Managing the limited space onboard my sailboat isn't a probem anymore. I can easily categorize and optimize every compartment, ensuring I have ample room for all my sailing essentials. The search feature is a godsend, allowing me to swiftly locate items, whether it's a spare sail or a tube of sunscreen.
+
+</p>
         </div>
       </div>
       <div class="col-md-3">
