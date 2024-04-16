@@ -402,8 +402,9 @@ a {
 }
 
 // Feature Columns
-.feature-columns {
+.feature-column {
   padding: 4rem 0;
+  background-color: white;
 
   .col-md-4 {
     margin-bottom: 2rem;
@@ -491,7 +492,6 @@ a {
   background-color: #ffffff;
   border-radius: 20px;
   padding: 20px;
-  margin-bottom: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -518,15 +518,14 @@ a {
     width: 50%;
     margin: 0 auto;
     margin-top: 100px;
+    margin-bottom: 30px;
   }
 
   .discover a {
-    display: block; /* Makes the entire line clickable */
     color: #666666; /* Adjust link color as needed */
     text-decoration: none;
     text-decoration: none;
     font-size: 16px;
-    margin-top: 25px;
   }
 
   .arrow a{
