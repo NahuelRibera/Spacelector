@@ -8,13 +8,11 @@
     <ul class="space-list">
       <% @spaces.each do |space| %>
         <li>
-          <div class="space-box">
-            <%= link_to space_path(space) do %>
-              <%= space.name %>
-            <% end %>
-
+          <div class="space-info" style="cursor: pointer; position: relative;">
+            <!-- This div becomes the clickable area, excluding the delete button -->
+            <%= link_to space.name, space_path(space), class: "space-link" %>
             <%= form_with url: space_path(space), method: :delete, class: "delete-form" do |form| %>
-              <%= form.submit 'X', onclick: "return confirm('Are you sure you want to delete this space?')", class: 'delete-space' %>
+              <%= form.submit 'X', onclick: "return confirm('Are you sure you want to delete this space?')", class: 'delete-space', style: "position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" %>
             <% end %>
           </div>
         </li>
@@ -23,15 +21,24 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function() {
-        const deleteButtons = document.querySelectorAll(".delete-space");
+        // Similar functionality as in the show view
+        const spaceInfos = document.querySelectorAll('.space-info');
 
-        deleteButtons.forEach(button => {
-          button.addEventListener("click", function(event) {
-            const confirmationMessage = 'Are you sure you want to delete this space?';
-
-            if (!confirm(confirmationMessage)) {
-              event.preventDefault();
+        spaceInfos.forEach(spaceInfo => {
+          spaceInfo.addEventListener('click', function(event) {
+            const spaceLink = this.querySelector('.space-link');
+            if (spaceLink) {
+              window.location.href = spaceLink.href;
             }
+          });
+        });
+
+        const deleteButtons = document.querySelectorAll('.delete-space');
+
+        deleteButtons.forEach(deleteButton => {
+          deleteButton.addEventListener('click', function(event) {
+            event.stopPropagation(); // This prevents the click from bubbling up to the .space-info
+            // The rest of the delete action remains unchanged
           });
         });
       });
