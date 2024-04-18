@@ -136,15 +136,14 @@
         <div class="review-card">
           <%= image_tag "velero.jpg", alt: "Profile Image", class: "profile-image" %>
           <p class="comment">Managing the limited space onboard my sailboat isn't a probem anymore. I can easily categorize and optimize every compartment, ensuring I have ample room for all my sailing essentials. The search feature is a godsend, allowing me to swiftly locate items, whether it's a spare sail or a tube of sunscreen.
-
-</p>
+          </p>
         </div>
       </div>
       <div class="col-md-3">
         <div class="review-card">
           <%= image_tag "tattoo.jpg", alt: "Profile Image", class: "profile-image" %>
           <p class="comment">In the world of tattooing, precision and organization are key, and this app delivers on both fronts. I can photograph each workstation, label compartments for ink, needles, and equipment, and even add notes for specific client preferences. A definite must-have for any tattoo artist serious about their craft!
-</p>
+          </p>
         </div>
       </div>
       <div class="col-md-3">
@@ -161,19 +160,16 @@
 <div id="section4" class="hero-section">
   <div class="container">
     <div class="row">
-      <div class="col-12">
-        <h1>Manage Your Space With Ease</h1>
-        <p>Our app transforms your physical storage into an easily navigable digital space.</p>
+        <%= image_tag "spacelector_crop.png", class: "logo-below"%>
+        <div class="terms">
+        <p>Transform your physical storage into an easily navigable digital space.<br>By clicking "Get Started", you agree to our <a href="/terms-and-conditions"><strong>Terms and Conditions</strong></a>.</p>
+        </div>
         <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
-          <%= button_tag(type: 'submit', class: 'btn go-to') do %>
+          <%= button_tag(type: 'submit', class: 'btn go-to', style: "margin-top: 20px;") do %>
             Get Started
           <% end %>
-          <p style="margin-top: 10px;">
-  By clicking "Get Started", you agree to our <a href="/terms-and-conditions">Terms and Conditions</a>.
-</p>
         <% end %>
       </div>
-    </div>
   </div>
 </div>
   <% end %>
