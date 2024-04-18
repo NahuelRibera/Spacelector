@@ -22,15 +22,13 @@
     <!-- Somewhere in your HTML, possibly at the end of the body -->
     <div id="search-results-dropdown" class="search-results-dropdown"></div>
 
-    <ul class="navbar-nav">
       <li class="nav-item">
         <%= form_with(url: destroy_user_session_path, method: :delete, local: false, class: "form-inline") do %>
-          <button type="submit" onclick="return confirm('Are you sure you want to sign out?')" class="btn nav-link sign-out-button">
+          <button type="submit" onclick="return confirm('Are you sure you want to sign out?')" class="btn nav-link sign-out-button" style="margin-left: 20px">
             <%= image_tag('exit.png', alt: 'Sign out') %>
           </button>
         <% end %>
       </li>
-    </ul>
   <% else %>
   <div class="right-buttons">
 
