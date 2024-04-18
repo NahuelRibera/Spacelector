@@ -212,6 +212,7 @@ $text-color: #4a4a4a;
     .logo-2 {
       margin-bottom: 50px;
     }
+
     .logo-image {
       height: 50px; // Set the height of your logo
     }
@@ -457,28 +458,6 @@ a {
   }
 }
 
-// Media Queries for Responsiveness
-@media (max-width: 768px) {
-  .hero-section {
-    padding: 3rem 1rem;
-
-    h1 {
-      font-size: 2rem;
-    }
-
-    p {
-      font-size: 1rem;
-    }
-  }
-
-  .feature-columns .col-md-4 {
-    // Adjust grid layout for smaller screens
-    &:not(:last-child) {
-      margin-bottom: 1rem;
-    }
-  }
-}
-
 .hero-content h1{
   text-align: left;
 }
@@ -587,7 +566,7 @@ a {
   /// ///////////////////////////////////////////////////////////////////////////////////////
 
   @media (min-width: 1450px) and (max-width: 1720px) {
-    
+
   }
 
   @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
@@ -616,6 +595,62 @@ a {
 
   @media (min-width: 1181px) and (max-width: 1366px) and (orientation: landscape) {
 
+  }
+
+  @media (min-width: 1366px) and (max-width: 1607px) {
+    .row h1 {
+      font-size: 40px !important;
+    }
+
+    .row p {
+      font-size: 18px !important;
+    }
+
+    .logo-image {
+      height: 45px !important; // Set the height of your logo
+    }
+
+    img.img-1 {
+      width: 600px !important;
+      margin-right: 50px !important;
+    }
+
+    img.img-2 {
+      width: 600px !important;
+      margin-left: 50px !important;
+    }
+
+    .hero-content {
+      max-width: 620px !important;
+    }
+
+    .hero-content-2 {
+      max-width: 620px !important;
+    }
+
+    .logo-below {
+      height: 45px !important;
+    }
+
+    .review-card {
+      height: 390px;
+    }
+
+    .review-card p {
+      font-size: 16px !important;
+    }
+
+    .profile-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    .comment p {
+      font-size: 14px !important;
+      line-height: 1.6;
+    }
   }
 
   /* iPhone SE portrait */
