@@ -44,18 +44,13 @@
       });
     </script>
   <% else %>
+   </section>
   <%# /////////////////////////////////////////////////////////////////////// %>
-  </section>
   <section id="content-home">
 <div id="section1" class="hero">
   <div class="container">
     <div class="row">
-      <!-- Image column -->
-      <%# <div class="col-md-6"> %>
         <%= image_tag "boombbba.png", alt: "Showcase Image", class: "img-1" %>
-      <%# </div> %>
-      <!-- Text and CTA column -->
-      <%# <div class="col-md-6"> %>
         <div class="hero-content">
           <div class="logo-2">
             <%= image_tag "spacelector_crop.png", class: "logo-image"%>
@@ -69,7 +64,6 @@
               <% end %>
             <% end %>
         </div>
-      <%# </div> %>
     </div>
   </div>
   <div class="discover">
@@ -79,7 +73,6 @@
     <a href="#section2"><i class="fa-solid fa-chevron-down"></i></a>
   </div>
 </div>
-
 </div>
 
 <!-- Info Section - Text Left, Image Right -->
@@ -87,35 +80,26 @@
   <div class="container">
     <div class="row">
       <!-- Text column -->
-      <div class="col-md-6">
         <div class="hero-content-2">
-
         <h2>Customize Your Space</h2>
         <p>Upload images of your storage areas and easily draw compartments directly on the photos. Each compartment can be labeled and customized to represent distinct sections of your space, such as drawers or shelves.</p>
       </div>
-      </div>
       <!-- Image column -->
-      <div class="col-md-6">
         <%= image_tag "secondfeature.png", alt: "Showcase Image", class: "img-2" %>
-      </div>
     </div>
   </div>
 </div>
 
 <!-- Info Section - Image Left, Text Right -->
-<div class="hero">
+<div class="hero", style="padding: 8rem 0;">
   <div class="container">
     <div class="row">
       <!-- Image column -->
-      <div class="col-md-6">
         <%= image_tag "firstfeature2.png", alt: "Showcase Image", class: "img-1" %>
-      </div>
       <!-- Text column -->
-      <div class="col-md-6">
       <div class="hero-content">
         <h2>Enhanced Search</h2>
           <p>Locate what you need by sight and by search, doubling your efficiency. Just add item details to your image compartments once, and our unique search feature guides you straight to your items, showcasing the image with highlighted compartments, visually emphasizing exactly where each item is stored.</p>
-      </div>
       </div>
     </div>
   </div>
