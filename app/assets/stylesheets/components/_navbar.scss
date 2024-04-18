@@ -3,7 +3,7 @@
 }
 
 .logo {
-  max-width: 160px;
+  max-width: 155px;
   height: auto;
 
   @media (max-width: 768px) {
@@ -20,6 +20,11 @@
     max-width: 110px;
     height: auto;
   }
+}
+
+.logo-home {
+  max-width: 155px;
+  height: auto;
 }
 
 .navbar {
@@ -531,3 +536,196 @@
     box-shadow: none; // No box shadow on hover
   }
 }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  margin-left: 45px;
+}
+
+
+  // NO ESCRIBIR DEBAJO SOLO RESPONSIVE
+  ///////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////////////////
+  /// ///////////////////////////////////////////////////////////////////////////////////////
+
+  @media (min-width: 1450px) and (max-width: 1720px) {
+
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .row {
+      flex-direction: column; /* Flex items stack vertically */
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 820px) and (orientation: portrait) {
+    .row {
+      flex-direction: column; /* Flex items stack vertically */
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) {
+
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+
+  }
+
+  @media (min-width: 1050px) and (max-width: 1180px) and (orientation: landscape) {
+
+  }
+
+  @media (min-width: 1181px) and (max-width: 1366px) and (orientation: landscape) {
+
+  }
+
+  @media (min-width: 1366px) and (max-width: 1607px) {
+    .row h1 {
+      font-size: 40px !important;
+    }
+
+    .row p {
+      font-size: 18px !important;
+    }
+
+    .logo-image {
+      height: 45px !important;
+    }
+
+    img.img-1 {
+      width: 600px !important;
+      margin-right: 50px !important;
+    }
+
+    img.img-2 {
+      width: 600px !important;
+      margin-left: 50px !important;
+    }
+
+    .hero-content {
+      max-width: 620px !important;
+    }
+
+    .hero-content-2 {
+      max-width: 620px !important;
+    }
+
+    .logo-below {
+      height: 45px !important;
+    }
+
+    .review-card {
+      height: 390px;
+    }
+
+    .review-card p {
+      font-size: 16px !important;
+    }
+
+    .profile-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    .comment p {
+      font-size: 14px !important;
+      line-height: 1.6;
+    }
+  }
+
+
+  /* iPhone SE portrait */
+  @media (min-width: 375px) and (max-width: 667px) and (orientation: portrait) {
+
+  }
+
+  /* iPhone SE landscape */
+  @media (min-width: 375px) and (max-width: 667px) and (orientation: landscape) {
+
+  }
+
+   /* iPhone X portrait */
+   @media (min-width: 389px) and (max-width: 896px) and (orientation: portrait) {
+    .logo-home {
+      display: none !important;
+    }
+
+    .logo-items a {
+      font-size: 12px !important;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      margin-left: 0px;
+    }
+
+    .google-btn {
+      font-size: 12px;
+    }
+
+    .go-to {
+      font-size: 12px;
+    }
+  }
+
+  /* iPhone X landscape */
+  @media (min-width: 389px) and (max-width: 896px) and (orientation: landscape) {
+    .logo-home {
+      display: none !important;
+    }
+
+    .logo-items a {
+      font-size: 10px !important;
+    }
+  }
+
+  /* iPhone 12 Pro portrait */
+  @media (min-width: 390px) and (max-width: 844px) and (orientation: portrait) {
+
+  }
+
+  /* iPhone 12 Pro landscape */
+  @media (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
+
+  }
+
+  /* iPhone 14 Pro Max portrait */
+  @media (min-width: 845px) and (max-width: 933px) and (orientation: portrait) {
+    .logo-home {
+      display: none !important;
+    }
+
+  }
+
+/* iPhone 14 Pro Max portrait */
+@media only screen and (max-device-width: 428px) and (max-device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
+  .logo-home {
+    display: none !important;
+  }
+}
+
+
+  // iphone 14 pro max (430x932)
+  @media (min-width: 845px) and (max-width: 933px) and (orientation: landscape) {
+    .logo-home {
+      display: none !important;
+    }
+  }
+
+  /* iPad Pro landscape (1024x1366) */
+  @media (min-width: 1367px) {
+
+  }
