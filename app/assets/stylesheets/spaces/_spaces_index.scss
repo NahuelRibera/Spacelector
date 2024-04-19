@@ -150,7 +150,8 @@ a {
 }
 
 a:hover {
-  text-decoration: none;
+  color: #333 !important; /* Your preferred color */
+  text-decoration: none !important;
 }
 
 .space-box {
@@ -160,9 +161,9 @@ a:hover {
 }
 
 .space-box a:hover {
-  text-decoration: none;
+  color: #333 !important; /* Your preferred color */
+  text-decoration: none !important;
 }
-
 
 ///
 /// homepage
@@ -607,7 +608,7 @@ a {
     }
 
     .logo-image {
-      height: 45px !important; 
+      height: 45px !important;
     }
 
     img.img-1 {
