@@ -55,7 +55,8 @@ a {
 }
 
 a:hover {
-  text-decoration: underline; /* Underline on hover */
+  color: #333 !important; /* Your preferred color */
+  text-decoration: none !important;
 }
 
 /* Media queries for responsiveness */
