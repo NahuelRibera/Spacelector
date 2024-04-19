@@ -543,6 +543,40 @@
   margin-left: 45px;
 }
 
+.navbar-toggle {
+  position: relative;
+  display: none;
+}
+
+.dropdown-menu {
+  display: none;
+  position: fixed;
+  top: 56px;
+  background-color: white;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid #ccc; /* Add border for better visibility */
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+}
+
+.toggle-menu {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  justify-content: center;
+  margin: 0;
+}
+
+.toggle-menu li {
+  font-size: 14px !important;
+}
+
+.nav-section-item li {
+  width: fit-content;
+}
 
   // NO ESCRIBIR DEBAJO SOLO RESPONSIVE
   ///////////////////////////////////////////////////////////////////////////////////////
@@ -678,6 +712,18 @@
 
     .go-to {
       font-size: 12px;
+    }
+
+    .navbar-toggle {
+      display: block;
+    }
+
+    .navbar-nav {
+      align-items: center !important;
+    }
+
+    .nav-links {
+      display: none !important;
     }
   }
 

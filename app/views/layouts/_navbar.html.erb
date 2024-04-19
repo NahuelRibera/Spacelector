@@ -9,7 +9,17 @@
     <% end %>
 
     <% if !user_signed_in? %>
-      <div class="nav-links">
+      <div class="navbar-toggle">
+      <button id="toggleButton">Toggle Menu</button>
+      <div class="dropdown-menu" id="dropdownMenu">
+      <ul class="toggle-menu">
+        <li class="nav-section-item"><a href="#section1" class="nav-link-section">Overview</a></li>
+        <li class="nav-section-item"><a href="#section2" class="nav-link-section">Features</a></li>
+        <li class="nav-section-item"><a href="#section3" class="nav-link-section">Reviews</a></li>
+    </ul>
+  </div>
+</div>
+       <div class="nav-links">
         <ul class="navbar-nav">
           <li class="nav-section-item"><%= link_to "Overview", "#section1", class: "nav-link-section" %></li>
           <li class="nav-section-item"><%= link_to "Features", "#section2", class: "nav-link-section" %></li>
@@ -56,6 +66,23 @@
 
 
 <script>
+  document.addEventListener("DOMContentLoaded", function() {
+  var toggleButton = document.getElementById("toggleButton");
+  var dropdownMenu = document.getElementById("dropdownMenu");
+
+  toggleButton.addEventListener("click", function() {
+    if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
+      dropdownMenu.style.display = "block";
+    } else {
+      dropdownMenu.style.display = "none";
+    }
+  });
+});
+
+
+
+
+
   document.addEventListener("DOMContentLoaded", function() {
     const navLinks = document.querySelectorAll('.nav-link-section');
     const sections = document.querySelectorAll('section'); // Ensure the selector matches your sections
