@@ -663,6 +663,91 @@ a {
 
   }
 
+/* iPhone X portrait */
+@media (min-width: 389px) and (max-width: 896px) and (orientation: portrait) {
+  .hero {
+    padding: 6rem 0 !important;
+  }
+
+  .row {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .row h1 {
+    font-size: 40px !important;
+    text-align: center !important;
+  }
+
+  .row p {
+    font-size: 18px !important;
+  }
+
+  .logo-image {
+    height: 35px !important;
+    display: block !important;
+    margin: 0 auto !important;
+  }
+
+  img.img-1 {
+    width: 600px !important;
+    margin: 0 !important;
+
+  }
+
+  img.img-2 {
+    width: 600px !important;
+    margin-left: 50px !important;
+  }
+
+  .hero-content {
+    max-width: 620px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin: 0 !important;
+    margin-bottom: 50px !important;
+  }
+
+  .discover hr {
+    margin-top: 15px;
+  }
+  .container .row {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+  .hero-content-2 {
+    max-width: 620px !important;
+  }
+
+  .logo-below {
+    height: 45px !important;
+  }
+
+  .review-card {
+    height: 390px;
+  }
+
+  .review-card p {
+    font-size: 16px !important;
+  }
+
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+
+  .comment p {
+    font-size: 14px !important;
+    line-height: 1.6;
+  }
+}
+
   /* iPhone X landscape */
   @media (min-width: 389px) and (max-width: 896px) and (orientation: landscape) {
 
@@ -680,7 +765,7 @@ a {
 
   /* iPhone 14 Pro Max portrait */
   @media (min-width: 845px) and (max-width: 932px) and (orientation: portrait) {
-    
+
   }
 
 
