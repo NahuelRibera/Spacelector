@@ -72,7 +72,7 @@
   <div class="arrow">
     <a href="#section2"><i class="fa-solid fa-chevron-down"></i></a>
   </div>
-</div>
+  </div>
 </div>
 
 <!-- Info Section - Text Left, Image Right -->
@@ -81,7 +81,9 @@
     <div class="row">
       <!-- Text column -->
         <div class="hero-content-2">
-        <h2>Customize Your Space</h2>
+        <h2 class="customize">Customize Your Space</h2>
+        <h2 class="customize-phone">Customize<br>Your Space</h2>
+
         <p>Upload images of your storage areas and easily draw compartments directly on the photos. Each compartment can be labeled and customized to represent distinct sections of your space, such as drawers or shelves.</p>
       </div>
       <!-- Image column -->
@@ -91,15 +93,15 @@
 </div>
 
 <!-- Info Section - Image Left, Text Right -->
-<div class="hero", style="padding: 8rem 0;">
+<div class="hero-3">
   <div class="container">
     <div class="row">
       <!-- Image column -->
         <%= image_tag "firstfeature2.png", alt: "Showcase Image", class: "img-1" %>
       <!-- Text column -->
-      <div class="hero-content">
+      <div class="hero-content-3">
         <h2>Enhanced Search</h2>
-          <p>Locate what you need by sight and by search, doubling your efficiency. Just add item details to your image compartments once, and our unique search feature guides you straight to your items, showcasing the image with highlighted compartments, visually emphasizing exactly where each item is stored.</p>
+          <p>Locate what you need by sight and by search, doubling your efficiency. Add information to your image compartments once, then our unique search feature will guide you straight to your items, showcasing the image with highlighted compartments, visually emphasizing exactly where each item is stored.</p>
       </div>
     </div>
   </div>
@@ -112,27 +114,59 @@
     <div class="row justify-content-center">
       <div class="col-md-3">
         <div class="review-card">
-          <%= image_tag "mecanico.jpg", alt: "Profile Image", class: "profile-image" %>
+          <div class="review-header">
+            <%= image_tag "mecanico.jpg", alt: "Profile Image", class: "profile-image" %>
+            <div class="review-details">
+              <p class="names">Thomas Miller</p>
+              <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+          </div>
           <p class="comment">As a mechanic, keeping my workshop organized has always been a challenge. I can label compartments for different tools, parts, and equipment. Need a specific wrench or socket? Just type it into the search bar, and voila! The highlighted results show me exactly where it is.</p>
         </div>
       </div>
       <div class="col-md-3">
         <div class="review-card">
-          <%= image_tag "velero.jpg", alt: "Profile Image", class: "profile-image" %>
+           <div class="review-header">
+            <%= image_tag "velero.jpg", alt: "Profile Image", class: "profile-image" %>
+            <div class="review-details">
+              <p class="names">Andrés Vila</p>
+              <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+          </div>
           <p class="comment">Managing the limited space onboard my sailboat isn't a probem anymore. I can easily categorize and optimize every compartment, ensuring I have ample room for all my sailing essentials. The search feature is a godsend, allowing me to swiftly locate items, whether it's a spare sail or a tube of sunscreen.
           </p>
         </div>
       </div>
       <div class="col-md-3">
         <div class="review-card">
-          <%= image_tag "tattoo.jpg", alt: "Profile Image", class: "profile-image" %>
+           <div class="review-header">
+            <%= image_tag "tattoo.png", alt: "Profile Image", class: "profile-image" %>
+            <div class="review-details">
+              <p class="names">Jonathan Tattoo</p>
+              <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+          </div>
           <p class="comment">In the world of tattooing, precision and organization are key, and this app delivers on both fronts. I can photograph each workstation, label compartments for ink, needles, and equipment, and even add notes for specific client preferences. A definite must-have for any tattoo artist serious about their craft!
           </p>
         </div>
       </div>
       <div class="col-md-3">
         <div class="review-card">
-          <%= image_tag "mecanico.jpg", alt: "Profile Image", class: "profile-image" %>
+           <div class="review-header">
+            <%= image_tag "mecanico.jpg", alt: "Profile Image", class: "profile-image" %>
+            <div class="review-details">
+              <p class="names">Lucas Morton</p>
+              <div class="stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+            </div>
+          </div>
           <p class="comment">As a mechanic, keeping my workshop organized has always been a challenge. I can label compartments for different tools, parts, and equipment. Need a specific wrench or socket? Just type it into the search bar, and voila! The highlighted results show me exactly where it is.</p>
         </div>
       </div>
@@ -143,10 +177,12 @@
 <!-- Hero Section -->
 <div id="section4" class="hero-section">
   <div class="container">
-    <div class="row">
+    <div class="below">
         <%= image_tag "spacelector_crop.png", class: "logo-below"%>
         <div class="terms">
-        <p>Transform your physical storage into an easily navigable digital space.<br>By clicking "Get Started", you agree to our <a href="/terms-and-conditions"><strong>Terms and Conditions</strong></a>.</p>
+        <p class="transform">Transform your physical storage into an easily navigable digital space.<br>By clicking "Get Started", you agree to our <a href="/terms-and-conditions"><strong>Terms and Conditions</strong></a>.</p>
+        <p class="transform-phone">Transform your physical storage into an easily navigable digital space.<br><br>By clicking "Get Started", you agree to our <a href="/terms-and-conditions"><strong>Terms and Conditions</strong></a>.</p>
+
         </div>
         <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
           <%= button_tag(type: 'submit', class: 'btn go-to', style: "margin-top: 20px;") do %>

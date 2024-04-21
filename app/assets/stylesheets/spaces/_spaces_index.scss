@@ -308,6 +308,75 @@ $text-color: #4a4a4a;
 }
 
 
+.hero-3 {
+  padding: 8rem 0;
+  background-color: #fff; // or any color that matches your design
+
+  .container {
+    display: flex;
+    align-items: center;
+    max-width: 90vw;
+    justify-content: center;
+    gap: 40px;
+  }
+  img.img-1 {
+    width: 700px;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    margin-right: 50px;
+  }
+
+
+  .col-md-6 {
+    height: fit-content;
+    width: fit-content;
+  }
+
+  .hero-content-3 {
+    margin-left: 50px;
+    width: fit-content;
+    max-width: 650px;
+
+    .logo-2 {
+      margin-bottom: 50px;
+    }
+
+    .logo-image {
+      height: 50px; // Set the height of your logo
+    }
+
+    h1 {
+      font-size: 50px;
+      margin-bottom: 35px;
+      color: #333; // or your chosen color for headings
+    }
+
+    h2 {
+      font-size: 40px;
+      margin-bottom: 35px;
+      color: #333; // or your chosen color for headings
+    }
+
+    p {
+      font-size: 20px;
+      color: #666; // or your chosen color for text
+    }
+
+    .btn-primary {
+      background-color: #4285f4; // or your primary color
+      border: none;
+      margin-top: 55px;
+
+      &:hover {
+        background-color: darken(#4285f4, 10%); // or the darkened primary color
+      }
+    }
+  }
+}
+
+
+
 @media (max-width: 768px) {
   .hero {
     .container {
@@ -484,8 +553,33 @@ a {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  margin-bottom: 20px;
 }
+
+.review-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+}
+
+.review-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  p {
+    margin-bottom: 5px;
+    color: #666666;
+    font-weight: 700;
+  }
+}
+
+.review-details .fa-star {
+  color: #44a0d8
+}
+
 
 .comment {
   font-size: 16px;
@@ -551,6 +645,18 @@ a {
 
 .hero-section {
   padding: 6rem;
+}
+
+.customize{
+  display: block;
+}
+
+.customize-phone {
+  display: none;
+}
+
+.transform-phone {
+  display: none;
 }
 
   // NO ESCRIBIR DEBAJO SOLO RESPONSIVE
@@ -629,6 +735,10 @@ a {
       max-width: 620px !important;
     }
 
+    .hero-content-3 {
+      max-width: 620px !important;
+    }
+
     .logo-below {
       height: 45px !important;
     }
@@ -664,6 +774,179 @@ a {
 
   }
 
+/* iPhone X portrait */
+@media (min-width: 389px) and (max-width: 896px) and (orientation: portrait) {
+  .hero {
+    padding: 4rem 0 !important;
+    margin-top: 90px;
+  }
+
+  .hero-2 {
+    padding: 4rem 0 !important;
+  }
+
+  .hero-3 {
+    padding: 4rem 0 !important;
+  }
+
+  .hero-content-3 {
+    order: -1;
+    max-width: 620px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin: 0 !important;
+    margin-bottom: 3.5rem !important;
+  }
+
+  .row {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .row h1 {
+    font-size: 40px !important;
+    text-align: center !important;
+  }
+
+  .row p {
+    font-size: 18px !important;
+  }
+
+  .logo-image {
+    height: 35px !important;
+    display: block !important;
+    margin: 0 auto !important;
+  }
+
+  img.img-1 {
+    width: 600px !important;
+    margin: 0 !important;
+
+  }
+
+  img.img-2 {
+    width: 600px !important;
+    margin: 0 !important;
+  }
+
+  .hero-content {
+    max-width: 620px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin: 0 !important;
+    margin-bottom: 3.5rem !important;
+  }
+
+  .discover hr {
+    margin-top: 15px;
+  }
+  .container .row {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+  .hero-content-2 {
+    max-width: 620px !important;
+    margin: 0 !important;
+    margin-bottom: 3.5rem !important;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .logo-below {
+    height: 45px !important;
+  }
+
+  .review-section {
+    padding: 4rem 0;
+  }
+
+  .review-card {
+    height: 390px;
+  }
+
+  .review-card p {
+    font-size: 16px !important;
+  }
+
+  .profile-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  .comment p {
+    font-size: 14px !important;
+    line-height: 1.6;
+  }
+
+  .customize {
+    display: none;
+  }
+
+  .customize-phone {
+    display: block;
+  }
+
+  .col-md-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .review-card {
+    width: 340px;
+    // height: 370px;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  .below {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  img.logo-below {
+    height: 35px !important;
+  }
+
+  .hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .hero-section .container {
+    width: 85vw; /* Adjust max-width as needed */
+  }
+
+  .transform-phone {
+    display: block;
+  }
+
+  .transform {
+    display: none;
+  }
+}
+
   /* iPhone X landscape */
   @media (min-width: 389px) and (max-width: 896px) and (orientation: landscape) {
 
@@ -681,7 +964,7 @@ a {
 
   /* iPhone 14 Pro Max portrait */
   @media (min-width: 845px) and (max-width: 932px) and (orientation: portrait) {
-    
+
   }
 
 

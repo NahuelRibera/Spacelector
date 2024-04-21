@@ -578,6 +578,18 @@
   width: fit-content;
 }
 
+#toggleButton {
+  background-color: transparent; /* Set background color to transparent */
+  border: none; /* Remove border */
+  padding: 0; /* Remove padding */
+  cursor: pointer; /* Add pointer cursor */
+}
+
+#toggleButton i {
+  font-size: 22px;
+  color: #666666;
+}
+
   // NO ESCRIBIR DEBAJO SOLO RESPONSIVE
   ///////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////////
@@ -725,6 +737,13 @@
     .nav-links {
       display: none !important;
     }
+
+    .navbar {
+      padding-right: 22px;
+      padding-left: 22px;
+    }
+
+
   }
 
   /* iPhone X landscape */
