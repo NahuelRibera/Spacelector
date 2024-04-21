@@ -552,6 +552,18 @@ a {
   padding: 6rem;
 }
 
+.customize{
+  display: block;
+}
+
+.customize-phone {
+  display: none;
+}
+
+.transform-phone {
+  display: none;
+}
+
   // NO ESCRIBIR DEBAJO SOLO RESPONSIVE
   ///////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////////
@@ -666,7 +678,12 @@ a {
 /* iPhone X portrait */
 @media (min-width: 389px) and (max-width: 896px) and (orientation: portrait) {
   .hero {
-    padding: 6rem 0 !important;
+    padding: 4rem 0 !important;
+    margin-top: 90px;
+  }
+
+  .hero-2 {
+    padding: 4rem 0 !important;
   }
 
   .row {
@@ -697,7 +714,7 @@ a {
 
   img.img-2 {
     width: 600px !important;
-    margin-left: 50px !important;
+    margin: 0 !important;
   }
 
   .hero-content {
@@ -708,7 +725,7 @@ a {
     text-align: center;
     justify-content: center;
     margin: 0 !important;
-    margin-bottom: 50px !important;
+    margin-bottom: 3.5rem !important;
   }
 
   .discover hr {
@@ -721,10 +738,20 @@ a {
 
   .hero-content-2 {
     max-width: 620px !important;
+    margin: 0 !important;
+    margin-bottom: 3.5rem !important;
+
+    p {
+      margin-bottom: 0;
+    }
   }
 
   .logo-below {
     height: 45px !important;
+  }
+
+  .review-section {
+    padding: 4rem 0;
   }
 
   .review-card {
@@ -736,15 +763,72 @@ a {
   }
 
   .profile-image {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     margin-bottom: 20px;
+    margin-top: 20px;
   }
 
   .comment p {
     font-size: 14px !important;
     line-height: 1.6;
+  }
+
+  .customize {
+    display: none;
+  }
+
+  .customize-phone {
+    display: block;
+  }
+
+  .col-md-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .review-card {
+    width: 340px;
+    // height: 370px;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  .below {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  img.logo-below {
+    height: 35px !important;
+  }
+
+  .hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .hero-section .container {
+    width: 85vw; /* Adjust max-width as needed */
+  }
+
+  .transform-phone {
+    display: block;
+  }
+
+  .transform {
+    display: none;
   }
 }
 
