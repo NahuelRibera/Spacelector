@@ -552,8 +552,33 @@ a {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  margin-bottom: 20px;
 }
+
+.review-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+}
+
+.review-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  p {
+    margin-bottom: 5px;
+    color: #666666;
+    font-weight: 700;
+  }
+}
+
+.review-details .fa-star {
+  color: #44a0d8
+}
+
 
 .comment {
   font-size: 16px;
