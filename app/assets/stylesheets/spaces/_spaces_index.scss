@@ -307,6 +307,75 @@ $text-color: #4a4a4a;
 }
 
 
+.hero-3 {
+  padding: 8rem 0;
+  background-color: #fff; // or any color that matches your design
+
+  .container {
+    display: flex;
+    align-items: center;
+    max-width: 90vw;
+    justify-content: center;
+    gap: 40px;
+  }
+  img.img-1 {
+    width: 700px;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    margin-right: 50px;
+  }
+
+
+  .col-md-6 {
+    height: fit-content;
+    width: fit-content;
+  }
+
+  .hero-content-3 {
+    margin-left: 50px;
+    width: fit-content;
+    max-width: 650px;
+
+    .logo-2 {
+      margin-bottom: 50px;
+    }
+
+    .logo-image {
+      height: 50px; // Set the height of your logo
+    }
+
+    h1 {
+      font-size: 50px;
+      margin-bottom: 35px;
+      color: #333; // or your chosen color for headings
+    }
+
+    h2 {
+      font-size: 40px;
+      margin-bottom: 35px;
+      color: #333; // or your chosen color for headings
+    }
+
+    p {
+      font-size: 20px;
+      color: #666; // or your chosen color for text
+    }
+
+    .btn-primary {
+      background-color: #4285f4; // or your primary color
+      border: none;
+      margin-top: 55px;
+
+      &:hover {
+        background-color: darken(#4285f4, 10%); // or the darkened primary color
+      }
+    }
+  }
+}
+
+
+
 @media (max-width: 768px) {
   .hero {
     .container {
@@ -640,6 +709,10 @@ a {
       max-width: 620px !important;
     }
 
+    .hero-content-3 {
+      max-width: 620px !important;
+    }
+
     .logo-below {
       height: 45px !important;
     }
@@ -684,6 +757,22 @@ a {
 
   .hero-2 {
     padding: 4rem 0 !important;
+  }
+
+  .hero-3 {
+    padding: 4rem 0 !important;
+  }
+
+  .hero-content-3 {
+    order: -1;
+    max-width: 620px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin: 0 !important;
+    margin-bottom: 3.5rem !important;
   }
 
   .row {
