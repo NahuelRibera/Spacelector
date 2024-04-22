@@ -37,16 +37,11 @@
     </div>
     <!-- Somewhere in your HTML, possibly at the end of the body -->
     <div id="search-results-dropdown" class="search-results-dropdown"></div>
-
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
         <%= form_with(url: destroy_user_session_path, method: :delete, local: false, class: "form-inline") do %>
-          <button type="submit" onclick="return confirm('Are you sure you want to sign out?')" class="btn nav-link sign-out-button" style="margin-left: 20px">
+          <button type="submit" onclick="return confirm('Are you sure you want to sign out?')" class="btn sign-out-button">
             <%= image_tag('exit.png', alt: 'Sign out') %>
           </button>
         <% end %>
-      </li>
-    </ul>
   <% else %>
     <div class="right-buttons">
       <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
