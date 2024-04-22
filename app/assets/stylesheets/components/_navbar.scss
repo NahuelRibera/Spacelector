@@ -531,7 +531,7 @@
   transition: color 0.3s; // Transition for color only
 
   &:hover {
-    color: #44A0D8; // Text turns full black on hover
+    color: #44A0D8 !important; // Text turns full black on hover
     text-decoration: none; // No underline on hover
     background-color: transparent; // No background color on hover
     box-shadow: none; // No box shadow on hover

@@ -66,13 +66,15 @@
 
     function drawCompartment(compartment, index) {
       context.strokeStyle = '#44A0D8';
-      context.lineWidth = 4.5;
+      context.lineWidth = 7.5;
       context.beginPath();
       context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
       context.stroke();
-      context.fillStyle = '#44A0D8';
-      context.font = 'bold 20px Open Sans';
-      context.fillText((index + 1).toString(), compartment.x + 10, compartment.y + 25);
+      context.fillStyle = 'black';
+      context.font = 'bold 50px Open Sans';
+      context.strokeStyle = 'black';
+      context.fillText((index + 1).toString(), compartment.x + 15, compartment.y + 52);
+      context.strokeText((index + 1).toString(), compartment.x + 15, compartment.y + 52);
     }
 
     function drawCompartments(imageSrc) {
@@ -133,7 +135,7 @@
 
     function handleStart(event) {
       isDrawing = true;
-      disableScroll();
+      disableScroll(); // Disable scrolling when drawing starts
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvas.width / rect.width;
       const scaleY = canvas.height / rect.height;
@@ -166,7 +168,7 @@
 
     function handleEnd(event) {
       isDrawing = false;
-      enableScroll();
+      enableScroll(); // Re-enable scrolling when drawing ends
       saveCompartment();
     }
 
