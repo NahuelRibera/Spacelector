@@ -65,16 +65,17 @@
     let loadedImage = null;
 
     function drawCompartment(compartment, index) {
-      context.strokeStyle = '#44A0D8';
-      context.lineWidth = 7.5;
       context.beginPath();
       context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
+      context.strokeStyle = '#44A0D8';
+      context.lineWidth = 7.5;
       context.stroke();
       context.fillStyle = 'black';
       context.font = 'bold 50px Open Sans';
-      context.strokeStyle = 'black';
-      context.fillText((index + 1).toString(), compartment.x + 15, compartment.y + 52);
+      context.strokeStyle = '#44A0D8';
       context.strokeText((index + 1).toString(), compartment.x + 15, compartment.y + 52);
+            context.fillText((index + 1).toString(), compartment.x + 15, compartment.y + 52);
+
     }
 
     function drawCompartments(imageSrc) {
