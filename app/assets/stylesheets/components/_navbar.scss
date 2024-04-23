@@ -749,12 +749,28 @@
 
   /* iPhone X landscape */
   @media (min-width: 389px) and (max-width: 896px) and (orientation: landscape) {
+
+    .sign {
+      padding: 3.5px 9px;
+      font-size: 12px;
+    }
+
+    .go-to {
+      padding: 4px 9px;
+      font-size: 12px;
+    }
+
+    .right-buttons {
+      gap: 0;
+    }
+
     .logo-home {
-      display: none !important;
+      display: block !important;
+      height: 15.54px;
     }
 
     .logo-items a {
-      font-size: 10px !important;
+      font-size: 12px !important;
     }
   }
 
@@ -765,7 +781,28 @@
 
   /* iPhone 12 Pro landscape */
   @media (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
+    .sign {
+      padding: 3.5px 9px;
+      font-size: 12px;
+    }
 
+    .go-to {
+      padding: 4px 9px;
+      font-size: 12px;
+    }
+
+    .right-buttons {
+      gap: 0;
+    }
+
+    .logo-home {
+      display: block !important;
+      height: 15.54px;
+    }
+
+    .logo-items a {
+      font-size: 12px !important;
+    }
   }
 
   /* iPhone 14 Pro Max portrait */
@@ -786,8 +823,27 @@
 
   // iphone 14 pro max (430x932)
   @media (min-width: 845px) and (max-width: 933px) and (orientation: landscape) {
+    .sign {
+      padding: 3.5px 9px;
+      font-size: 12px;
+    }
+
+    .go-to {
+      padding: 4px 9px;
+      font-size: 12px;
+    }
+
+    .right-buttons {
+      gap: 0;
+    }
+
     .logo-home {
-      display: none !important;
+      display: block !important;
+      height: 15.54px;
+    }
+
+    .logo-items a {
+      font-size: 12px !important;
     }
   }
 
