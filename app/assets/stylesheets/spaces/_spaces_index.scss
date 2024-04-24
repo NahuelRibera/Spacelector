@@ -954,6 +954,39 @@ a {
   /* iPhone X landscape */
   @media (min-width: 389px) and (max-width: 896px) and (orientation: landscape) {
 
+    .hero {
+      padding: 4rem 0 !important;
+    }
+
+    img.img-1 {
+      width: 400px !important;
+      margin: 0 !important;
+    }
+
+    .hero-content {
+      max-width: 350px !important;
+      margin: 0 !important;
+
+      h1 {
+        font-size: 28px !important;
+      }
+
+      p {
+        font-size: 15px !important;
+
+        br {
+          display: none !important;
+        }
+      }
+    }
+
+    img.logo-image {
+      height: 25px !important;
+    }
+
+    .hero .container {
+      justify-content: initial !important;
+    }
   }
 
   /* iPhone 12 Pro portrait */
@@ -964,6 +997,39 @@ a {
   /* iPhone 12 Pro landscape */
   @media (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
 
+    .hero {
+      padding: 4rem 0 !important;
+    }
+
+    img.img-1 {
+      width: 380px !important;
+      margin: 0 !important;
+    }
+
+    .hero-content {
+      max-width: 370px !important;
+      margin: 0 !important;
+
+      h1 {
+        font-size: 28px !important;
+      }
+
+      p {
+        font-size: 15px !important;
+
+        br {
+          display: none !important;
+        }
+      }
+    }
+
+    img.logo-image {
+      height: 25px !important;
+    }
+
+    .hero .container {
+      justify-content: initial !important;
+    }
   }
 
   /* iPhone 14 Pro Max portrait */
@@ -974,6 +1040,69 @@ a {
 
   // iphone 14 pro max (430x932)
   @media (min-width: 845px) and (max-width: 932px) and (orientation: landscape) {
+
+    .hero {
+      padding: 4rem 0 !important;
+    }
+
+    img.img-1 {
+      width: 400px !important;
+      margin: 0;
+    }
+
+    img.logo-image {
+      height: 25px !important;
+      margin-bottom: -25px !important;
+    }
+
+    .hero-content {
+      max-width: 370px !important;
+      margin: 0 !important;
+
+      h1 {
+        font-size: 28px !important;
+      }
+
+      p {
+        font-size: 15px !important;
+        margin-bottom: 25px !important;
+
+        br {
+          display: none !important;
+        }
+      }
+    }
+
+    .hero .container {
+      justify-content: initial !important;
+    }
+
+    .go-to {
+      margin: 0;
+    }
+
+    .sign {
+      margin-right: 15px !important;
+    }
+
+    .discover {
+      text-align: center;
+        margin-top: 20px; /* Adjust as needed */
+        margin-bottom: 20px; /* Adjust as needed */
+      }
+
+      .discover hr {
+        border-top: 1px solid #ccc;
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+
+      .discover a {
+        font-size: 11px !important;
+        margin-bottom: -5px;
+      }
 
   }
 
