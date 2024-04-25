@@ -1107,7 +1107,25 @@ a {
       padding: 4rem 0 !important;
     }
 
+    .hero-2 {
+      padding: 4rem 0 !important;
+    }
+
+    .hero-3 {
+      padding: 4rem 0 !important;
+    }
+
     img.img-1 {
+      width: 400px !important;
+      margin: 0;
+    }
+
+    img.img-2 {
+      width: 400px !important;
+      margin: 0;
+    }
+
+    img.img-3 {
       width: 400px !important;
       margin: 0;
     }
@@ -1122,6 +1140,42 @@ a {
       margin: 0 !important;
 
       h1 {
+        font-size: 28px !important;
+      }
+
+      p {
+        font-size: 15px !important;
+        margin-bottom: 25px !important;
+
+        br {
+          display: none !important;
+        }
+      }
+    }
+
+    .hero-content-2 {
+      max-width: 370px !important;
+      margin: 0 !important;
+
+      h2 {
+        font-size: 28px !important;
+      }
+
+      p {
+        font-size: 15px !important;
+        margin-bottom: 25px !important;
+
+        br {
+          display: none !important;
+        }
+      }
+    }
+
+    .hero-content-3 {
+      max-width: 370px !important;
+      margin: 0 !important;
+
+      h2 {
         font-size: 28px !important;
       }
 
@@ -1165,6 +1219,11 @@ a {
         font-size: 11px !important;
         margin-bottom: -5px;
       }
+
+    .review-card {
+      height: 100px !important;
+      width: 165px !important;
+    }
   }
 
   /* iPad Pro landscape (1024x1366) */
