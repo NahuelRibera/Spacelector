@@ -970,8 +970,8 @@ a {
     }
 
     img.img-2 {
-      width: 400px !important;
-      margin: 0;
+      width: 360px !important;
+      margin-left: 15px !important;
     }
 
     img.img-3 {
@@ -981,7 +981,7 @@ a {
 
     img.img-1 {
       width: 400px !important;
-      margin: 0 !important;
+      margin-right: 15px !important;
     }
 
     .hero-content {
@@ -1002,7 +1002,8 @@ a {
     }
 
     .hero-content-2 {
-      max-width: 370px !important;
+      max-width: 200px !important;
+      width: auto;
       margin: 0 !important;
 
       h2 {
@@ -1020,7 +1021,7 @@ a {
     }
 
     .hero-content-3 {
-      max-width: 370px !important;
+      max-width: 300px !important;
       margin: 0 !important;
 
       h2 {
@@ -1117,6 +1118,10 @@ a {
       .review-card:not(:last-child) {
         margin-bottom: 25px !important; /* Override bottom margin for all cards except the last one */
       }
+
+      .header h1 {
+        font-size: 20px;
+      }
   }
 
   /* iPhone 12 Pro portrait */
@@ -1140,7 +1145,7 @@ a {
     }
 
     img.img-2 {
-      width: 400px !important;
+      width: 360px !important;
       margin: 0;
     }
 
@@ -1288,6 +1293,14 @@ a {
 
       .review-card:not(:last-child) {
         margin-bottom: 25px !important; /* Override bottom margin for all cards except the last one */
+      }
+
+      img.logo-below {
+        height: 35px !important;
+      }
+
+      .header h1 {
+        font-size: 20px;
       }
   }
 
@@ -1458,6 +1471,14 @@ a {
 
     .review-card:not(:last-child) {
       margin-bottom: 25px !important; /* Override bottom margin for all cards except the last one */
+    }
+
+    img.logo-below {
+      height: 35px !important;
+    }
+
+    .header h1 {
+      font-size: 20px;
     }
   }
 
