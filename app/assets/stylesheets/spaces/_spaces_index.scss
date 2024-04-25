@@ -544,6 +544,8 @@ a {
 
 .review-section {
   padding: 8rem 0;
+  display: flex;
+  justify-content: center;
 }
 
 .review-card {
@@ -557,6 +559,7 @@ a {
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  margin-right: 20px;
 }
 
 .review-header {
@@ -569,7 +572,7 @@ a {
 .review-details {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   width: 100%;
 
@@ -954,6 +957,171 @@ a {
   /* iPhone X landscape */
   @media (min-width: 389px) and (max-width: 896px) and (orientation: landscape) {
 
+     .hero {
+      padding: 4rem 0 !important;
+    }
+
+    .hero-2 {
+      padding: 4rem 0 !important;
+    }
+
+    .hero-3 {
+      padding: 4rem 0 !important;
+    }
+
+    img.img-2 {
+      width: 360px !important;
+      margin-left: 15px !important;
+    }
+
+    img.img-3 {
+      width: 400px !important;
+      margin: 0;
+    }
+
+    img.img-1 {
+      width: 400px !important;
+      margin-right: 15px !important;
+    }
+
+    .hero-content {
+      max-width: 350px !important;
+      margin: 0 !important;
+
+      h1 {
+        font-size: 28px !important;
+      }
+
+      p {
+        font-size: 15px !important;
+
+        br {
+          display: none !important;
+        }
+      }
+    }
+
+    .hero-content-2 {
+      max-width: 200px !important;
+      width: auto;
+      margin: 0 !important;
+
+      h2 {
+        font-size: 28px !important;
+      }
+
+      p {
+        font-size: 15px !important;
+        margin-bottom: 25px !important;
+
+        br {
+          display: none !important;
+        }
+      }
+    }
+
+    .hero-content-3 {
+      max-width: 300px !important;
+      margin: 0 !important;
+
+      h2 {
+        font-size: 28px !important;
+      }
+
+      p {
+        font-size: 15px !important;
+        margin-bottom: 25px !important;
+
+        br {
+          display: none !important;
+        }
+      }
+    }
+
+    img.logo-image {
+      height: 25px !important;
+      margin-bottom: -25px !important;
+
+    }
+
+    .hero .container {
+      justify-content: initial !important;
+    }
+
+
+    .go-to {
+      margin: 0;
+    }
+
+    .sign {
+      margin-right: 15px !important;
+    }
+
+    .discover {
+      text-align: center;
+        margin-top: 20px; /* Adjust as needed */
+        margin-bottom: 20px; /* Adjust as needed */
+      }
+
+      .discover hr {
+        border-top: 1px solid #ccc;
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+
+      .discover a {
+        font-size: 11px !important;
+        margin-bottom: -5px;
+      }
+
+      .review-card {
+        height: fit-content !important;
+        width: 700px !important;
+        margin: 0 10px 25px 10px; /* Adjusted margin to include 25px bottom margin */
+
+      }
+
+      .review-section {
+        display: flex;
+        justify-content: center;
+        align-items: center; /* Center vertically */
+        padding: 4rem 0 !important;
+
+      }
+
+      .row.justify-content-center {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: left;
+      }
+
+      .col-md-3 {
+        width: auto !important; /* Override col-md-3 width */
+      }
+
+      img.profile-image {
+        width: 50px;
+        height: 50px;
+      }
+
+      .comment {
+        font-size: 15px;
+      }
+
+      .review-details {
+        justify-content: flex-start !important;
+      }
+
+      .review-card:not(:last-child) {
+        margin-bottom: 25px !important; /* Override bottom margin for all cards except the last one */
+      }
+
+      .header h1 {
+        font-size: 20px;
+      }
   }
 
   /* iPhone 12 Pro portrait */
@@ -964,6 +1132,176 @@ a {
   /* iPhone 12 Pro landscape */
   @media (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
 
+    .hero {
+      padding: 4rem 0 !important;
+    }
+
+    .hero-2 {
+      padding: 4rem 0 !important;
+    }
+
+    .hero-3 {
+      padding: 4rem 0 !important;
+    }
+
+    img.img-2 {
+      width: 360px !important;
+      margin: 0;
+    }
+
+    img.img-3 {
+      width: 400px !important;
+      margin: 0;
+    }
+
+    img.img-1 {
+      width: 380px !important;
+      margin: 0 !important;
+    }
+
+    .hero-content {
+      max-width: 370px !important;
+      margin: 0 !important;
+
+      h1 {
+        font-size: 28px !important;
+        margin-bottom: 15px !important;
+      }
+
+      p {
+        font-size: 15px !important;
+        margin-bottom: 20px !important;
+
+        br {
+          display: none !important;
+        }
+      }
+    }
+
+    .hero-content-2 {
+      max-width: 370px !important;
+      margin: 0 !important;
+
+      h2 {
+        font-size: 28px !important;
+      }
+
+      p {
+        font-size: 15px !important;
+        margin-bottom: 25px !important;
+
+        br {
+          display: none !important;
+        }
+      }
+    }
+
+    .hero-content-3 {
+      max-width: 370px !important;
+      margin: 0 !important;
+
+      h2 {
+        font-size: 28px !important;
+      }
+
+      p {
+        font-size: 15px !important;
+        margin-bottom: 25px !important;
+
+        br {
+          display: none !important;
+        }
+      }
+    }
+
+    img.logo-image {
+      height: 25px !important;
+      margin-bottom: -35px !important;
+
+    }
+
+    .hero .container {
+      justify-content: initial !important;
+    }
+
+
+    .go-to {
+      margin: 0;
+    }
+
+    .sign {
+      margin-right: 15px !important;
+    }
+
+    .discover {
+      text-align: center;
+        margin-top: 20px; /* Adjust as needed */
+        margin-bottom: 20px; /* Adjust as needed */
+      }
+
+      .discover hr {
+        border-top: 1px solid #ccc;
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+
+      .discover a {
+        font-size: 11px !important;
+        margin-bottom: -5px;
+      }
+
+      .review-card {
+        height: fit-content !important;
+        width: 700px !important;
+        margin: 0 10px 25px 10px; /* Adjusted margin to include 25px bottom margin */
+
+      }
+
+      .review-section {
+        display: flex;
+        justify-content: center;
+        align-items: center; /* Center vertically */
+        padding: 4rem 0 !important;
+
+      }
+
+      .row.justify-content-center {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: left;
+      }
+
+      .col-md-3 {
+        width: auto !important; /* Override col-md-3 width */
+      }
+
+      img.profile-image {
+        width: 50px;
+        height: 50px;
+      }
+
+      .comment {
+        font-size: 15px;
+      }
+
+      .review-details {
+        justify-content: flex-start !important;
+      }
+
+      .review-card:not(:last-child) {
+        margin-bottom: 25px !important; /* Override bottom margin for all cards except the last one */
+      }
+
+      img.logo-below {
+        height: 35px !important;
+      }
+
+      .header h1 {
+        font-size: 20px;
+      }
   }
 
   /* iPhone 14 Pro Max portrait */
@@ -975,6 +1313,173 @@ a {
   // iphone 14 pro max (430x932)
   @media (min-width: 845px) and (max-width: 932px) and (orientation: landscape) {
 
+    .hero {
+      padding: 4rem 0 !important;
+    }
+
+    .hero-2 {
+      padding: 4rem 0 !important;
+    }
+
+    .hero-3 {
+      padding: 4rem 0 !important;
+    }
+
+    img.img-1 {
+      width: 400px !important;
+      margin: 0;
+    }
+
+    img.img-2 {
+      width: 400px !important;
+      margin: 0;
+    }
+
+    img.img-3 {
+      width: 400px !important;
+      margin: 0;
+    }
+
+    img.logo-image {
+      height: 25px !important;
+      margin-bottom: -25px !important;
+    }
+
+    .hero-content {
+      max-width: 370px !important;
+      margin: 0 !important;
+
+      h1 {
+        font-size: 28px !important;
+      }
+
+      p {
+        font-size: 15px !important;
+        margin-bottom: 25px !important;
+
+        br {
+          display: none !important;
+        }
+      }
+    }
+
+    .hero-content-2 {
+      max-width: 370px !important;
+      margin: 0 !important;
+
+      h2 {
+        font-size: 28px !important;
+      }
+
+      p {
+        font-size: 15px !important;
+        margin-bottom: 25px !important;
+
+        br {
+          display: none !important;
+        }
+      }
+    }
+
+    .hero-content-3 {
+      max-width: 370px !important;
+      margin: 0 !important;
+
+      h2 {
+        font-size: 28px !important;
+      }
+
+      p {
+        font-size: 15px !important;
+        margin-bottom: 25px !important;
+
+        br {
+          display: none !important;
+        }
+      }
+    }
+
+    .hero .container {
+      justify-content: initial !important;
+    }
+
+    .go-to {
+      margin: 0;
+    }
+
+    .sign {
+      margin-right: 15px !important;
+    }
+
+    .discover {
+      text-align: center;
+        margin-top: 20px; /* Adjust as needed */
+        margin-bottom: 20px; /* Adjust as needed */
+      }
+
+      .discover hr {
+        border-top: 1px solid #ccc;
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+
+      .discover a {
+        font-size: 11px !important;
+        margin-bottom: -5px;
+      }
+
+    .review-card {
+      height: fit-content !important;
+      width: 700px !important;
+      margin: 0 10px 25px 10px; /* Adjusted margin to include 25px bottom margin */
+
+    }
+
+    .review-section {
+      display: flex;
+      justify-content: center;
+      align-items: center; /* Center vertically */
+      padding: 4rem 0 !important;
+
+    }
+
+    .row.justify-content-center {
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+      justify-content: left;
+    }
+
+    .col-md-3 {
+      width: auto !important; /* Override col-md-3 width */
+    }
+
+    img.profile-image {
+      width: 50px;
+      height: 50px;
+    }
+
+    .comment {
+      font-size: 15px;
+    }
+
+    .review-details {
+      justify-content: flex-start !important;
+    }
+
+    .review-card:not(:last-child) {
+      margin-bottom: 25px !important; /* Override bottom margin for all cards except the last one */
+    }
+
+    img.logo-below {
+      height: 35px !important;
+    }
+
+    .header h1 {
+      font-size: 20px;
+    }
   }
 
   /* iPad Pro landscape (1024x1366) */
