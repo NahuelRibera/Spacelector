@@ -982,11 +982,41 @@ a {
 
     img.logo-image {
       height: 25px !important;
+      margin-bottom: -25px !important;
+
     }
 
     .hero .container {
       justify-content: initial !important;
     }
+
+
+    .go-to {
+      margin: 0;
+    }
+
+    .sign {
+      margin-right: 15px !important;
+    }
+
+    .discover {
+      text-align: center;
+        margin-top: 20px; /* Adjust as needed */
+        margin-bottom: 20px; /* Adjust as needed */
+      }
+
+      .discover hr {
+        border-top: 1px solid #ccc;
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+
+      .discover a {
+        font-size: 11px !important;
+        margin-bottom: -5px;
+      }
   }
 
   /* iPhone 12 Pro portrait */
@@ -1012,10 +1042,12 @@ a {
 
       h1 {
         font-size: 28px !important;
+        margin-bottom: 15px !important;
       }
 
       p {
         font-size: 15px !important;
+        margin-bottom: 20px !important;
 
         br {
           display: none !important;
@@ -1025,11 +1057,41 @@ a {
 
     img.logo-image {
       height: 25px !important;
+      margin-bottom: -35px !important;
+
     }
 
     .hero .container {
       justify-content: initial !important;
     }
+
+
+    .go-to {
+      margin: 0;
+    }
+
+    .sign {
+      margin-right: 15px !important;
+    }
+
+    .discover {
+      text-align: center;
+        margin-top: 20px; /* Adjust as needed */
+        margin-bottom: 20px; /* Adjust as needed */
+      }
+
+      .discover hr {
+        border-top: 1px solid #ccc;
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+
+      .discover a {
+        font-size: 11px !important;
+        margin-bottom: -5px;
+      }
   }
 
   /* iPhone 14 Pro Max portrait */
@@ -1103,7 +1165,6 @@ a {
         font-size: 11px !important;
         margin-bottom: -5px;
       }
-
   }
 
   /* iPad Pro landscape (1024x1366) */
