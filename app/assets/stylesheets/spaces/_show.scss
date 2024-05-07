@@ -803,7 +803,7 @@ textarea {
   .modal-content {
     width: fit-content;
     height: fit-content;
-    max-height: 90vh;
+    max-height: 95vh;
     max-width: 95vw;
     top: 50%;
     left: 50%;
@@ -893,7 +893,7 @@ textarea {
   .modal-content {
     width: fit-content;
     height: fit-content;
-    max-height: 90vh;
+    max-height: 95vh;
     max-width: 95vw;
     top: 50%;
     left: 50%;
@@ -983,7 +983,7 @@ textarea {
   .modal-content {
     width: fit-content;
     height: fit-content;
-    max-height: 90vh;
+    max-height: 95vh;
     max-width: 95vw;
     top: 50%;
     left: 50%;
@@ -1068,7 +1068,7 @@ textarea {
   .modal-content {
     width: fit-content;
     height: fit-content;
-    max-height: 90vh;
+    max-height: 95vh;
     max-width: 95vw;
     top: 50%;
     left: 50%;
@@ -1142,7 +1142,7 @@ textarea {
   .modal-content {
     width: fit-content;
     height: fit-content;
-    max-height: 90vh;
+    max-height: 95vh;
     max-width: 95vw;
     top: 50%;
     left: 50%;
@@ -1188,6 +1188,28 @@ textarea {
     padding: 0;
     margin-bottom: -2px;
     margin-top: -2px;
+  }
+
+  .modal-content {
+    width: fit-content;
+    height: fit-content;
+    max-width: 95%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 0;
+  }
+
+  .compartment-info-container {
+    max-height: 500px;
+    height: 500x;
+    width: fit-content;
+    margin-top: 0px;
+    padding: 0px;
+    // overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    padding-left: 10px;
   }
 }
 
@@ -1252,7 +1274,7 @@ textarea {
   .modal-content {
     width: fit-content;
     height: fit-content;
-    max-height: 90vh;
+    max-height: 95vh;
     max-width: 95vw;
     top: 50%;
     left: 50%;
