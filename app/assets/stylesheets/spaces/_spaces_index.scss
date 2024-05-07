@@ -666,6 +666,39 @@ a {
   display: none;
 }
 
+.info-icon {
+  font-family: 'Open Sans', sans-serif;
+  position: fixed; // Fixes the position relative to the viewport
+  left: 20px; // Distance from the left side of the viewport
+  bottom: 20px; // Distance from the bottom of the viewport
+  z-index: 1000; // Ensures the icon stays above other elements
+  background: none; // Ensures there is no background unless specified
+  border: none; // No borders unless you want one
+  color: #333; // Set the color of the text, adjust as needed
+  font-size: 16px; // Set the font size as needed
+  text-decoration: none; // Removes underline from links
+}
+
+.card-video {
+  width: 100%; // Ensures the container takes the full width of its parent
+  padding: 10px 0px; // No padding inside the container
+  video {
+    width: 100%; // Video fills the entire width of the container
+    height: auto; // Height adjusts automatically to keep the aspect ratio
+  }
+}
+
+// Ensures video maintains full width on all devices and orientations
+@media (max-width: 768px) { // Adjustments for mobile devices
+  .card-video {
+  width: 100%; // Full width on small screens
+  video {
+      width: 100%; // Full width for the video on small screens
+  }
+  }
+}
+
+
   // NO ESCRIBIR DEBAJO SOLO RESPONSIVE
   ///////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////////

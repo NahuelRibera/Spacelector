@@ -11,6 +11,9 @@
           <div class="space-info" style="cursor: pointer; position: relative;">
             <!-- This div becomes the clickable area, excluding the delete button -->
             <%= link_to space.name, space_path(space), class: "space-link" %>
+
+            <%= link_to "Need help? Watch tutorial clicking here!", new_video_popup_path, class: "info-icon" %>
+
             <%= form_with url: space_path(space), method: :delete, class: "delete-form" do |form| %>
               <%= form.submit 'X', onclick: "return confirm('Are you sure you want to delete this space?')", class: 'delete-space', style: "position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" %>
             <% end %>

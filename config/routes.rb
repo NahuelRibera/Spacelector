@@ -47,5 +47,5 @@ Rails.application.routes.draw do
   get 'images/:id/conversion_complete', to: 'images#conversion_complete', as: :conversion_complete
   get 'autocomplete_search', to: 'spaces#autocomplete_search'
   get '/terms-and-conditions', to: 'pages#terms_and_conditions'
-
+  get 'video_popup', to: 'videos#popup', as: :new_video_popup
 end
