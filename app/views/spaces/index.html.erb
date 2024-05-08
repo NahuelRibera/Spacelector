@@ -58,7 +58,7 @@
           <div class="logo-2">
             <%= image_tag "spacelector_crop.png", class: "logo-image"%>
           </div>
-          <h1>What are you looking for?</h1>
+          <h1><%= t('homepage.headline') %></h1>
 
           <p style="margin-bottom: 35px;">Manage your space to access your belongings. Take or upload a<br>picture, select spaces, add information.<strong> Find anything in seconds.</strong></p>
             <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>

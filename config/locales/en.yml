@@ -28,4 +28,17 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  navbar:
+    overview: "Overview"
+    features: "Features"
+    reviews: "Reviews"
+    signIn: "Sign In"
+  homepage:
+    headline: "What are you looking for?"
+    description: "Manage your space to access your belongings. Take or upload a picture, select spaces, add information. Find anything in seconds."
+    get_started: "Get Started"
+    discover: "Discover all you can do with Spacelector"
+    customize_your_space: "Customize Your Space"
+    enhanced_search: "Enhanced Search"
+    enhance_desc: "Locate what you need by sight and by search, doubling your efficiency. Add information to your image compartments once, then our unique search feature will guide you straight to your items, showcasing the image with highlighted compartments, visually emphasizing exactly where each item is stored."
+    terms: "By clicking \"Get Started\", you agree to our Terms and Conditions."

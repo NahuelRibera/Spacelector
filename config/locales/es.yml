@@ -1,0 +1,15 @@
+es:
+  navbar:
+    overview: "General"
+    features: "Características"
+    reviews: "Reseñas"
+    signIn: "Iniciar Sesión"
+  homepage:
+    headline: "¿Qué estás buscando?"
+    description: "Gestiona tu espacio para acceder a tus pertenencias. Toma o sube una foto, selecciona espacios, añade información. Encuentra cualquier cosa en segundos."
+    get_started: "Comenzar"
+    discover: "Descubre todo lo que puedes hacer con Spacelector"
+    customize_your_space: "Personaliza Tu Espacio"
+    enhanced_search: "Búsqueda Mejorada"
+    enhance_desc: "Localiza lo que necesitas a través de la vista y la búsqueda, duplicando tu eficiencia. Agrega información a tus compartimentos de imágenes una vez, luego nuestra característica de búsqueda única te guiará directamente a tus objetos, mostrando la imagen con compartimentos destacados, enfatizando visualmente exactamente dónde está cada objeto almacenado."
+    terms: "Al hacer clic en \"Comenzar\", aceptas nuestros Términos y Condiciones."
