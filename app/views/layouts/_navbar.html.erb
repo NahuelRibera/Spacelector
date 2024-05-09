@@ -48,13 +48,13 @@
     <div class="right-buttons">
       <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
         <%= button_tag(type: 'submit', class: 'btn google-btn sign') do %>
-          Sign In
+          <%= t('navbar.signin') %>
         <% end %>
       <% end %>
 
       <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
         <%= button_tag(type: 'submit', class: 'btn google-btn go-to') do %>
-          Go to Spacelector
+          <%= t('navbar.goto') %>
         <% end %>
       <% end %>
     </div>
