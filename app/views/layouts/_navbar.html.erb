@@ -19,13 +19,15 @@
     </ul>
   </div>
 </div>
-       <div class="nav-links">
-        <ul class="navbar-nav">
-          <li class="nav-section-item"><%= link_to "Overview", "#section1", class: "nav-link-section" %></li>
-          <li class="nav-section-item"><%= link_to "Features", "#section2", class: "nav-link-section" %></li>
-          <li class="nav-section-item"><%= link_to "Reviews", "#section3", class: "nav-link-section" %></li>
-        </ul>
-      </div>
+<div class="nav-links">
+  <ul class="navbar-nav">
+    <li class="nav-section-item"><%= link_to t('navbar.overview'), "#section1", class: "nav-link-section" %></li>
+    <li class="nav-section-item"><%= link_to t('navbar.features'), "#section2", class: "nav-link-section" %></li>
+    <li class="nav-section-item"><%= link_to t('navbar.reviews'), "#section3", class: "nav-link-section" %></li>
+    <li><%= link_to "EN", locale: 'en' %></li>
+    <li><%= link_to "ES", locale: 'es' %></li>
+  </ul>
+</div>
     <% end %>
   </div>
 
@@ -46,13 +48,13 @@
     <div class="right-buttons">
       <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
         <%= button_tag(type: 'submit', class: 'btn google-btn sign') do %>
-          Sign In
+          <%= t('navbar.signin') %>
         <% end %>
       <% end %>
 
       <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
         <%= button_tag(type: 'submit', class: 'btn google-btn go-to') do %>
-          Go to Spacelector
+          <%= t('navbar.goto') %>
         <% end %>
       <% end %>
     </div>

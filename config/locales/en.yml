@@ -28,4 +28,26 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  navbar:
+    overview: "Overview"
+    features: "Features"
+    reviews: "Reviews"
+    signIn: "Sign In"
+    goto: "Go to Spacelector"
+    signin: "Sign In"
+  homepage:
+    headline: "What are you looking for?"
+    manage1: "Manage your space to access your belongings. Take or upload a"
+    manage2: "picture, select spaces, add information."
+    manage3: "Find anything in seconds."
+    getstarted: "Get started"
+    discover: "Discover all you can do with Spacelector"
+    customize: "Customize Your Space"
+    customize2: "Customize"
+    customize3: "Your Space"
+    feature1: "Upload images of your storage areas and easily draw compartments directly on the photos. Each compartment can be labeled and customized to represent distinct sections of your space, such as drawers or shelves."
+    search: "Enhanced Search"
+    feature2: "Locate what you need by sight and by search, doubling your efficiency. Add information to your image compartments once, then our unique search feature will guide you straight to your items, showcasing the image with highlighted compartments, visually emphasizing exactly where each item is stored."
+    terms1: "Transform your physical storage into an easily navigable digital space."
+    terms2: "By clicking 'Get Started', you agree to our"
+    terms3: "Terms and Conditions"
