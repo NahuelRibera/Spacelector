@@ -50,150 +50,150 @@
    </section>
   <%# /////////////////////////////////////////////////////////////////////// %>
   <section id="content-home">
-<div id="section1" class="hero">
-  <div class="container">
-    <div class="row">
-        <%= image_tag "boombbba.png", alt: "Showcase Image", class: "img-1" %>
-        <div class="hero-content">
-          <div class="logo-2">
-            <%= image_tag "spacelector_crop.png", class: "logo-image"%>
-          </div>
-          <h1><%= t('homepage.headline') %></h1>
+    <div id="section1" class="hero">
+      <div class="container">
+        <div class="row">
+            <%= image_tag "boombbba.png", alt: "Showcase Image", class: "img-1" %>
+            <div class="hero-content">
+              <div class="logo-2">
+                <%= image_tag "spacelector_crop.png", class: "logo-image"%>
+              </div>
+              <h1><%= t('homepage.headline') %></h1>
 
-          <p style="margin-bottom: 35px;"><%= t('homepage.manage1') %> <%= t('homepage.manage2') %> <strong> <%= t('homepage.manage3') %></strong></p>
+              <p style="margin-bottom: 35px;"><%= t('homepage.manage1') %> <%= t('homepage.manage2') %> <strong> <%= t('homepage.manage3') %></strong></p>
+                <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
+                  <%= button_tag(type: 'submit', class: 'btn go-to') do %>
+                    <%= t('homepage.getstarted') %>
+                  <% end %>
+                <% end %>
+            </div>
+        </div>
+      </div>
+      <div class="discover">
+      <hr style="border-top: 1px solid #ccc; width: 50%;">
+      <a href="#section2"><%= t('homepage.discover') %></a>
+      <div class="arrow">
+        <a href="#section2"><i class="fa-solid fa-chevron-down"></i></a>
+      </div>
+      </div>
+    </div>
+
+    <!-- Info Section - Text Left, Image Right -->
+    <div id="section2" class="hero-2 bg-light img-right">
+      <div class="container">
+        <div class="row">
+          <!-- Text column -->
+            <div class="hero-content-2">
+            <h2 class="customize"><%= t('homepage.customize') %></h2>
+            <h2 class="customize-phone"><%= t('homepage.customize2') %> <br><%= t('homepage.customize3') %></h2>
+
+            <p><%= t('homepage.feature1') %></p>
+          </div>
+          <!-- Image column -->
+            <%= image_tag "secondfeature.png", alt: "Showcase Image", class: "img-2" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info Section - Image Left, Text Right -->
+    <div class="hero-3">
+      <div class="container">
+        <div class="row">
+          <!-- Image column -->
+            <%= image_tag "firstfeature2.png", alt: "Showcase Image", class: "img-1" %>
+          <!-- Text column -->
+          <div class="hero-content-3">
+            <h2><%= t('homepage.search') %></h2>
+              <p><%= t('homepage.feature2') %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Review Section -->
+    <div id="section3" class="review-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-3">
+            <div class="review-card">
+              <div class="review-header">
+                <%= image_tag "mecanico.jpg", alt: "Profile Image", class: "profile-image" %>
+                <div class="review-details">
+                  <p class="names">Thomas Miller</p>
+                  <div class="stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="comment"><%= t('homepage.review1') %>As a mechanic, keeping my workshop organized has always been a challenge. I can label compartments for different tools, parts, and equipment. Need a specific wrench or socket? Just type it into the search bar, and voila! The highlighted results show me exactly where it is.</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="review-card">
+              <div class="review-header">
+                <%= image_tag "velero.jpg", alt: "Profile Image", class: "profile-image" %>
+                <div class="review-details">
+                  <p class="names">Andrés Vila</p>
+                  <div class="stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="comment"><%= t('homepage.review2') %>Managing the limited space onboard my sailboat isn't a probem anymore. I can easily categorize and optimize every compartment, ensuring I have ample room for all my sailing essentials. The search feature is a godsend, allowing me to swiftly locate items, whether it's a spare sail or a tube of sunscreen.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="review-card">
+              <div class="review-header">
+                <%= image_tag "tattoo.png", alt: "Profile Image", class: "profile-image" %>
+                <div class="review-details">
+                  <p class="names">Jonathan Tattoo</p>
+                  <div class="stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="comment"><%= t('homepage.review3') %>In the world of tattooing, precision and organization are key, and this app delivers on both fronts. I can photograph each workstation, label compartments for ink, needles, and equipment, and even add notes for specific client preferences. A definite must-have for any tattoo artist serious about their craft!
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="review-card">
+              <div class="review-header">
+                <%= image_tag "mecanico.jpg", alt: "Profile Image", class: "profile-image" %>
+                <div class="review-details">
+                  <p class="names">Lucas Morton</p>
+                  <div class="stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+              </div>
+              <p class="comment"><%= t('homepage.review4') %>As a mechanic, keeping my workshop organized has always been a challenge. I can label compartments for different tools, parts, and equipment. Need a specific wrench or socket? Just type it into the search bar, and voila! The highlighted results show me exactly where it is.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div id="section4" class="hero-section">
+      <div class="container">
+        <div class="below">
+            <%= image_tag "spacelector_crop.png", class: "logo-below"%>
+            <div class="terms">
+            <p class="transform"><%= t('homepage.terms1') %><br><%= t('homepage.terms2') %><a href="/terms-and-conditions"> <strong> <%= t('homepage.terms3') %></strong></a>.</p>
+            <p class="transform-phone"><%= t('homepage.terms1') %><br><br><%= t('homepage.terms2') %> <a href="/terms-and-conditions"> <strong> <%= t('homepage.terms3') %> </strong ></a>.</p>
+
+            </div>
             <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
-              <%= button_tag(type: 'submit', class: 'btn go-to') do %>
+              <%= button_tag(type: 'submit', class: 'btn go-to', style: "margin-top: 20px;") do %>
                 <%= t('homepage.getstarted') %>
               <% end %>
             <% end %>
-        </div>
-    </div>
-  </div>
-  <div class="discover">
-  <hr style="border-top: 1px solid #ccc; width: 50%;">
-  <a href="#section2"><%= t('homepage.discover') %></a>
-  <div class="arrow">
-    <a href="#section2"><i class="fa-solid fa-chevron-down"></i></a>
-  </div>
-  </div>
-</div>
-
-<!-- Info Section - Text Left, Image Right -->
-<div id="section2" class="hero-2 bg-light img-right">
-  <div class="container">
-    <div class="row">
-      <!-- Text column -->
-        <div class="hero-content-2">
-        <h2 class="customize"><%= t('homepage.customize') %></h2>
-        <h2 class="customize-phone"><%= t('homepage.customize2') %> <br><%= t('homepage.customize3') %></h2>
-
-        <p><%= t('homepage.feature1') %></p>
-      </div>
-      <!-- Image column -->
-        <%= image_tag "secondfeature.png", alt: "Showcase Image", class: "img-2" %>
-    </div>
-  </div>
-</div>
-
-<!-- Info Section - Image Left, Text Right -->
-<div class="hero-3">
-  <div class="container">
-    <div class="row">
-      <!-- Image column -->
-        <%= image_tag "firstfeature2.png", alt: "Showcase Image", class: "img-1" %>
-      <!-- Text column -->
-      <div class="hero-content-3">
-        <h2><%= t('homepage.search') %></h2>
-          <p><%= t('homepage.feature2') %></p>
+          </div>
       </div>
     </div>
-  </div>
-</div>
-
-
-<!-- Review Section -->
-<div id="section3" class="review-section">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-3">
-        <div class="review-card">
-          <div class="review-header">
-            <%= image_tag "mecanico.jpg", alt: "Profile Image", class: "profile-image" %>
-            <div class="review-details">
-              <p class="names">Thomas Miller</p>
-              <div class="stars">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-              </div>
-            </div>
-          </div>
-          <p class="comment"><%= t('homepage.review1') %>As a mechanic, keeping my workshop organized has always been a challenge. I can label compartments for different tools, parts, and equipment. Need a specific wrench or socket? Just type it into the search bar, and voila! The highlighted results show me exactly where it is.</p>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="review-card">
-           <div class="review-header">
-            <%= image_tag "velero.jpg", alt: "Profile Image", class: "profile-image" %>
-            <div class="review-details">
-              <p class="names">Andrés Vila</p>
-              <div class="stars">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-              </div>
-            </div>
-          </div>
-          <p class="comment"><%= t('homepage.review2') %>Managing the limited space onboard my sailboat isn't a probem anymore. I can easily categorize and optimize every compartment, ensuring I have ample room for all my sailing essentials. The search feature is a godsend, allowing me to swiftly locate items, whether it's a spare sail or a tube of sunscreen.
-          </p>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="review-card">
-           <div class="review-header">
-            <%= image_tag "tattoo.png", alt: "Profile Image", class: "profile-image" %>
-            <div class="review-details">
-              <p class="names">Jonathan Tattoo</p>
-              <div class="stars">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-              </div>
-            </div>
-          </div>
-          <p class="comment"><%= t('homepage.review3') %>In the world of tattooing, precision and organization are key, and this app delivers on both fronts. I can photograph each workstation, label compartments for ink, needles, and equipment, and even add notes for specific client preferences. A definite must-have for any tattoo artist serious about their craft!
-          </p>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="review-card">
-           <div class="review-header">
-            <%= image_tag "mecanico.jpg", alt: "Profile Image", class: "profile-image" %>
-            <div class="review-details">
-              <p class="names">Lucas Morton</p>
-              <div class="stars">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-              </div>
-            </div>
-          </div>
-          <p class="comment"><%= t('homepage.review4') %>As a mechanic, keeping my workshop organized has always been a challenge. I can label compartments for different tools, parts, and equipment. Need a specific wrench or socket? Just type it into the search bar, and voila! The highlighted results show me exactly where it is.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Hero Section -->
-<div id="section4" class="hero-section">
-  <div class="container">
-    <div class="below">
-        <%= image_tag "spacelector_crop.png", class: "logo-below"%>
-        <div class="terms">
-        <p class="transform"><%= t('homepage.terms1') %><br><%= t('homepage.terms2') %><a href="/terms-and-conditions"> <strong> <%= t('homepage.terms3') %></strong></a>.</p>
-        <p class="transform-phone"><%= t('homepage.terms1') %><br><br><%= t('homepage.terms2') %> <a href="/terms-and-conditions"> <strong> <%= t('homepage.terms3') %> </strong ></a>.</p>
-
-        </div>
-        <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
-          <%= button_tag(type: 'submit', class: 'btn go-to', style: "margin-top: 20px;") do %>
-            <%= t('homepage.getstarted') %>
-          <% end %>
-        <% end %>
-      </div>
-  </div>
-</div>
   <% end %>
 </section>
