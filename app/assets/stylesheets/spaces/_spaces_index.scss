@@ -669,22 +669,34 @@ a {
 .info-icon {
   font-family: 'Open Sans', sans-serif;
   position: fixed; // Fixes the position relative to the viewport
-  left: 20px; // Distance from the left side of the viewport
-  bottom: 20px; // Distance from the bottom of the viewport
+  left: 40px; // Distance from the left side of the viewport
+  bottom: 30px; // Distance from the bottom of the viewport
   z-index: 1000; // Ensures the icon stays above other elements
   background: none; // Ensures there is no background unless specified
   border: none; // No borders unless you want one
-  color: #333; // Set the color of the text, adjust as needed
+  color: #aeaeae; // Set the color of the text, adjust as needed
   font-size: 16px; // Set the font size as needed
   text-decoration: none; // Removes underline from links
 }
 
 .card-video {
   width: 100%; // Ensures the container takes the full width of its parent
-  padding: 10px 0px; // No padding inside the container
+  padding: 15px 15px; // No padding inside the container
+  border-radius: 10px;
+  background-color: white;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  max-width: 76vw;
+  border: 1px solid #ddd;
+  margin: 0 auto;
+
   video {
     width: 100%; // Video fills the entire width of the container
     height: auto; // Height adjusts automatically to keep the aspect ratio
+    border-radius: 10px;
+
   }
 }
 
