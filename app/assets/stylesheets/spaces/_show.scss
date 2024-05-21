@@ -484,66 +484,68 @@ a {
 }
 
 .modal-overlay {
-  display: none;
+  display: none; // Ensure it is hidden by default
   position: fixed;
   z-index: 9999;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  height: 300%;
-  background-color: rgba(0,0,0,0.7);
-
+  height: 100%; // Changed from 300% to 100%
+  background-color: rgba(0, 0, 0, 0.7);
+ 
+ 
   @media (max-width: 768px) {
     width: 100%;
     height: 100%;
     overflow: hidden;
   }
-}
-
-
-.modal-content {
+ }
+ 
+ 
+ .modal-content {
   background-color: #fefefe;
   padding: 10px;
   border: 1px solid;
   border-radius: 10px;
-  // display: flex;
-  // margin-top: 3vw;
-  // margin-bottom: 50px;
   width: fit-content;
-  height: fit-content;
-  position: fixed;
-
+  height: auto; // Ensure it can grow as needed
+  position: fixed; // Keep it fixed
+ 
+ 
   @media (min-width: 1200px) {
     margin: auto;
-    display: absolute;
+    display: block;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
-
+ 
+ 
   @media (max-width: 768px) {
-    display: absolute;
+    display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 30px;
     overflow: auto;
     left: 50%;
     transform: translate(-50%, -50%);
-    top: 50%;
-    max-height: calc(90vh - 100px);
+    top: 46%; // Adjusted to move closer to the bottom of the screen
+    max-height: calc(90vh - 3px); // Allow even more vertical space
   }
-
+ 
+ 
   @media (max-height: 440px) {
     width: fit-content;
-    height: fit-content;
-    max-height: 390px;
+    height: auto; // Ensure it can grow as needed
+    max-height: 90vh; // Allow more vertical space
     max-width: 900px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
-}
+ }
+ 
 
 #image-modal{
   justify-content: center;
