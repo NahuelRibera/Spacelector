@@ -24,8 +24,29 @@
     <li class="nav-section-item"><%= link_to t('navbar.overview'), "#section1", class: "nav-link-section" %></li>
     <li class="nav-section-item"><%= link_to t('navbar.features'), "#section2", class: "nav-link-section" %></li>
     <li class="nav-section-item"><%= link_to t('navbar.reviews'), "#section3", class: "nav-link-section" %></li>
-    <li><%= link_to "EN", locale: 'en' %></li>
-    <li><%= link_to "ES", locale: 'es' %></li>
+    <li class="nav-section-item language-dropdown">
+      <div class="dropdown">
+        <button class="dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <%= I18n.locale == :en ? 'ENG' : 'ES' %> <%= image_tag "#{I18n.locale == :en ? 'eng.jpg' : 'es.png'}", class: "flag-icon" %>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+          <% if I18n.locale != :en %>
+            <li>
+              <%= link_to locale: 'en' do %>
+                ENG <%= image_tag "eng.jpg", alt: "English", class: "flag-icon" %>
+              <% end %>
+            </li>
+          <% end %>
+          <% if I18n.locale != :es %>
+            <li>
+              <%= link_to locale: 'es' do %>
+                ES <%= image_tag "es.png", alt: "Spanish", class: "flag-icon" %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </li>
   </ul>
 </div>
     <% end %>

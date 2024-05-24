@@ -544,6 +544,71 @@
   margin-left: 45px;
 }
 
+.language-dropdown {
+  position: relative;
+
+  .dropdown-toggle {
+    background: none;
+    border: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px 8px;  // Adjust padding to make it more compact
+
+    .flag-icon {
+      width: 20px;
+      height: auto;
+      margin-left: 5px;
+    }
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 0;  // Remove extra padding
+    width: auto;  // Ensure the width fits the content
+
+    li {
+      padding: 0;  // Remove extra padding inside list items
+      cursor: pointer;
+      width: 100%;  // Ensure the list items take full width
+
+      &:hover {
+        background: #f0f0f0;
+      }
+
+      a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: black;
+        padding: 5px 8px;  // Adjust padding inside each link to remove excess space
+        white-space: nowrap;  // Ensure text does not wrap
+        width: 100%;  // Ensure the anchor takes full width
+        box-sizing: border-box;  // Include padding in the element's total width
+
+        .flag-icon {
+          width: 20px;
+          height: auto;
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+
+  &:hover .dropdown-menu {
+    display: block;
+  }
+}
+
 .navbar-toggle {
   position: relative;
   display: none;
