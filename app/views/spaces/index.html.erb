@@ -6,15 +6,24 @@
     </div>
 
     <ul class="space-list">
-      <% @spaces.each do |space| %>
+      <% if @spaces.any? %>
+        <% @spaces.each do |space| %>
+          <li>
+            <div class="space-info" style="cursor: pointer; position: relative;">
+              <!-- This div becomes the clickable area, excluding the delete button -->
+              <%= link_to space.name, space_path(space), class: "space-link" %>
+
+              <%= form_with url: space_path(space), method: :delete, class: "delete-form" do |form| %>
+                <%= form.submit 'X', onclick: "return confirm('Are you sure you want to delete this space?')", class: 'delete-space', style: "position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" %>
+              <% end %>
+            </div>
+          </li>
+        <% end %>
+      <% else %>
         <li>
           <div class="space-info" style="cursor: pointer; position: relative;">
-            <!-- This div becomes the clickable area, excluding the delete button -->
-            <%= link_to space.name, space_path(space), class: "space-link" %>
-
-            <%= form_with url: space_path(space), method: :delete, class: "delete-form" do |form| %>
-              <%= form.submit 'X', onclick: "return confirm('Are you sure you want to delete this space?')", class: 'delete-space', style: "position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" %>
-            <% end %>
+            <!-- Placeholder space info -->
+            <%= link_to raw("Click on <strong>+ New</strong> to start!"), new_space_path, class: "space-link" %>
           </div>
         </li>
       <% end %>
