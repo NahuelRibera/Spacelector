@@ -1,32 +1,27 @@
 <section id="content-card" class="set-card">
   <div class='card-general'>
     <h1>Upload Image</h1>
-      <%= form_with model: @image, url: space_images_path(@space), local: true, class: 'image-form' do |form| %>
+    <%= form_with model: @image, url: space_images_path(@space), local: true, class: 'image-form' do |form| %>
       <div class="field">
         <%= form.label :title, 'Title' %>
         <%= form.text_field :title, required: true, class: 'text-field' %>
       </div>
-
       <br>
-
       <div class="field">
         <%= form.file_field :file, required: true, id: 'imageFileInput', capture: 'camera' %>
       </div>
-
       <div id="image-preview-container" style="display: none;">
         <img id="imagePreview" src="#" alt="Image preview" style="max-width: 100%;"/>
       </div>
-
       <br>
-
-      <button id="selectCompartmentsButton" type="button" class="btn back_form" style="margin-bottom: 30px;">Select Compartments</button>
-
-      <br>
-
+      <div style="display: flex; align-items: center; margin-bottom: 30px;">
+        <button id="selectCompartmentsButton" type="button" class="btn back_form" style="margin-right: 10px;">Select Compartments</button>
+        <button id="tutorialButton" type="button" class="btn-circle-new">
+          <%= image_tag 'question.png', alt: '?', style: 'width: 20px; height: 20px;' %>
+        </button>
+      </div>
       <canvas id="imageCanvas" class="image-canvas" style="display: none; max-width: 100%; width: 550px; height: auto; margin-bottom: 20px"></canvas>
-
       <div id="compartmentNamesContainer" style="display: none;"></div>
-
       <div class='btn-row'>
         <% if @space.parent_space %>
           <%= link_to "Back to '#{j @space.name}'", space_path(@space.parent_space), class: "back_to" %>
@@ -38,6 +33,15 @@
     <% end %>
   </div>
 </section>
+
+<div id="tutorialModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="card-video">
+      <%= video_tag "videosp.mp4", controls: true, class: "video-class" %>
+    </div>
+  </div>
+</div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -248,5 +252,36 @@
         alert('Please name all compartments before uploading.');
       }
     });
+    
+    var modal = document.getElementById("tutorialModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("tutorialButton");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Get the video element
+    var video = document.querySelector("#tutorialModal video");
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal and pause the video
+    span.onclick = function() {
+      modal.style.display = "none";
+      video.pause();
+    }
+
+    // When the user clicks anywhere outside of the modal, close it and pause the video
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+        video.pause();
+      }
+    }
   });
+  
 </script>
