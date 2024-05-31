@@ -169,6 +169,62 @@ a:hover {
   margin-right: 0px;
 }
 
+.info-icon {
+  font-family: 'Open Sans', sans-serif;
+  position: fixed; // Fixes the position relative to the viewport
+  left: 40px; // Ensure same left margin as .set
+  bottom: 20px; // Distance from the bottom of the viewport
+  z-index: 1000; // Ensures the icon stays above other elements
+  background: none; // Ensures there is no background unless specified
+  border: none; // No borders unless you want one
+  color: #727272; // Set the color of the text, adjust as needed
+  font-size: 16px; // Set the font size as needed
+  text-decoration: none; // Removes underline from links
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: left;
+  transition: box-shadow 0.2s ease-in-out;
+  background-color: white;
+
+  &:hover {
+    box-shadow: 0 3px 7px rgba(0,0,0,0.07);
+  }
+}
+
+.card-video {
+  width: 100%; // Ensures the container takes the full width of its parent
+  padding: 15px 15px; // No padding inside the container
+  border-radius: 10px;
+  background-color: white;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  max-width: 76vw;
+  border: 1px solid #ddd;
+  margin: 0 auto;
+
+  video {
+    width: 100%; // Video fills the entire width of the container
+    height: auto; // Height adjusts automatically to keep the aspect ratio
+    border-radius: 10px;
+
+  }
+}
+
+// Ensures video maintains full width on all devices and orientations
+@media (max-width: 768px) { // Adjustments for mobile devices
+  .card-video {
+  width: 100%; // Full width on small screens
+  video {
+      width: 100%; // Full width for the video on small screens
+  }
+  }
+}
+
+
 ///
 /// homepage
 ///
@@ -665,51 +721,6 @@ a {
 .transform-phone {
   display: none;
 }
-
-.info-icon {
-  font-family: 'Open Sans', sans-serif;
-  position: fixed; // Fixes the position relative to the viewport
-  left: 40px; // Distance from the left side of the viewportsdsd
-  bottom: 30px; // Distance from the bottom of the viewportsdf
-  z-index: 1000; // Ensures the icon stays above other elements
-  background: none; // Ensures there is no background unless specified
-  border: none; // No borders unless you want one
-  color: #aeaeae; // Set the color of the text, adjust as needed
-  font-size: 16px; // Set the font size as needed
-  text-decoration: none; // Removes underline from links
-}
-
-.card-video {
-  width: 100%; // Ensures the container takes the full width of its parent
-  padding: 15px 15px; // No padding inside the container
-  border-radius: 10px;
-  background-color: white;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  max-width: 76vw;
-  border: 1px solid #ddd;
-  margin: 0 auto;
-
-  video {
-    width: 100%; // Video fills the entire width of the container
-    height: auto; // Height adjusts automatically to keep the aspect ratio
-    border-radius: 10px;
-
-  }
-}
-
-// Ensures video maintains full width on all devices and orientations
-@media (max-width: 768px) { // Adjustments for mobile devices
-  .card-video {
-  width: 100%; // Full width on small screens
-  video {
-      width: 100%; // Full width for the video on small screens
-  }
-  }
-}
-
 
   // NO ESCRIBIR DEBAJO SOLO RESPONSIVE
   ///////////////////////////////////////////////////////////////////////////////////////
