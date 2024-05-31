@@ -145,3 +145,16 @@ input[type="text"] {
   text-decoration: none;
   cursor: pointer;
 }
+
+.no-style-button {
+  display: inline-block;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+}
+
+#tutorialButton {
+  cursor: pointer !important;
+}

@@ -16,9 +16,9 @@
       <br>
       <div style="display: flex; align-items: center; margin-bottom: 30px;">
         <button id="selectCompartmentsButton" type="button" class="btn back_form" style="margin-right: 10px;">Select Compartments</button>
-        <button id="tutorialButton" type="button" class="btn-circle-new">
-          <%= image_tag 'question.png', alt: '?', style: 'width: 20px; height: 20px;' %>
-        </button>
+        <div id="tutorialButton" class="no-style-button">
+          <%= image_tag 'question.png', alt: '?', style: 'width: 30px; height: 30px;'  %>
+        </div>
       </div>
       <canvas id="imageCanvas" class="image-canvas" style="display: none; max-width: 100%; width: 550px; height: auto; margin-bottom: 20px"></canvas>
       <div id="compartmentNamesContainer" style="display: none;"></div>
@@ -255,7 +255,7 @@
     
     var modal = document.getElementById("tutorialModal");
 
-    // Get the button that opens the modal
+    // Get the button that opens the modalsd
     var btn = document.getElementById("tutorialButton");
 
     // Get the <span> element that closes the modal
