@@ -16,8 +16,9 @@
       <br>
       <div style="display: flex; align-items: center; margin-bottom: 30px;">
         <button id="selectCompartmentsButton" type="button" class="btn back_form" style="margin-right: 10px;">Select Compartments</button>
+        <button id="resetButton" type="button" class="btn back_form" style="margin-right: 10px;">Reset</button>
         <div id="tutorialButton" class="no-style-button">
-          <%= image_tag 'question.png', alt: '?', style: 'width: 30px; height: 30px;'  %>
+          <%= image_tag 'question.png', alt: '?', style: 'width: 30px; height: 30px;' %>
         </div>
       </div>
       <canvas id="imageCanvas" class="image-canvas" style="display: none; max-width: 100%; width: 550px; height: auto; margin-bottom: 20px"></canvas>
@@ -53,6 +54,7 @@
     let isDrawing = false;
     let startX, startY, endX, endY;
     let selectedFile = null;
+    let loadedImage = null;
 
     document.getElementById('imageFileInput').addEventListener('change', function(event) {
       selectedFile = event.target.files[0];
@@ -66,8 +68,6 @@
       }
     });
 
-    let loadedImage = null;
-
     function drawCompartment(compartment, index) {
       context.beginPath();
       context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
@@ -78,8 +78,7 @@
       context.font = 'bold 50px Open Sans';
       context.strokeStyle = '#44A0D8';
       context.strokeText((index + 1).toString(), compartment.x + 15, compartment.y + 52);
-            context.fillText((index + 1).toString(), compartment.x + 15, compartment.y + 52);
-
+      context.fillText((index + 1).toString(), compartment.x + 15, compartment.y + 52);
     }
 
     function drawCompartments(imageSrc) {
@@ -140,7 +139,7 @@
 
     function handleStart(event) {
       isDrawing = true;
-      disableScroll(); // Disable scrolling when drawing starts
+      disableScroll();
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvas.width / rect.width;
       const scaleY = canvas.height / rect.height;
@@ -170,10 +169,9 @@
       drawCompartment(currentCompartment, compartments.length);
     }
 
-
     function handleEnd(event) {
       isDrawing = false;
-      enableScroll(); // Re-enable scrolling when drawing ends
+      enableScroll();
       saveCompartment();
     }
 
@@ -182,12 +180,12 @@
     canvas.addEventListener('mouseup', handleEnd);
 
     canvas.addEventListener('touchstart', function(event) {
-      event.preventDefault(); // Prevents the default touch action from happening
+      event.preventDefault();
       handleStart(event.touches[0]);
     }, { passive: false });
 
     canvas.addEventListener('touchmove', function(event) {
-      event.preventDefault(); // Prevents the default touch action from happening
+      event.preventDefault();
       handleMove(event.touches[0]);
     }, { passive: false });
 
@@ -235,6 +233,17 @@
       canvas.style.display = 'block';
     });
 
+    const resetButton = document.getElementById('resetButton');
+    resetButton.addEventListener('click', function() {
+      compartments.length = 0; // Clear the compartments array
+      context.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+      drawCompartments(); // Redraw the image without compartments
+      // Optionally clear the hidden inputs
+      const form = document.querySelector('.image-form');
+      const inputs = form.querySelectorAll('input[name^="image[compartments_attributes]"]');
+      inputs.forEach(input => input.remove());
+    });
+
     const uploadButton = document.getElementById('uploadButton');
     uploadButton.addEventListener('click', function(event) {
       const compartmentInputs = compartmentNamesContainer.querySelectorAll('input');
@@ -252,10 +261,10 @@
         alert('Please name all compartments before uploading.');
       }
     });
-    
+
     var modal = document.getElementById("tutorialModal");
 
-    // Get the button that opens the modalsd
+    // Get the button that opens the modal
     var btn = document.getElementById("tutorialButton");
 
     // Get the <span> element that closes the modal
@@ -283,5 +292,4 @@
       }
     }
   });
-  
 </script>
