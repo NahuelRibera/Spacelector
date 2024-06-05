@@ -79,6 +79,4 @@ test:
 #
 production:
   <<: *default
-  database: snap_production
-  username: snap
-  password: <%= ENV["SNAP_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
