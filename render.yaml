@@ -12,11 +12,11 @@ services:
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec rails server -b 0.0.0.0 -p $PORT"
     envVars:
-      - key: postgres://spacelector_user:R2zPbGy4UQo22vw5C2bZi7d02Sd3qdN1@dpg-cpfdtkf109ks73bi6i7g-a/spacelector
+      - key: DATABASE_URL
         fromDatabase:
           name: mysite
           property: connectionString
-      - key: a9022366303e43f9f83a6e5b14549bb8
-        sync: false
-      - key: 2
+      - key: RAILS_MASTER_KEY
+        value: a9022366303e43f9f83a6e5b14549bb8
+      - key: WEB_CONCURRENCY
         value: 2 # sensible default
