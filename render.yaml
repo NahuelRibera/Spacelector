@@ -17,6 +17,33 @@ services:
           name: mysite
           property: connectionString
       - key: RAILS_MASTER_KEY
-        value: a9022366303e43f9f83a6e5b14549bb8
+        value: REDACTED_RAILS_MASTER_KEY
+      - key: WEB_CONCURRENCY
+        value: 2 # sensible default
+
+databases:
+  - name: mysite
+    databaseName: mysite
+    user: mysite
+    plan: free
+
+services:
+  - type: web
+    name: mysite
+    runtime: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec rails server -b 0.0.0.0 -p $PORT"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mysite
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        value: "REDACTED_RAILS_MASTER_KEY"
+      - key: GOOGLE_CLIENT_ID
+        value: "REDACTED_GOOGLE_CLIENT_ID"
+      - key: GOOGLE_CLIENT_SECRET
+        value: "REDACTED_GOOGLE_CLIENT_SECRET"
       - key: WEB_CONCURRENCY
         value: 2 # sensible default
