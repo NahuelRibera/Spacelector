@@ -2,13 +2,13 @@ databases:
   - name: mysite
     databaseName: mysite
     user: mysite
-    plan: free
+    plan: starter
 
 services:
   - type: web
     name: mysite
     runtime: ruby
-    plan: free
+    plan: starter
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec rails server -b 0.0.0.0 -p $PORT"
     envVars:
@@ -24,3 +24,7 @@ services:
         value: "REDACTED_GOOGLE_CLIENT_SECRET"
       - key: WEB_CONCURRENCY
         value: 2 # sensible default
+
+  - type: shell
+    name: mysite-shell
+    plan: starter
