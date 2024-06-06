@@ -6,11 +6,11 @@ class ImagesController < ApplicationController
     @image = @space.images.new(image_params)
 
     if params[:image][:file].content_type == 'image/heic'
-      # Process and resize the image before attaching
       processed_image = process_heic_image(params[:image][:file])
       @image.file.attach(io: processed_image, filename: 'processed_image.jpg', content_type: 'image/jpeg')
     else
-      @image.file.attach(params[:image][:file])
+      processed_image = process_image(params[:image][:file])
+      @image.file.attach(io: File.open(processed_image.path), filename: params[:image][:file].original_filename)
     end
 
     @image.file_path = @image.file.key
@@ -43,14 +43,14 @@ class ImagesController < ApplicationController
 
   def convert_heic
     file = params[:file]
-  
+
     if file.content_type == 'image/heic'
       require "image_processing/mini_magick"
-  
+
       # Temporarily save the uploaded file to disk
       uploaded_file = Tempfile.new(['upload', '.heic'])
       File.binwrite(uploaded_file.path, file.read)
-  
+
       begin
         # Perform the conversion and resize
         processed_image = ImageProcessing::MiniMagick
@@ -58,14 +58,14 @@ class ImagesController < ApplicationController
                               .convert("jpg")
                               .resize_to_limit(1920, 1080) # Add resizing here
                               .call
-  
+
         # Create a new blob from the processed image
         converted_blob = ActiveStorage::Blob.create_and_upload!(
           io: File.open(processed_image.path, 'rb'),
           filename: "#{file.original_filename.split('.').first}.jpg",
           content_type: 'image/jpeg'
         )
-  
+
         # Respond with the URL to the converted and resized image
         render json: { preview_url: rails_blob_url(converted_blob) }, status: :ok
       rescue => e
@@ -81,7 +81,7 @@ class ImagesController < ApplicationController
     else
       render json: { error: "Unsupported file type." }, status: :unprocessable_entity
     end
-  end  
+  end
 
   def destroy
     @space = Space.find(params[:space_id])
@@ -105,6 +105,27 @@ class ImagesController < ApplicationController
                           .convert("jpg")
                           .resize_to_limit(1920, 1080)
                           .call
+
+    processed_image # This will return the path to the processed image
+  end
+
+  def process_image(file)
+    require "image_processing/mini_magick"
+
+    # Temporarily save the uploaded file to disk
+    uploaded_file = Tempfile.new(['upload', File.extname(file.original_filename)])
+    File.binwrite(uploaded_file.path, file.read)
+
+    image = MiniMagick::Image.read(File.binread(uploaded_file.path))
+    
+    if image.width > 1920 || image.height > 1920
+      processed_image = ImageProcessing::MiniMagick
+                          .source(uploaded_file.path)
+                          .resize_to_limit(1920, 1920)
+                          .call
+    else
+      processed_image = uploaded_file
+    end
 
     processed_image # This will return the path to the processed image
   end
