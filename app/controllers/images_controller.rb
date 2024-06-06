@@ -46,23 +46,18 @@ class ImagesController < ApplicationController
   
     if file.content_type == 'image/heic'
       require "image_processing/mini_magick"
-      Rails.logger.info "Starting HEIC conversion for file: #{file.original_filename}"
   
       # Temporarily save the uploaded file to disk
       uploaded_file = Tempfile.new(['upload', '.heic'])
       File.binwrite(uploaded_file.path, file.read)
   
       begin
-        Rails.logger.info "Uploaded file temporarily saved to: #{uploaded_file.path}"
-  
         # Perform the conversion and resize
         processed_image = ImageProcessing::MiniMagick
                               .source(uploaded_file.path)
                               .convert("jpg")
                               .resize_to_limit(1920, 1080) # Add resizing here
                               .call
-  
-        Rails.logger.info "Image converted and resized successfully."
   
         # Create a new blob from the processed image
         converted_blob = ActiveStorage::Blob.create_and_upload!(
@@ -71,25 +66,22 @@ class ImagesController < ApplicationController
           content_type: 'image/jpeg'
         )
   
-        Rails.logger.info "Converted blob created successfully."
-  
         # Respond with the URL to the converted and resized image
         render json: { preview_url: rails_blob_url(converted_blob) }, status: :ok
       rescue => e
-        Rails.logger.error "Error during HEIC conversion: #{e.message}"
-        render json: { error: e.message }, status: :internal_server_error
+        logger.error "Error during HEIC conversion: #{e.message}"
+        render json: { error: "Error during HEIC conversion: #{e.message}" }, status: :internal_server_error
       ensure
         # Clean up temporary files
         uploaded_file.close
         uploaded_file.unlink
-        processed_image.close
-        processed_image.unlink if processed_image
+        processed_image.close if processed_image && !processed_image.closed?
+        processed_image.unlink if processed_image && File.exist?(processed_image.path)
       end
     else
-      Rails.logger.error "Unsupported file type: #{file.content_type}"
       render json: { error: "Unsupported file type." }, status: :unprocessable_entity
     end
-  end
+  end  
 
   def destroy
     @space = Space.find(params[:space_id])
