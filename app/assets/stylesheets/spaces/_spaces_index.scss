@@ -193,6 +193,33 @@ a:hover {
   }
 }
 
+/* Adjust for medium screens (2 items per row) */
+@media screen and (max-width: 768px) {
+  .info-icon {
+    flex: 0 0 calc(50% - 20px);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .info-icon {
+    flex: 0 0 calc(100% - 20px);
+    left: 20px; // Adjust the left position for smaller screens
+    bottom: 10px; // Adjust the bottom position for smaller screens
+    padding: 8px; // Adjust the padding for smaller screens
+    font-size: 14px; // Adjust the font size for smaller screens
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .info-icon {
+    flex: 0 0 calc(100% - 20px);
+    left: 10px; // Further adjust the left position for extra small screens
+    bottom: 10px; // Adjust the bottom position for extra small screens
+    padding: 8px; // Adjust the padding for extra small screens
+    font-size: 12px; // Adjust the font size for extra small screens
+  }
+}
+
 .card-video {
   width: 100%; // Ensures the container takes the full width of its parent
   padding: 15px 15px; // No padding inside the container

@@ -46,8 +46,8 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const MAX_WIDTH = 1920;
-    const MAX_HEIGHT = 1920;
+    const MAX_WIDTH = 1500;
+    const MAX_HEIGHT = 1500;
     const canvas = document.getElementById('imageCanvas');
     const context = canvas.getContext('2d');
     const compartmentNamesContainer = document.getElementById('compartmentNamesContainer');
@@ -95,7 +95,7 @@
       context.beginPath();
       context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
       context.strokeStyle = '#44A0D8';
-      context.lineWidth = 7.5;
+      context.lineWidth = 11.5;
       context.stroke();
       context.fillStyle = 'black';
       context.font = 'bold 50px Open Sans';
