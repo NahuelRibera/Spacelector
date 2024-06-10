@@ -3,6 +3,9 @@ class ImagesController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:convert_heic]
 
   def create
+    MiniMagick.configure do |config|
+      config.timeout = 300 # Increase timeout to 5 minutes
+    end
     @image = @space.images.new(image_params)
 
     if params[:image][:file].content_type == 'image/heic'
@@ -92,6 +95,7 @@ class ImagesController < ApplicationController
 
   private
 
+
   def process_heic_image(file)
     require "image_processing/mini_magick"
 
@@ -111,11 +115,11 @@ class ImagesController < ApplicationController
 
   def process_image(file)
     require "image_processing/mini_magick"
-  
+
     # Temporarily save the uploaded file to disk
     uploaded_file = Tempfile.new(['upload', File.extname(file.original_filename)])
     File.binwrite(uploaded_file.path, file.read)
-  
+
     image = MiniMagick::Image.read(File.binread(uploaded_file.path))
     
     if image.width > 1500 || image.height > 1500
@@ -129,6 +133,7 @@ class ImagesController < ApplicationController
 
     processed_image # This will return the path to the processed image
   end
+  
 
   def image_params
     params.require(:image).permit(:file, :title, compartments_attributes: [:name, :x, :y, :width, :height])
