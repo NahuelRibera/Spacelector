@@ -23,6 +23,9 @@ class ImagesController < ApplicationController
     else
       render :new
     end
+  ensure
+    processed_image&.close if processed_image && !processed_image.closed?
+    processed_image&.unlink if processed_image && File.exist?(processed_image.path)
   end
 
   def new
@@ -46,45 +49,40 @@ class ImagesController < ApplicationController
 
   def convert_heic
     file = params[:file]
-  
+
     if file.content_type == 'image/heic'
       require "image_processing/mini_magick"
-  
-      # Temporarily save the uploaded file to disk
+
       uploaded_file = Tempfile.new(['upload', '.heic'])
       File.binwrite(uploaded_file.path, file.read)
-  
+
       begin
-        # Perform the conversion and resize
         processed_image = ImageProcessing::MiniMagick
                               .source(uploaded_file.path)
                               .convert("jpg")
-                              .resize_to_limit(1500, 1500) # Change resizing here
+                              .resize_to_limit(1500, 1500)
                               .call
-  
-        # Create a new blob from the processed image
+
         converted_blob = ActiveStorage::Blob.create_and_upload!(
           io: File.open(processed_image.path, 'rb'),
           filename: "#{file.original_filename.split('.').first}.jpg",
           content_type: 'image/jpeg'
         )
-  
-        # Respond with the URL to the converted and resized image
+
         render json: { preview_url: rails_blob_url(converted_blob) }, status: :ok
       rescue => e
         logger.error "Error during HEIC conversion: #{e.message}"
         render json: { error: "Error during HEIC conversion: #{e.message}" }, status: :internal_server_error
       ensure
-        # Clean up temporary files
         uploaded_file.close
         uploaded_file.unlink
-        processed_image.close if processed_image && !processed_image.closed?
-        processed_image.unlink if processed_image && File.exist?(processed_image.path)
+        processed_image&.close if processed_image && !processed_image.closed?
+        processed_image&.unlink if processed_image && File.exist?(processed_image.path)
       end
     else
       render json: { error: "Unsupported file type." }, status: :unprocessable_entity
     end
-  end  
+  end
 
   def destroy
     @space = Space.find(params[:space_id])
@@ -95,33 +93,29 @@ class ImagesController < ApplicationController
 
   private
 
-
   def process_heic_image(file)
     require "image_processing/mini_magick"
 
-    # Temporarily save the uploaded file to disk
     uploaded_file = Tempfile.new(['upload', '.heic'])
     File.binwrite(uploaded_file.path, file.read)
 
-    # Perform the conversion and resize
     processed_image = ImageProcessing::MiniMagick
                           .source(uploaded_file.path)
                           .convert("jpg")
                           .resize_to_limit(1920, 1080)
                           .call
 
-    processed_image # This will return the path to the processed image
+    processed_image
   end
 
   def process_image(file)
     require "image_processing/mini_magick"
 
-    # Temporarily save the uploaded file to disk
     uploaded_file = Tempfile.new(['upload', File.extname(file.original_filename)])
     File.binwrite(uploaded_file.path, file.read)
 
     image = MiniMagick::Image.read(File.binread(uploaded_file.path))
-    
+
     if image.width > 1500 || image.height > 1500
       processed_image = ImageProcessing::MiniMagick
                           .source(uploaded_file.path)
@@ -131,9 +125,8 @@ class ImagesController < ApplicationController
       processed_image = uploaded_file
     end
 
-    processed_image # This will return the path to the processed image
+    processed_image
   end
-  
 
   def image_params
     params.require(:image).permit(:file, :title, compartments_attributes: [:name, :x, :y, :width, :height])
