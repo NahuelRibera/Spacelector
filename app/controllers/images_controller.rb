@@ -9,11 +9,11 @@ class ImagesController < ApplicationController
     @image = @space.images.new(image_params)
 
     if params[:image][:file].content_type == 'image/heic'
-      processed_image = process_heic_image(params[:image][:file])
-      @image.file.attach(io: processed_image, filename: 'processed_image.jpg', content_type: 'image/jpeg')
+      processed_image_path = process_heic_image(params[:image][:file])
+      @image.file.attach(io: File.open(processed_image_path), filename: 'processed_image.jpg', content_type: 'image/jpeg')
     else
-      processed_image = process_image(params[:image][:file])
-      @image.file.attach(io: File.open(processed_image.path), filename: params[:image][:file].original_filename)
+      processed_image_path = process_image(params[:image][:file])
+      @image.file.attach(io: File.open(processed_image_path), filename: params[:image][:file].original_filename)
     end
 
     @image.file_path = @image.file.key
@@ -24,8 +24,7 @@ class ImagesController < ApplicationController
       render :new
     end
   ensure
-    processed_image&.close if processed_image && !processed_image.closed?
-    processed_image&.unlink if processed_image && File.exist?(processed_image.path)
+    File.delete(processed_image_path) if processed_image_path && File.exist?(processed_image_path)
   end
 
   def new
@@ -105,7 +104,7 @@ class ImagesController < ApplicationController
                           .resize_to_limit(1920, 1080)
                           .call
 
-    processed_image
+    processed_image.path
   end
 
   def process_image(file)
@@ -116,16 +115,24 @@ class ImagesController < ApplicationController
 
     image = MiniMagick::Image.read(File.binread(uploaded_file.path))
 
-    if image.width > 1500 || image.height > 1500
-      processed_image = ImageProcessing::MiniMagick
-                          .source(uploaded_file.path)
-                          .resize_to_limit(1500, 1500)
-                          .call
-    else
-      processed_image = uploaded_file
-    end
+    processed_image_path = if image.width > 1500 || image.height > 1500
+                             step_resize(uploaded_file.path)
+                           else
+                             uploaded_file.path
+                           end
 
-    processed_image
+    processed_image_path
+  end
+
+  def step_resize(file_path)
+    image = MiniMagick::Image.open(file_path)
+    output_path = Tempfile.new(['step_resized', '.jpg']).path
+
+    while image.width > 1500 || image.height > 1500
+      image.resize "1500x1500>"
+      image.write(output_path)
+    end
+    output_path
   end
 
   def image_params
