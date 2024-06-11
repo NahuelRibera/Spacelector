@@ -55,3 +55,22 @@ en:
     review2: "Space on my sailboat is optimized. Categorize essentials and quickly locate items with the search feature."
     review3: "Perfect for organizing my tattoo workstation. Label inks and needles, add client notes, and stay precise."
     review4: "Organizing my home is a breeze. Label closets and kitchen compartments, and find everything fast with visual guides."
+  spaces:
+    title: "Spaces"
+    new_space: "+ New"
+    delete_confirm: "Are you sure you want to delete this space?"
+    placeholder: "Click on <strong>+ New</strong> to start!"
+    help: "<strong>Looking for help?</strong> Please, click here to watch a tutorial!"
+  space:
+    back_to: "Back to '%{name}'"
+    back: "Back"
+    upload_image: "Upload image"
+    new_space: "+ New"
+  images:
+    title: "Upload Image"
+    label_title: "Title"
+    select_compartments: "Select Compartments"
+    reset: "Reset"
+    back_to: "Back to '%{name}'"
+    back: "Back"
+    upload: "Upload"

@@ -544,7 +544,8 @@
   margin-left: 45px;
 }
 
-.language-dropdown {
+.language-dropdown,
+.language-dropdown-signed-in {
   position: relative;
 
   .dropdown-toggle {
@@ -554,7 +555,8 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 5px 8px;  // Adjust padding to make it more compact
+    padding: 5px 8px;
+    margin-right: 17px;
 
     .flag-icon {
       width: 20px;
@@ -573,13 +575,13 @@
     border-radius: 4px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    padding: 0;  // Remove extra padding
-    width: auto;  // Ensure the width fits the content
+    padding: 0;
+    width: auto;
 
     li {
-      padding: 0;  // Remove extra padding inside list items
+      padding: 0;
       cursor: pointer;
-      width: 100%;  // Ensure the list items take full width
+      width: 100%;
 
       &:hover {
         background: #f0f0f0;
