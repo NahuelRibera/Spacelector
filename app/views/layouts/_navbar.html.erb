@@ -58,6 +58,7 @@
         <%= form.text_field :query, placeholder: t('navbar.search_placeholder'), autocomplete: "off", class: "search-input" %>
       <% end %>
     </div>
+    <div id="search-results-dropdown" class="search-results-dropdown"></div>
     <!-- Language Dropdown for Signed-in Users -->
     <div class="language-dropdown-signed-in">
       <div class="dropdown">
@@ -94,80 +95,60 @@
           <%= t('navbar.signin') %>
         <% end %>
       <% end %>
-    <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
-      <%= button_tag(type: 'submit', class: 'btn google-btn go-to') do %>
-        <%= t('navbar.goto') %>
+      <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
+        <%= button_tag(type: 'submit', class: 'btn google-btn go-to') do %>
+          <%= t('navbar.goto') %>
+        <% end %>
       <% end %>
-    <% end %>
     </div>
   <% end %>
 </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-  var toggleButton = document.getElementById("toggleButton");
-  var dropdownMenu = document.getElementById("dropdownMenu");
+    var toggleButton = document.getElementById("toggleButton");
+    var dropdownMenu = document.getElementById("dropdownMenu");
 
-  toggleButton.addEventListener("click", function() {
-    if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
-      dropdownMenu.style.display = "block";
-    } else {
-      dropdownMenu.style.display = "none";
-    }
-  });
-});
-
-
-
-
-
-  document.addEventListener("DOMContentLoaded", function() {
-    const navLinks = document.querySelectorAll('.nav-link-section');
-    const sections = document.querySelectorAll('section'); // Ensure the selector matches your sections
-
-    // Set the 'active' class based on the scroll position
-    function setActiveLinkOnScroll() {
-      let currentSectionIndex = -1;
-      sections.forEach((section, index) => {
-        const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
-        const sectionBottom = sectionTop + section.offsetHeight;
-        if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionBottom) {
-          currentSectionIndex = index;
-        }
-      });
-
-      if (currentSectionIndex !== -1) {
-        navLinks.forEach((link, index) => {
-          link.classList.toggle('active', index === currentSectionIndex);
-        });
+    toggleButton.addEventListener("click", function() {
+      if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
+        dropdownMenu.style.display = "block";
+      } else {
+        dropdownMenu.style.display = "none";
       }
-    }
-
-    // Listen to scroll events
-    window.addEventListener('scroll', setActiveLinkOnScroll);
-
-    // Smooth scroll to the section when a nav link is clicked
-    navLinks.forEach((link, index) => {
-      link.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default anchor behavior
-        const targetId = link.getAttribute('href').substring(1);
-        const targetSection = document.getElementById(targetId);
-
-        // Perform smooth scrolling to the target section
-        targetSection.scrollIntoView({ behavior: 'smooth' });
-
-        // Set 'active' class after scrolling ends
-        navLinks.forEach(lnk => lnk.classList.remove('active'));
-        link.classList.add('active');
-
-        // Update the URL hash without page jump
-        history.pushState(null, null, '#' + targetId);
-      });
     });
 
-    // Update active link on load and when resizing or changing the orientation of the device
-    setActiveLinkOnScroll();
-    window.addEventListener('resize', setActiveLinkOnScroll);
-    window.addEventListener('orientationchange', setActiveLinkOnScroll);
+    // Search bar dropdown functionality
+    var searchInput = document.querySelector('.search-input');
+    var searchDropdown = document.getElementById('search-results-dropdown');
+
+    searchInput.addEventListener('input', function() {
+      var query = searchInput.value.trim();
+
+      if (query.length > 0) {
+        // Assuming you have an endpoint to get search results via AJAX
+        fetch(`/search_autocomplete?query=${query}`)
+          .then(response => response.json())
+          .then(data => {
+            var dropdownContent = '';
+            if (data.length > 0) {
+              data.forEach(item => {
+                dropdownContent += `<div class="search-result-item">${item.name}</div>`;
+              });
+            } else {
+              dropdownContent = '<div class="search-result-item">No results found</div>';
+            }
+            searchDropdown.innerHTML = dropdownContent;
+            searchDropdown.style.display = 'block';
+          });
+      } else {
+        searchDropdown.style.display = 'none';
+      }
+    });
+
+    document.addEventListener('click', function(event) {
+      if (!searchDropdown.contains(event.target) && !searchInput.contains(event.target)) {
+        searchDropdown.style.display = 'none';
+      }
+    });
   });
 </script>
