@@ -1,9 +1,9 @@
 <section id="content-card" class="set-card">
   <div class='card-general'>
-    <h1>Upload Image</h1>
+    <h1><%= t('images.title') %></h1>
     <%= form_with model: @image, url: space_images_path(@space), local: true, class: 'image-form' do |form| %>
       <div class="field">
-        <%= form.label :title, 'Title' %>
+        <%= form.label :title, t('images.label_title') %>
         <%= form.text_field :title, required: true, class: 'text-field' %>
       </div>
       <br>
@@ -15,8 +15,8 @@
       </div>
       <br>
       <div style="display: flex; align-items: center; margin-bottom: 30px;">
-        <button id="selectCompartmentsButton" type="button" class="btn back_form" style="margin-right: 10px;">Select Compartments</button>
-        <button id="resetButton" type="button" class="btn back_form" style="margin-right: 10px;">Reset</button>
+        <button id="selectCompartmentsButton" type="button" class="btn back_form" style="margin-right: 10px;"><%= t('images.select_compartments') %></button>
+        <button id="resetButton" type="button" class="btn back_form" style="margin-right: 10px;"><%= t('images.reset') %></button>
         <div id="tutorialButton" class="no-style-button">
           <%= image_tag 'question.png', alt: '?', style: 'width: 30px; height: 30px;' %>
         </div>
@@ -25,11 +25,11 @@
       <div id="compartmentNamesContainer" style="display: none;"></div>
       <div class='btn-row'>
         <% if @space.parent_space %>
-          <%= link_to "Back to '#{j @space.name}'", space_path(@space.parent_space), class: "back_to" %>
+          <%= link_to t('images.back_to', name: j(@space.name)), space_path(@space.parent_space), class: "back_to" %>
         <% else %>
-          <%= link_to 'Back', spaces_path, class: "back_form" %>
+          <%= link_to t('images.back'), spaces_path, class: "back_form" %>
         <% end %>
-        <%= form.submit "Upload", class:"custom-btn", style: "justify-content: center;", id: 'uploadButton' %>
+        <%= form.submit t('images.upload'), class:"custom-btn", style: "justify-content: center;", id: 'uploadButton' %>
       </div>
     <% end %>
   </div>

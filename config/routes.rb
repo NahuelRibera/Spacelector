@@ -1,51 +1,55 @@
 Rails.application.routes.draw do
-  get 'members/dashboard'
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    sessions: 'users/sessions',
-    omniauth_callbacks: 'users/omniauth_callbacks'
-  }
-  root to: 'spaces#index'
+  # Define Devise routes without OmniAuth callbacks
+  devise_for :users, skip: [:omniauth_callbacks]
 
-  resources :spaces do
-    resources :images, only: [:new, :create, :show, :destroy, :update] do
+  # Define OmniAuth callback routes separately
+  devise_for :users, only: [:omniauth_callbacks], controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
+  # Scope routes by locale
+  scope '(:locale)', locale: /#{I18n.available_locales.join("|")}/ do
+    root to: 'spaces#index'
+
+    resources :spaces do
+      resources :images, only: [:new, :create, :show, :destroy, :update] do
+        resources :compartments, only: [:index]
+      end
+      collection do
+        get 'search'
+      end
+    end
+
+    patch '/spaces/:id/update_name', to: 'spaces#update_name', as: 'update_space_name'
+
+    resources :images, only: [] do
       resources :compartments, only: [:index]
     end
-    collection do
-      get 'search'
+
+    resources :boxes, only: [] do
+      resource :info, only: [:new, :create, :show, :edit, :update, :destroy]
     end
-  end
 
-  patch '/spaces/:id/update_name', to: 'spaces#update_name', as: 'update_space_name'
-
-  resources :images, only: [] do
-    resources :compartments, only: [:index]
-  end
-
-  resources :boxes, only: [] do
-    resource :info, only: [:new, :create, :show, :edit, :update, :destroy]
-  end
-
-  resources :compartments do
-    resources :object_infos, except: [:show] do
-      collection do
-        post 'create_or_update'
+    resources :compartments do
+      resources :object_infos, except: [:show] do
+        collection do
+          post 'create_or_update'
+        end
+        get 'last', on: :member, to: 'object_infos#last'
       end
-      get 'last', on: :member, to: 'object_infos#last'
     end
+
+    get '/profile', to: 'profiles#show', as: :profile
+
+    get 'checkout', to: 'checkouts#show'
+    get 'checkout/:plan', to: 'checkouts#checkout', as: :checkout_plan
+    get 'checkout/success', to: 'checkouts#success'
+    get 'billing', to: 'billings#show'
+    post 'compartments/:compartment_id/object_infos', to: 'object_infos#create'
+    post 'convert_heic', to: 'images#convert_heic', as: :convert_heic
+    get 'compartments/:compartment_id/object_infos/last', to: 'object_infos#last', as: 'fetch_last_compartment_object_info'
+    get 'images/:id/conversion_complete', to: 'images#conversion_complete', as: :conversion_complete
+    get 'autocomplete_search', to: 'spaces#autocomplete_search'
+    get '/terms-and-conditions', to: 'pages#terms_and_conditions'
+    get 'video_popup', to: 'videos#popup', as: :new_video_popup
   end
-
-  get '/profile', to: 'profiles#show', as: :profile
-
-  get 'checkout', to: 'checkouts#show'
-  get 'checkout/:plan', to: 'checkouts#checkout', as: :checkout_plan
-  get 'checkout/success', to: 'checkouts#success'
-  get 'billing', to: 'billings#show'
-  post 'compartments/:compartment_id/object_infos', to: 'object_infos#create'
-  post 'convert_heic', to: 'images#convert_heic', as: :convert_heic
-  get 'compartments/:compartment_id/object_infos/last', to: 'object_infos#last', as: 'fetch_last_compartment_object_info'
-  get 'images/:id/conversion_complete', to: 'images#conversion_complete', as: :conversion_complete
-  get 'autocomplete_search', to: 'spaces#autocomplete_search'
-  get '/terms-and-conditions', to: 'pages#terms_and_conditions'
-  get 'video_popup', to: 'videos#popup', as: :new_video_popup
 end
+

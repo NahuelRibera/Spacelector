@@ -6,6 +6,7 @@ es:
     signIn: "Iniciar Sesión"
     goto: "Ir a Spacelector"
     signin: "Inicia sesión"
+    search_placeholder: "¿Qué estás buscando?"
   homepage:
     headline: "¿Qué estás buscando?"
     manage1: "Gestiona tu espacio para acceder a tus pertenencias. Tome o cargue una"
@@ -26,3 +27,28 @@ es:
     review2: "El espacio en mi velero está optimizado. Clasifica los artículos esenciales y localízalos rápidamente con la función de búsqueda."
     review3: "Perfecto para organizar mi estación de trabajo de tatuajes. Etiqueta tintas y agujas, añade notas a los clientes y mantén la precisión."
     review4: "Organizar mi casa es pan comido. Etiqueta armarios y compartimentos de cocina, y encuéntralo todo rápidamente con guías visuales."
+  spaces:
+    title: "Espacios"
+    new_space: "+ Nuevo"
+    delete_confirm: "¿Estás seguro de que deseas eliminar este espacio?"
+    placeholder: "Haz clic en <strong>+ Nuevo</strong> para comenzar!"
+    help: "<strong>¿Buscas ayuda?</strong> Por favor, haz clic aquí para ver tutorial!"
+  space:
+    back_to: "Volver a '%{name}'"
+    back: "Volver"
+    upload_image: "Subir imagen"
+    new_space: "+ Nuevo"
+  images:
+    title: "Subir Imagen"
+    label_title: "Título"
+    select_compartments: "Seleccionar Compartimentos"
+    reset: "Restablecer"
+    back_to: "Volver a '%{name}'"
+    back: "Volver"
+    upload: "Subir"
+  new_space:
+    title: "Nuevo Espacio"
+    name_placeholder: "Introduce el nombre del espacio"
+    back_to: "Volver a '%{name}'"
+    back: "Volver"
+    create: "Crear"

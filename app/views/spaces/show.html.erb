@@ -8,34 +8,34 @@
     </div>
     <div class="rotated-hud">
       <% if @space.parent_space %>
-        <%= link_to raw('<i class="fa-solid fa-arrow-left"></i> Back to \''.html_safe + j(@space.parent_space.name) + '\''), space_path(@space.parent_space), class: "back_to" %>
+        <%= link_to raw("<i class='fa-solid fa-arrow-left'></i> #{t('space.back_to', name: j(@space.parent_space.name))}"), space_path(@space.parent_space), class: "back_to" %>
       <% else %>
-       <%= link_to raw('<i class="fa-solid fa-arrow-left"></i> Back'), spaces_path, class: "back" %>
+       <%= link_to raw("<i class='fa-solid fa-arrow-left'></i> #{t('space.back')}"), spaces_path, class: "back" %>
       <% end %>
-      <%= link_to raw('<i class="fa-solid fa-arrow-up-from-bracket"></i> Upload image'), new_space_image_path(@space), class: "upload" %>
-      <%= link_to '+ New', new_space_path(parent_space_id: @space.id), class: "new" %>
+      <%= link_to raw("<i class='fa-solid fa-arrow-up-from-bracket'></i> #{t('space.upload_image')}"), new_space_image_path(@space), class: "upload" %>
+      <%= link_to t('space.new_space'), new_space_path(parent_space_id: @space.id), class: "new" %>
     </div>
     <div class="default-hud">
-      <%= link_to '+ New', new_space_path(parent_space_id: @space.id), class: "new" %>
+      <%= link_to t('space.new_space'), new_space_path(parent_space_id: @space.id), class: "new" %>
     </div>
   </div>
 
   <div class="default-hud">
     <% if @space.parent_space %>
-      <%= link_to raw('<i class="fa-solid fa-arrow-left"></i> Back to \''.html_safe + j(@space.parent_space.name) + '\''), space_path(@space.parent_space), class: "back_to" %>
+      <%= link_to raw("<i class='fa-solid fa-arrow-left'></i> #{t('space.back_to', name: j(@space.parent_space.name))}"), space_path(@space.parent_space), class: "back_to" %>
     <% else %>
-      <%= link_to raw('<i class="fa-solid fa-arrow-left"></i> Back'), spaces_path, class: "back" %>
+      <%= link_to raw("<i class='fa-solid fa-arrow-left'></i> #{t('space.back')}"), spaces_path, class: "back" %>
     <% end %>
-    <%= link_to raw('<i class="fa-solid fa-arrow-up-from-bracket"></i> Upload image'), new_space_image_path(@space), class: "upload" %>
+    <%= link_to raw("<i class='fa-solid fa-arrow-up-from-bracket'></i> #{t('space.upload_image')}"), new_space_image_path(@space), class: "upload" %>
   </div>
 
   <ul class="space-list">
     <% @child_spaces.each do |child_space| %>
       <li>
-        <div class="space-info" style="cursor: pointer; position: relative;"> <!-- Position relative for positioning the delete button -->
-          <%= link_to child_space.name, space_path(child_space), class: "space-link" %> <!-- Keep the link visible -->
+        <div class="space-info" style="cursor: pointer; position: relative;">
+          <%= link_to child_space.name, space_path(child_space), class: "space-link" %>
           <%= form_with url: space_path(child_space), method: :delete do |form| %>
-            <%= form.submit 'X', onclick: "return confirm('Are you sure you want to delete this space?')", class: "delete-space", style: "position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" %>
+            <%= form.submit 'X', onclick: "return confirm(t('spaces.delete_confirm'))", class: "delete-space", style: "position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" %>
           <% end %>
         </div>
       </li>
@@ -57,9 +57,9 @@
             <div class="title">
               <h5><%= image.title %></h5>
             </div>
-             <%= form_with url: space_image_path(@space, image), method: :delete, class: "delete-image-form", data: { confirm: 'Are you sure you want to delete this image?' } do |form| %>
-            <%= form.submit 'X', class: "delete" %>
-          <% end %>
+            <%= form_with url: space_image_path(@space, image), method: :delete, class: "delete-image-form", data: { confirm: t('images.delete_confirm') } do |form| %>
+              <%= form.submit 'X', class: "delete" %>
+            <% end %>
           </div>
         </div>
       <% end %>
@@ -70,7 +70,7 @@
   <div class="modal-content">
     <div class="modal-body">
       <div style="position: relative;">
-        <span class="close-modal">&times;</span> <!-- Close button inside modal-canvas -->
+        <span class="close-modal">&times;</span>
         <canvas id="modal-canvas" class="modal-canvas"></canvas>
       </div>
       <div id="compartment-info-boxes" class="compartment-info-container">
