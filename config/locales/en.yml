@@ -35,6 +35,7 @@ en:
     signIn: "Sign In"
     goto: "Go to Spacelector"
     signin: "Sign In"
+    search_placeholder: "What are you looking for?"
   homepage:
     headline: "What are you looking for?"
     manage1: "Manage your space to access your belongings. Take or upload a"
@@ -80,5 +81,3 @@ en:
     back_to: "Back to '%{name}'"
     back: "Back"
     create: "Create"
-  navbar:
-    search_placeholder: "What are you looking for?"

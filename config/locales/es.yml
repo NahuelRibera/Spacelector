@@ -6,6 +6,7 @@ es:
     signIn: "Iniciar Sesión"
     goto: "Ir a Spacelector"
     signin: "Inicia sesión"
+    search_placeholder: "¿Qué estás buscando?"
   homepage:
     headline: "¿Qué estás buscando?"
     manage1: "Gestiona tu espacio para acceder a tus pertenencias. Tome o cargue una"
@@ -51,5 +52,3 @@ es:
     back_to: "Volver a '%{name}'"
     back: "Volver"
     create: "Crear"
-  navbar:
-    search_placeholder: "¿Qué estás buscando?"

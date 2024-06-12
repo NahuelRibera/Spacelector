@@ -94,12 +94,11 @@
           <%= t('navbar.signin') %>
         <% end %>
       <% end %>
-
-      <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
-        <%= button_tag(type: 'submit', class: 'btn google-btn go-to') do %>
-          <%= t('navbar.goto') %>
-        <% end %>
+    <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
+      <%= button_tag(type: 'submit', class: 'btn google-btn go-to') do %>
+        <%= t('navbar.goto') %>
       <% end %>
+    <% end %>
     </div>
   <% end %>
 </div>
