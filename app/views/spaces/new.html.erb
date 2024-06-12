@@ -1,20 +1,20 @@
 <section id="content-card" class="set-card">
   <div class='card-general'>
-    <h1>New Space</h1>
+    <h1><%= t('new_space.title') %></h1>
 
-  <%= form_with model: @space, url: spaces_path, local: true, class: 'space-form' do |form| %>
-    <% if @space.parent_space_id %>
-      <%= form.hidden_field :parent_space_id %>
-    <% end %>
-    <%= form.text_field :name, required: true, class: 'text-field' %>
-    <div class='btn-row'>
-    <% if @space.parent_space %>
-      <%= link_to "Back to '#{j @space.parent_space.name}'", space_path(@space.parent_space), class: "back_to" %>
-    <% else %>
-    <%= link_to 'Back', spaces_path, class: "back_form" %>
+    <%= form_with model: @space, url: spaces_path, local: true, class: 'space-form' do |form| %>
+      <% if @space.parent_space_id %>
+        <%= form.hidden_field :parent_space_id %>
       <% end %>
-        <%= button_tag "Create", type: "submit", class: "btn new-create" %>
-    </div>
+      <%= form.text_field :name, required: true, class: 'text-field', placeholder: t('new_space.name_placeholder') %>
+      <div class='btn-row'>
+        <% if @space.parent_space %>
+          <%= link_to t('new_space.back_to', name: @space.parent_space.name), space_path(@space.parent_space), class: "back_to" %>
+        <% else %>
+          <%= link_to t('new_space.back'), spaces_path, class: "back_form" %>
+        <% end %>
+        <%= button_tag t('new_space.create'), type: "submit", class: "btn new-create" %>
+      </div>
     <% end %>
   </div>
 </section>

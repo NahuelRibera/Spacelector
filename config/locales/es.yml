@@ -31,7 +31,7 @@ es:
     new_space: "+ Nuevo"
     delete_confirm: "¿Estás seguro de que deseas eliminar este espacio?"
     placeholder: "Haz clic en <strong>+ Nuevo</strong> para comenzar!"
-    help: "<strong>¿Buscas ayuda?</strong> Por favor, haz clic aquí para ver un tutorial!"
+    help: "<strong>¿Buscas ayuda?</strong> Por favor, haz clic aquí para ver tutorial!"
   space:
     back_to: "Volver a '%{name}'"
     back: "Volver"
@@ -45,3 +45,11 @@ es:
     back_to: "Volver a '%{name}'"
     back: "Volver"
     upload: "Subir"
+  new_space:
+    title: "Nuevo Espacio"
+    name_placeholder: "Introduce el nombre del espacio"
+    back_to: "Volver a '%{name}'"
+    back: "Volver"
+    create: "Crear"
+  navbar:
+    search_placeholder: "¿Qué estás buscando?"

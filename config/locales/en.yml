@@ -74,3 +74,11 @@ en:
     back_to: "Back to '%{name}'"
     back: "Back"
     upload: "Upload"
+  new_space:
+    title: "New Space"
+    name_placeholder: "Enter space name"
+    back_to: "Back to '%{name}'"
+    back: "Back"
+    create: "Create"
+  navbar:
+    search_placeholder: "What are you looking for?"
