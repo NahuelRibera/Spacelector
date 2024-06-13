@@ -582,6 +582,8 @@
       padding: 0;
       cursor: pointer;
       width: 100%;
+      display: flex;
+      justify-content: center; // Center the content horizontally
 
       &:hover {
         background: #f0f0f0;
@@ -592,15 +594,17 @@
         align-items: center;
         text-decoration: none;
         color: black;
-        padding: 5px 8px;  // Adjust padding inside each link to remove excess space
+        padding: 5px;  // Adjust padding to remove excess space
         white-space: nowrap;  // Ensure text does not wrap
         width: 100%;  // Ensure the anchor takes full width
         box-sizing: border-box;  // Include padding in the element's total width
+        justify-content: center; // Center the content horizontally
 
         .flag-icon {
           width: 20px;
           height: auto;
           margin-left: 5px;
+          margin-right: 5px;  // Add margin to the right to control space
         }
       }
     }
