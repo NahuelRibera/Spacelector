@@ -92,3 +92,5 @@ gem 'image_processing', '~> 1.2'
 
 gem "stripe", "~> 10.8"
 gem "pay", "~> 7.1"
+
+gem 'aws-sdk-s3', '~> 1.48'
