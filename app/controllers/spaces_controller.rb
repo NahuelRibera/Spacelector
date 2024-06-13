@@ -6,7 +6,7 @@ class SpacesController < ApplicationController
       # Display the user's spaces or child spaces if they are logged in
       @spaces = params[:parent_space_id].present? ? Space.find(params[:parent_space_id]).child_spaces : current_user.spaces.where(parent_space_id: nil)
     else
-      # Set @spaces to all spaces
+      # Set @spaces to all spacess
       @spaces = Space.all
     end
   end
