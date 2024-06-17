@@ -7,5 +7,5 @@
 //= link application.css
 //= link dembow.mp4
 //= link videosp.mp4
-//= link tutorial30.mp4
+//= link tutorial40.mp4
 //= link uploadimg.mp4
