@@ -29,7 +29,7 @@
         <% else %>
           <%= link_to t('images.back'), spaces_path, class: "back_form" %>
         <% end %>
-        <%= form.submit t('images.upload'), class:"custom-btn", style: "justify-content: center;", id: 'uploadButton' %>
+        <%= form.submit t('images.upload'), class:"custom-btn", style: "justify-content: center;", id: 'uploadButton', disabled: true %>
       </div>
     <% end %>
   </div>
@@ -52,11 +52,15 @@
     const context = canvas.getContext('2d');
     const compartmentNamesContainer = document.getElementById('compartmentNamesContainer');
     const imagePreview = document.getElementById('imagePreview');
+    const uploadButton = document.getElementById('uploadButton');
     const compartments = [];
     let isDrawing = false;
     let startX, startY, endX, endY;
     let selectedFile = null;
     let loadedImage = null;
+
+    // Initially disable the upload button
+    uploadButton.disabled = true;
 
     document.getElementById('imageFileInput').addEventListener('change', async function(event) {
       selectedFile = event.target.files[0];
@@ -134,6 +138,11 @@
 
       compartments.push(compartment);
       drawCompartments();
+
+      // Enable the upload button after at least one compartment is drawn
+      if (compartments.length > 0) {
+        uploadButton.disabled = false;
+      }
     }
 
     function updateOrCreateHiddenInputs(compartment, index) {
@@ -265,23 +274,15 @@
       const form = document.querySelector('.image-form');
       const inputs = form.querySelectorAll('input[name^="image[compartments_attributes]"]');
       inputs.forEach(input => input.remove());
+
+      // Disable the upload button if there are no compartments
+      uploadButton.disabled = true;
     });
 
-    const uploadButton = document.getElementById('uploadButton');
     uploadButton.addEventListener('click', function(event) {
-      const compartmentInputs = compartmentNamesContainer.querySelectorAll('input');
-      let compartmentsNamed = true;
-
-      compartmentInputs.forEach(input => {
-        if (input.value.trim() === '') {
-          compartmentsNamed = false;
-          return;
-        }
-      });
-
-      if (!compartmentsNamed) {
+      if (compartments.length === 0) {
         event.preventDefault();
-        alert('Please name all compartments before uploading.');
+        alert('Please draw at least one compartment before uploading.');
       }
     });
 
@@ -307,7 +308,7 @@
       video.pause();
     }
 
-    // When the user clicks anywhere outside of the modal, close it and pause the videos
+    // When the user clicks anywhere outside of the modal, close it and pause the video
     window.onclick = function(event) {
       if (event.target == modal) {
         modal.style.display = "none";
