@@ -109,6 +109,23 @@
     var toggleButton = document.getElementById("toggleButton");
     var dropdownMenu = document.getElementById("dropdownMenu");
 
+    function toggleDropdownOnClick() {
+      var languageDropdownSignedIn = document.getElementById('languageDropdownSignedIn');
+      
+      if (languageDropdownSignedIn && window.innerWidth <= 768) {
+        languageDropdownSignedIn.addEventListener('click', function(event) {
+          event.preventDefault();
+          var dropdownMenu = this.nextElementSibling;
+          dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+        });
+      }
+    }
+
+  toggleDropdownOnClick();
+
+  window.addEventListener('resize', function() {
+    toggleDropdownOnClick();
+  });
     toggleButton.addEventListener("click", function() {
       if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
         dropdownMenu.style.display = "block";
