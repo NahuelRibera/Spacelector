@@ -921,3 +921,87 @@
   @media (min-width: 1367px) {
 
   }
+
+  /* iPhone 11 portrait */
+  @media (min-width: 375px) and (max-width: 388px) and (orientation: portrait) {
+    .logo-home {
+      display: none !important;
+    }
+  
+    .logo-items a {
+      font-size: 12px !important;
+    }
+  
+    .nav-links {
+      display: flex;
+      align-items: center;
+      margin-left: 0px;
+    }
+  
+    .google-btn {
+      font-size: 12px;
+    }
+  
+    .go-to {
+      font-size: 12px;
+    }
+  
+    .navbar-toggle {
+      display: block;
+    }
+  
+    .navbar-nav {
+      align-items: center !important;
+    }
+  
+    .nav-links {
+      display: none !important;
+    }
+  
+    .navbar {
+      padding-right: 22px;
+      padding-left: 22px;
+    }
+  }
+  
+    /* iPhone 11 portrait */
+    @media (min-width: 375px) and (max-width: 388px) and (orientation: portrait) {
+    .logo-home {
+      display: none !important;
+    }
+  
+    .logo-items a {
+      font-size: 12px !important;
+    }
+  
+    .nav-links {
+      display: flex;
+      align-items: center;
+      margin-left: 0px;
+    }
+  
+    .google-btn {
+      font-size: 12px;
+    }
+  
+    .go-to {
+      font-size: 12px;
+    }
+  
+    .navbar-toggle {
+      display: block;
+    }
+  
+    .navbar-nav {
+      align-items: center !important;
+    }
+  
+    .nav-links {
+      display: none !important;
+    }
+  
+    .navbar {
+      padding-right: 22px;
+      padding-left: 22px;
+    }
+  }
