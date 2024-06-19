@@ -54,11 +54,29 @@
     </script>
   <% else %>
    </section>
-  <%# /////////////////////////////////////////////////////////////////////// %>
+<%# /////////////////////////////////////////////////////////////////////// %>
   <section id="content-home">
     <div id="section1" class="hero">
       <div class="container">
         <div class="row">
+        <div class="logo-bug">
+          <%= image_tag "spacelector_crop.png", class: "logo-image"%>
+        </div>
+
+        <div class="hero-content-bug">
+              <div class="logo-2">
+                <%= image_tag "spacelector_crop.png", class: "logo-image"%>
+              </div>
+              <h1 class="titulo-home"><%= t('homepage.headline') %></h1>
+
+              <p style="margin-bottom: 35px;"><%= t('homepage.manage1') %> <%= t('homepage.manage2') %> <strong> <%= t('homepage.manage3') %></strong></p>
+                <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
+                  <%= button_tag(type: 'submit', class: 'btn go-to home') do %>
+                    <%= t('homepage.getstarted') %>
+                  <% end %>
+                <% end %>
+            </div>
+
             <%= image_tag "homep10.jpg", alt: "Showcase Image", class: "img-1" %>
             <div class="hero-content">
               <div class="logo-2">
@@ -66,7 +84,7 @@
               </div>
               <h1><%= t('homepage.headline') %></h1>
 
-              <p style="margin-bottom: 35px;"><%= t('homepage.manage1') %> <%= t('homepage.manage2') %> <strong> <%= t('homepage.manage3') %></strong></p>
+              <p class="subtitle" style="margin-bottom: 35px;"><%= t('homepage.manage1') %> <%= t('homepage.manage2') %> <strong> <%= t('homepage.manage3') %></strong></p>
                 <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
                   <%= button_tag(type: 'submit', class: 'btn go-to') do %>
                     <%= t('homepage.getstarted') %>
@@ -93,7 +111,7 @@
             <h2 class="customize"><%= t('homepage.customize') %></h2>
             <h2 class="customize-phone"><%= t('homepage.customize2') %> <br><%= t('homepage.customize3') %></h2>
 
-            <p><%= t('homepage.feature1') %></p>
+            <p class="info"><%= t('homepage.feature1') %></p>
           </div>
           <!-- Image column -->
             <%= image_tag "1feature1.png", alt: "Showcase Image", class: "img-2" %>
@@ -101,7 +119,7 @@
       </div>
     </div>
 
-    <!-- Info Section - Image Left, Text Right -->
+<!-- Info Section - Image Left, Text Right -->
     <div class="hero-3">
       <div class="container">
         <div class="row">
@@ -109,13 +127,12 @@
             <%= image_tag "2feature2.png", alt: "Showcase Image", class: "img-1" %>
           <!-- Text column -->
           <div class="hero-content-3">
-            <h2><%= t('homepage.search') %></h2>
-              <p><%= t('homepage.feature2') %></p>
+            <h2 class="enhaced"><%= t('homepage.search') %></h2>
+              <p class="info"><%= t('homepage.feature2') %></p>
           </div>
         </div>
       </div>
     </div>
-
 
     <!-- Review Section -->
     <div id="section3" class="review-section">
