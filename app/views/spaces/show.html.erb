@@ -34,8 +34,8 @@
       <li>
         <div class="space-info" style="cursor: pointer; position: relative;">
           <%= link_to child_space.name, space_path(child_space), class: "space-link" %>
-          <%= form_with url: space_path(child_space), method: :delete do |form| %>
-            <%= form.submit 'X', onclick: "return confirm(t('spaces.delete_confirm'))", class: "delete-space", style: "position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" %>
+          <%= form_with url: space_path(child_space), method: :delete, data: { confirm: t('spaces.delete_confirm') } do |form| %>
+            <%= form.submit 'X', onclick: "return confirmDelete();", class: "delete-space", style: "position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" %>
           <% end %>
         </div>
       </li>
@@ -127,6 +127,10 @@
     });
   });
 });
+
+  function confirmDelete() {
+    return confirm('<%= j(t('spaces.delete_confirm')) %>');
+  }
 
   document.addEventListener('DOMContentLoaded', handlePageLoad);
   window.addEventListener('resize', handleWindowResize);
