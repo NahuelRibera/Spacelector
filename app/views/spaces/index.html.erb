@@ -12,7 +12,7 @@
             <div class="space-info" style="cursor: pointer; position: relative;">
               <%= link_to space.name, space_path(space), class: "space-link" %>
               <%= form_with url: space_path(space), method: :delete, class: "delete-form" do |form| %>
-                <%= form.submit 'X', onclick: "return confirm(t('spaces.delete_confirm'))", class: 'delete-space', style: "position: absolute; right: 10px; top: 50%; transform: translateY(-50%);" %>
+                <%= form.submit 'X', class: 'delete-space', style: "position: absolute; right: 10px; top: 50%; transform: translateY(-50%);", onclick: "return confirmDelete();" %>
               <% end %>
             </div>
           </li>
@@ -30,7 +30,6 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function() {
-        // Similar functionality as in the show view
         const spaceInfos = document.querySelectorAll('.space-info');
 
         spaceInfos.forEach(spaceInfo => {
@@ -47,10 +46,13 @@
         deleteButtons.forEach(deleteButton => {
           deleteButton.addEventListener('click', function(event) {
             event.stopPropagation(); // This prevents the click from bubbling up to the .space-info
-            // The rest of the delete action remains unchanged
           });
         });
       });
+
+      function confirmDelete() {
+        return confirm('<%= j(t('spaces.delete_confirm')) %>');
+      }
     </script>
   <% else %>
    </section>
