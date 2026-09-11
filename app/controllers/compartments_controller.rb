@@ -11,13 +11,8 @@ class CompartmentsController < ApplicationController
     end
   end
 
-  def create_or_update_object_info
-    puts "Description received: #{params[:object_info][:description]}"
-  end
-
   def index
-    image = Image.find(params[:image_id])
-    compartments = image.compartments
+    compartments = @image.compartments
     render json: compartments
   end
 
@@ -37,7 +32,7 @@ class CompartmentsController < ApplicationController
   private
 
   def set_image
-    @image = Image.find(params[:image_id])
+    @image = find_owned_image(params[:image_id])
   end
 
   def set_compartment

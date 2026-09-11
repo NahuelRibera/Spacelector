@@ -14,7 +14,7 @@ module Snap
       generate.test_framework :test_unit, fixture: false
     end
 
-    config.action_mailer.default_url_options = { host: 'http://localhot/3000' }
+    config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 

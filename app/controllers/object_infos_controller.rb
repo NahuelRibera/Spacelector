@@ -23,7 +23,7 @@ class ObjectInfosController < ApplicationController
   private
 
   def set_compartment
-    @compartment = Compartment.find(params[:compartment_id])
+    @compartment = Compartment.joins(image: :space).merge(current_user.spaces).find(params[:compartment_id])
   end
 
   def object_info_params

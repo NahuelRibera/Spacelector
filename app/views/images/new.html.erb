@@ -1,6 +1,15 @@
 <section id="content-card" class="set-card">
   <div class='card-general'>
     <h1><%= t('images.title') %></h1>
+    <% if @image.errors.any? %>
+      <div id="error_explanation" data-turbo-cache="false">
+        <ul>
+          <% @image.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
     <%= form_with model: @image, url: space_images_path(@space), local: true, class: 'image-form' do |form| %>
       <div class="field">
         <%= form.label :title, t('images.label_title') %>

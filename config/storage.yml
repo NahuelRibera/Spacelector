@@ -6,12 +6,18 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+# Works with AWS S3 directly, or any S3-compatible provider (e.g. Cloudflare R2,
+# Backblaze B2) by also setting S3_ENDPOINT.
 amazon:
   service: S3
   access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
   secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
   region: <%= ENV['AWS_REGION'] %>
   bucket: <%= ENV['S3_BUCKET_NAME'] %>
+  <% if ENV['S3_ENDPOINT'].present? %>
+  endpoint: <%= ENV['S3_ENDPOINT'] %>
+  force_path_style: true
+  <% end %>
 
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:

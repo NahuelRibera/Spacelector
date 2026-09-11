@@ -2,18 +2,45 @@ class ImagesController < ApplicationController
   before_action :set_space, only: [:new, :create, :show, :destroy]
   skip_before_action :verify_authenticity_token, only: [:convert_heic]
 
+  ALLOWED_CONTENT_TYPES = %w[image/jpeg image/png image/webp image/heic].freeze
+  MAX_UPLOAD_BYTES = 15.megabytes
+  MAX_USER_STORAGE_BYTES = 200.megabytes
+
   def create
+    @image = @space.images.new(image_params)
+    uploaded_file = params[:image][:file]
+
+    unless uploaded_file.respond_to?(:content_type) && ALLOWED_CONTENT_TYPES.include?(uploaded_file.content_type)
+      @image.errors.add(:file, "must be a JPEG, PNG, WEBP or HEIC image")
+      return render :new, status: :unprocessable_entity
+    end
+
+    if uploaded_file.size > MAX_UPLOAD_BYTES
+      @image.errors.add(:file, "must be smaller than #{MAX_UPLOAD_BYTES / 1.megabyte}MB")
+      return render :new, status: :unprocessable_entity
+    end
+
+    if current_user.storage_used_bytes + uploaded_file.size > MAX_USER_STORAGE_BYTES
+      @image.errors.add(:file, "would exceed your #{MAX_USER_STORAGE_BYTES / 1.megabyte}MB storage limit for this demo")
+      return render :new, status: :unprocessable_entity
+    end
+
     MiniMagick.configure do |config|
       config.timeout = 300 # Increase timeout to 5 minutes
     end
-    @image = @space.images.new(image_params)
 
-    if params[:image][:file].content_type == 'image/heic'
-      processed_image_path = process_heic_image(params[:image][:file])
-      @image.file.attach(io: File.open(processed_image_path), filename: 'processed_image.jpg', content_type: 'image/jpeg')
-    else
-      processed_image_path = process_image(params[:image][:file])
-      @image.file.attach(io: File.open(processed_image_path), filename: params[:image][:file].original_filename)
+    begin
+      if uploaded_file.content_type == 'image/heic'
+        processed_image_path = process_heic_image(uploaded_file)
+        @image.file.attach(io: File.open(processed_image_path), filename: 'processed_image.jpg', content_type: 'image/jpeg')
+      else
+        processed_image_path = process_image(uploaded_file)
+        @image.file.attach(io: File.open(processed_image_path), filename: uploaded_file.original_filename)
+      end
+    rescue StandardError => e
+      logger.error "Error processing uploaded image: #{e.message}"
+      @image.errors.add(:file, "could not be processed. Please try a different file.")
+      return render :new, status: :unprocessable_entity
     end
 
     @image.file_path = @image.file.key
@@ -21,7 +48,7 @@ class ImagesController < ApplicationController
     if @image.save
       redirect_to space_path(@space), notice: 'Image successfully uploaded.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   ensure
     File.delete(processed_image_path) if processed_image_path && File.exist?(processed_image_path)
@@ -33,12 +60,12 @@ class ImagesController < ApplicationController
   end
 
   def show
-    @image = Image.find(params[:id])
+    @image = @space.images.find(params[:id])
     @compartments = @image.compartments || [] # Initialize @compartments to an empty array if it's nil
   end
 
   def conversion_complete
-    image = Image.find(params[:id])
+    image = find_owned_image(params[:id])
     if image.converted?
       render json: { converted: true, url: rails_blob_url(image.file) }
     else
@@ -84,7 +111,6 @@ class ImagesController < ApplicationController
   end
 
   def destroy
-    @space = Space.find(params[:space_id])
     @image = @space.images.find(params[:id])
     @image.destroy
     redirect_to @space, notice: 'Image was successfully deleted.'
@@ -140,6 +166,6 @@ class ImagesController < ApplicationController
   end
 
   def set_space
-    @space = Space.find(params[:space_id])
+    @space = current_user.spaces.find(params[:space_id])
   end
 end

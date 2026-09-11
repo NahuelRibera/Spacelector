@@ -11,6 +11,12 @@ class ApplicationController < ActionController::Base
     { locale: I18n.locale }
   end
 
+  # Scopes an Image lookup to the current user's own spaces, so changing an id
+  # in the URL can't expose or affect another user's image/compartments/annotations.
+  def find_owned_image(id)
+    Image.joins(:space).merge(current_user.spaces).find(id)
+  end
+
   private
 
   # This method is called by Devise to determine the path after sign out.

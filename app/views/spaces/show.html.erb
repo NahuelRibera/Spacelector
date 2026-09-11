@@ -159,17 +159,22 @@
     };
   }
 
+let highlightedCompartmentId = null;
+
 window.addEventListener('load', function() {
   const queryParams = new URLSearchParams(window.location.search);
   const imageId = queryParams.get('image_id');
   const compartmentId = queryParams.get('highlight_compartment_id');
 
-  if (imageId && compartmentId) {
+  if (imageId) {
+    highlightedCompartmentId = compartmentId;
     showModalForImage(imageId);
-    // Wait for the modal to potentially finish loading before highlighting compartments
-    setTimeout(() => {
-      highlightCompartment(compartmentId);
-    }, 500); // You may need to adjust this delay based on how long your modal takes to load
+    if (compartmentId) {
+      // Wait for the modal to potentially finish loading before highlighting compartments
+      setTimeout(() => {
+        highlightCompartment(compartmentId);
+      }, 500); // You may need to adjust this delay based on how long your modal takes to load
+    }
   }
 });
 
@@ -190,7 +195,7 @@ function highlightCompartment(compartmentId) {
   waitForCompartmentInfoToBeReady(compartmentId, () => {
     const compartmentTextArea = document.querySelector(`#description-${compartmentId}`);
     if (compartmentTextArea) {
-      compartmentTextArea.style.border = '2px solid #44A0D8';
+      compartmentTextArea.style.border = '2px solid #F5A623';
       compartmentTextArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
       compartmentTextArea.focus(); // Optionally set focus to the textarea
     } else {
@@ -388,9 +393,43 @@ function checkConversionComplete(imageId) {
     const closeModal = document.querySelector('.close-modal');
     const spaceName = document.getElementById('space-name');
     const renameButton = document.getElementById('rename-button');
+    const infoContainer = document.getElementById('compartment-info-boxes');
     let clickedImage = null;
 
-    const compartmentsInfoBoxes = {};
+    // Caches the raw compartments data per image id (avoids refetching on reopen), but the
+    // canvas and annotation boxes are always rebuilt from it on every open — see the note below
+    // on why a previous version of this cache caused the modal to show the wrong picture.
+    const compartmentsDataCache = {};
+
+    // Tracks which image the modal is currently supposed to be showing. An in-flight fetch or
+    // Image() load only gets to touch the canvas/DOM if it still matches this by the time it
+    // resolves, so switching images quickly (or reopening) can't let a slower, older load paint
+    // over a newer selection.
+    let currentModalImageId = null;
+
+    function renderModalContents(imageId, imageSrc, compartmentsData) {
+      if (currentModalImageId !== imageId) return;
+
+      const context = modalCanvas.getContext('2d');
+      const img = new Image();
+
+      img.onload = function() {
+        if (currentModalImageId !== imageId) return;
+
+        modalCanvas.width = img.width;
+        modalCanvas.height = img.height;
+        context.clearRect(0, 0, modalCanvas.width, modalCanvas.height);
+        context.drawImage(img, 0, 0);
+
+        infoContainer.innerHTML = '';
+        compartmentsData.forEach((compartment, index) => {
+          compartment.number = index + 1;
+          drawCompartment(context, compartment);
+          infoContainer.appendChild(createCompartmentInfoBox(compartment));
+        });
+      };
+      img.src = imageSrc;
+    }
 
     function updateSpaceName(newName) {
       fetch('<%= update_space_name_path(@space) %>', {
@@ -429,17 +468,19 @@ function checkConversionComplete(imageId) {
           return;
         }
 
-        const infoContainer = document.getElementById('compartment-info-boxes');
-        infoContainer.innerHTML = ''; // Clear existing info boxes
+        const imageSrc = this.src;
+        currentModalImageId = imageId;
 
-        if (compartmentsInfoBoxes[imageId]) {
-          // If compartments info boxes already exist for this image, use them
-          compartmentsInfoBoxes[imageId].forEach(box => {
-            infoContainer.appendChild(box);
-          });
-          modal.style.display = 'block'; // Show the modal
+        // Blank the canvas immediately so a stale previous image is never left showing while
+        // the selected one is loading.
+        const context = modalCanvas.getContext('2d');
+        context.clearRect(0, 0, modalCanvas.width, modalCanvas.height);
+        infoContainer.innerHTML = '';
+
+        if (compartmentsDataCache[imageId]) {
+          modal.style.display = 'block';
+          renderModalContents(imageId, imageSrc, compartmentsDataCache[imageId]);
         } else {
-          // Otherwise, fetch compartment data from the server
           fetch(`/images/${imageId}/compartments`)
             .then(response => {
               if (!response.ok) {
@@ -448,30 +489,11 @@ function checkConversionComplete(imageId) {
               return response.json();
             })
             .then(compartmentsData => {
-              modal.style.display = 'block'; // Show the modal
-              const context = modalCanvas.getContext('2d');
-              const img = new Image();
+              if (currentModalImageId !== imageId) return; // a different image was opened meanwhile
 
-              img.onload = function() {
-                modalCanvas.width = img.width;
-                modalCanvas.height = img.height;
-                context.drawImage(img, 0, 0);
-
-                const infoBoxes = [];
-                compartmentsData.forEach((compartment, index) => {
-                  compartment.number = index + 1;
-                  drawCompartment(context, compartment);
-
-                  // Create info box for each compartment
-                  const compartmentInfoBox = createCompartmentInfoBox(compartment);
-                  infoContainer.appendChild(compartmentInfoBox);
-                  infoBoxes.push(compartmentInfoBox);
-                });
-
-                // Store the info boxes for future use
-                compartmentsInfoBoxes[imageId] = infoBoxes;
-              };
-              img.src = this.src;
+              compartmentsDataCache[imageId] = compartmentsData;
+              modal.style.display = 'block';
+              renderModalContents(imageId, imageSrc, compartmentsData);
             })
             .catch(error => console.error('Error fetching compartment data:', error));
         }
@@ -480,26 +502,30 @@ function checkConversionComplete(imageId) {
 
     closeModal.addEventListener('click', function() {
       modal.style.display = 'none';
+      currentModalImageId = null;
       infoContainer.innerHTML = '';
     });
 
     window.addEventListener('click', function(event) {
       if (event.target === modal) {
         modal.style.display = 'none';
-        const infoContainer = document.getElementById('compartment-info-boxes'); // Moved inside window click event listener
+        currentModalImageId = null;
         infoContainer.innerHTML = '';
       }
     });
 
     function drawCompartment(context, compartment) {
+      const isHighlighted = highlightedCompartmentId && compartment.id.toString() === highlightedCompartmentId.toString();
+      const color = isHighlighted ? '#F5A623' : '#44A0D8';
+
       context.beginPath();
       context.rect(compartment.x, compartment.y, compartment.width, compartment.height);
-      context.strokeStyle = '#44A0D8';
-      context.lineWidth = 7.5;
+      context.strokeStyle = color;
+      context.lineWidth = isHighlighted ? 11 : 7.5;
       context.stroke();
       context.fillStyle = 'black';
       context.font = 'bold 50px Open Sans';
-      context.strokeStyle = '#44A0D8';
+      context.strokeStyle = color;
       context.strokeText(compartment.number.toString(), compartment.x + 15, compartment.y + 52);
       context.fillText(compartment.number.toString(), compartment.x + 15, compartment.y + 52);
     }

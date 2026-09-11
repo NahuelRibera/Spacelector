@@ -4,10 +4,7 @@ class SpacesController < ApplicationController
   def index
     if user_signed_in?
       # Display the user's spaces or child spaces if they are logged in
-      @spaces = params[:parent_space_id].present? ? Space.find(params[:parent_space_id]).child_spaces : current_user.spaces.where(parent_space_id: nil)
-    else
-      # Set @spaces to all spacess
-      @spaces = Space.all
+      @spaces = params[:parent_space_id].present? ? current_user.spaces.find(params[:parent_space_id]).child_spaces : current_user.spaces.where(parent_space_id: nil)
     end
   end
 
@@ -26,47 +23,37 @@ class SpacesController < ApplicationController
   end
 
   def search
-    query = params[:query]
-    # Adjust the query based on where the searchable information is actually stored.
-    # This example assumes a direct relationship for simplicity.
-    compartments = Compartment.joins(:object_infos).where("object_infos.description ILIKE ?", "%#{query}%").distinct
+    result = SearchService.new(current_user, params[:query]).top_result
 
-    if compartments.any?
-      # Assuming each compartment is related to one image, and each image to one space.
-      # This will need adjustment based on your actual data model.
-      compartment = compartments.first
-      image = compartment.image
-      space = image.space
-      redirect_to space_path(space, image_id: image.id, highlight_compartment_id: compartment.id)
+    if result
+      redirect_to space_path(result.url_options)
     else
-      redirect_to root_path, alert: 'No results found.'
+      redirect_to root_path, alert: t('search.no_results')
     end
   end
 
   def autocomplete_search
-    query = params[:query]
-    results = Compartment.joins(:object_infos)
-                         .where("object_infos.description ILIKE ?", "%#{query}%")
-                         .limit(5)
-                         .distinct
-                         .pluck('object_infos.description')
+    results = SearchService.new(current_user, params[:query]).results.map do |result|
+      {
+        type: result.type,
+        label: result.label,
+        location: result.location,
+        url: space_path(result.url_options)
+      }
+    end
 
-    # Split by slashes or commas and then further split by spaces to get individual words
-    results = results.map { |description| description.split(/[\/,]/).map(&:strip) }.flatten
-    results = results.map { |item| item.split(/\s+/) }.flatten
-    results = results.select { |word| word.downcase.start_with?(query.downcase) }
-    render json: results.uniq
+    render json: results
   end
 
   def show
-    @space = Space.find(params[:id])
+    @space = current_user.spaces.find(params[:id])
     @image = @space.images.first # Or fetch the desired image using your logic
     @compartments = @image.compartments if @image.present?
     @child_spaces = @space.child_spaces
   end
 
   def destroy
-    @space = Space.find(params[:id])
+    @space = current_user.spaces.find(params[:id])
     if @space.destroy
       flash[:notice] = 'Space was successfully deleted.'
       redirect_to spaces_path
@@ -77,7 +64,7 @@ class SpacesController < ApplicationController
   end
 
   def update_name
-    @space = Space.find(params[:id])
+    @space = current_user.spaces.find(params[:id])
     if @space.update(name: params[:name])
       render json: { success: true, message: 'Space name successfully updated' }
     else

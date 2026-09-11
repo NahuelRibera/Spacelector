@@ -1,7 +1,24 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.action_mailer.default_url_options = { host: "http://TODO_PUT_YOUR_DOMAIN_HERE" }
+  config.action_mailer.default_url_options = { host: ENV.fetch("APP_HOST", "localhost") }
+
+  # Password-reset emails (Devise's :recoverable) are optional to configure: without SMTP_ADDRESS,
+  # delivery is a no-op instead of raising, so "forgot password" still works without crashing.
+  if ENV["SMTP_ADDRESS"].present?
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: ENV["SMTP_ADDRESS"],
+      port: ENV.fetch("SMTP_PORT", 587),
+      user_name: ENV["SMTP_USERNAME"],
+      password: ENV["SMTP_PASSWORD"],
+      authentication: "plain",
+      enable_starttls_auto: true
+    }
+  else
+    config.action_mailer.perform_deliveries = false
+  end
+  config.action_mailer.raise_delivery_errors = false
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -17,12 +34,13 @@ Rails.application.configure do
   config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
-  config.active_storage.service = :amazon
+  # Defaults to S3 (see config/storage.yml); set ACTIVE_STORAGE_SERVICE=local only for a
+  # single-box deploy where you accept that uploads won't survive a redeploy.
+  config.active_storage.service = ENV.fetch("ACTIVE_STORAGE_SERVICE", "amazon").to_sym
 
-  # Ensures that a master key has been made available in ENV["RAILS_MASTER_KEY"], config/master.key, or an environment
-  # key such as config/credentials/production.key. This key is used to decrypt credentials (and other encrypted files).
-  # config.require_master_key = true
-  config.require_master_key = true
+  # Secrets (RAILS_MASTER_KEY, GOOGLE_CLIENT_*, AWS_*, DATABASE_URL, ...) are supplied via
+  # environment variables in production, not via config/credentials, so no master key is required.
+  config.require_master_key = false
 
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
   # config.public_file_server.enabled = false

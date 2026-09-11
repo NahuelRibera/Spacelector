@@ -7,6 +7,14 @@ class User < ApplicationRecord
           :omniauthable, omniauth_providers: [:google_oauth2]
   pay_customer stripe_attributes: :stripe_attributes
 
+  def storage_used_bytes
+    Image.joins(:space)
+         .where(spaces: { user_id: id })
+         .joins("INNER JOIN active_storage_attachments ON active_storage_attachments.record_type = 'Image' AND active_storage_attachments.record_id = images.id")
+         .joins("INNER JOIN active_storage_blobs ON active_storage_blobs.id = active_storage_attachments.blob_id")
+         .sum("active_storage_blobs.byte_size")
+  end
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email

@@ -40,10 +40,14 @@ RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 # Final stage for app image
 FROM base
 
-# Install packages needed for deployment
+# Install packages needed for deployment. imagemagick (not libvips) because the app processes
+# uploads with MiniMagick/ImageProcessing::MiniMagick; libheif-dev adds HEIC (iPhone photo) support.
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libvips postgresql-client && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+    apt-get install --no-install-recommends -y curl imagemagick libheif-dev postgresql-client && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives && \
+    if [ -f /etc/ImageMagick-6/policy.xml ] && ! grep -q "HEIC" /etc/ImageMagick-6/policy.xml; then \
+      sed -i '/<\/policymap>/i <policy domain="coder" rights="read|write" pattern="HEIC" />' /etc/ImageMagick-6/policy.xml; \
+    fi
 
 # Copy built artifacts: gems, application
 COPY --from=build /usr/local/bundle /usr/local/bundle

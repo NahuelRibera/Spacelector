@@ -499,13 +499,28 @@
 }
 
 .search-result-item {
+  display: block;
   padding: 12px;
   cursor: pointer;
   border-bottom: 1px solid #ddd;
+  text-decoration: none;
+  color: inherit;
 }
 
 .search-result-item:hover {
   background-color: #f6f6f6;
+}
+
+.search-result-location {
+  display: block;
+  font-size: 0.8em;
+  color: #757575;
+  margin-top: 2px;
+}
+
+.search-result-empty {
+  cursor: default;
+  color: #757575;
 }
 
 

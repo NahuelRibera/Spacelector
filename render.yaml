@@ -1,30 +1,40 @@
 databases:
-  - name: mysite
-    databaseName: mysite
-    user: mysite
+  - name: spacelector-db
+    databaseName: spacelector
+    user: spacelector
     plan: starter
 
 services:
   - type: web
-    name: mysite
+    name: spacelector
     runtime: ruby
     plan: starter
     buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec rails server -b 0.0.0.0 -p $PORT"
+    startCommand: "bundle exec rails db:migrate && bundle exec rails server -b 0.0.0.0 -p $PORT"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysite
+          name: spacelector-db
           property: connectionString
-      - key: RAILS_MASTER_KEY
-        value: "REDACTED_RAILS_MASTER_KEY"
+      - key: RAILS_ENV
+        value: production
+      - key: SECRET_KEY_BASE
+        sync: false # generate locally with `bin/rails secret` and paste it in the Render dashboard
       - key: GOOGLE_CLIENT_ID
-        value: "REDACTED_GOOGLE_CLIENT_ID"
+        sync: false # optional: only needed if you want "Sign in with Google", see README
       - key: GOOGLE_CLIENT_SECRET
-        value: "REDACTED_GOOGLE_CLIENT_SECRET"
+        sync: false
+      - key: ACTIVE_STORAGE_SERVICE
+        value: amazon
+      - key: AWS_ACCESS_KEY_ID
+        sync: false # your own S3 (or S3-compatible) bucket credentials, see docs/DEPLOYMENT.md
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+      - key: AWS_REGION
+        sync: false
+      - key: S3_BUCKET_NAME
+        sync: false
+      - key: APP_HOST
+        sync: false # your domain, e.g. spacelector.example.com; used to build links in emails
       - key: WEB_CONCURRENCY
         value: 2 # sensible default
-
-  - type: shell
-    name: mysite-shell
-    plan: starter

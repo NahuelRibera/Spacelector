@@ -90,16 +90,8 @@
     <% end %>
   <% else %>
     <div class="right-buttons">
-      <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
-        <%= button_tag(type: 'submit', class: 'btn google-btn sign') do %>
-          <%= t('navbar.signin') %>
-        <% end %>
-      <% end %>
-      <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
-        <%= button_tag(type: 'submit', class: 'btn google-btn go-to') do %>
-          <%= t('navbar.goto') %>
-        <% end %>
-      <% end %>
+      <%= link_to t('navbar.signin'), new_user_session_path, class: 'btn google-btn sign' %>
+      <%= link_to t('navbar.goto'), new_user_registration_path, class: 'btn google-btn go-to' %>
     </div>
   <% end %>
 </div>
@@ -126,40 +118,53 @@
   window.addEventListener('resize', function() {
     toggleDropdownOnClick();
   });
-    toggleButton.addEventListener("click", function() {
-      if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
-        dropdownMenu.style.display = "block";
-      } else {
-        dropdownMenu.style.display = "none";
-      }
-    });
+    if (toggleButton) {
+      toggleButton.addEventListener("click", function() {
+        if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
+          dropdownMenu.style.display = "block";
+        } else {
+          dropdownMenu.style.display = "none";
+        }
+      });
+    }
 
     // Search bar dropdown functionality
     var searchInput = document.querySelector('.search-input');
     var searchDropdown = document.getElementById('search-results-dropdown');
 
+    var searchDebounceTimer;
+
     searchInput.addEventListener('input', function() {
       var query = searchInput.value.trim();
+      clearTimeout(searchDebounceTimer);
 
-      if (query.length > 0) {
-        // Assuming you have an endpoint to get search results via AJAX
-        fetch(`/search_autocomplete?query=${query}`)
+      if (query.length === 0) {
+        searchDropdown.style.display = 'none';
+        return;
+      }
+
+      searchDebounceTimer = setTimeout(function() {
+        fetch(`/autocomplete_search?query=${encodeURIComponent(query)}`)
           .then(response => response.json())
           .then(data => {
-            var dropdownContent = '';
+            searchDropdown.innerHTML = '';
             if (data.length > 0) {
               data.forEach(item => {
-                dropdownContent += `<div class="search-result-item">${item.name}</div>`;
+                var link = document.createElement('a');
+                link.href = item.url;
+                link.className = 'search-result-item';
+                link.innerHTML = `<strong>${item.label}</strong><span class="search-result-location">${item.location}</span>`;
+                searchDropdown.appendChild(link);
               });
             } else {
-              dropdownContent = '<div class="search-result-item">No results found</div>';
+              var empty = document.createElement('div');
+              empty.className = 'search-result-item search-result-empty';
+              empty.textContent = '<%= j t("search.no_results") %>';
+              searchDropdown.appendChild(empty);
             }
-            searchDropdown.innerHTML = dropdownContent;
             searchDropdown.style.display = 'block';
           });
-      } else {
-        searchDropdown.style.display = 'none';
-      }
+      }, 250);
     });
 
     document.addEventListener('click', function(event) {

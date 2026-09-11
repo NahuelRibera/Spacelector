@@ -18,7 +18,9 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
-  config.active_storage.service = :amazon
+  # Local disk by default so the app runs without AWS credentials.
+  # Set ACTIVE_STORAGE_SERVICE=amazon (plus the AWS_* / S3_* vars) to test S3 locally.
+  config.active_storage.service = ENV.fetch("ACTIVE_STORAGE_SERVICE", "local").to_sym
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
@@ -37,9 +39,6 @@ Rails.application.configure do
   end
   config.assets.compile = true
   config.assets.debug = true
-
-  # Store uploaded files on the local file system (see config/storage.yml for options).
-  # config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false

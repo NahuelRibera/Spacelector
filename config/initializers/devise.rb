@@ -25,9 +25,9 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-  config.omniauth :google_oauth2,
-  Rails.application.credentials.dig(:google_oauth, :client_id) || ENV['GOOGLE_CLIENT_ID'],
-  Rails.application.credentials.dig(:google_oauth, :client_secret) || ENV['GOOGLE_CLIENT_SECRET']
+  # Google sign-in is optional: without these two vars set, clicking "Sign in with
+  # Google" will fail at Google (invalid client), but email/password sign-up still works.
+  config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET']
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

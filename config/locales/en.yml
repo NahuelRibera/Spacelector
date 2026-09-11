@@ -81,3 +81,5 @@ en:
     back_to: "Back to '%{name}'"
     back: "Back"
     create: "Create"
+  search:
+    no_results: "No results found."

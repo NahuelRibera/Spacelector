@@ -52,3 +52,5 @@ es:
     back_to: "Volver a '%{name}'"
     back: "Volver"
     create: "Crear"
+  search:
+    no_results: "No se encontraron resultados."
