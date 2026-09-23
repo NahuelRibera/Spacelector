@@ -25,9 +25,15 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-  # Google sign-in is optional: without these two vars set, clicking "Sign in with
-  # Google" will fail at Google (invalid client), but email/password sign-up still works.
-  config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET']
+  # Google sign-in is optional. The strategy is only registered when both credentials are
+  # set (via a local .env in development, loaded by dotenv-rails, or the host's env vars in
+  # production). Without them the Google buttons are hidden and email/password is used, so
+  # a request with an empty client_id is never sent to Google.
+  google_client_id = ENV['GOOGLE_CLIENT_ID'].presence
+  google_client_secret = ENV['GOOGLE_CLIENT_SECRET'].presence
+  if google_client_id && google_client_secret
+    config.omniauth :google_oauth2, google_client_id, google_client_secret
+  end
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

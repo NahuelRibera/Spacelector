@@ -9,6 +9,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
 
   def google_oauth2
+    return redirect_to_email_login if auth.blank?
+
     user = User.from_omniauth(auth)
 
     if user.present?
@@ -25,10 +27,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # More info at:
   # https://github.com/heartcombo/devise#omniauth
 
-  # GET|POST /resource/auth/twitter
-  # def passthru
-  #   super
-  # end
+  # POST /users/auth/google_oauth2 only lands here when no OmniAuth strategy intercepted it,
+  # i.e. GOOGLE_CLIENT_ID/SECRET aren't set. Devise's default is a bare 404.
+  def passthru
+    redirect_to_email_login
+  end
 
   # GET|POST /users/auth/twitter/callback
   # def failure
@@ -46,5 +49,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def auth
     @auth ||= request.env['omniauth.auth']
+  end
+
+  def redirect_to_email_login
+    redirect_to new_user_session_path, alert: t('devise.omniauth_callbacks.not_configured', kind: 'Google')
   end
 end

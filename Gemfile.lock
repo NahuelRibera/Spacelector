@@ -146,7 +146,7 @@ GEM
       railties (>= 3.2)
     drb (2.2.0)
       ruby2_keywords
-    error_highlight (0.6.0)
+    error_highlight (0.7.0)
     erubi (1.12.0)
     execjs (2.9.1)
     faraday (2.9.0)

@@ -72,11 +72,7 @@
               <h1 class="titulo-home"><%= t('homepage.headline') %></h1>
 
               <p style="margin-bottom: 35px;"><%= t('homepage.manage1') %> <%= t('homepage.manage2') %> <strong> <%= t('homepage.manage3') %></strong></p>
-                <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
-                  <%= button_tag(type: 'submit', class: 'btn go-to home') do %>
-                    <%= t('homepage.getstarted') %>
-                  <% end %>
-                <% end %>
+                <%= render 'get_started_button', button_class: 'btn go-to home' %>
             </div>
 
             <%= image_tag "homep10.jpg", alt: "Showcase Image", class: "img-1" %>
@@ -87,11 +83,7 @@
               <h1><%= t('homepage.headline') %></h1>
 
               <p class="subtitle" style="margin-bottom: 35px;"><%= t('homepage.manage1') %> <%= t('homepage.manage2') %> <strong> <%= t('homepage.manage3') %></strong></p>
-                <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
-                  <%= button_tag(type: 'submit', class: 'btn go-to') do %>
-                    <%= t('homepage.getstarted') %>
-                  <% end %>
-                <% end %>
+                <%= render 'get_started_button', button_class: 'btn go-to' %>
             </div>
         </div>
       </div>
@@ -212,11 +204,7 @@
             <p class="transform-phone"><%= t('homepage.terms1') %><br><br><%= t('homepage.terms2') %> <a href="/terms-and-conditions"> <strong> <%= t('homepage.terms3') %> </strong ></a>.</p>
 
             </div>
-            <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
-              <%= button_tag(type: 'submit', class: 'btn go-to', style: "margin-top: 20px;") do %>
-                <%= t('homepage.getstarted') %>
-              <% end %>
-            <% end %>
+            <%= render 'get_started_button', button_class: 'btn go-to', style: "margin-top: 20px;" %>
           </div>
       </div>
     </div>

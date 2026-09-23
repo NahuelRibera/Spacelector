@@ -1,0 +1,10 @@
+<%# Homepage call to action: Google sign-in when it's configured, otherwise email/password sign-up. %>
+<% if google_oauth_enabled? %>
+  <%= form_for "Login", url: omniauth_authorize_path(:user, :google_oauth2), method: :post, data: { turbo: "false" }, html: { class: "button_to" } do |f| %>
+    <%= button_tag(type: 'submit', class: button_class, style: local_assigns[:style]) do %>
+      <%= t('homepage.getstarted') %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= link_to t('homepage.getstarted'), new_user_registration_path, class: button_class, style: local_assigns[:style] %>
+<% end %>

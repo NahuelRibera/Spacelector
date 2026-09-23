@@ -1,11 +1,14 @@
 # Spacelector
 
-Spacelector is a visual tool for keeping track of where things are stored. Usersreate spaces and
+Spacelector is a visual tool for keeping track of where things are stored. Users create spaces and
 subspaces that match the structure of real locations, then upload photos and mark drawers, shelves,
 boxes, or other areas as numbered compartments. Each compartment has its own short annotation
 describing what is stored there. The navbar search covers spaces, subspaces, photo titles, and
 annotations, and opens the relevant image with the matching compartment highlighted.
 
+![Spacelector landing page with the tagline "What are you looking for?" and a laptop and phone showing a photographed wardrobe with numbered compartments](docs/screenshots/00-landing.png)
+
+*Spacelector turns physical storage into a searchable visual map.*
 
 ## The problem it solves
 
@@ -26,6 +29,10 @@ it. It's not meant for uploading polished documents or keeping a formal catalogu
 annotations are closer to a sticky note than an inventory entry, and it's built to be quick to add
 to and quick to search, not thorough.
 
+![A "Warehouse" space containing three subspaces (Ground floor, Maintenance, Packing) and seven titled photos of shelving, cages, pallet racks and storage bins](docs/screenshots/01-warehouse-overview.png)
+
+*A warehouse space can contain nested areas and multiple storage photos, mirroring the structure of the real location.*
+
 ## Main features
 
 - Email/password authentication, with Google sign-in available if you configure it (see below).
@@ -39,6 +46,10 @@ to and quick to search, not thorough.
 - Opening a search result jumps straight to the right photo with the matching box highlighted.
 - HEIC photos (the default format on iPhones) are converted to JPEG automatically on upload.
 - Each user only ever sees and can modify their own spaces, images and annotations.
+
+![Upload Image form for a "Bulk pallet storage" photo, with ten numbered boxes drawn over the pallet rack's shelves](docs/screenshots/02-select-compartments.png)
+
+*Draw numbered regions directly over a photo to map the physical storage areas you want to track.*
 
 ## Stack
 
@@ -108,6 +119,10 @@ signed-in user. Two Postgres extensions do the actual matching:
 - `unaccent`, so accented text matches its plain form too (searching "cafe" would find "café").
 - `pg_trgm`'s `similarity()`, so a search for "screws" still finds an annotation typed as "scews".
 
+![Navbar search for "chargers" showing a matching compartment annotation, "Cordless drills, impact drivers, spare batteries, fast chargers", listed under the Warehouse space](docs/screenshots/03-search-results.png)
+
+*One search covers spaces, photos and compartment notes; here "chargers" matches a word inside a single compartment's annotation, shown with the space it belongs to.*
+
 Results are ranked so an exact match always beats a substring match, which beats a fuzzy one, and
 anything below a similarity threshold is dropped entirely — the goal is to tolerate a typo without
 turning search into "return anything vaguely related." That threshold also means very short or
@@ -117,6 +132,10 @@ won't find "screws" unless they're close enough for trigram similarity to catch 
 Clicking a result opens the right place: a space/subspace result opens that space; an image or
 annotation result opens the image in its modal with the matching box highlighted and scrolled into
 view.
+
+![Image modal for the bulk pallet storage photo with compartment 1 outlined in orange and its annotation, "Cordless drills, impact drivers, spare batteries, fast chargers", focused in the notes panel](docs/screenshots/04-highlighted-compartment.png)
+
+*Opening an annotation result jumps directly to the relevant photo and highlights the matching physical compartment.*
 
 ## Storage: what's used where
 
@@ -149,36 +168,30 @@ explanation on the upload form — no file is silently dropped or partially save
 git clone https://github.com/NahuelRibera/spacelector.git
 cd spacelector
 bundle install
-
-# Creates config/database.yml's databases (defaults to snap_development / snap_test)
-bundle exec rails db:create
-bundle exec rails db:migrate
+bin/rails db:prepare   # creates the databases (snap_development / snap_test) and loads the schema
+bin/rails db:seed      # creates the demo account and sample data
+bin/rails server
 ```
 
-No `.env` file or credentials are required for this. Copy `.env.example` to `.env` only if you
-want the optional Google sign-in.
+No `.env` file or credentials are needed for any of this. Open `http://localhost:3000` and log in
+with the demo account:
 
-### Sample data (optional)
+| Email | Password |
+|---|---|
+| `demo@spacelector.app` | `password123` |
 
-```bash
-bundle exec rails db:seed
-```
+### Sample data
 
-Creates one demo account — **demo@spacelector.dev / spacelector123** — with a "Warehouse" space
+`bin/rails db:seed` (`db/seeds.rb`) creates the demo account above with a "Warehouse" space
 containing a "Large cabinet" and a "Lockers" subspace, two photos, and a handful of annotations,
 including one with a deliberate spelling mistake so you can try the typo-tolerant search right
-away. It's idempotent (running it again won't duplicate anything) and never touches existing data.
-It also refuses to run at all when `RAILS_ENV=production`, so this fixed login can't end up on a
-public deployment by accident.
+away. It's idempotent: running it again won't duplicate the account or its data, never deletes
+anything, and resets the demo password to `password123` if it was changed. It refuses to run
+when `RAILS_ENV=production`, so this publicly known login can't end up on a real deployment.
 
-### Run it
+### Try it
 
-```bash
-bundle exec rails server
-```
-
-Visit `http://localhost:3000`, sign up with any email/password (Google sign-in is optional — see
-`.env.example`), and:
+Log in as the demo account (or sign up with any email/password), and:
 
 1. Create a space, e.g. "Warehouse".
 2. Inside it, create a subspace, e.g. "Large cabinet".
@@ -187,7 +200,69 @@ Visit `http://localhost:3000`, sign up with any email/password (Google sign-in i
 5. Reload the page, click the image again — your boxes and notes are still there.
 6. Use the search bar to find what you just typed, typo and all.
 
-Or skip 1–4 and just run the sample data above, then sign in as the demo account.
+The demo account already has steps 1–4 done, so you can go straight to searching.
+
+## Authentication
+
+Authentication is handled by Devise. Email/password sign-up and login always work; signing in
+with Google is an optional extra.
+
+### Demo login
+
+`demo@spacelector.app` / `password123` — created by `db/seeds.rb` (see [Sample data](#sample-data)).
+It's for local development and demos only.
+
+### Google sign-in (optional)
+
+The app does not need Google OAuth to run. When `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`
+aren't both set, the Google strategy isn't registered, the Google buttons are hidden (the
+homepage "Get started" button goes to email sign-up instead), and no request is ever sent to
+Google.
+
+To enable it locally:
+
+1. In [Google Cloud Console](https://console.cloud.google.com/) → APIs & Services → Credentials,
+   create an **OAuth client ID** of type **Web application** (use your own; this repository ships
+   no credentials).
+2. Add the **Authorized redirect URI**:
+
+   ```
+   http://localhost:3000/users/auth/google_oauth2/callback
+   ```
+
+   and the **Authorized JavaScript origin**:
+
+   ```
+   http://localhost:3000
+   ```
+
+3. Copy `.env.example` to `.env` and fill in the two values:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   ```
+   GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
+   GOOGLE_CLIENT_SECRET=your-client-secret
+   ```
+
+4. Restart the server. `.env` is read at boot by `dotenv-rails` in development and test.
+
+`.env` is excluded from Git by `.gitignore`, so your credentials stay on your machine;
+`.env.example` is the committed template and contains no secrets — never put real values there.
+
+The callback URL is built from the host and port the app is actually served on, so it must match
+what's registered in Google Cloud exactly. If you run Rails on another port, for example:
+
+```bash
+bin/rails server -p 3001
+```
+
+then register `http://localhost:3001/users/auth/google_oauth2/callback` as the redirect URI (and
+`http://localhost:3001` as the JavaScript origin) as well. A mismatch shows up on Google's side as
+`redirect_uri_mismatch`. For production, set the same two variables in the host's environment and
+register your production callback URL — see [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md).
 
 ## Tests
 
@@ -198,7 +273,8 @@ bundle exec rails test
 Covers space creation and reopening (including nested subspaces), image upload with its
 compartments' coordinates, annotation create/update, exact and fuzzy search — both through
 `SearchService` directly and through the search endpoints — that a search result opens the right
-image with the right box, and, repeated across most of the above, that one user can never read,
+image with the right box, email/password login and that Google sign-in is only offered when
+it's configured, and, repeated across most of the above, that one user can never read,
 modify, or delete another user's spaces, images, or annotations by guessing an id in the URL.
 
 There's also one browser test (`bundle exec rails test:system`, needs a local Chrome install)
