@@ -45,3 +45,4 @@
 /config/credentials/production.key
 /config/credentials/development.key
 /config/credentials/*.yml.enc
+docs/images/
