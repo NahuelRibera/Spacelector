@@ -1,0 +1,62 @@
+// Devise pages (sign in, sign up, passwords, edit account).
+// Builds on #content-card / .card-general from spaces/_new.scss.
+.auth-page {
+  padding: 0 16px 40px;
+}
+
+.card-general.auth-card {
+  max-width: 420px;
+
+  h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+    color: #333;
+  }
+
+  label {
+    font-size: 16px;
+    margin-top: 0;
+  }
+
+  .form-check-label {
+    display: inline;
+  }
+
+  .btn.new-create {
+    padding: 8px 16px;
+
+    &:hover, &:focus {
+      background-color: #408ebf;
+      color: #fff;
+    }
+  }
+}
+
+.auth-links {
+  text-align: center;
+  margin-top: 20px;
+
+  a {
+    display: block;
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 6px;
+
+    &:hover {
+      color: #44A0D8 !important;
+    }
+  }
+
+  form {
+    margin-top: 12px;
+  }
+
+  input[type="image"] {
+    height: 40px;
+    width: auto;
+  }
+}
